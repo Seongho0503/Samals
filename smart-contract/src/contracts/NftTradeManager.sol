@@ -7,6 +7,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "./NftSale.sol";
 import "./NftDonate.sol";
 import "./NftFree.sol";
+import "./AnimalNft.sol";
 
 /*
 * P2P 거래 정보를 관리하는 Factory Contract
@@ -212,7 +213,7 @@ contract NftTradeManager is Ownable {
 
         //emit DonateCreated(newAnimalNftDonateId, address(newAnimalNftDonate), newAnimalNftDonateId);
 
-        return newFreeId;
+        return newNftFreeId;
     }
 
     /*
