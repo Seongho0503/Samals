@@ -15,7 +15,7 @@ import "./AnimalNft.sol";
 * @version
 */
 
-contract AnimalNftDonate is Ownable, IERC721Receiver {
+contract NftDonate is Ownable, IERC721Receiver {
     using SafeMath for uint256;
 
     event Closed(uint256 indexed animalId);
