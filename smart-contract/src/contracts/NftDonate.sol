@@ -2,7 +2,6 @@
 pragma solidity ^0.8.16;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
@@ -15,7 +14,7 @@ import "./AnimalNft.sol";
 * @version
 */
 
-contract NftDonate is Ownable, IERC721Receiver {
+contract NftDonate is Ownable {
     using SafeMath for uint256;
 
     event Closed(uint256 indexed animalId);
@@ -127,14 +126,14 @@ contract NftDonate is Ownable, IERC721Receiver {
     }
 
     // IERC721Receiver는 interface므로 이 메서드를 필수로 상속해야한다.
-    function onERC721Received(
-        address operator,
-        address from,
-        uint256 tokenId,
-        bytes calldata data
-    ) external pure returns (bytes4) {
-        return this.onERC721Received.selector;
-    }
+    // function onERC721Received(
+    //     address operator,
+    //     address from,
+    //     uint256 tokenId,
+    //     bytes calldata data
+    // ) external pure returns (bytes4) {
+    //     return this.onERC721Received.selector;
+    // }
 
     modifier ActiveMint() {
         require(!_isClosed);
