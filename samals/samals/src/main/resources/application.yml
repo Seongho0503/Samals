@@ -1,9 +1,10 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/func?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/withculture?serverTimezone=Asia/Seoul
     username: root
     password: 1234
+
   jpa:
     database: mysql
     show-sql: true  # jpa나 hibernate를 통해 CRUD를 실행하면 해당 CRUD의 sql을 로깅으로 보여준다
@@ -13,3 +14,4 @@ spring:
     properties:
       hibernate:
         format_sql: true  # 로깅에 표시되는 sql을 보기 좋게 해준다
+    open-in-view: false
