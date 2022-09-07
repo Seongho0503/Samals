@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://i7d102.p.ssafy.io:7102/withculture?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
