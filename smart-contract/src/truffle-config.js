@@ -47,8 +47,10 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 //const MNEMONIC = "target couch tilt famous space dinosaur three ill mind magnet coyote horn";
 //const MNEMONIC = "kiwi soccer iron refuse domain health decrease grain drip ball supply warrior small good firm glad unusual employ immune lounge work honey brand result";
-const MNEMONIC = "202933a3542ac61ca96dae70d848df3e8f824703b39a4cc0da77b8acd05838a6";
-const WALLET = "0x202933a3542ac61ca96dae70d848df3e8f824703b39a4cc0da77b8acd05838a6";
+//const PrivateKEY = "46987d196d2a5f34a92adafea19343ee84a1ad6da9c56368d4b953739427f362";
+const PrivateKEY="bf8908959b314d4d248befafda5eb6929caed7dc1ed26f82731eb02c5d872611";
+const WALLET = "0x7415379A5Aa989fDf0B259182ddf93dD50597933";
+//const WALLET = "0x85c991c497f62ECE1b577eFEB6D5E518C42683D4";
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -77,11 +79,11 @@ module.exports = {
     //   }
     // },
     ssafy: {
-      provider: () => new HDWalletProvider(MNEMONIC, "http://20.196.209.2:8545"),
+      provider: () => new HDWalletProvider(PrivateKEY,"http://20.196.209.2:8545"),
       host: "20.196.209.2",
       port: 8545,
-      network_id: "*"
-      //from: WALLET
+      network_id: "*",
+      from: WALLET
     },
 
     //
