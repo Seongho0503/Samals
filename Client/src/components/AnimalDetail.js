@@ -9,7 +9,7 @@ const AnimalDetail = ({ animalDetail }) => {
   return (
     <div className="AnimalDetail">
       <h2>멸종위기동물 세부정보</h2>
-      {/* <h4>{animalDetail.length} 개수 필요 없지 않나</h4> */}
+      {/* <h4>{animalDetail.length} 개수 필요 없지 않나 개수 생략</h4> */}
       <div>
         {animalDetail.map((it) => (
           <div key={it.id}>
