@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import "../../styles/MainNFT.css";
 import Header from "../Header";
 import paperimg from "../../assets/paperimg.png";
 import nftexample from "../../assets/nftexample.jpg";
@@ -15,7 +16,21 @@ const MainNFT =
                     OUR
                     NFT
                 </h3>
-                <img
+                <div class="card2">
+                    <div class="content">
+                        <div class="front">
+                            <h2>
+                                Samals
+                            </h2>
+                        </div>
+                        <div class="back">
+                            <h2>
+                                NFT
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                {/* <img
                     src={
                         paperimg
                     }
@@ -26,7 +41,7 @@ const MainNFT =
                     src={
                         nftexample
                     }
-                />
+                /> */}
                 <h1 id="">
                     {" "}
                     SAMALS
