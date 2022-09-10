@@ -1,0 +1,8 @@
+package com.project.samals.repository;
+
+import com.project.samals.domain.Sale;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SaleRepository extends JpaRepository<Sale, Long> {
+
+}
