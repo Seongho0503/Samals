@@ -30,4 +30,10 @@ public class UserService {
         return UserDto.convert(saved);
     }
 
+    public UserDto getUserInfo(String address){
+        User user = userRepository.findByWalletAddress(address);
+        UserDto userDto = UserDto.convert(user);
+        return userDto;
+    }
+
 }

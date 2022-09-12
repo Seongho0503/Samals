@@ -20,9 +20,25 @@ public class UserController {
 
 
     @ApiOperation(value = "사용자 등록")
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<UserDto> signup(@RequestBody UserDto userDto) {
         return new ResponseEntity<>(userService.signup(userDto), HttpStatus.CREATED);
     }
+
+    @ApiOperation(value = "사용자 조회")
+    @GetMapping("/{address}")
+    public ResponseEntity<UserDto> getUserInfo(@PathVariable String address) {
+        return new ResponseEntity<>(userService.getUserInfo(address), HttpStatus.OK);
+    }
+//
+//    @DeleteMapping("/{address}")
+//    public ResponseEntity<UserDto> withdrawal(@PathVariable String address) {
+//        return userService.withdrawal(address);
+//    }
+//
+//    @PutMapping
+//    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+//        return userService.updateUser(userDto);
+//    }
 
 }
