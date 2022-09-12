@@ -62,6 +62,9 @@ public class SaleDto {
                 .salePrice(sale.getSalePrice())
                 .saleDescription(sale.getSaleDescription())
                 .isSold(sale.getIsSold())
+                .createdTime(sale.getCreatedTime())
+                .updatedTime(sale.getUpdatedTime())
+                .completedTime(sale.getCompletedTime())
                 .build();
     }
 
