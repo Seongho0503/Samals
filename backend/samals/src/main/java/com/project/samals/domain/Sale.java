@@ -53,4 +53,8 @@ public class Sale {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="sale_completed_at")
     private Date completedTime;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_seq")
+    private User user;
 }
