@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MainSub.css";
+import title from "../../assets/our-story.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
@@ -70,20 +71,20 @@ const MainSub =
         return (
             <div id="mainsub">
                 {/* <img id='hero-background' src={list[0].src}/> */}
+                <img
+                    width="500px"
+                    src={
+                        title
+                    }
+                />
 
-                <h1 id="header-subtext-first">
-                    OUR
-                    STORY
-                </h1>
-                <h1 id="header-subtext-first">
-                    기부금액
-                </h1>
                 <h1
                     class="count"
                     id="header-subtext-first"
                 >
                     0
                 </h1>
+
                 <h5 id="header-subtext-second">
                     {" "}
                     살기위해
@@ -170,16 +171,6 @@ const MainSub =
                     찾아가
                     달래주세요.
                     <br />
-                </h5>
-                <h5 id="header-subtext">
-                    Craft,
-                    hunt
-                    and
-                    trade
-                    NFT's
-                    in
-                    the
-                    dark
                 </h5>
             </div>
         );

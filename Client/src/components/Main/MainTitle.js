@@ -5,6 +5,8 @@ import React, {
 import "../../styles/Hero.css";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/bg-01.jpg";
+import font from "../../assets/font.png";
+import title from "../../assets/our-vision.png";
 import Header from "../Header";
 
 const MainTitle =
@@ -36,19 +38,21 @@ const MainTitle =
                         bg
                     }
                 />
-                <div id="bg"></div>
-                <h3 id="header-text-second">
-                    {" "}
-                    SAVE
-                    THE
-                    ANIMALS{" "}
-                </h3>
-                <h1 id="header-text-first">
-                    {" "}
-                    SAMALS
-                </h1>
-
-                <div id="hero-buttons">
+                <div id="hero-background2">
+                    <img
+                        width="77%"
+                        src={
+                            font
+                        }
+                    />
+                    {/* <img
+                        width="10%"
+                        src={
+                            title
+                        }
+                    /> */}
+                </div>
+                {/* <div id="hero-buttons">
                     <button
                         id="explore"
                         onClick={
@@ -65,7 +69,7 @@ const MainTitle =
                     >
                         Create
                     </button>
-                </div>
+                </div> */}
             </div>
         );
     };

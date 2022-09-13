@@ -100,7 +100,7 @@ body {
     right: 0;
     bottom: 0;
     position: absolute;
-
+    width: "30%";
     background: url("../assets/nftexample.jpg");
     transform: rotateY(
             0.5turn
@@ -112,6 +112,5 @@ body {
 
 .card2::before {
     transform: none;
-    width: "100%";
     background: url("../assets/samals.png");
 }

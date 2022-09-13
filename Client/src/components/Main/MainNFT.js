@@ -5,6 +5,7 @@ import React, {
 import { useNavigate } from "react-router-dom";
 import "../../styles/MainNFT.css";
 import Header from "../Header";
+import title from "../../assets/our-nft.png";
 import paperimg from "../../assets/paperimg.png";
 import nftexample from "../../assets/nftexample.jpg";
 
@@ -16,10 +17,12 @@ const MainNFT =
                 class="box-container"
             >
                 <div class="box">
-                    <h3 id="header-subtext-first">
-                        OUR
-                        NFT
-                    </h3>
+                    <img
+                        width="500px"
+                        src={
+                            title
+                        }
+                    />
                     <h1 id="">
                         {" "}
                         SAMALS
@@ -136,53 +139,336 @@ const MainNFT =
                     <div class="wrap">
                         <div class="items-wrap">
                             <div class="items marquee">
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src={
+                                            nftexample
+                                        }
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png"
+                                    />
+                                </div>
                             </div>
                             <div
                                 aria-hidden="true"
                                 class="items marquee"
                             >
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src={
+                                            nftexample
+                                        }
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png"
+                                    />
+                                </div>
                             </div>
                         </div>
 
                         <div class="items-wrap">
                             <div class="items marquee reverce">
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src={
+                                            nftexample
+                                        }
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png"
+                                    />
+                                </div>
                             </div>
                             <div
                                 aria-hidden="true"
                                 class="items marquee reverce"
                             >
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
-                                <div class="item"></div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src={
+                                            nftexample
+                                        }
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU"
+                                    />
+                                </div>
+                                <div class="item">
+                                    {" "}
+                                    <img
+                                        width="100px"
+                                        border-radius="6px"
+                                        src="https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MainTeam.css";
+import title from "../../assets/our-team.png";
 import { useNavigate } from "react-router-dom";
 import profile from "../../assets/profile-example.png";
 import Header from "../Header";
@@ -11,10 +12,12 @@ const MainTeam =
     () => {
         return (
             <div id="hero2">
-                <h3 id="header-subtext-first">
-                    OUR
-                    TEAM
-                </h3>
+                <img
+                    width="500px"
+                    src={
+                        title
+                    }
+                />
                 <h1 id="">
                     {" "}
                     SAMALS

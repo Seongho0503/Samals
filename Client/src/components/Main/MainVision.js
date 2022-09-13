@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MainVision.css";
+import title from "../../assets/our-vision.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
@@ -28,10 +29,12 @@ const MainVision =
                     </div>
                 </div>
                 <div>
-                    <h3 id="header-subtext-first">
-                        OUR
-                        VISION
-                    </h3>
+                    <img
+                        width="500px"
+                        src={
+                            title
+                        }
+                    />
                     <h1 id="">
                         {" "}
                         SAMALS

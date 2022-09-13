@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MainToken.css";
+import title from "../../assets/our-token.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import coinimg from "../../assets/coin-img.png";
@@ -14,10 +15,12 @@ const MainToken =
                 class="box-container"
             >
                 <div>
-                    <h3 id="header-subtext-first">
-                        OUR
-                        TOKEN
-                    </h3>
+                    <img
+                        width="500px"
+                        src={
+                            title
+                        }
+                    />
                     <h1 id="">
                         {" "}
                         SAMALS
