@@ -4,6 +4,7 @@ import React, {
 } from "react";
 import "../../styles/Hero.css";
 import { useNavigate } from "react-router-dom";
+import bg from "../../assets/bg-01.jpg";
 import Header from "../Header";
 
 const MainTitle =
@@ -29,7 +30,13 @@ const MainTitle =
                 {/* <img id='hero-background' src={list[0].src}/> */}
 
                 <Header />
-
+                <img
+                    id="hero-background"
+                    src={
+                        bg
+                    }
+                />
+                <div id="bg"></div>
                 <h3 id="header-text-second">
                     {" "}
                     SAVE
@@ -40,13 +47,6 @@ const MainTitle =
                     {" "}
                     SAMALS
                 </h1>
-                <h5 id="header-subtext">
-                    Start
-                    your
-                    NFT
-                    collection
-                    now
-                </h5>
 
                 <div id="hero-buttons">
                     <button

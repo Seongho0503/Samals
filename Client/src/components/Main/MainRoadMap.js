@@ -2,6 +2,7 @@ import React, {
     useState,
     useEffect,
 } from "react";
+import "../../styles/MainRoadMap.css";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 

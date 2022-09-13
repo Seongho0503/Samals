@@ -1,6 +1,3 @@
-:root {
-}
-
 #mainsub {
     width: 100%;
     height: 500px;
@@ -33,96 +30,6 @@
     background-position: center;
     mix-blend-mode: screen;
     opacity: 0.3;
-}
-#header {
-    height: 77px;
-    /* border: 0.001px solid red; */
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: fixed;
-    /* margin-bottom: 13rem; */
-    top: 0;
-    z-index: 1;
-    right: 0;
-    left: 0;
-    background: #100f17;
-}
-
-#logo {
-    color: #ffffff;
-    padding: 10px;
-    font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    font-weight: bold;
-    font-size: 24px;
-    text-decoration: none;
-    border: none;
-}
-
-#connect-wallet {
-    width: 180px;
-    height: 40px;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 50px;
-    padding: 10px;
-    margin-left: 30px;
-    font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    cursor: pointer;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-a {
-    margin-left: 30px;
-    padding: 15px;
-    font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    border: none;
-    cursor: pointer;
-    transition: border
-        1.5s ease;
-}
-
-#link-containers
-    a:hover {
-    border: 1px
-        solid
-        #ffffff;
-}
-
-#link-containers a {
-    border: 1px
-        solid
-        #100f17;
-    border-radius: 30px;
 }
 
 #header-subtext-first {
@@ -163,88 +70,11 @@ a {
     margin-top: 80px;
 }
 
-button#explore {
-    width: 180px;
-    height: 50px;
-    margin-right: 20px;
-    border-radius: 30px;
-    font-size: 21px;
-    border: none;
-    font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-
-    background: #11998e; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-        to bottom,
-        #38ef7d,
-        #11998e
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-        to bottom,
-        #38ef7d,
-        #11998e
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    color: #ffffff;
-    cursor: pointer;
-}
-
-button#create {
-    width: 180px;
-    height: 50px;
-    margin-left: 20px;
-    border-radius: 30px;
-    font-size: 21px;
-    border: none;
-    font-family: -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    background-color: transparent;
-    border: 2px
-        solid
-        #ffffff;
-    color: #ffffff;
-    cursor: pointer;
-}
-
 @media screen and (max-width: 978px) {
-    a:not(#logo) {
-        display: none;
-    }
-
-    #logo {
-        font-size: 18px;
-        float: left;
-        margin-left: 10px;
-    }
-
     #mainsub {
         height: 600px;
         /* border: 1px solid cyan; */
         text-align: center;
-    }
-
-    #header {
-        height: 100px;
-        /* border: 0.001px solid red; */
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
     }
 
     #header-subtext-first {
@@ -300,68 +130,6 @@ button#create {
         margin-top: 20px;
         padding-left: 20px;
         padding-right: 20px;
-    }
-
-    button#explore {
-        width: 180px;
-        height: 50px;
-        margin-right: 5px;
-        border-radius: 30px;
-        border: none;
-        font-family: -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            "Open Sans",
-            "Helvetica Neue",
-            sans-serif;
-
-        background: #11998e; /* fallback for old browsers */
-        background: -webkit-linear-gradient(
-            to
-                bottom,
-            #38ef7d,
-            #11998e
-        ); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(
-            to
-                bottom,
-            #38ef7d,
-            #11998e
-        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        font-weight: 600;
-        color: #ffffff;
-        cursor: pointer;
-    }
-
-    button#create {
-        width: 180px;
-        height: 50px;
-        margin-left: 5px;
-        border-radius: 30px;
-        border: none;
-        font-family: -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            Roboto,
-            Oxygen,
-            Ubuntu,
-            Cantarell,
-            "Open Sans",
-            "Helvetica Neue",
-            sans-serif;
-        background-color: #100f17;
-        border: 1px
-            solid
-            #ffffff;
-
-        font-weight: 600;
-        color: #ffffff;
-        cursor: pointer;
     }
 }
 

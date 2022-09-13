@@ -1,117 +1,156 @@
-*,
-::before,
-::after {
-    position: relative;
-    box-sizing: border-box;
+.wrap {
+    max-width: 450px;
+    padding: 20px;
 }
-
-body {
-    background-color: black;
-    color: white;
+.autonft {
     display: flex;
     align-items: center;
 }
-
-/* Card */
-.card2 {
-    box-shadow: 0px
-        0px 5px
-        rgb(
-            95,
-            88,
-            88
-        );
-    padding: 2em;
-    max-width: 310px;
-    width: 100%;
-    height: 460px;
-    text-align: center;
-    margin: auto;
-    font-size: 18x;
-    background: black;
-    transition: 1.5s
-        ease;
-    transform-style: preserve-3d;
-}
-
-.card2:hover {
-    transform: rotateY(
-        0.5turn
-    );
-}
-
-/* Content */
-.card2 .content {
-    transform-style: preserve-3d;
-
-    transition: 1s
-        ease;
-}
-
-.card2 .back,
-.card2 .front {
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-
+.items-wrap {
+    position: relative;
     display: flex;
-    flex-direction: column;
+    overflow: hidden;
+    user-select: none;
+    gap: 20px;
 }
-
-.card2 {
-    text-shadow: 0 0
-        5px black;
-}
-
-.card2 .back {
-    transform: rotateY(
-        0.5turn
-    );
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.card2 p,
-.card2 h2 {
-    transform: translateZ(
-        100px
-    );
-}
-
-.card2 p {
-    font-size: 1em;
-    line-height: 1.6em;
-}
-
-.card2 h2 {
-    margin: 0 0 20px
-        0;
-    font-size: 2.25em;
-}
-
-.card2::before,
-.card2::after {
+.items-wrap:before,
+.items-wrap:after {
     content: "";
+    height: 100%;
     top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    width: 10%;
     position: absolute;
-
-    background: url("../assets/nftexample.jpg");
-    transform: rotateY(
-            0.5turn
-        )
-        translateZ(
-            1px
+    z-index: 1;
+    pointer-events: none;
+}
+.items-wrap:before {
+    left: 0;
+    background: linear-gradient(
+        90deg,
+        rgb(
+                1,
+                5,
+                28
+            )
+            0%,
+        rgba(
+                255,
+                255,
+                255,
+                0
+            )
+            100%
+    );
+}
+.items-wrap:after {
+    right: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(
+                255,
+                255,
+                255,
+                0
+            )
+            0%,
+        rgb(
+                1,
+                5,
+                28
+            )
+            100%
+    );
+}
+.items {
+    flex-shrink: 0;
+    display: flex;
+    gap: 20px;
+    counter-reset: item;
+    justify-content: space-around;
+    min-width: 100%;
+}
+.item {
+    background: #ccc;
+    flex: 0 0 auto;
+    width: 100px;
+    height: 100px;
+    counter-increment: item;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #fff;
+    margin: 10px 0;
+    transition: all
+        0.1s
+        ease-in-out;
+}
+.item:hover {
+    transform: scale(
+        1.05
+    );
+    box-shadow: 0 0
+        10px
+        rgba(
+            0,
+            0,
+            0,
+            0.5
         );
 }
 
-.card2::before {
-    transform: none;
+.item:before {
+    content: counter(
+        item
+    );
+}
 
-    background: url("../assets/paperimg.png");
+.marquee {
+    animation: scroll
+        20s linear
+        infinite;
+}
+.reverce {
+    animation-direction: reverse;
+}
+.items-wrap:hover
+    .marquee {
+    animation-play-state: paused;
+}
+
+.perfscan {
+    margin: 20px 0;
+    text-align: center;
+    bottom: 0;
+    background: #fff;
+    padding: 5px;
+}
+.perfscan hr {
+    border: solid
+        #999;
+    border-width: 1px
+        0 0 0;
+    max-width: 50%;
+}
+.perfscan a {
+    color: #000;
+    font-weight: bold;
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(
+            0
+        );
+    }
+    to {
+        transform: translateX(
+            calc(
+                -100% -
+                    20px
+            )
+        );
+    }
 }
