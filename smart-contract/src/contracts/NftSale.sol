@@ -125,17 +125,15 @@ contract NftSale is Ownable {
     * @ exception 판매자가 현재 동물 주인이어야 함
     * @ exception 구매자가 현재 동물 가격 이상의 잔고를 가지고 있어야 함
     */
-    function purchase(uint price1) public payable
-    //ActiveSale
+    function purchase() public returns(uint256)
+    //ActiveSale : 넣을 것인지 고려
      {
-
+        
         // 판매자가 동물 주인인가 확인
         require(_animalNftContract.ownerOf(_animalId) == _seller, "seller is not owner");
 
         // 구매자에게 현재 잔고가 있는가 확인
         require(_currencyContract.balanceOf(msg.sender) >= _price, "balance is exhausted");
-
-
 
         /*
         [판매자 => 구매자]
@@ -145,16 +143,20 @@ contract NftSale is Ownable {
             3. _transfer 실행 -> ERC-721 내부에서 소유권 변경
             4. 마지막으로 요청 객체가 ERC-721 Receiver인지 확인(현재 상속 중)
         */
-      //  _animalNftContract.safeTransferFrom(_seller, msg.sender, _animalId); // 잘되는지 테스트 필요한 핵심 부분
+        //_animalNftContract.safeTransferFrom(_seller, msg.sender, _animalId); // 잘되는지 테스트 필요한 핵심 부분
 
         /* 
         [구매자 => 판매자]
         구매자에게서 판매자에게 토큰 지불
         */
-
+        _currencyContract.transferFrom(msg.sender, _seller, _price);
+        _animalNftContract.transferFrom(_seller, msg.sender, _animalId);
+        //ERC721 내부에 규정되어있는 approve 후 구매하기는 보안상 뛰어나지만
+        //웹페이지 컨셉에 맞지 않아 자체 규정된 민트 기록을 사용한다.
+        //만약 사용하기 위해선 구매자가 요청하는 방식이나 판매자가 올리고 구매자가 요청하면 판매자가 허락하는 방식이다.
+        //_animalNftContract.transferFrom(owner(), msg.sender, _animalId);
         
-      //  _currencyContract.approve(msg.sender,_price);
-        _currencyContract.transferFrom(msg.sender, _seller, price1);
+        //  _currencyContract.approve(msg.sender,_price);
         // _currencyContract.approve(address(this), _price);
         // _currencyContract.transferFrom(address(this), _seller, _price);
  
@@ -162,8 +164,25 @@ contract NftSale is Ownable {
 
         // 판매 종료 메서드 실행
         closed();
+
+        return _animalId;
     }
 
+    function _getSeller() public view returns(address) {
+        return _seller;
+    }
+
+    function _getPrice() public view returns(uint256) {
+        return _price;
+    }
+
+    function _getAnimalId() public view returns(uint256) {
+        return _animalId;
+    }
+
+    function _getSaleTime() public view returns(uint256, uint256) {
+        return (_startedAt, _endedAt);
+    }
     // IERC721Receiver는 interface므로 이 메서드를 필수로 상속해야한다.
     // function onERC721Received(
     //     address operator,
