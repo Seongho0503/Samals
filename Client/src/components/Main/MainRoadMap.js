@@ -7,6 +7,7 @@ import title from "../../assets/our-roadmap.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import $ from "jquery";
+
 var carousel = $(
         ".carousel"
     ),
@@ -22,7 +23,6 @@ $(".prev").on(
     { d: "p" },
     rotate
 );
-
 function rotate(e) {
     if (
         e.data.d ==
@@ -63,45 +63,39 @@ function rotate(e) {
 const MainRoadMap =
     () => {
         return (
-            <div id="hero">
+            <div id="hero2">
                 <img
                     width="30%"
                     src={
                         title
                     }
                 />
-
-                <h1 id="">
-                    {" "}
-                    SAMALS
-                </h1>
-                <h5 id="">
-                    Start
-                    your
-                    NFT
-                    collection
-                    now
-                </h5>
+                <br />
                 <div class="roadmap">
                     <div class="container22">
                         <div class="carousel">
                             <div class="item123 a">
-                                A
+                                멸종위기동물
+                                <br />
+                                -컨텐츠컨텐츠
                             </div>
                             <div class="item123 b">
-                                B
+                                환경보호
                             </div>
                             <div class="item123 c">
-                                C
+                                SSAFY
+                                토큰
                             </div>
                             <div class="item123 d">
-                                D
+                                가상세계
                             </div>
                             <div class="item123 e">
-                                E
+                                유니티
+                                게임
                             </div>
                             <div class="item123 f">
-                                F
+                                NFT
+                                커뮤니티
                             </div>
                         </div>
                     </div>

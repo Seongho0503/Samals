@@ -34,7 +34,7 @@
 
 #header-subtext-first {
     margin-top: 90px;
-    font-size: 40px;
+    font-size: 100px;
     font-family: -apple-system,
         BlinkMacSystemFont,
         "Segoe UI",
@@ -45,7 +45,7 @@
         "Open Sans",
         "Helvetica Neue",
         sans-serif;
-    color: #00fc28;
+    color: #dfdc11;
     font-family: "Black Han Sans",
         sans-serif;
 }

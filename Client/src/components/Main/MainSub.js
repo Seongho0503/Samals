@@ -54,7 +54,7 @@ window.onload =
             );
 
         // 목표 수치
-        const max = 830190;
+        const max = 129983;
 
         setTimeout(
             () =>

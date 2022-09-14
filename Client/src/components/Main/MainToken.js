@@ -21,10 +21,6 @@ const MainToken =
                             title
                         }
                     />
-                    <h1 id="">
-                        {" "}
-                        SAMALS
-                    </h1>
 
                     <h5 id="header-subtext-second">
                         {" "}

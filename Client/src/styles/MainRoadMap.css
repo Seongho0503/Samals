@@ -1,10 +1,10 @@
 .roadmap {
-    margin-top: 100px;
+    margin-top: 180px;
 }
 .container22 {
     margin: 0 auto;
     width: 250px;
-    height: 200px;
+    height: 400px;
     position: relative;
     perspective: 1000px;
 }
@@ -23,9 +23,11 @@
     position: absolute;
     background: #000;
     width: 250px;
-    height: 200px;
+    height: 400px;
     line-height: 200px;
-    font-size: 5em;
+    font-size: 30px;
+    font-family: "Black Han Sans",
+        sans-serif;
     text-align: center;
     color: #fff;
     opacity: 0.95;
@@ -39,7 +41,7 @@
         translateZ(
             250px
         );
-    background: #ed1c24;
+    background: url("../assets/carousel-01.png");
 }
 .b {
     transform: rotateY(
@@ -48,7 +50,7 @@
         translateZ(
             250px
         );
-    background: #0072bc;
+    background: url("../assets/carousel-02.png");
 }
 .c {
     transform: rotateY(
@@ -57,7 +59,7 @@
         translateZ(
             250px
         );
-    background: #39b54a;
+    background: url("../assets/carousel-03.png");
 }
 .d {
     transform: rotateY(
@@ -66,7 +68,7 @@
         translateZ(
             250px
         );
-    background: #f26522;
+    background: url("../assets/carousel-04.png");
 }
 .e {
     transform: rotateY(
@@ -75,7 +77,7 @@
         translateZ(
             250px
         );
-    background: #630460;
+    background: url("../assets/carousel-05.png");
 }
 .f {
     transform: rotateY(
@@ -84,7 +86,7 @@
         translateZ(
             250px
         );
-    background: #8c6239;
+    background: url("../assets/carousel-06.png");
 }
 
 .next,

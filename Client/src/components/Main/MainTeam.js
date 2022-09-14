@@ -5,7 +5,12 @@ import React, {
 import "../../styles/MainTeam.css";
 import title from "../../assets/our-team.png";
 import { useNavigate } from "react-router-dom";
-import profile from "../../assets/profile-example.png";
+import profile1 from "../../assets/profile-1.png";
+import profile2 from "../../assets/profile-2.png";
+import profile3 from "../../assets/profile-3.png";
+import profile4 from "../../assets/profile-4.png";
+import profile5 from "../../assets/profile-5.png";
+import profile6 from "../../assets/profile-6.png";
 import Header from "../Header";
 
 const MainTeam =
@@ -18,17 +23,6 @@ const MainTeam =
                         title
                     }
                 />
-                <h1 id="">
-                    {" "}
-                    SAMALS
-                </h1>
-                <h5 id="">
-                    Start
-                    your
-                    NFT
-                    collection
-                    now
-                </h5>
 
                 <div class="container">
                     <div
@@ -40,18 +34,69 @@ const MainTeam =
                                 <div class="at-user__avatar">
                                     <img
                                         src={
-                                            profile
+                                            profile1
                                         }
                                     />
                                 </div>
                                 <div class="at-user__name">
-                                    Lee
-                                    Chung
+                                    Kwon
+                                    Sungho
                                 </div>
                                 <div class="at-user__title">
-                                    Team
-                                    Leader
-                                    <br />
+                                    Front-End
+                                </div>
+                            </div>
+                        </div>
+                        <div class="at-column">
+                            <div class="at-user">
+                                <div class="at-user__avatar">
+                                    <img
+                                        src={
+                                            profile2
+                                        }
+                                    />
+                                </div>
+                                <div class="at-user__name">
+                                    Kim
+                                    Chaeri
+                                </div>
+                                <div class="at-user__title">
+                                    Front-End
+                                </div>
+                            </div>
+                        </div>
+                        <div class="at-column">
+                            <div class="at-user">
+                                <div class="at-user__avatar">
+                                    <img
+                                        src={
+                                            profile3
+                                        }
+                                    />
+                                </div>
+                                <div class="at-user__name">
+                                    Han
+                                    Yubin
+                                </div>
+                                <div class="at-user__title">
+                                    Unity
+                                </div>
+                            </div>
+                        </div>
+                        <div class="at-column">
+                            <div class="at-user">
+                                <div class="at-user__avatar">
+                                    <img
+                                        src={
+                                            profile4
+                                        }
+                                    />
+                                </div>
+                                <div class="at-user__name">
+                                    Yang
+                                    Joseph
+                                </div>
+                                <div class="at-user__title">
                                     Back-End
                                 </div>
                             </div>
@@ -61,18 +106,16 @@ const MainTeam =
                                 <div class="at-user__avatar">
                                     <img
                                         src={
-                                            profile
+                                            profile5
                                         }
                                     />
                                 </div>
                                 <div class="at-user__name">
-                                    Marco
-                                    Gomez
+                                    Lee
+                                    Jaehwan
                                 </div>
                                 <div class="at-user__title">
-                                    Co-Founder,
-                                    Creative
-                                    Director
+                                    Back-End
                                 </div>
                             </div>
                         </div>
@@ -81,74 +124,16 @@ const MainTeam =
                                 <div class="at-user__avatar">
                                     <img
                                         src={
-                                            profile
+                                            profile6
                                         }
                                     />
                                 </div>
                                 <div class="at-user__name">
-                                    Brad
-                                    Joe
+                                    Lee
+                                    Chung
                                 </div>
                                 <div class="at-user__title">
-                                    Office
-                                    Manager
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-column">
-                            <div class="at-user">
-                                <div class="at-user__avatar">
-                                    <img
-                                        src={
-                                            profile
-                                        }
-                                    />
-                                </div>
-                                <div class="at-user__name">
-                                    Mitch
-                                    Petty
-                                </div>
-                                <div class="at-user__title">
-                                    Lead
-                                    Developer
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-column">
-                            <div class="at-user">
-                                <div class="at-user__avatar">
-                                    <img
-                                        src={
-                                            profile
-                                        }
-                                    />
-                                </div>
-                                <div class="at-user__name">
-                                    Philip
-                                    Satemburgo
-                                </div>
-                                <div class="at-user__title">
-                                    Community
-                                    Manager
-                                </div>
-                            </div>
-                        </div>
-                        <div class="at-column">
-                            <div class="at-user">
-                                <div class="at-user__avatar">
-                                    <img
-                                        src={
-                                            profile
-                                        }
-                                    />
-                                </div>
-                                <div class="at-user__name">
-                                    George
-                                    Petty
-                                </div>
-                                <div class="at-user__title">
-                                    Lead
-                                    Designer
+                                    Back-End
                                 </div>
                             </div>
                         </div>

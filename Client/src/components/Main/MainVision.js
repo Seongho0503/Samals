@@ -16,16 +16,8 @@ const MainVision =
             >
                 <div class="card2 box">
                     <div class="content">
-                        <div class="front">
-                            <h2>
-                                Samals
-                            </h2>
-                        </div>
-                        <div class="back">
-                            <h2>
-                                NFT
-                            </h2>
-                        </div>
+                        <div class="front"></div>
+                        <div class="back"></div>
                     </div>
                 </div>
                 <div>
@@ -35,17 +27,7 @@ const MainVision =
                             title
                         }
                     />
-                    <h1 id="">
-                        {" "}
-                        SAMALS
-                    </h1>
-                    <h5 id="">
-                        Start
-                        your
-                        NFT
-                        collection
-                        now
-                    </h5>
+
                     <h5 id="header-subtext-second">
                         {" "}
                         살기위해
