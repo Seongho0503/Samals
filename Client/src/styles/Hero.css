@@ -1,9 +1,17 @@
-:root {
-}
-
 #hero {
     width: 100%;
-    height: 500px;
+    height: 690px;
+    /* border: 1px solid cyan; */
+    align-items: center;
+    text-align: center;
+    position: relative;
+    background-size: cover;
+    /* z-index: 1; */
+    margin-top: 6rem;
+}
+#hero2 {
+    width: 100%;
+    height: 900px;
     /* border: 1px solid cyan; */
     text-align: center;
     position: relative;
@@ -11,10 +19,79 @@
     /* z-index: 1; */
     margin-top: 13rem;
 }
+@-webkit-keyframes vibrate {
+    from {
+        -webkit-transform: translateX(
+            -3px
+        );
+        transform: translateX(
+            -3px
+        );
+    }
+    to {
+        -webkit-transform: translateX(
+            3px
+        );
+        transform: translateX(
+            3px
+        );
+    }
+}
+
+@keyframes vibrate {
+    from {
+        -webkit-transform: translateX(
+            -4px
+        );
+        transform: translateX(
+            -4px
+        );
+    }
+    to {
+        -webkit-transform: translateX(
+            4px
+        );
+        transform: translateX(
+            4px
+        );
+    }
+}
+.vibrate {
+    -webkit-animation: vibrate
+        0.1s linear
+        infinite;
+    animation: vibrate
+        0.1s linear
+        infinite;
+}
 
 #hero-background {
     width: 100%;
-    height: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-size: cover;
+
+    /* clip-path: polygon(33% 4%, 63% 0, 86% 5%, 100% 37%, 83% 75%, 51% 81%, 22% 79%, 3% 65%, 6% 33%, 28% 23%); */
+}
+#hero-background2 {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    -webkit-animation: vibrate
+        0.1s linear
+        14;
+    animation: vibrate
+        0.1s linear
+        14;
+
+    /* clip-path: polygon(33% 4%, 63% 0, 86% 5%, 100% 37%, 83% 75%, 51% 81%, 22% 79%, 3% 65%, 6% 33%, 28% 23%); */
+}
+#hero-background3 {
+    width: 100%;
     position: absolute;
     z-index: -1;
     bottom: 0;
@@ -23,7 +100,6 @@
 
     /* clip-path: polygon(33% 4%, 63% 0, 86% 5%, 100% 37%, 83% 75%, 51% 81%, 22% 79%, 3% 65%, 6% 33%, 28% 23%); */
 }
-
 #hero:before {
     content: "";
     position: absolute;
