@@ -9,103 +9,54 @@
     display: flex;
     justify-content: space-evenly;
 }
-/* Card */
+
 .card2 {
-    box-shadow: 0px
-        0px 5px
-        rgb(0, 0, 0);
-    padding: 2em;
     max-width: 310px;
     width: 100%;
     height: 460px;
+
+    float: left;
+    perspective: 500px;
+}
+
+.content2 {
+    width: 100%;
+    height: 100%;
+
+    transition: transform
+        1s;
+    transform-style: preserve-3d;
+}
+
+.card2:hover
+    .content2 {
+    transform: rotateY(
+        180deg
+    );
+    transition: transform
+        0.5s;
+}
+
+.front,
+.back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    background: url("../assets/vision-01.png");
+    line-height: 300px;
+    color: #03446a;
     text-align: center;
+    font-size: 60px;
     border-radius: 30px;
-    font-size: 18x;
-    background: black;
-    transition: 1.5s
-        ease;
-    transform-style: preserve-3d;
-}
-
-.card2:hover {
-    transform: rotateY(
-        0.5turn
-    );
-}
-
-/* Content */
-.card2 .content {
-    transform-style: preserve-3d;
-
-    transition: 1s
-        ease;
-}
-
-.card2 .back,
-.card2 .front {
-    transform-style: preserve-3d;
     backface-visibility: hidden;
-
-    display: flex;
-    flex-direction: column;
 }
 
-.card2 {
-    text-shadow: 0 0
-        5px black;
-}
-
-.card2 .back {
-    transform: rotateY(
-        0.5turn
-    );
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-}
-
-.card2 p,
-/* .card2 h2 {
-    transform: translateZ(
-        100px
-    );
-} */
-
-.card2 p {
-    font-size: 1em;
-    line-height: 1.6em;
-}
-
-.card2 h2 {
-    margin: 0 0 20px
-        0;
-    font-size: 2.25em;
-}
-
-.card2::before,
-.card2::after {
-    content: "";
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-    width: "30%";
+.back {
     border-radius: 30px;
-    background: url("../assets/vision-02.png");
+    background: url("../assets/vision-02.jpg ");
+    color: white;
     transform: rotateY(
-            0.5turn
-        )
-        translateZ(
-            1px
-        );
-}
-
-.card2::before {
-    transform: none;
-    border-radius: 30px;
-    background: url("../assets/vision-01.png ");
+        180deg
+    );
 }
