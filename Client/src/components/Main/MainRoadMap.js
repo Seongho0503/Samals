@@ -5,60 +5,15 @@ import React, {
 import "../../styles/MainRoadMap.css";
 import title from "../../assets/our-roadmap.png";
 import { useNavigate } from "react-router-dom";
-import Header from "../Header";
-import $ from "jquery";
+import {
+    Swiper,
+    SwiperSlide,
+} from "swiper/react";
 
-var carousel = $(
-        ".carousel"
-    ),
-    currdeg = 0;
+import "swiper/css";
+import "swiper/css/effect-cards";
 
-$(".next").on(
-    "click",
-    { d: "n" },
-    rotate
-);
-$(".prev").on(
-    "click",
-    { d: "p" },
-    rotate
-);
-function rotate(e) {
-    if (
-        e.data.d ==
-        "n"
-    ) {
-        currdeg =
-            currdeg -
-            60;
-    }
-    if (
-        e.data.d ==
-        "p"
-    ) {
-        currdeg =
-            currdeg +
-            60;
-    }
-    carousel.css({
-        "-webkit-transform":
-            "rotateY(" +
-            currdeg +
-            "deg)",
-        "-moz-transform":
-            "rotateY(" +
-            currdeg +
-            "deg)",
-        "-o-transform":
-            "rotateY(" +
-            currdeg +
-            "deg)",
-        transform:
-            "rotateY(" +
-            currdeg +
-            "deg)",
-    });
-}
+import { EffectCards } from "swiper";
 
 const MainRoadMap =
     () => {
@@ -72,39 +27,43 @@ const MainRoadMap =
                 />
                 <br />
                 <div class="roadmap">
-                    <div class="container22">
-                        <div class="carousel">
-                            <div class="item123 a">
-                                멸종위기동물
-                                <br />
-                                -컨텐츠컨텐츠
-                            </div>
-                            <div class="item123 b">
-                                환경보호
-                            </div>
-                            <div class="item123 c">
-                                SSAFY
-                                토큰
-                            </div>
-                            <div class="item123 d">
-                                가상세계
-                            </div>
-                            <div class="item123 e">
-                                유니티
-                                게임
-                            </div>
-                            <div class="item123 f">
-                                NFT
-                                커뮤니티
-                            </div>
-                        </div>
-                    </div>
-                    <div class="next">
-                        Next
-                    </div>
-                    <div class="prev">
-                        Prev
-                    </div>
+                    <Swiper
+                        effect={
+                            "cards"
+                        }
+                        grabCursor={
+                            true
+                        }
+                        modules={[
+                            EffectCards,
+                        ]}
+                        className="mySwiper"
+                    >
+                        <SwiperSlide>
+                            Slide
+                            1
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            Slide
+                            2
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            Slide
+                            3
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            Slide
+                            4
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            Slide
+                            5
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            Slide
+                            6
+                        </SwiperSlide>
+                    </Swiper>
                 </div>
             </div>
         );
