@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  Samals_FE: # 이름은 어떤걸로 지정해도 상관없음
+  Samals_fe: # 서비스명은 소문자만
     build:
       dockerfile: Dockerfile # dockerfile이름
       context: ./ # 도커파일 위치 명시
