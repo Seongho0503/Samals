@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MainSub.css";
+import title from "../../assets/our-story.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
@@ -53,7 +54,7 @@ window.onload =
             );
 
         // 목표 수치
-        const max = 830190;
+        const max = 129983;
 
         setTimeout(
             () =>
@@ -70,116 +71,93 @@ const MainSub =
         return (
             <div id="mainsub">
                 {/* <img id='hero-background' src={list[0].src}/> */}
+                <img
+                    width="500px"
+                    src={
+                        title
+                    }
+                />
 
-                <h1 id="header-subtext-first">
-                    OUR
-                    STORY
-                </h1>
-                <h1 id="header-subtext-first">
-                    기부금액
-                </h1>
                 <h1
                     class="count"
                     id="header-subtext-first"
                 >
                     0
                 </h1>
+
                 <h5 id="header-subtext-second">
-                    {" "}
-                    살기위해
-                    떠난
-                    북극곰들
+                    Samals를
+                    통해
+                    기부된
+                    금액은
+                    위와
+                    같아요{" "}
                     <br />
-                    "이대로
-                    가다간
-                    모두
-                    죽게
-                    될
-                    거야"
                     <br />
-                    북극곰은
+                    환경
+                    파괴로
+                    인한
+                    동물들의
+                    멸종은,
+                    우리의
+                    삶에도
+                    많은
+                    영향을
+                    끼치고
+                    있어요.
+                    <br />
                     인간들의
                     이기심으로
-                    인해
+                    많은
+                    동물은
                     살아갈
                     곳을
                     잃어가고,
                     <br />
-                    먹을
-                    음식이
-                    없어
-                    점점
-                    야위어져만
-                    가고
-                    있습니다.
+                    지구상에서
+                    사라지고
+                    있어요.
                     <br />
+                    <br />
+                    저희
+                    팀은
+                    이
                     위기를
-                    느낀
-                    이들은
-                    좁디좁은
-                    빙하
-                    위에서
-                    인간에게
-                    도움을
-                    요청하고
-                    경고를
-                    해왔지만
+                    해결할
+                    많은
+                    방법을
+                    고민했습니다.
                     <br />
-                    돌아오는
-                    건
-                    플라스틱과
-                    더위
-                    뿐이었고
-                    <br />
-                    이에
-                    분노한
-                    북극곰들은
-                    인류와의
-                    관계를
-                    단절하고
-                    그들만의
-                    세상을
-                    만들어
-                    나갔습니다.
-                    <br />
-                    결국
-                    우리
-                    인류도
-                    언젠간
-                    위기를
-                    맞이할
-                    거에요.
-                    <br />
-                    화난
-                    북극곰들처럼요!
-                    <br />
-                    다시는
-                    이러한
-                    일들이
-                    일어나지
-                    않게,
-                    <br />
-                    또
-                    함께
-                    상생하며
-                    살아갈
-                    수
-                    있도록
-                    화난
-                    북극곰들을
-                    찾아가
-                    달래주세요.
-                    <br />
-                </h5>
-                <h5 id="header-subtext">
-                    Craft,
-                    hunt
-                    and
-                    trade
-                    NFT's
-                    in
+                    우리는
+                    Save
                     the
-                    dark
+                    animals,
+                    Samals
+                    프로젝트를
+                    통해,{" "}
+                    <br />
+                    멸종
+                    위기
+                    동물을
+                    위한
+                    NFT를
+                    발급하고,
+                    이를
+                    그
+                    동물을
+                    위해
+                    기부하기로
+                    했어요.
+                    <br />
+                    지금
+                    멸종
+                    위기
+                    동물을
+                    위해
+                    팀
+                    올청이와
+                    함께해주세요!
+                    <br />
                 </h5>
             </div>
         );

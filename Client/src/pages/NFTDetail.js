@@ -18,8 +18,11 @@ import { hotDropsData } from "../constants/MockupData";
 import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
 import AnimalDetail from "../components/AnimalDetail";
+import AnimalInfo from "../components/NftDetail/AnimalInfo";
+import AnimalBook from "../components/NftDetail/AnimalBook";
+import TradeHistory from "../components/NftDetail/TradeHistory";
 
-const NFTDetail = () => {
+const NftDetail = () => {
   const isMobile = useMobile();
 
   const [colors, setColors] = useState([]);
@@ -134,9 +137,13 @@ const NFTDetail = () => {
         />
       </div>
 
-      <AnimalDetail animalDetail={dummyList} />
+      {/* <AnimalDetail animalDetail={dummyList} /> */}
+      <AnimalBook></AnimalBook>
+      <AnimalInfo />
+      <TradeHistory></TradeHistory>
+      {/* <Test /> */}
     </div>
   );
 };
 
-export default NFTDetail;
+export default NftDetail;

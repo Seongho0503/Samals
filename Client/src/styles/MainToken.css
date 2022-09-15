@@ -1,0 +1,17 @@
+.jump {
+    animation: jump
+        1.5s
+        infinite
+        ease;
+}
+@keyframes jump {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -40px;
+    }
+    100% {
+        top: 0;
+    }
+}

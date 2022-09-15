@@ -4,6 +4,9 @@ import React, {
 } from "react";
 import "../../styles/Hero.css";
 import { useNavigate } from "react-router-dom";
+import bg from "../../assets/bg-02.png";
+import font from "../../assets/font2.png";
+import title from "../../assets/our-vision.png";
 import Header from "../Header";
 
 const MainTitle =
@@ -29,26 +32,27 @@ const MainTitle =
                 {/* <img id='hero-background' src={list[0].src}/> */}
 
                 <Header />
-
-                <h3 id="header-text-second">
-                    {" "}
-                    SAVE
-                    THE
-                    ANIMALS{" "}
-                </h3>
-                <h1 id="header-text-first">
-                    {" "}
-                    SAMALS
-                </h1>
-                <h5 id="header-subtext">
-                    Start
-                    your
-                    NFT
-                    collection
-                    now
-                </h5>
-
-                <div id="hero-buttons">
+                <img
+                    id="hero-background"
+                    src={
+                        bg
+                    }
+                />
+                <div id="hero-background2">
+                    <img
+                        width="77%"
+                        src={
+                            font
+                        }
+                    />
+                    {/* <img
+                        width="10%"
+                        src={
+                            title
+                        }
+                    /> */}
+                </div>
+                {/* <div id="hero-buttons">
                     <button
                         id="explore"
                         onClick={
@@ -65,7 +69,7 @@ const MainTitle =
                     >
                         Create
                     </button>
-                </div>
+                </div> */}
             </div>
         );
     };

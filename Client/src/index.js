@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import "swiper/css/bundle";
+
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
@@ -10,18 +12,45 @@ import Explore from "./pages/Explore";
 
 //dapp
 import { DAppProvider } from "@usedapp/core";
-import NFTDetail from "./pages/NFTDetail";
+import NftDetail from "./pages/NftDetail";
 
 ReactDOM.render(
   <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DAppProvider config={{}}><Home /></DAppProvider>} />
-        <Route path="/create" element={<DAppProvider><Create /></DAppProvider>} />
-        <Route path="/explore" element={<DAppProvider config={{}}><Explore /></DAppProvider>} />
-        <Route path="/detail" element={<DAppProvider config={{}}><NFTDetail /></DAppProvider>} />
-
-      </Routes>
-    </BrowserRouter>,
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <DAppProvider config={{}}>
+            <Home />
+          </DAppProvider>
+        }
+      />
+      <Route
+        path="/create"
+        element={
+          <DAppProvider>
+            <Create />
+          </DAppProvider>
+        }
+      />
+      <Route
+        path="/explore"
+        element={
+          <DAppProvider config={{}}>
+            <Explore />
+          </DAppProvider>
+        }
+      />
+      <Route
+        path="/detail"
+        element={
+          <DAppProvider config={{}}>
+            <NftDetail />
+          </DAppProvider>
+        }
+      />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
