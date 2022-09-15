@@ -4,6 +4,8 @@ pragma solidity ^0.8.16;
 //"tokokukan_uri_test"
 //"tokokukan"
 //"NT"
+
+//0x97dCDA3350320DA104A39FF3616ee2211646C9c2
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -50,10 +52,11 @@ contract MascortNft is ERC721Enumerable, Ownable {
 
     IERC20 private _currencyContract;
 
-    //계약서 생성
-    //@param address tokenUri : 현 NFT가 지정하고 있는 IPFS URI
-    //@param string name : 현 마스코트 NFT 동물의 이름 (=토코투칸)
-    //@param string class : 현 마스코트 NFT 동물의 멸종위기등급
+    /*계약서 생성
+     * @param address tokenUri : 현 NFT가 지정하고 있는 IPFS URI
+     * @param string name : 현 마스코트 NFT 동물의 이름 (=토코투칸)
+     * @param string class : 현 마스코트 NFT 동물의 멸종위기등급
+    */
     constructor(
         address currencyContractAddress,
         string memory tokenUri,
@@ -72,10 +75,17 @@ contract MascortNft is ERC721Enumerable, Ownable {
         _tokenIds.increment();
     }
 
-    function _createMascortNft (
+    /*
+    * createMascortNft
+    * MascortNft에 대한 소유권 부여
+    * 
+    * @ param uint256 mintedAt Mint를 진행한 UNIX TIME STAMP 시간
+    * @ return uint256 _presentTokenId 소유권 번호를 발급
+    * @ exception MacortNft 소유권을 가지고 있다면 소유권 중복 발급하지 않는다.
+    */
+    function createMascortNft (
         uint256 mintedAt
-    )
-    public returns (uint256)
+    ) public returns (uint256)
     {
         require(_minters[msg.sender] == uint256(0), "ALREADY OWNED THIS TOKEN");
 
@@ -120,9 +130,12 @@ contract MascortNft is ERC721Enumerable, Ownable {
         return (_tokenIds.current()-1);
     }
 
-    //_getTokenInfoByWallet : Free Struct 정보 조회
-    //@param address walletAddress : 현 지갑에 매핑된 Free Struct 데이터 조회
-    //@return (uint256, uint256) : Free Struct 내의 ( tokenId, mintedAt ) 값 반환
+    /*
+    * _getTokenInfoByWallet
+    * Free Struct 기록된 정보 조회
+    * @param address walletAddress : 조회하고자 하는 지갑 주소
+    * @return (uint256, uint256) : Free Struct 내의 ( tokenId, mintedAt ) 값 반환
+    */
     function _getTokenInfoByWallet(
         address walletAddress
     ) public view returns(uint256, uint256) {
@@ -134,9 +147,12 @@ contract MascortNft is ERC721Enumerable, Ownable {
         return (0,0); 
     }
 
-    //_isOwner : 지갑에 한 소유 여부 조회(_getTokenId를 호출하기 전에 사용)
-    //@param address walletAddress : 현 지갑에 매핑된 Free Struct 데이터 조회
-    //@returns(uint256, uint256) : Free Struct 내의 ( tokenId, mintedAt ) 값 반환
+    /*
+    * isOwner
+    * 지갑에 현 소유 여부 조회, _getTokenId를 호출하기 전에 사용
+    * @param address walletAddress : 조회하고자 하는 지갑 주소
+    * @returns bool : 소유권 유무 반환
+    */
     function _isOwner(
         address walletAddress
     ) public view returns(bool){
