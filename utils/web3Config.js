@@ -2085,7 +2085,7 @@ export const animalNftContractAddress = "0x09746Ad311D1A792411b1FEA1473D4cea88FA
 export const mascortNftContractAddress = "0x97dCDA3350320DA104A39FF3616ee2211646C9c2";
 
 //NftSaleManager
-export const nftSaleManagerContractAddress = "0xf8e81D47203A594245E36C48e151709F0C19fBe8";
+export const nftSaleManagerContractAddress = "0xA8D395C7a68Be1EBA3a29B05cb36FEf0c3DE5E28";
 
 export const aceTokenContract = new web3.eth.Contract(
     aceTokenAbi,

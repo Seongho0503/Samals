@@ -109,6 +109,15 @@ contract NftSale is Ownable {
         return _currencyContract.balanceOf(msg.sender);
         
     }
+
+    /*
+    * animalIdof
+    * NftSale을 작성한 글 작성자를 반환
+    *
+    * @ param None
+    * @ return address
+    * @ exception None
+    */
     function animalIdof() public view returns(address) {
         return _animalNftContract.ownerOf(_animalId);
     }
@@ -120,7 +129,7 @@ contract NftSale is Ownable {
     * 구매자의 지갑으로부터 계약 지갑으로 판매 가격 만큼의 ERC-20 토큰을 전송
     * @ modifier ActiveSale 시간과 판매 종료 내역 확인
     * @ param None
-    * @ return None
+    * @ return _animalId
     * @ exception 현재 활성 상태(미취소, 미완료, 판매시간 내)의 판매 이어야 함
     * @ exception 판매자가 현재 동물 주인이어야 함
     * @ exception 구매자가 현재 동물 가격 이상의 잔고를 가지고 있어야 함

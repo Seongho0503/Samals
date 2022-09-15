@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 //0x9dE8aCDbFe898E579F8B79D9141F5e595ca09E99
-//0xd9145CCE52D386f254917e481eB44e9943F39138
+//0x09746Ad311D1A792411b1FEA1473D4cea88FA589
 
 
 //본체 : 
@@ -37,6 +37,9 @@ contract NftSaleManager is Ownable {
 
     //Sale Contract에 대한 소유권 명시
     mapping(uint256 => Sale) private _sales;
+
+    //approve 문제로 인해 임시로 주소를 보관할 mapping
+    mapping(uint256 => address) private _saleAddress;
 
     // 특정 동물에 따른 거래 ID 목록 => To Much인가? => Id값만 기록되기 때문에 성능에 비해 gas 효율 보통
     mapping(uint256 => uint256[]) private _salesByAnimal;
@@ -83,7 +86,7 @@ contract NftSaleManager is Ownable {
     * @ param uint256 price 판매 가격
     * @ param uint256 startedAt 판매 시작 시간
     * @ param uint256 endedAt 판매 종료 시간
-    * @ return None
+    * @ return (animalId, address) 판매할 animalId, 판매글 Contract 주소 반환
     */
     function createSale(
             uint256 animalId,
@@ -94,7 +97,6 @@ contract NftSaleManager is Ownable {
             uint256,
             address)
     {
-
         /* 유효성 검사
             1. 글 등록자가 동물 Id를 실제로 소유하는지 확인
             2. 판매 가격은 0을 넘어야 함 
@@ -106,15 +108,25 @@ contract NftSaleManager is Ownable {
         //거래 객체 생성
         NftSale newNftSale = new NftSale(_currencyAddress, _animalNftAddress, animalId, msg.sender, price, startedAt, endedAt);
         
+        //이벤트 발생
         emit SaleCreated(address(newNftSale), animalId);
 
         //외부에서 NftSale의 주소에 대한 거래를 ERC20에서 approve 해주어야 한다.
-        return (animalId, address(newNftSale));
+        _saleAddress[animalId] = address(newNftSale);
 
+        return (animalId, address(newNftSale));
         
     }
 
-    //gas 오류 때문에 먼저 해당 NftSale Contract의 권한을 approve한 후 현 객체를 NftTradeManager Contract 내부에 등록한다.
+    /*
+    * recordSale
+    * approve 문제 : 먼저 해당 NftSale Contract의 권한을 외부에서 approve 진행
+    * 이후 현 객체를 NftTradeManager Contract 내부에 등록
+    *
+    * @ param uint256 animalId 동물 ID
+    * @ param address nftSaleAddress 등록할 NftSale 글 주소
+    * @ return uint256 newNftSaleId 등록된 NftSale 글 ID
+    */
     function recordSale(
         uint256 animalId,
         address nftSaleAddress
@@ -148,7 +160,7 @@ contract NftSaleManager is Ownable {
     *
     * @ param uint256 saleId 거래 ID
     * @ return address 거래 소유 Wallet address
-    * @ exception None
+    * @ exception 발행된 saleId를 초과하는 요청을 할 수 없다.
     */
     function ownerOfSale(uint256 saleId) public view
     returns(address) {
@@ -162,7 +174,7 @@ contract NftSaleManager is Ownable {
     *
     * @ param uint256 saleId 거래 ID
     * @ return (address, address) 거래 Contract address, Owner address
-    * @ exception None
+    * @ exception 발행된 saleId를 초과하는 요청을 할 수 없다.
     */
     function getSaleInfo(uint256 saleId) public view
     returns(address, address) {

@@ -82,7 +82,6 @@ contract AnimalNft is ERC721URIStorage, Ownable {
        @param uint256[] memory numbeR : 해당 동물의 고유 넘버링 번호
        @parmam bool[] check : 내부에서 사용할 배열, function 내부에서 memory로 생성하기 위해서는 동물의 수를 constant로 한정 지어 사용할 수 있다. 하지만 테스트를 위해 유동적으로 가져가기 위한 목적으로 매개변수로 받아준다.
     */
-
     constructor(
         address currencyContractAddress,
         uint32[] memory species,
@@ -133,7 +132,7 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     * donate
     * Donate Struct를 생성해 내용을 기록하고 mint 수행
     * @ param uint256 donatedAt : UNIX TIME STAMP 기반한 시간 정보 기록
-    * @ return animalId
+    * @ return newTokenId
     */
     function donate(
             uint256 donatedAt
@@ -187,7 +186,14 @@ contract AnimalNft is ERC721URIStorage, Ownable {
         return newTokenId;
     }
 
-    // ERC721 토큰의 transferFrom 함수를 override 해서 사용
+    /*
+    * transferFrom
+    * ERC721 토큰의 transferFrom 함수를 override 해서 사용
+    * @ param address from : NFT 판매자
+    * @ param address to : NFT 구매자
+    * @ param uint256 tokenId : 양도할 토큰 animalId
+    * @ return newTokenId
+    */
     function transferFrom(
         address from,
         address to,

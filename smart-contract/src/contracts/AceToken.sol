@@ -8,11 +8,16 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 //AceToken을 ERC20 표준을 상속해 구현
 contract AceToken is ERC20, Ownable {
 
-    //ERC20 생성자 그대로 사용: name = AceToken, symbol = ACE
+    /*
+    * ERC20 기반 토큰
+    * @param string name 토큰명 : AceToken
+    * @param string symbol 토큰심볼 : ACE
+    * @param address[] wallets 토큰을 배분할 지갑 주소 목록
+    */
     constructor(string memory name, string memory symbol, address[] memory wallets) ERC20(name,symbol){
         // mint 1000 token
         for(uint256 i = 0; i < wallets.length; i++){
-            _mint(wallets[i], 100000*10**uint(decimals()));
+            _mint(wallets[i], 100000);
         }
     }
 }
