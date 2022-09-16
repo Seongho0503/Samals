@@ -77,10 +77,13 @@ class AnimalInfo extends React.Component {
 
                 <div className="timeline-content js--fadeInLeft">
                   <h2>Title</h2>
+
                   <div className="date">이름명</div>
-                  <p className="content">
-                    토코투칸(영어: Toco Toucan, 학명: Ramphastos toco)
-                  </p>
+                  <div className="AnimalName">
+                    <p className="content">
+                      토코투칸(영어: Toco Toucan, 학명: Ramphastos toco)
+                    </p>
+                  </div>
                   {/* <a className="bnt-more" href="javascript:void(0)">
                   More
                 </a> */}
