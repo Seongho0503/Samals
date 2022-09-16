@@ -2,19 +2,20 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 
 import "./AnimalNft.sol";
+
 /*
 * 거래 정보를 저장하는 Contracts
 * 거래 등록마다 생성되므로 객체로 활용
 * @author
 * @version
 */
-
-contract NftSale is Ownable {
+contract NftSale is Ownable, IERC721Receiver {
     using SafeMath for uint256;
 
     event Purchase(uint256 indexed animalId, address seller, address buyer);
@@ -144,30 +145,12 @@ contract NftSale is Ownable {
         // 구매자에게 현재 잔고가 있는가 확인
         require(_currencyContract.balanceOf(msg.sender) >= _price, "balance is exhausted");
 
-        /*
-        [판매자 => 구매자]
-        판매자에게서 구매자에게 동물 소유권 전송
-            1. safeTransferFrom 발동
-            2. _isApprovedOrOwner(_msgSender(), tokenId) 실행
-            3. _transfer 실행 -> ERC-721 내부에서 소유권 변경
-            4. 마지막으로 요청 객체가 ERC-721 Receiver인지 확인(현재 상속 중)
-        */
-        //_animalNftContract.safeTransferFrom(_seller, msg.sender, _animalId); // 잘되는지 테스트 필요한 핵심 부분
-
         /* 
         [구매자 => 판매자]
         구매자에게서 판매자에게 토큰 지불
         */
         _currencyContract.transferFrom(msg.sender, _seller, _price);
         _animalNftContract.transferFrom(_seller, msg.sender, _animalId);
-        //ERC721 내부에 규정되어있는 approve 후 구매하기는 보안상 뛰어나지만
-        //웹페이지 컨셉에 맞지 않아 자체 규정된 민트 기록을 사용한다.
-        //만약 사용하기 위해선 구매자가 요청하는 방식이나 판매자가 올리고 구매자가 요청하면 판매자가 허락하는 방식이다.
-        //_animalNftContract.transferFrom(owner(), msg.sender, _animalId);
-        
-        //  _currencyContract.approve(msg.sender,_price);
-        // _currencyContract.approve(address(this), _price);
-        // _currencyContract.transferFrom(address(this), _seller, _price);
  
         emit Purchase(_animalId, _seller, msg.sender);
 
@@ -192,15 +175,16 @@ contract NftSale is Ownable {
     function _getSaleTime() public view returns(uint256, uint256) {
         return (_startedAt, _endedAt);
     }
-    // IERC721Receiver는 interface므로 이 메서드를 필수로 상속해야한다.
-    // function onERC721Received(
-    //     address operator,
-    //     address from,
-    //     uint256 tokenId,
-    //     bytes calldata data
-    // ) external pure override returns (bytes4) {
-    //     return this.onERC721Received.selector;
-    // }
+    
+    //IERC721Receiver는 interface므로 이 메서드를 필수로 상속해야한다.
+    function onERC721Received(
+        address operator,
+        address from,
+        uint256 tokenId,
+        bytes calldata data
+    ) external pure override returns (bytes4) {
+        return this.onERC721Received.selector;
+    }
 
     modifier ActiveSale() {
         require(_startedAt < block.timestamp, "This sale is not started yet");

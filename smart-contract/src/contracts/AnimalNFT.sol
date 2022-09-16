@@ -12,12 +12,8 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 /*
-굳이 한페이지에 쓰지 않는 이유는?
-1. 일단 하나면 없어보임
-2. 여러개 작성하면 객체지향을 강조할 수 있다.
-3. 다중 검색시 REST하게 각각 요청함으로 속도 줄일 수 있다?? 아니다 오히려 이벤트로 연관된 id값을 받고 다시 해당 컨트랙트로 재요청하는 이슈 발생
-4, 여기서는 코드를 줄이는 것을 목표로 함. 그러나 그게 불가능할 때도 있었다.
-5. 내부 struct로 객체를 만들었지만 가스 소모가 심하다
+기부금으로 발행하는 NFT 토큰
+구매를 진행한 사람들이게 랜덤한 동물의 소유권이 기록된다.
 */
 contract AnimalNft is ERC721URIStorage, Ownable {
     
@@ -55,17 +51,8 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     uint256 constant public MINT_PRICE = 500;
 
     //기부 시: LIMITED_ANIMALS(랜덤) => MINTED_ANIMALS(순서)
-    mapping(uint256 => AnimalInfo) private LIMITED_ANIMALS; //최초값을 2차원 배열로 받아야하는데 가스가 미쳐날뛴다.
-    mapping(uint256 => AnimalInfo) private MINTED_ANIMALS; //뽑기 이후 민팅된 동물들 => ArrayList가 안되는 것을 깨닫고 방식 변경
-
-    //ERC721URIStrage 표준: 토큰 ID에 매핑된 URI 주소
-    //mapping(uint256 => string) private _tokenURIs;
-
-    //토큰의 현 소유자들 기록/갱신
-    //mapping(uint256 => address) private _tokenOwners;
-
-    //최초 민트자 기록: 22000개가 발행되었다고 했을 때 검색속도 개선 => 그러나 아래 transactionHistories[tokenId]
-    //mapping(uint256 => address) private _minters; => AnimalInfo Struct로 관리한 이상 필요가 없어짐
+    mapping(uint256 => AnimalInfo) private LIMITED_ANIMALS; 
+    mapping(uint256 => AnimalInfo) private MINTED_ANIMALS;
 
     // 특정 지갑에 따른 기부 ID 목록
     mapping(address => uint256[]) private _donateIdsByWallet;
@@ -207,82 +194,6 @@ contract AnimalNft is ERC721URIStorage, Ownable {
 
         MINTED_ANIMALS[tokenId].owner = to;
     }
-
-    // 무작위의 동물을 뽑기
-    // function _createAnimalNft (
-    // ) private returns (uint256)
-    // {
-        
-    //     //랜덤으로 동물을 뽑아주는 메서드 -> 4번째 방식에서 수정됨
-    //     //uint256 randomAnimalId = _getRandomAnimalId();
-
-    //     /* 유효성 검사
-    //         - 모든 동물들이 민트가 진행되었다면 더 이상 NFT를 발행할 수 없다
-    //     */
-    //     require(_tokenIds.current() <= LIMITED_NUMBER, "ALL ANIMALS WERE MINTED");
-
-    //     //유효성 검사: 민트가 일어나지 않았는지 재확인
-    //     require(LIMITED_ANIMALS[randomAnimalId].minter == address(0), "NFT MINTER ALREADY EXISTS");
-    
-    //     //현재 관리하고 있는 NFT 개수에 1을 추가
-    //     uint256 newAnimalId = _tokenIds.current();
-
-    //     require( newAnimalId < LIMITED_NUMBER );       
-
-    //     LIMITED_ANIMALS[randomAnimalId].minter = msg.sender;
-    //     LIMITED_ANIMALS[randomAnimalId].owner = msg.sender;
-
-    //     MINTED_ANIMALS[newAnimalId] = LIMITED_ANIMALS[randomAnimalId];
-
-    //     //ERC721의 소유권 기록
-    //     _mint(msg.sender, newAnimalId);
-    //     //ERC721URIStorage에 URI 기록
-    //     _setTokenURI(newAnimalId, MINTED_ANIMALS[newAnimalId].tokenUri);
-
-    //     _tokenIds.increment();
-
-    //     return newAnimalId;
-    // }
-
-    
-    // function _getRandomAnimalId(  
-    // ) private view returns(uint256){
-    //     //방법1
-    //     //Solidity는 deterministic하다 -> random성을 지양하는 언어
-    //     //하지만 keccak256 라이브러리와 abi을 이용해 랜덤성을 부여할 수 있다
-    //     //조사해보니 Solidity 환경에서 ArrayList의 add는 가능하지만 delete는 논리삭제만 가능했다
-    //     //uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, _tokenIds.current()))) % (MINTED_ANIMALS.length);
-    //     //MINTED_ANIMALS.push(LIMITED_ANIMALS[random]);
-    //     //delete LIMITED_ANIMALS
-        
-    //     //방법2
-    //     //극한의 조회문을 사용하기로 결정
-    //     //새로 배열을 임시로 만들어 뽑기를 진행하려고 했는데 i와 크기 배열 tmp는 임시로 만들 수 있지만 인덱스를 기록하기 위한 j는 임시로 만들기 불가
-    //     //uint256[] memory tmp = new uint256[](LIMITED_NUMBER - _tokenIds.current());
-    //     //for(uint256 i=0; i<LIMITED_ANIMALS.length; i++){
-    //     //    if(LIMITED_ANIMALS[i].minter == address(0)){
-    //     //        tmp.push(i); 
-    //     //    }
-    //     //}
-        
-    //     //방법3 = 방법1 + 방법2 = view 키워드를 사용해 gas를 최대한 아끼고 리턴값을 밖으로 빼서 gas를 사용한다.
-    //     // uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender,  _tokenIds.current()))) % LIMITED_NUMBER;
-    //     //특정 random수를 임의로 정하고 앞으로 이동하면서 가장 가까운 숫자를 번호로 뽑아낸다.
-    //     // for(uint256 i = random ; i < random + LIMITED_NUMBER; i++){
-    //     //     //민트자가 정해지지 않았다면 채택
-    //     //     if(LIMITED_ANIMALS[ i % LIMITED_NUMBER ].minter == address(0)){ 
-    //     //         return i;
-    //     //     }
-    //     // }
-    //     // 디버깅 해 본 결과 트랜잭션이 생성되거나 하면서 Race Condition이 매우 많이 발생했고 민트가 정상적으로 수행되지 않았다
-    //     // 이것을 방지하기 위해 조건을 만족한다면 바로 tokenIds를 증가시켜 다음 번 오는 사람이 민트를 요청했을 때 충돌하지 않도록 한다
-
-
-
-    //     return LIMITED_NUMBER;
-    //     //delete LIMITED_ANIMALS
-        
-    // }
 
     function _getSpecies(
         uint256 tokenId
