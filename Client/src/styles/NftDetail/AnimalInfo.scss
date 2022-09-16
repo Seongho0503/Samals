@@ -81,6 +81,10 @@ header {
   }
 }
 
+// .AnimalName {
+//   width: 200%;
+// }
+
 .timeline-item-right {
   width: 100%;
   margin-bottom: 70px;
@@ -178,10 +182,11 @@ header {
   }
 }
 
-// .timeline-content js--fadeInLeft {
-//   position: relative;
-//   right: 30px;
-// }
+.timeline-content js--fadeInLeft {
+  //  position: relative;
+  //  right: 30px;
+  height: 150%;
+}
 
 .timeline-img {
   width: 30px;
