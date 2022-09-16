@@ -1,9 +1,9 @@
 import * as React from "react";
 import "../../styles/NftDetail/AnimalBook.scss";
-// import "../styles/Animal.scss";
 import { $, jQuery } from "jquery";
 import dictionary from "../../assets/dictionary.png";
 import Wobble from "react-reveal/Wobble";
+import Tada from "react-reveal/Tada";
 
 // const AnimalBook = () => {
 class AnimalBook extends React.Component {
@@ -11,8 +11,9 @@ class AnimalBook extends React.Component {
     return (
       <div>
         {/* <div className="imgLoader"></div> */}
-        <img className="subTitle" src={dictionary} />
-
+        <Tada>
+          <img className="subTitle" src={dictionary} />
+        </Tada>
         <div className="container">
           {/* <h1 className="title">멸종 위기 동물 도감</h1> */}
 
