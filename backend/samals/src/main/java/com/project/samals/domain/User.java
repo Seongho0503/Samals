@@ -67,4 +67,9 @@ public class User {
         sale.setUser(this);
     }
 
+    public void deleteSaleHistory(long saleSeq) {
+        this.saleHistory.removeIf(sale ->
+                sale.getSaleSeq()==saleSeq);
+    }
+
 }
