@@ -1,0 +1,14 @@
+version: "3"
+services:
+  samals_fe:
+    # 서비스명은 소문자만
+    build:
+      dockerfile: Dockerfile # dockerfile이름
+      context: ./ # 도커파일 위치 명시
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/html:/usr/share/nginx/html
+
+    ports:
+      - "3001:3001" # port 맵핑
+    stdin_open: true

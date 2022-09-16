@@ -8,9 +8,11 @@
   // margin-top: ;
 }
 .subTitle {
-  transform: scale(0.45, 0.45);
-  margin-top: -154px;
-  margin-left: -187px;
+  //transform: scale(0.45, 0.45);
+  margin-top: 180px;
+  margin-left: 400px;
+  width: 900px;
+  height: 500px;
 }
 .imgLoader {
   font-family: "Indie Flower", cursive;
@@ -24,13 +26,22 @@ $bookAngle: 55deg;
 $speed: 5s;
 $borderColor: #555;
 
-$images: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPoJNq8rBnm9o40t7hjAeWl9sORoQd8Ck9g&usqp=CAU"),
-  //#1
-  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN9jkc37cBhBJzVIHmEz9bwqtaRLjV792nXFYU5TfUSlXfllbNeDsIgkE18G_yq4mFa44&usqp=CAU"),
-  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSncTDDMSeZ6RTzjWz8serPMqhLY3fp_bWlvw&usqp=CAU"),
-  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWCcsBKovRaSCJIgOdGwRWdtwP2GlYzTHU4Q&usqp=CAU"),
-  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUkXofJGB7i1ETw-BQorY1NHe9yvlhsAUA2w&usqp=CAU"),
-  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPoJNq8rBnm9o40t7hjAeWl9sORoQd8Ck9g&usqp=CAU"); //#1
+// $images: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPoJNq8rBnm9o40t7hjAeWl9sORoQd8Ck9g&usqp=CAU"),
+//   //#1
+//   url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN9jkc37cBhBJzVIHmEz9bwqtaRLjV792nXFYU5TfUSlXfllbNeDsIgkE18G_yq4mFa44&usqp=CAU"),
+//   url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSncTDDMSeZ6RTzjWz8serPMqhLY3fp_bWlvw&usqp=CAU"),
+//   url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWCcsBKovRaSCJIgOdGwRWdtwP2GlYzTHU4Q&usqp=CAU"),
+//   url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUkXofJGB7i1ETw-BQorY1NHe9yvlhsAUA2w&usqp=CAU"),
+//   url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPoJNq8rBnm9o40t7hjAeWl9sORoQd8Ck9g&usqp=CAU"); //#1
+
+$images: 
+//#1
+  url("http://newsteacher.chosun.com/site/data/img_dir/2017/11/08/2017110800380_0.jpg"),
+  url("https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLbIiM%2Fbtrox1gxQFS%2Fk1gcnmLSXZS1YZudOwqGv1%2Fimg.jpg"),
+  url("https://image.ytn.co.kr/general/jpg/2020/0706/202007061415011609_d.jpg"),
+  url("https://img1.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202202/01/joongang/20220201050040380kgqc.jpg"),
+  url("https://w.namu.la/s/77d598cc999a66a027ff8605ae171e53f12d6efd4976b0085d07db67019bdf6b5fd653704c6ff26d30d237f1b1ff7d7929b5f097a03cad8544c2dc7339f91374bc04430aedcd5f157195554fd8d641ff864823370635abd70c021a5dfdbbb784"),
+  url("http://newsteacher.chosun.com/site/data/img_dir/2017/11/08/2017110800380_0.jpg"); //#1
 
 // Preload to images
 .imgLoader {
@@ -88,7 +99,7 @@ $images: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIPoJNq8rBnm
   perspective-origin: center 50px;
   transform: scale(1.2);
   filter: drop-shadow(0px 10px 5px rgba(0, 0, 0, 0.25));
-  margin-top: -700px;
+  margin-top: -400px;
 }
 
 .page {
