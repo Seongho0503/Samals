@@ -1,5 +1,7 @@
 import Web3 from "web3";
 
+/* Contract ABI */
+
 export const aceTokenAbi = [
 	{
 		"inputs": [
@@ -2073,7 +2075,7 @@ export const nftSaleAbi = [
 export const web3 = new Web3(window.ethereum);
 
 
-// /* Contract Address export */
+/* Contract Address */
 
 //AceToken
 export const aceTokenContractAddress = "0x9dE8aCDbFe898E579F8B79D9141F5e595ca09E99";
@@ -2086,6 +2088,8 @@ export const mascortNftContractAddress = "0x97dCDA3350320DA104A39FF3616ee2211646
 
 //NftSaleManager
 export const nftSaleManagerContractAddress = "0xA8D395C7a68Be1EBA3a29B05cb36FEf0c3DE5E28";
+
+/* Contract Instance */
 
 export const aceTokenContract = new web3.eth.Contract(
     aceTokenAbi,

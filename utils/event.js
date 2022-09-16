@@ -1,30 +1,29 @@
 import { aceTokenContract, animalNftContract, mascortNftContract, nftSaleManagerContract } from "./web3Config";
 import { web3, animalNftContractAddress, createNftSaleContract } from "./web3Config";
 
-//메타마스크 로그인
-//const web3 = new Web3(window.ethereum);
-
+// 메타마스크 로그인
 export function MetaMaskLogin() {
     
-    //메타마스크 설치확인
+    // 메타마스크 설치확인
     if (typeof web3 !== 'undefined') {
         console.log('Ethereum successfully detected!')
         
-        //계정연결
+        // 계정연결
         window.ethereum
         .request({ method: "eth_requestAccounts" })
         .then(accounts => {
           console.log("연결된 계정", accounts);
         });
       
-    //설치가 안되었다면 에러 발생
-      } else {
-        // if the provider is not detected, detectEthereumProvider resolves to null
-        console.error('Please install MetaMask!');
-      }
+    // 설치가 안되었다면 에러 발생
+    } else {
+      // if the provider is not detected, detectEthereumProvider resolves to null
+      console.error('Please install MetaMask!');
+    }
 
 };
 
+// 총 민트수 반환
 export var totalSupply = async () => {
     const res = await aceTokenContract.methods
     .totalSupply().call();
