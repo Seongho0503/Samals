@@ -10,11 +10,13 @@ const TradeHistory = () => {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Description</th>
+              <th>Price</th>
+              <th className="Dsc">Description</th>
             </tr>
             <tr>
               <td>548</td>
               <td>권성호</td>
+              <td>200달러</td>
               <td>
                 구매기록ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
               </td>
@@ -22,6 +24,7 @@ const TradeHistory = () => {
             <tr>
               <td>954</td>
               <td>김채리</td>
+              <td>300달러</td>
               <td>
                 구매기록ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
               </td>
@@ -29,6 +32,7 @@ const TradeHistory = () => {
             <tr>
               <td>417</td>
               <td>이청</td>
+              <td>300달러</td>
               <td>
                 구매기록ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
               </td>
@@ -36,6 +40,7 @@ const TradeHistory = () => {
             <tr>
               <td>033</td>
               <td>양요셉</td>
+              <td>300달러</td>
               <td>
                 구매기록ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
               </td>

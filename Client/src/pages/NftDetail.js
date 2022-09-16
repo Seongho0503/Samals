@@ -21,6 +21,8 @@ import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
 import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
+import TradeChart from "../components/NftDetail/TradeChart";
+import MainLast from "../components/Main/MainLast";
 
 const NftDetail = () => {
   const isMobile = useMobile();
@@ -142,6 +144,8 @@ const NftDetail = () => {
       <AnimalInfo />
       <TradeHistory></TradeHistory>
       {/* <Test /> */}
+      <TradeChart></TradeChart>
+      <MainLast />
     </div>
   );
 };
