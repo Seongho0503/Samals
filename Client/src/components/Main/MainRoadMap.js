@@ -40,28 +40,31 @@ const MainRoadMap =
                         className="mySwiper"
                     >
                         <SwiperSlide>
-                            Slide
-                            1
+                            ACE
+                            토큰
+                            경제
+                            시스템
                         </SwiperSlide>
                         <SwiperSlide>
-                            Slide
-                            2
+                            '아틀란티스
+                            아일랜드'
+                            활성화
                         </SwiperSlide>
                         <SwiperSlide>
-                            Slide
-                            3
+                            NFT
+                            커뮤니티
+                            확장
                         </SwiperSlide>
                         <SwiperSlide>
-                            Slide
-                            4
+                            홀더들을
+                            위한
+                            SAMALS만의
+                            리워드
                         </SwiperSlide>
                         <SwiperSlide>
-                            Slide
-                            5
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            Slide
-                            6
+                            SAMALS
+                            가상사회
+                            구축
                         </SwiperSlide>
                     </Swiper>
                 </div>
