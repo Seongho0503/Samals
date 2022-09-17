@@ -5,24 +5,24 @@ import Avocado from "../assets/models/Avocado.glb";
 import Tiger from "../assets/card/Tiger.png";
 
 export const exploreList = [
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: AntiqueCamera,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: BarramundiFish,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Avocado,
-  },
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: AntiqueCamera,
+  // },
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: BarramundiFish,
+  // },
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: Avocado,
+  // },
   {
     name: "Test NFT #1",
     description:

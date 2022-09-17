@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Explore from "./pages/Explore";
+import Trade from "./pages/Trade";
 
 //dapp
 import { DAppProvider } from "@usedapp/core";
@@ -38,6 +39,14 @@ ReactDOM.render(
         element={
           <DAppProvider config={{}}>
             <Explore />
+          </DAppProvider>
+        }
+      />
+      <Route
+        path="/trade"
+        element={
+          <DAppProvider config={{}}>
+            <Trade />
           </DAppProvider>
         }
       />

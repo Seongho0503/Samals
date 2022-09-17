@@ -4,12 +4,12 @@
   margin-right: 15px;
   width: 250px;
   /* box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2); */
-  /* box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; */
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   height: 300px;
   border-radius: 30px;
   backdrop-filter: blur(50px);
   /* filter:blur(4px); */
-  background-color: #eb5160;
+  background: rgb(2, 0, 36);
   /* background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.05) 0%,
@@ -145,14 +145,14 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 15px;
   margin-top: 5px;
-  color: #ffffff;
+  color: #e81616;
 }
 
 @keyframes cardHoverAnimation {
   0% {
     background: radial-gradient(
       circle,
-      #EB5160(255, 255, 255, 0.05) 10%,
+      rgba(255, 255, 255, 0.05) 0%,
       rgba(0, 245, 201, 0.4) 0%,
       rgba(255, 255, 255, 0.05) 70%
     );
@@ -161,7 +161,7 @@
   100% {
     background: radial-gradient(
       circle,
-      #EB5160(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.05) 0%,
       rgba(252, 0, 155, 0.425) 0%,
       rgba(255, 255, 255, 0.05) 70%
     );
