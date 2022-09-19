@@ -14,6 +14,7 @@ import Home from "./pages/Home";
 import Create from "./pages/Create";
 import Explore from "./pages/Explore";
 import Minting from "./pages/Minting";
+import Game from "./pages/Game";
 
 //dapp
 import { DAppProvider } from "@usedapp/core";
@@ -68,6 +69,16 @@ ReactDOM.render(
                         config={{}}
                     >
                         <Minting />
+                    </DAppProvider>
+                }
+            />
+            <Route
+                path="/game"
+                element={
+                    <DAppProvider
+                        config={{}}
+                    >
+                        <Game />
                     </DAppProvider>
                 }
             />

@@ -43,9 +43,9 @@ const Header =
                 </Link>
 
                 <div id="link-containers">
-                    <a>
+                    <Link to="/game">
                         게임
-                    </a>
+                    </Link>
                     <Link to="/explore">
                         상점
                     </Link>
