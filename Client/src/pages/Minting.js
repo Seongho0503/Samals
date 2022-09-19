@@ -7,14 +7,16 @@ import RatingData from "../components/Minting/RatingData";
 import "../styles/Home.css";
 import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
+import MintingTitle from "../components/Minting/MintingTitle";
 
 const Minting =
     () => {
         return (
             <div id="home">
+                <MintingTitle />
                 <RatingData />
-                <AnimalData />
                 <MintingButton />
+                <AnimalData />
                 <MintingModal />
             </div>
         );
