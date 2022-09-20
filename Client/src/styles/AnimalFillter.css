@@ -1,0 +1,17 @@
+.toggles {
+  margin-left: 250px;
+}
+
+.toggles button {
+  color: #1ecd97;
+  border: 2px solid;
+  border-radius: 40px;
+  display: block;
+  float: left;
+  margin: auto;
+  padding: 10px;
+  width: 150px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 0 5px;
+}
