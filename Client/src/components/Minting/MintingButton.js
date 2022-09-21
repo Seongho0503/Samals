@@ -3,7 +3,7 @@ import React, {
     useEffect,
 } from "react";
 
-import button from "../../assets/animal-button.png";
+import buttonImg from "../../assets/animal-button.png";
 import modalBack from "../../assets/modal-back.jpg";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
@@ -63,7 +63,7 @@ const MintingButton =
                     <img
                         width="400px"
                         src={
-                            button
+                            buttonImg
                         }
                     />
                 </Button>
