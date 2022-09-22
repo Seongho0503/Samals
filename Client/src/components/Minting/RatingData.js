@@ -2,8 +2,8 @@ import React, {
     useState,
     useEffect,
 } from "react";
-import "../../styles/MainSub.css";
-import title from "../../assets/our-story.png";
+import "../../styles/MintingRating.css";
+import Collaboration from "../../assets/collaboration.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
@@ -54,7 +54,7 @@ window.onload =
             );
 
         // 목표 수치
-        const max = 129983;
+        const max = 983;
 
         setTimeout(
             () =>
@@ -69,13 +69,20 @@ window.onload =
 const RatingData =
     () => {
         return (
-            <div id="mainsub">
+            <div id="rating-data">
                 <Header />
                 {/* <img id='hero-background' src={list[0].src}/> */}
 
+                <img
+                    width="800px"
+                    src={
+                        Collaboration
+                    }
+                />
+
                 <h1
                     class="count"
-                    id="header-subtext-first"
+                    id="rating-text"
                 >
                     0
                 </h1>

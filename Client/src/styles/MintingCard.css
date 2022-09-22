@@ -1,0 +1,28 @@
+.animal-data-title {
+    color: #ffffff;
+    font-family: "Black Han Sans",
+        sans-serif;
+    font-size: 44px;
+    margin-top: 200px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.animal-card {
+    display: flex;
+    justify-content: center;
+}
+.animal-card-detail {
+    margin: 20px;
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 100%;
+    font-family: "Black Han Sans",
+        sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+}
+
+.animal-card-img {
+    max-width: 300px;
+    margin-bottom: 20px;
+}
