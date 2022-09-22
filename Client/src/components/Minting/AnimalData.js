@@ -2,9 +2,9 @@ import React, {
     useState,
     useEffect,
 } from "react";
-import animal01 from "../../assets/profile-1.png";
-import animal02 from "../../assets/profile-2.png";
-import animal03 from "../../assets/profile-3.png";
+import animal01 from "../../assets/minting02.png";
+import animal02 from "../../assets/minting03.png";
+import animal03 from "../../assets/minting04.png";
 import "../../styles/MintingCard.css";
 import bg from "../../assets/bg-04.png";
 import { useNavigate } from "react-router-dom";
@@ -30,7 +30,11 @@ const AnimalData =
                             }
                         />
                         <h2>
-                            82개
+                            와이오밍
+                            두꺼비
+                        </h2>
+                        <h2>
+                            11개
                         </h2>
                     </div>
                     <div class="animal-card-detail">
@@ -40,6 +44,11 @@ const AnimalData =
                                 animal02
                             }
                         />
+                        <h2>
+                            아프리카
+                            숲
+                            코끼리
+                        </h2>
                         <h2>
                             132개
                         </h2>
@@ -51,6 +60,9 @@ const AnimalData =
                                 animal03
                             }
                         />
+                        <h2>
+                            호랑이
+                        </h2>
                         <h2>
                             674개
                         </h2>
