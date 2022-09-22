@@ -38,3 +38,15 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+// Default는 dev 로 지정
+ext.profile = (!project.hasProperty('profile') || !profile) ? 'dev' : profile
+
+// 리소스 폴더 지정
+sourceSets {
+    main {
+        resources {
+            srcDirs "src/main/resources", "src/main/resources-${profile}"
+        }
+    }
+}
