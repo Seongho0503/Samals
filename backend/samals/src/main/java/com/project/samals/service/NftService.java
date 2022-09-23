@@ -4,7 +4,7 @@ import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
 import com.project.samals.domain.User;
 import com.project.samals.dto.NftDto;
-import com.project.samals.dto.request.ReqDto;
+//import com.project.samals.dto.request.ReqDto;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.response.ResNftDto;

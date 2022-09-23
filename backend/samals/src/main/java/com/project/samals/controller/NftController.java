@@ -1,7 +1,6 @@
 package com.project.samals.controller;
 
 import com.project.samals.dto.*;
-import com.project.samals.dto.request.ReqDto;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.response.ResNftDto;
 import com.project.samals.service.NftService;
