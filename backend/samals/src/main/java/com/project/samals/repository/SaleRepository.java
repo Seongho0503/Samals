@@ -14,7 +14,8 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
 
     void deleteBySaleSeq(long saleSeq);
 
-//    Sale[] findAllBySellerAddress(String address);
-//
-//    Sale[] findAllByBuyerAddress(String address);
+
+    Sale[] findAllBySellerAddress(String address);
+
+    Sale[] findAllByBuyerAddress(String address);
 }

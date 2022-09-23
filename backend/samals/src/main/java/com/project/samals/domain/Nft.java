@@ -21,6 +21,9 @@ public class Nft {
     @Column(name = "nft_token_id")
     private int tokenId;
 
+    @Column(name = "nft_owner")
+    private String nftOwner;
+
     @Column(name = "nft_type")
     private String nftType;
 
@@ -33,6 +36,10 @@ public class Nft {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="nft_created_at")
     private Date createdTime;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="nft_updated_at")
+    private Date updatedTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_seq")

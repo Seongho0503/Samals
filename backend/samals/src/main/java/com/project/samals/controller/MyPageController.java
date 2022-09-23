@@ -25,12 +25,12 @@ public class MyPageController {
 
     private final SaleService saleService;
     private final NftService nftService;
-//
-//    @ApiOperation(value = "내 거래 내역 조회")
-//    @GetMapping("/sale-list/{address}")
-//    public ResponseEntity<List<SaleDto>> getMySaleList(@PathVariable String address){
-//        return new ResponseEntity<>(saleService.getMySaleList(address),HttpStatus.OK);
-//    }
+
+    @ApiOperation(value = "내 거래 내역 조회")
+    @GetMapping("/{address}/sale")
+    public ResponseEntity<List<SaleDto>> getMySaleList(@PathVariable String address){
+        return new ResponseEntity<>(saleService.getMySaleList(address),HttpStatus.OK);
+    }
 
     @ApiOperation(value = "내 민팅 내역 조회")
     @GetMapping("/{address}/mint")
@@ -38,10 +38,10 @@ public class MyPageController {
         return new ResponseEntity<>(nftService.getMyMintHistory(address), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "보유 NFT 리스트 조회")
+    @ApiOperation(value = "내 NFT 리스트 조회")
     @GetMapping("/{address}/nft")
-    public ResponseEntity<List<NftDto>> getNftList(@PathVariable String address){
-        return new ResponseEntity<>(nftService.getNftList(address),HttpStatus.OK);
+    public ResponseEntity<List<NftDto>> getMyNftList(@PathVariable String address){
+        return new ResponseEntity<>(nftService.getMyNftList(address),HttpStatus.OK);
     }
 
 
