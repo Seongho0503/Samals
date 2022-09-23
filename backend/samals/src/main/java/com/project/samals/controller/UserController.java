@@ -1,6 +1,7 @@
 package com.project.samals.controller;
 
-import com.project.samals.dto.ReqUserDto;
+import com.project.samals.dto.NftDto;
+import com.project.samals.dto.request.ReqUserDto;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.UserDto;
 import com.project.samals.service.UserService;
@@ -47,10 +48,5 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "사용자 거래 내역 조회")
-    @GetMapping("/{address}/sale-history")
-    public ResponseEntity<List<SaleDto>> getSaleHistory(@PathVariable String address) {
-        return new ResponseEntity<>(userService.getSaleHistory(address), HttpStatus.OK);
-    }
 
 }

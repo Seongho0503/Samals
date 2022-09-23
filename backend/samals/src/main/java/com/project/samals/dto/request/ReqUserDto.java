@@ -1,4 +1,4 @@
-package com.project.samals.dto;
+package com.project.samals.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.samals.domain.User;
