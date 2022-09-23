@@ -40,5 +40,4 @@ public class NftDto {
                 .walletAddress(nft.getUser().getWalletAddress())
                 .build();
     }
-
 }
