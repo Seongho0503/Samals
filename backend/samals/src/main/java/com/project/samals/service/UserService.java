@@ -1,10 +1,8 @@
 package com.project.samals.service;
 
-import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
 import com.project.samals.domain.User;
-import com.project.samals.dto.NftDto;
-import com.project.samals.dto.ReqUserDto;
+import com.project.samals.dto.request.ReqUserDto;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.UserDto;
 import com.project.samals.repository.UserRepository;
@@ -62,13 +60,13 @@ public class UserService {
         return UserDto.convert(saved);
     }
 
-    public List<SaleDto> getSaleHistory(String address){
-        User user = userRepository.findByWalletAddress(address);
-        List<SaleDto> saleHistory = new ArrayList<>();
-        for(Sale sale : user.getSaleHistory()){
-            saleHistory.add(SaleDto.convert(sale));
-        }
-        return saleHistory;
-    }
+//    public List<SaleDto> getSaleHistory(String address){
+//        User user = userRepository.findByWalletAddress(address);
+//        List<SaleDto> saleHistory = new ArrayList<>();
+//        for(Sale sale : user.getSaleHistory()){
+//            saleHistory.add(SaleDto.convert(sale));
+//        }
+//        return saleHistory;
+//    }
 
 }

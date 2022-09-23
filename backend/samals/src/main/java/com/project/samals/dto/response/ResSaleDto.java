@@ -1,4 +1,4 @@
-package com.project.samals.dto;
+package com.project.samals.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.samals.domain.Sale;
@@ -11,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SaleDto {
+public class ResSaleDto {
     private Long saleSeq;
 
     private int tokenId;
@@ -49,10 +49,10 @@ public class SaleDto {
                 .build();
     }
 
-    public static SaleDto convert(Sale sale) {
+    public static ResSaleDto convert(Sale sale) {
         if(sale == null) return null;
 
-        return SaleDto.builder()
+        return ResSaleDto.builder()
                 .saleSeq(sale.getSaleSeq())
                 .tokenId(sale.getNft().getTokenId())
                 .saleContractAddress(sale.getSaleContractAddress())

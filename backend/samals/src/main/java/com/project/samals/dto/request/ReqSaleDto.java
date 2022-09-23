@@ -1,4 +1,4 @@
-package com.project.samals.dto;
+package com.project.samals.dto.request;
 
 import com.project.samals.domain.Sale;
 import lombok.*;
@@ -21,7 +21,6 @@ public class ReqSaleDto {
 
     public Sale toEntity(){
         return Sale.builder()
-                .tokenId(tokenId)
                 .saleContractAddress(saleContractAddress)
                 .sellerAddress(sellerAddress)
                 .salePrice(salePrice)
