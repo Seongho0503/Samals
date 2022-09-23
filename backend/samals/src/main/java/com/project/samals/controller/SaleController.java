@@ -1,6 +1,7 @@
 package com.project.samals.controller;
 
 import com.project.samals.dto.*;
+import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.service.SaleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,11 +26,6 @@ public class SaleController {
     public ResponseEntity<SaleDto> createSale(@RequestBody ReqSaleDto saleDto) {
         return new ResponseEntity<>(saleService.createSale(saleDto), HttpStatus.CREATED);
     }
-    @ApiOperation(value = "거래 삭제")
-    @DeleteMapping("/{address}/delete/{saleSeq}")
-    public ResponseEntity<String> deleteSale(@PathVariable String address,@PathVariable int saleSeq) {
-        return new ResponseEntity<>(saleService.deleteSale(address,saleSeq), HttpStatus.OK);
-    }
 
     @ApiOperation(value = "전체 거래 조회")
     @GetMapping("/list")
@@ -39,8 +35,8 @@ public class SaleController {
 
     @ApiOperation(value = "거래 상세 조회")
     @GetMapping("/{saleSeq}")
-    public ResponseEntity<SaleDto> getSaleInfo(@PathVariable long saleSeq){
-        return new ResponseEntity<>(saleService.getSaleInfo(saleSeq),HttpStatus.OK);
+    public ResponseEntity<SaleDto> getSale(@PathVariable long saleSeq){
+        return new ResponseEntity<>(saleService.getSale(saleSeq),HttpStatus.OK);
     }
 
     @ApiOperation(value = "거래 완료")

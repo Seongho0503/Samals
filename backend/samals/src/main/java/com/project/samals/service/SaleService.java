@@ -1,8 +1,11 @@
 package com.project.samals.service;
 
+import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
 import com.project.samals.domain.User;
 import com.project.samals.dto.*;
+import com.project.samals.dto.request.ReqSaleDto;
+import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.SaleRepository;
 import com.project.samals.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,20 +23,24 @@ public class SaleService {
 
     private final SaleRepository saleRepository;
     private final UserRepository userRepository;
+
+    private final NftRepository nftRepository;
     //거래 등록
     @Transactional
     public SaleDto createSale(ReqSaleDto saleDto) {
-        User user = userRepository.findByWalletAddress(saleDto.getSellerAddress());
+
+        Nft nft = nftRepository.findByTokenId(saleDto.getTokenId());
 
         Sale sale =saleDto.toEntity();
         sale.setIsSold('N');
         sale.setCreatedTime(new Date());
         sale.setUpdatedTime(new Date());
-        Sale saved=saleRepository.save(sale);
+        saleRepository.save(sale);
 
-        user.addSaleHistory(saved);
-        userRepository.save(user);
-        return SaleDto.convert(saved);
+        nft.addNftSaleList(sale);
+        nftRepository.save(nft);
+
+        return SaleDto.convert(sale);
     }
 
     public List<SaleDto> getSaleList(){
@@ -44,25 +51,9 @@ public class SaleService {
         return saleList;
     }
 
-    public SaleDto getSaleInfo(long saleSeq) {
+    public SaleDto getSale(long saleSeq) {
         Sale saleInfo=saleRepository.findBySaleSeq(saleSeq);
         return SaleDto.convert(saleInfo);
-    }
-
-    public String deleteSale(String address, long saleSeq){
-        User user = userRepository.findByWalletAddress(address);
-
-        for(int i=0; i<user.getSaleHistory().size();i++){
-            if(user.getSaleHistory().get(i).getSaleSeq()==saleSeq){
-                saleRepository.deleteBySaleSeq(saleSeq);
-            }
-        }
-
-        user.deleteSaleHistory(saleSeq);
-        userRepository.save(user);
-
-        return "Success";
-
     }
 
     public SaleDto completeSale(String buyerAddress,long saleSeq) {
@@ -76,8 +67,23 @@ public class SaleService {
     }
 
 
-
-
-
+    //내 거래내역 (판매 + 구매)
+//    public List<SaleDto> getMySaleList(String address){
+//        List<SaleDto> saleList = new ArrayList<>();
+//
+//        for(Sale sale : saleRepository.findAllBySellerAddress(address)){
+//            saleList.add(SaleDto.convert(sale));
+//        }
+//        for(Sale sale : saleRepository.findAllByBuyerAddress(address)){
+//            saleList.add(SaleDto.convert(sale));
+//        }
+//        /*
+//        Todo
+//        1. pfp 번호 추가하기
+//        2. 최근 10개 목록만 불러오기
+//         */
+//
+//        return saleList;
+//    }
 
 }
