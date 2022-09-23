@@ -40,9 +40,9 @@ public class SaleController {
     }
 
     @ApiOperation(value = "거래 완료")
-    @PutMapping("/{saleSeq}/complete/{address}")
-    public ResponseEntity<SaleDto> completeSale(@PathVariable long saleSeq,@PathVariable String address) {
-        return new ResponseEntity<>(saleService.completeSale(address,saleSeq), HttpStatus.OK);
+    @PutMapping("/{saleSeq}/complete/{buyerAddress}")
+    public ResponseEntity<SaleDto> completeSale(@PathVariable long saleSeq,@PathVariable String buyerAddress) {
+        return new ResponseEntity<>(saleService.completeSale(buyerAddress,saleSeq), HttpStatus.OK);
     }
 
 
