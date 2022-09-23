@@ -2,7 +2,7 @@ spring:
   # mysql DB ??
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://j7d103.p.ssafy.io:3306/samals?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://172.17.0.1:3306/samals?serverTimezone=Asia/Seoul
     username: root
     password: ALLCHUNG2
 
@@ -16,3 +16,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
+profiles:
+  default: dev
