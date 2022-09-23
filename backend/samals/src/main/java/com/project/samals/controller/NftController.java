@@ -1,6 +1,9 @@
 package com.project.samals.controller;
 
 import com.project.samals.dto.*;
+import com.project.samals.dto.request.ReqDto;
+import com.project.samals.dto.request.ReqNftDto;
+import com.project.samals.dto.response.ResNftDto;
 import com.project.samals.service.NftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,35 +23,47 @@ public class NftController {
 
     private final NftService nftService;
 
-
-    @ApiOperation(value = "보유 NFT 연동")
-    @PostMapping("/add")
-    public ResponseEntity<NftDto> addNft(@RequestBody ReqNftDto nftDto) {
-        return new ResponseEntity<>(nftService.addNft(nftDto), HttpStatus.CREATED);
+    @ApiOperation(value = "NFT 민팅")
+    @PostMapping("/mint")
+    public ResponseEntity<NftDto> mintNft(@RequestBody ReqNftDto nftDto) {
+        return new ResponseEntity<>(nftService.mintNft(nftDto), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "보유 NFT 리스트 조회")
-    @GetMapping("/{address}/list")
-    public ResponseEntity<List<NftDto>> getNftList(@PathVariable String address){
-        return new ResponseEntity<>(nftService.getNftList(address),HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "보유 NFT 상세 조회")
-    @GetMapping("/detail")
-    public ResponseEntity<NftDto> getNftInfo(@RequestBody ReqNftDto nftDto){
-        return new ResponseEntity<>(nftService.getNftInfo(nftDto),HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "보유 NFT 연동 해제")
-    @DeleteMapping("/{address}/delete/{tokenId}")
-    public ResponseEntity<String> removeNft(@PathVariable String address,@PathVariable int tokenId) {
-        return new ResponseEntity<>(nftService.removeNft(address,tokenId), HttpStatus.OK);
-    }
-
-    @ApiOperation(value = "NFT 토큰 거래 내역 조회")
-    @GetMapping("/{tokenId}/history")
+    @ApiOperation(value = "NFT 거래 내역 조회")
+    @GetMapping("/{tokenId}/sale")
     public ResponseEntity<List<SaleDto>> getNftHistory(@PathVariable int tokenId) {
         return new ResponseEntity<>(nftService.getNftHistory(tokenId), HttpStatus.OK);
     }
+
+    @ApiOperation(value = "NFT 민팅 내역 조회")
+    @GetMapping("/{tokenId}/mint")
+    public ResponseEntity<NftDto> getMintHistory(@PathVariable int tokenId){
+        return new ResponseEntity<>(nftService.getMintHistory(tokenId),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "NFT 상세 조회")
+    @GetMapping("/{tokenId}")
+    public ResponseEntity<ResNftDto> getNft(@PathVariable int tokenId){
+        return new ResponseEntity<>(nftService.getNft(tokenId),HttpStatus.OK);
+    }
+
+
+//
+//    @ApiOperation(value = "NFT 연동")
+//    @PostMapping("/add")
+//    public ResponseEntity<NftDto> addNft(@RequestBody ReqNftDto nftDto) {
+//        return new ResponseEntity<>(nftService.addNft(nftDto), HttpStatus.CREATED);
+//    }
+//
+
+
+//
+//    @ApiOperation(value = "보유 NFT 연동 해제")
+//    @DeleteMapping("/{address}/delete/{tokenId}")
+//    public ResponseEntity<String> removeNft(@PathVariable String address,@PathVariable int tokenId) {
+//        return new ResponseEntity<>(nftService.removeNft(address,tokenId), HttpStatus.OK);
+//    }
+//
+
 
 }

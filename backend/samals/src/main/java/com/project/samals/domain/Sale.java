@@ -1,7 +1,9 @@
 package com.project.samals.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,9 +22,6 @@ public class Sale {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sale_seq")
     private Long saleSeq;
-
-    @Column(name = "sale_token_id")
-    private int tokenId;
 
     @Column(name = "sale_contract_address")
     private String saleContractAddress;
@@ -55,6 +54,25 @@ public class Sale {
     private Date completedTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_seq")
-    private User user;
+    @JoinColumn(name="nft_seq")
+    private Nft nft;
+
+
+    // Sale Like
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL)
+    @Builder.Default
+    private List<SaleLike> saleLikes = new ArrayList<>();
+
+    // Sale Like Method
+    public void addSaleLike(SaleLike saleLike) {
+        this.saleLikes.add(saleLike);
+        saleLike.setSale(this);
+    }
+
+    public void removeSaleLike(int saleLikeSeq) {
+        saleLikes.removeIf(saleLike ->
+                saleLike.getSaleLikeSeq()==saleLikeSeq);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.project.samals.dto;
+package com.project.samals.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.samals.domain.Nft;
@@ -18,9 +18,15 @@ public class ReqNftDto {
 
     private String walletAddress;
 
+    private String nftType;
+
+    private int nftPrice;
+
     public Nft toEntity(){
         return Nft.builder()
                 .tokenId(tokenId)
+                .nftType(nftType)
+                .nftPrice(nftPrice)
                 .build();
     }
 

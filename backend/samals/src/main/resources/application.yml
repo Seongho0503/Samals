@@ -2,9 +2,9 @@ spring:
   # mysql DB ??
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/samals?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://j7d103.p.ssafy.io:3306/samals?serverTimezone=Asia/Seoul
     username: root
-    password: 1234
+    password: ALLCHUNG2
 
   # jpa ??
   jpa:

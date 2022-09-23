@@ -24,7 +24,6 @@ public class User {
     @Column(name = "user_nickname")
     private String userNickname;
 
-
     @Column(name = "user_bio")
     private String userBio;
 
@@ -39,32 +38,59 @@ public class User {
     @Column(name="user_updated_at")
     private Date updatedTime;
 
-    // NFT List
+    // Minted NFT List
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @Builder.Default
-    private List<Nft> nftList = new ArrayList<>();
+    private List<Nft> mintList = new ArrayList<>();
 
-    // NFT 등록
-    public void addNft(Nft nft) {
-        this.nftList.add(nft);
+    // Minted NFT Method
+    public void addMintedNft(Nft nft) {
+        this.mintList.add(nft);
         nft.setUser(this);
     }
 
-    // NFT 등록 해제
-    public void removeNft(int tokenId) {
-        this.nftList.removeIf(nft ->
-                nft.getTokenId()==tokenId);
-    }
-
-    // Sale 거래 내역
+    // Sale Like
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @Builder.Default
-    private List<Sale> saleHistory = new ArrayList<>();
+    private List<SaleLike> saleLikes = new ArrayList<>();
 
-    // 거래 내역 추가
-    public void addSaleHistory(Sale sale) {
-        this.saleHistory.add(sale);
-        sale.setUser(this);
+    // Sale Like Method
+    public void addSaleLike(SaleLike saleLike) {
+        this.saleLikes.add(saleLike);
+        saleLike.setUser(this);
     }
+
+    public void removeSaleLike(int saleLikeSeq) {
+        saleLikes.removeIf(saleLike ->
+                saleLike.getSaleLikeSeq()==saleLikeSeq);
+    }
+
+
+
+
+
+
+
+//    // NFT 등록 해제
+//    public void removeNft(int tokenId) {
+//        this.nftList.removeIf(nft ->
+//                nft.getTokenId()==tokenId);
+//    }
+
+//    // Sale 거래 내역
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    @Builder.Default
+//    private List<Sale> saleHistory = new ArrayList<>();
+//
+//    // 거래 내역 추가
+//    public void addSaleHistory(Sale sale) {
+//        this.saleHistory.add(sale);
+//        sale.setUser(this);
+//    }
+//
+//    public void deleteSaleHistory(long saleSeq) {
+//        this.saleHistory.removeIf(sale ->
+//                sale.getSaleSeq()==saleSeq);
+//    }
 
 }
