@@ -9,4 +9,6 @@ public interface NftRepository extends JpaRepository<Nft, Long> {
 
     Nft findByTokenId(int tokenId);
     void deleteByNftSeq(Long nftSeq);
+
+    List<Nft> findAllByNftOwner(String address);
 }

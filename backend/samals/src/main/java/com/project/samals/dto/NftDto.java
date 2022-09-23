@@ -18,6 +18,8 @@ public class NftDto {
     private Long nftSeq;
     private int tokenId;
 
+    private String nftOwner;
+
     private String nftType;
 
     private int nftMintNumber;
@@ -27,12 +29,16 @@ public class NftDto {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date createdTime;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private Date updatedTime;
+
     private String walletAddress;
 
     public Nft toEntity(){
         return Nft.builder()
                 .nftSeq(nftSeq)
                 .tokenId(tokenId)
+                .nftOwner(nftOwner)
                 .nftType(nftType)
                 .nftMintNumber(nftMintNumber)
                 .nftPrice(nftPrice)
@@ -45,10 +51,12 @@ public class NftDto {
         return NftDto.builder()
                 .nftSeq(nft.getNftSeq())
                 .tokenId(nft.getTokenId())
+                .nftOwner(nft.getNftOwner())
                 .nftType(nft.getNftType())
                 .nftMintNumber(nft.getNftMintNumber())
                 .nftPrice(nft.getNftPrice())
                 .createdTime(nft.getCreatedTime())
+                .updatedTime(nft.getUpdatedTime())
                 .walletAddress(nft.getUser().getWalletAddress())
                 .build();
     }

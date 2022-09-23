@@ -8,17 +8,10 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReqDto {
+public class ReqSaleLikeDto {
 
-    private int tokenId;
+    private long saleSeq;
 
     private String walletAddress;
-
-    public Nft toEntity(){
-        return Nft.builder()
-                .tokenId(tokenId)
-                .build();
-    }
-
 
 }
