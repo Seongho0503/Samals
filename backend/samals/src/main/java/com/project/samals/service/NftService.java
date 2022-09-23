@@ -33,6 +33,8 @@ public class NftService {
 
         Nft saved = nftDto.toEntity();
         saved.setCreatedTime(new Date());
+        saved.setUpdatedTime(new Date());
+        saved.setNftOwner(nftDto.getWalletAddress());
         saved.setNftMintNumber(0);
         nftRepository.save(saved);
 
@@ -67,10 +69,10 @@ public class NftService {
         return mintHistory;
     }
 
-    public List<NftDto> getNftList(String address){
-        User user = userRepository.findByWalletAddress(address);
+    public List<NftDto> getMyNftList(String address){
+        List<Nft> myNft = nftRepository.findAllByNftOwner(address);
         List<NftDto> nftList = new ArrayList<>();
-        for(Nft nft : user.getMintList()){
+        for(Nft nft : myNft){
             nftList.add(NftDto.convert(nft));
         }
         return nftList;

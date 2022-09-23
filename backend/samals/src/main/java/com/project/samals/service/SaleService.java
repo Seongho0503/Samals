@@ -2,8 +2,7 @@ package com.project.samals.service;
 
 import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
-import com.project.samals.domain.User;
-import com.project.samals.dto.*;
+import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.SaleRepository;
@@ -62,28 +61,32 @@ public class SaleService {
         sale.setCompletedTime(new Date());
         sale.setUpdatedTime(new Date());
         sale.setBuyerAddress(buyerAddress);
+        sale.getNft().setNftOwner(buyerAddress);
+        sale.getNft().setUpdatedTime(new Date());
+
         Sale saved = saleRepository.save(sale);
         return SaleDto.convert(saved);
     }
 
 
     //내 거래내역 (판매 + 구매)
-//    public List<SaleDto> getMySaleList(String address){
-//        List<SaleDto> saleList = new ArrayList<>();
-//
-//        for(Sale sale : saleRepository.findAllBySellerAddress(address)){
-//            saleList.add(SaleDto.convert(sale));
-//        }
-//        for(Sale sale : saleRepository.findAllByBuyerAddress(address)){
-//            saleList.add(SaleDto.convert(sale));
-//        }
-//        /*
-//        Todo
-//        1. pfp 번호 추가하기
-//        2. 최근 10개 목록만 불러오기
-//         */
-//
-//        return saleList;
-//    }
+    public List<SaleDto> getMySaleList(String address){
+        List<SaleDto> saleList = new ArrayList<>();
+
+        for(Sale sale : saleRepository.findAllBySellerAddress(address)){
+            saleList.add(SaleDto.convert(sale));
+        }
+        for(Sale sale : saleRepository.findAllByBuyerAddress(address)){
+            saleList.add(SaleDto.convert(sale));
+        }
+        /*
+        Todo
+        1. pfp 번호 추가하기
+        2. 최근 10개 목록만 불러오기
+        3. 생성 시간별로 정렬
+         */
+
+        return saleList;
+    }
 
 }
