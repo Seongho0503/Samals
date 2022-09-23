@@ -17,11 +17,11 @@ public class SaleLike {
     private Long saleLikeSeq;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "user_seq")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name="sale_seq")
     private Sale sale;
 
 
