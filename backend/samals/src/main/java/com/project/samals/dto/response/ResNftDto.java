@@ -1,11 +1,9 @@
-package com.project.samals.dto;
+package com.project.samals.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.samals.domain.Nft;
-import com.project.samals.domain.User;
 import lombok.*;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Getter
@@ -13,7 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class NftDto {
+public class ResNftDto {
 
     private Long nftSeq;
     private int tokenId;
@@ -39,10 +37,10 @@ public class NftDto {
                 .build();
     }
 
-    public static NftDto convert(Nft nft) {
+    public static ResNftDto convert(Nft nft) {
         if(nft == null) return null;
 
-        return NftDto.builder()
+        return ResNftDto.builder()
                 .nftSeq(nft.getNftSeq())
                 .tokenId(nft.getTokenId())
                 .nftType(nft.getNftType())
