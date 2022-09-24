@@ -1,3 +1,7 @@
+.animal-nft {
+    margin-bottom: 300px;
+}
+
 .animal-data-title {
     color: #ffffff;
     font-family: "Black Han Sans",
@@ -7,10 +11,12 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+
 .animal-card {
     display: flex;
     justify-content: center;
 }
+
 .animal-card-detail {
     margin: 20px;
     max-width: 300px;
