@@ -3,6 +3,8 @@ package com.project.samals.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //빌드 패턴 사용 가능
 @Builder
@@ -38,4 +40,8 @@ public class Animal {
 
     @Column(name = "animal_current",nullable = true)
     private int animalCurrent;
+
+//    @OneToMany(mappedBy = "animal")
+//    @JoinColumn
+//    private List<Ipfs> ipfsList = new ArrayList<>();
 }

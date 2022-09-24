@@ -21,11 +21,33 @@ public class AnimalService {
     private final AnimalRepository animalRepository;
     private static final Logger log = LoggerFactory.getLogger(AnimalService.class);
 
+    //동물 종류 추가
     public AnimalDto addAnimal(AnimalDto animalDto){
         Animal animal = animalDto.toEntity();
         log.info("animal: {}",animal.toString());
         //DB 저장
         animalRepository.save(animal);
         return animalDto;
+    }
+    public AnimalDto modifyAnimal(AnimalDto animalDto){
+        Animal animal = animalRepository.findByAnimalSpecies(animalDto.getAnimal_species());
+        animal.setAnimalSpecies(animalDto.getAnimal_species());
+        animal.setAnimalClass(animalDto.getAnimal_class());
+        animal.setAnimalDescription(animalDto.getAnimal_description());
+        animal.setAnimalTotal(animalDto.getAnimal_total());
+        animal.setAnimalCurrent(animalDto.getAnimal_current());
+        return new AnimalDto().convert(animal);
+    }
+    //동물의 현재 개수 증가
+    public Boolean incAnimal(String animalSpecies){
+//        AnimalDto animalDto = new AnimalDto().convert(animalRepository.findByAnimalSpecies(animalSpecies));
+        Animal animal = animalRepository.findByAnimalSpecies(animalSpecies);
+        //총 개수보다 현재 개수가 적으면
+        if(animal.getAnimalTotal() > animal.getAnimalCurrent()){
+            animal.setAnimalCurrent(animal.getAnimalCurrent() + 1);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
