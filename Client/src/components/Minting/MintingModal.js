@@ -3,6 +3,7 @@ import React, {
     useEffect,
 } from "react";
 import "../../styles/MintingCard.css";
+import Footer from "../Footer";
 
 const MintingModal =
     () => {
@@ -18,6 +19,7 @@ const MintingModal =
                         674개
                     </h2>
                 </div>
+                {/* <Footer /> */}
             </div>
         );
     };

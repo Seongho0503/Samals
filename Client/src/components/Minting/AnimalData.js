@@ -9,11 +9,12 @@ import "../../styles/MintingCard.css";
 import bg from "../../assets/bg-04.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import Footer from "../Footer";
 
 const AnimalData =
     () => {
         return (
-            <div>
+            <div class="animal-nft">
                 <h2 class="animal-data-title">
                     현재
                     이

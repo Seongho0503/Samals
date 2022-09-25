@@ -3,6 +3,7 @@ import AnimalData from "../components/Minting/AnimalData";
 import MintingButton from "../components/Minting/MintingButton";
 import MintingModal from "../components/Minting/MintingModal";
 import RatingData from "../components/Minting/RatingData";
+import Footer from "../components/Footer";
 
 import "../styles/Home.css";
 import CardList from "../components/CardList";
