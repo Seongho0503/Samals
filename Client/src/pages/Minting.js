@@ -19,7 +19,6 @@ const Minting =
                 <MintingButton />
                 <AnimalData />
                 <MintingModal />
-                <Footer />
             </div>
         );
     };
