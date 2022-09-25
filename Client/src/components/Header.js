@@ -43,16 +43,16 @@ const Header =
 
                 <div id="link-containers">
                     <Link to="/game">
-                        Game
+                        GAME
                     </Link>
                     <Link to="/explore">
-                        Market
+                        MARKET
                     </Link>
                     <Link to="/trade">
-                        Explore
+                        EXPLORE
                     </Link>
                     <Link to="/minting">
-                        Drops
+                        DROPS
                     </Link>
 
                     <button
