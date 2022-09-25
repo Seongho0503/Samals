@@ -11,9 +11,15 @@ body {
     text-align: center;
 }
 
+<<<<<<< HEAD
 a {
     color: #ffffff;
 }
+=======
+/* a {
+  color: #ffffff;
+} */
+>>>>>>> feature/FE/nftCard
 
 #card-list-header-text {
     color: #ffffff;
@@ -24,12 +30,20 @@ a {
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
 #list-container {
+<<<<<<< HEAD
     /* border: 1px solid red; */
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     margin-bottom: 100px;
+=======
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 100px;
+>>>>>>> feature/FE/nftCard
 }

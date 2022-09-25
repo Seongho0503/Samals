@@ -42,6 +42,7 @@ const Header =
                     Room
                 </Link>
 
+<<<<<<< HEAD
                 <div id="link-containers">
                     <Link to="/game">
                         게임
@@ -59,6 +60,13 @@ const Header =
                         Craft
                         NFT
                     </a>
+=======
+      <div id="link-containers">
+        <a>게임</a>
+        <Link to="/explore">상점</Link>
+        <Link to="/trade">거래소</Link>
+        <a>기부</a>
+>>>>>>> feature/FE/nftCard
 
                     <button
                         id="connect-wallet"
