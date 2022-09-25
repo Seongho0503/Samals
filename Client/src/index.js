@@ -33,16 +33,16 @@ import Footer from "./components/base/ScrollToTop";
 // import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 
-function getLibrary(
-    provider
-) {
-    const library =
-        new Web3Provider(
-            provider,
-            "any"
-        );
-    return library;
-}
+// function getLibrary(
+//     provider
+// ) {
+//     const library =
+//         new Web3Provider(
+//             provider,
+//             "any"
+//         );
+//     return library;
+// }
 
 {
     /* <Web3ReactProvider getLibrary={getLibrary}> */

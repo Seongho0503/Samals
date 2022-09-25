@@ -47,14 +47,14 @@ function App() {
         pathname,
     } =
         useLocation();
-    const {
-        chainedId,
-        account,
-        active,
-        activate,
-        deactivate,
-    } =
-        useWeb3React();
+    // const {
+    //     chainedId,
+    //     account,
+    //     active,
+    //     activate,
+    //     deactivate,
+    // } =
+    //     useWeb3React();
     const [
         ScrollY,
         setScrollY,
@@ -67,32 +67,32 @@ function App() {
             false
         ); // 버튼 상태
 
-    const handdleConnect =
-        () => {
-            if (
-                active
-            ) {
-                deactivate();
-                return;
-            }
+    // const handdleConnect =
+    //     () => {
+    //         if (
+    //             active
+    //         ) {
+    //             deactivate();
+    //             return;
+    //         }
 
-            activate(
-                injected,
-                (
-                    error
-                ) => {
-                    if (
-                        "/No Ethereum provider was found on window.ethereum/".test(
-                            error
-                        )
-                    ) {
-                        window.open(
-                            "https://metamask.io/download.html"
-                        );
-                    }
-                }
-            );
-        };
+    //         activate(
+    //             injected,
+    //             (
+    //                 error
+    //             ) => {
+    //                 if (
+    //                     "/No Ethereum provider was found on window.ethereum/".test(
+    //                         error
+    //                     )
+    //                 ) {
+    //                     window.open(
+    //                         "https://metamask.io/download.html"
+    //                     );
+    //                 }
+    //             }
+    //         );
+    //     };
     const handleFollow =
         () => {
             //  window.addEventListener('scroll', () => setScrollY(window.pageYOffset));
@@ -132,13 +132,6 @@ function App() {
                 false
             ); // BtnStatus의 값을 false로 바꿈 => 버튼 숨김
         };
-
-    useEffect(() => {
-        console.log(
-            "ScrollY is ",
-            ScrollY
-        ); // ScrollY가 변화할때마다 값을 콘솔에 출력
-    }, [ScrollY]);
 
     useEffect(
         () => {
