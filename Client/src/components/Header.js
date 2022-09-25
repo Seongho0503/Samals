@@ -38,35 +38,22 @@ const Header =
                     to="/"
                     id="logo"
                 >
-                    NFT
-                    Room
+                    SAMALS
                 </Link>
 
-<<<<<<< HEAD
                 <div id="link-containers">
                     <Link to="/game">
-                        게임
+                        Game
                     </Link>
                     <Link to="/explore">
-                        상점
+                        Market
                     </Link>
-                    <a>
-                        거래소
-                    </a>
+                    <Link to="/trade">
+                        Explore
+                    </Link>
                     <Link to="/minting">
-                        기부
+                        Drops
                     </Link>
-                    <a>
-                        Craft
-                        NFT
-                    </a>
-=======
-      <div id="link-containers">
-        <a>게임</a>
-        <Link to="/explore">상점</Link>
-        <Link to="/trade">거래소</Link>
-        <a>기부</a>
->>>>>>> feature/FE/nftCard
 
                     <button
                         id="connect-wallet"

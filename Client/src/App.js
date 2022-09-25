@@ -20,6 +20,8 @@ import Create from "./pages/Create";
 import Explore from "./pages/Explore";
 import Trade from "./pages/Trade";
 import Register from "./pages/Register";
+import Game from "./pages/Game";
+import Minting from "./pages/Minting";
 
 //dapp
 import { DAppProvider } from "@usedapp/core";
@@ -232,7 +234,7 @@ function App() {
                         <DAppProvider
                             config={{}}
                         >
-                            <NftDetail />
+                            <Minting />
                         </DAppProvider>
                     }
                 />{" "}
@@ -242,7 +244,7 @@ function App() {
                         <DAppProvider
                             config={{}}
                         >
-                            <NftDetail />
+                            <Game />
                         </DAppProvider>
                     }
                 />
