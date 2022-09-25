@@ -17,6 +17,7 @@ const counter = (
         setInterval(
             () => {
                 $counter.innerHTML =
+                    counter &&
                     Math.ceil(
                         max -
                             now
