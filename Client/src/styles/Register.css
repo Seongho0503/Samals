@@ -1,169 +1,150 @@
+/* .body,
 html {
-  height: 100%;
-}
-body {
-  margin: 0;
+  background-color: #fff !important;
+} */
+
+/* body.Register {
+  width: 1000px;
+  margin: 300;
   padding: 0;
   font-family: sans-serif;
-  background: linear-gradient(#141e30, #243b55);
+  background: #fff;
 }
+html.Register {
+  height: 100%;
+  background: #fff;
+} */
 
-.login-box {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 400px;
-  padding: 40px;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.5);
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-}
-
-.login-box h2 {
-  margin: 0 0 30px;
-  padding: 0;
-  color: #fff;
-  text-align: center;
-}
-
-.login-box .user-box {
-  position: relative;
-}
-
-.login-box .user-box input {
-  width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 30px;
-  border: none;
-  border-bottom: 1px solid #fff;
-  outline: none;
-  background: transparent;
-}
-.login-box .user-box label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  pointer-events: none;
-  transition: 0.5s;
-}
-
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
-  top: -20px;
-  left: 0;
-  color: #03e9f4;
-  font-size: 12px;
-}
-
-.login-box form a {
-  position: relative;
-  display: inline-block;
-  padding: 10px 20px;
-  color: #03e9f4;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: 0.5s;
-  margin-top: 40px;
-  letter-spacing: 4px;
-}
-
-.login-box a:hover {
-  background: #03e9f4;
-  color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
-    0 0 100px #03e9f4;
-}
-
-.login-box a span {
-  position: absolute;
+.card-body {
+  width: 500px;
   display: block;
+  justify-content: center;
+  align-items: center;
 }
 
-.login-box a span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #03e9f4);
-  animation: btn-anim1 1s linear infinite;
-}
-
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-.login-box a span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
+#register html {
   height: 100%;
-  background: linear-gradient(180deg, transparent, #03e9f4);
-  animation: btn-anim2 1s linear infinite;
-  animation-delay: 0.25s;
+  background: #fff !important;
+}
+.register body {
+  width: 1000px;
+  margin: 300;
+  padding: 0;
+  font-family: sans-serif;
+  background: #fff !important;
+  /* background: linear-gradient(#141e30, #243b55); */
 }
 
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
+.sup-red {
+  color: red;
+  font-size: medium !important;
 }
 
-.login-box a span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
+.item-data-form {
+  /* color: gray; */
+  color: #fff;
+}
+
+.input-box {
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0.25rem gray dashed;
+  width: 20rem;
+  height: 15rem;
+  padding: 0.25rem;
+}
+.input-box-file {
+  box-sizing: border-box;
   width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #03e9f4);
-  animation: btn-anim3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-.login-box a span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, #03e9f4);
-  animation: btn-anim4 1s linear infinite;
-  animation-delay: 0.75s;
+  display: flex;
+  justify-content: center;
+}
+.input-box-file:hover {
+  background-color: lightgray;
+}
+.input-box-file-img {
+  width: 25%;
+  height: 25%;
+  margin-top: 25%;
+  margin-bottom: 25%;
+}
+.input-box-file-img-change {
+  width: 100%;
+  height: 100%;
 }
 
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
+.width-full {
+  width: 100% !important;
+}
+.main-btn-set {
+  margin: 0.25rem 0;
+  display: flex;
+  justify-content: center;
+}
+.main-btn-set-element {
+  flex-basis: 0;
+  width: 33.333%;
+}
+.main-btn-set-element-rightspace {
+  margin-right: 2rem;
+}
+.item-element {
+  margin-top: 2rem;
+}
+.element-label {
+  font-weight: bolder;
+  color: #fff;
+}
+.element-input {
+  margin-top: 0.5rem;
+  width: 60%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: lightgray 0.1rem solid;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.element-textarea {
+  resize: none;
+  height: 10rem !important;
+}
+
+.element-btn {
+  font-weight: bolder;
+  width: 5rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: skyblue;
+}
+
+.element-btn:hover {
+  background-color: lightgray;
+}
+
+.sort-list {
+  font-size: 0.75rem;
+  font-weight: bolder;
+}
+
+.nft-market-img {
+  width: 100%;
+  height: 300px;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.25rem dashed lightgray;
+}
+
+.padding-none {
+  box-sizing: border-box;
+  padding: 0 !important;
+}
+
+.nft-market-item {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.text-align-left {
+  text-align: left !important;
 }

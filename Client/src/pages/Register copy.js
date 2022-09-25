@@ -1,26 +1,23 @@
+import Header from "../components/Header";
+
 import "../styles/Register.css";
 
 const Register = () => {
   return (
     <div>
-      <div class="login-box">
+      <Header />
+      <div className="login-box">
         <h2>Register</h2>
         <form>
-          <div class="user-box">
+          <div className="user-box">
             <input type="text" name="" required="" />
             <label>Username</label>
           </div>
-          <div class="user-box">
+          <div className="user-box">
             <input type="password" name="" required="" />
             <label>nft명</label>
           </div>
-          <a href="#">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Submit
-          </a>
+          <a href="#">Submit</a>
         </form>
       </div>
     </div>

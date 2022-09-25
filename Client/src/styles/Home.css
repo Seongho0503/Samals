@@ -11,9 +11,9 @@ body {
   text-align: center;
 }
 
-a {
+/* a {
   color: #ffffff;
-}
+} */
 
 #card-list-header-text {
   color: #ffffff;
@@ -23,12 +23,11 @@ a {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
 #list-container {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   margin-bottom: 100px;
 }

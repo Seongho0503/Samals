@@ -1,0 +1,129 @@
+/* .body,
+html {
+  background-color: #fff;
+} */
+
+.Register html {
+  height: 100%;
+  background: #fff;
+}
+.Register body {
+  width: 1000px;
+  margin: 300;
+  padding: 0;
+  font-family: sans-serif;
+  background: #fff;
+  /* background: linear-gradient(#141e30, #243b55); */
+}
+
+.sup-red {
+  color: red;
+  font-size: medium !important;
+}
+
+.item-data-form {
+  color: gray;
+}
+
+.input-box {
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0.25rem gray dashed;
+  width: 20rem;
+  height: 15rem;
+  padding: 0.25rem;
+}
+.input-box-file {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.input-box-file:hover {
+  background-color: lightgray;
+}
+.input-box-file-img {
+  width: 25%;
+  height: 25%;
+  margin-top: 25%;
+  margin-bottom: 25%;
+}
+.input-box-file-img-change {
+  width: 100%;
+  height: 100%;
+}
+
+.width-full {
+  width: 100% !important;
+}
+.main-btn-set {
+  margin: 0.25rem 0;
+  display: flex;
+  justify-content: center;
+}
+.main-btn-set-element {
+  flex-basis: 0;
+  width: 33.333%;
+}
+.main-btn-set-element-rightspace {
+  margin-right: 2rem;
+}
+.item-element {
+  margin-top: 2rem;
+}
+.element-label {
+  font-weight: bolder;
+}
+.element-input {
+  margin-top: 0.5rem;
+  width: 60%;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: lightgray 0.1rem solid;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.element-textarea {
+  resize: none;
+  height: 10rem !important;
+}
+
+.element-btn {
+  font-weight: bolder;
+  width: 5rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  background-color: skyblue;
+}
+
+.element-btn:hover {
+  background-color: lightgray;
+}
+
+.sort-list {
+  font-size: 0.75rem;
+  font-weight: bolder;
+}
+
+.nft-market-img {
+  width: 100%;
+  height: 300px;
+  padding-bottom: 0.5rem;
+  border-bottom: 0.25rem dashed lightgray;
+}
+
+.padding-none {
+  box-sizing: border-box;
+  padding: 0 !important;
+}
+
+.nft-market-item {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.text-align-left {
+  text-align: left !important;
+}

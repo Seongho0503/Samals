@@ -23,7 +23,6 @@ const Header = () => {
         <Link to="/explore">상점</Link>
         <Link to="/trade">거래소</Link>
         <a>기부</a>
-        {/* <a>Craft NFT</a> */}
 
         <button id="connect-wallet" onClick={handleWallet}>
           {!account ? "Connect Wallet" : account}

@@ -4,6 +4,8 @@
 
 .toggles button {
   color: #1ecd97;
+  position: relative;
+  background: #1ecd97;
   border: 2px solid;
   border-radius: 40px;
   display: block;
@@ -11,7 +13,39 @@
   margin: auto;
   padding: 10px;
   width: 150px;
+  max-width: 150px;
+  max-height: 144px;
   cursor: pointer;
   font-size: 14px;
-  margin: 0 5px;
+  /* margin: 0 5px; */
+  margin-right: 20px;
+  transition: background 0.8s ease-in-out;
+}
+
+.toggles button:hover {
+  background-color: blueviolet;
+  color: blueviolet;
+}
+
+.toggles button:hover .animal-fillter {
+  top: 50%;
+  transform: translateY(-50%);
+  animation: motion 0.3s linear 0s infinite alternate;
+  margin-top: 0;
+}
+
+@keyframes motion {
+  0% {
+    margin-top: 0px;
+  }
+  100% {
+    margin-top: 10px;
+  }
+}
+
+.toggles button:hover .animal-name {
+  color: black;
+  font-size: 38px;
+  font-family: "TTCrownMychewR";
+  transform: translateY(-60%);
 }

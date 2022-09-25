@@ -1,9 +1,17 @@
 import "../styles/TradeSelect.css";
+// import styles from "../styles/TradeSelect.module.css";
 
 const TradeSelect = () => {
+  function onClick() {
+    console.log("Hi there, user!");
+    window.location.replace("/register");
+  }
   return (
-    <div className="container">
-      <div className="control-group">
+    <div className="animal-container">
+      <button className="register" id="register" onClick={onClick}>
+        NFT 등록
+      </button>
+      <div className="animal-control-group">
         <h1>Price</h1>
         {/* <label className="control control--checkbox">
           First checkbox
@@ -31,7 +39,7 @@ const TradeSelect = () => {
           <div className="control__indicator"></div>
         </label> */}
       </div>
-      <div className="control-group">
+      <div className="animal-control-group">
         <h1>PRICE</h1>
         <label className="control control--radio">
           최저가순
@@ -59,7 +67,7 @@ const TradeSelect = () => {
           <div className="control__indicator"></div>
         </label> */}
       </div>
-      <div className="control-group">
+      <div className="animal-control-group">
         <h1>아이템</h1>
         <div className="select">
           <select>

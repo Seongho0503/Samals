@@ -6,7 +6,7 @@ import { ColorExtractor } from "react-color-extractor";
 import Card from "./base/Card";
 import Button from "./base/Button";
 import { Colors } from "../constants/Colors";
-
+import Star from "../assets/star.png";
 import { ModelViewerElement } from "@google/model-viewer";
 import { useARStatus } from "../hooks/isARStatus";
 
@@ -18,6 +18,8 @@ const NFTCard = ({
   likeCount,
   gradient,
   onClick,
+  image,
+  species,
 }) => {
   const [isLike, setIsLike] = useState(false);
   const [colors, setColors] = useState([]);
@@ -50,18 +52,84 @@ const NFTCard = ({
               camera-controls
               auto-rotate
               src={nftSrc}
+              // image={Star}
             >
               {" "}
+              {/* <img
+                className="star"
+                // image={Star}
+                style={{ backgroundImage: "url(" + Star + ")" }}
+              /> */}
             </model-viewer>
           ) : (
             <>
+              {/*멸종위기 등급 별*/}
+              <div className="info-container">
+                <img
+                  className="star"
+                  // image={Star}
+                  src={Star}
+                  //src="../assets/star.png"
+                  alt="star"
+                  // style={{ backgroundImage: "url(" + Star + ")" }}
+                />
+                <img
+                  className="star"
+                  // image={Star}
+                  src={Star}
+                  //src="../assets/star.png"
+                  alt="star"
+                  // style={{ backgroundImage: "url(" + Star + ")" }}
+                />
+                <img
+                  className="star"
+                  // image={Star}
+                  src={Star}
+                  //src="../assets/star.png"
+                  alt="star"
+                  // style={{ backgroundImage: "url(" + Star + ")" }}
+                />
+                {/* <p className="owner"> LEJOURN.DARK.NFT</p>
+                <p className="name">Alien Cry</p> */}
+              </div>
               <ColorExtractor getColors={getColors}>
+                {/* <img
+                  className="star"
+                  image={Star}
+                  // style={{ backgroundImage: "url(" + Star + ")" }}
+                /> */}
                 <img className="nft-image" src={nftSrc} />
               </ColorExtractor>
             </>
           )}
+
           <div className="wrapper">
+            {/* <img
+              className="star"
+              image={Star}
+              // style={{ backgroundImage: "url(" + Star + ")" }}
+            />
+            <img
+              className="star"
+              image={Star}
+              // style={{ backgroundImage: "url(" + Star + ")" }}
+            />
+            <img
+              className="star"
+              image={Star}
+              // style={{ backgroundImage: "url(" + Star + ")" }}
+            /> */}
+            {/* <div
+              style={{
+                backgroundImage: "url(" + Star + ")",
+              }}
+            /> */}
+
             <div className="info-container">
+              {/* <img
+                className="star"
+                style={{ backgroundImage: "url(" + Star + ")" }}
+              /> */}
               <p className="owner"> LEJOURN.DARK.NFT</p>
               <p className="name">Alien Cry</p>
             </div>
