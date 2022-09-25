@@ -25,7 +25,7 @@
   max-width: 800px;
   margin-top: 800px;
   margin-left: 400px;
-  overflow: hidden;
+  overflow: auto;
 
   table {
     border-collapse: collapse;
@@ -52,6 +52,10 @@
       th {
         color: rgba(255, 255, 255, 0.7);
       }
+
+      // th.Dsc {
+      //   max-width: 150px;
+      // }
 
       td {
         color: rgba(255, 255, 255, 0.5);

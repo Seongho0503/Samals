@@ -3,34 +3,33 @@ import AntiqueCamera from "../assets/models/AntiqueCamera.glb";
 import BarramundiFish from "../assets/models/BarramundiFish.glb";
 import Avocado from "../assets/models/Avocado.glb";
 import Tiger from "../assets/card/Tiger.png";
+import Toad from "../assets/card/Toad.png";
+import Shark from "../assets/card/Shark.png";
+import Elephant from "../assets/card/Elephant.png";
+import Toco from "../assets/card/Toco.png";
 
 export const exploreList = [
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: AntiqueCamera,
+  // },
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: BarramundiFish,
+  // },
+  // {
+  //   name: "Test NFT #1",
+  //   description:
+  //     "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+  //   src: Avocado,
+  // },
   {
     name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: AntiqueCamera,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: BarramundiFish,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Avocado,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Tiger,
-  },
-  {
-    name: "Test NFT #1",
+    species: "tiger",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
     src: Tiger,
@@ -39,19 +38,25 @@ export const exploreList = [
     name: "Test NFT #1",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Tiger,
+    src: Toad,
   },
   {
     name: "Test NFT #1",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Tiger,
+    src: Shark,
   },
   {
     name: "Test NFT #1",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Tiger,
+    src: Elephant,
+  },
+  {
+    name: "Test NFT #1",
+    description:
+      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+    src: Toco,
   },
   {
     name: "Test NFT #1",

@@ -1,11 +1,12 @@
+import { red } from "@mui/material/colors";
 import React, { useState } from "react";
 import "../../styles/base/Card.css";
 
 const Card = React.forwardRef(
   (
     {
-      width = "250px",
-      height = "300px",
+      width = "270px",
+      height = "460px",
       child,
       blurColor = "rgba(48,118,234,0.2)",
       onClick,
@@ -17,12 +18,13 @@ const Card = React.forwardRef(
       style={{
         width: `${width}`,
         height: `${height}`,
-        background: `radial-gradient(
-                circle,
-                rgba(255, 255, 255, 0.05) 0%,
-                ${blurColor} 0%,
-                rgba(255, 255, 255, 0.05) 70%
-              )`,
+
+        //   background: `radial-gradient(
+        //           circle,
+        //           rgba(255, 255, 255, 0.05) 0%,
+        //           ${blurColor} 0%,
+        //           rgba(255, 255, 255, 0.05) 70%
+        //         )`,
       }}
       onClick={onClick}
       ref={ref}
