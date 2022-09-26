@@ -5,10 +5,12 @@ import "../styles/Explore/Explore.css";
 import Header from "../components/Header";
 import Search from "../components/Search";
 import MainLast from "../components/Main/MainLast";
+import Market from "../assets/market.png";
 const Explore = () => {
   return (
     <div id="explore">
-      <Header />
+      {/* <Header /> */}
+      <img className="market-img" src={Market}></img>
       <div id="list-container">
         <CardList list={exploreList} />
       </div>
