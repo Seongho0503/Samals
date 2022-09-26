@@ -33,9 +33,10 @@ const layerConfigurations = [
       // { name: "Shine" },
       // { name: "Bottom lid" },
       // { name: "Top lid" },
-      { name: "aniaml" },
+      { name: "Background" },
       { name: "backpack" },
-      { name: "shoes" },
+      { name: "aniaml" },
+      { name: "Hat" },
     ],
   },
 ];
@@ -45,9 +46,9 @@ const shuffleLayerConfigurations = false;
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
-  smoothing: false,
+  width: 1600,
+  height: 1600,
+  smoothing: true,
 };
 
 const gif = {
