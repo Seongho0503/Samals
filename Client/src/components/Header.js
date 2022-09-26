@@ -32,14 +32,14 @@ const Header = () => {
         console.log(err);
       }
     }
-    if (typeof klaytn !== "undefined") {
-      try {
-        const caver = new Caver(klaytn);
-        setCaver(caver);
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    // if (typeof klaytn !== "undefined") {
+    //   try {
+    //     const caver = new Caver(klaytn);
+    //     setCaver(caver);
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // }
   }, []);
 
   // 로그인 우회 처리
@@ -68,9 +68,9 @@ const Header = () => {
   };
   // 1-종료
 
-  const handleWallet = () => {
-    activateBrowserWallet();
-  };
+  // const handleWallet = () => {
+  //   activateBrowserWallet();
+  // };
 
   return (
     <div id="header">
