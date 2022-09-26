@@ -1,0 +1,457 @@
+screen,
+screen *,
+screen *:before,
+screen *:after {
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    transform-style: preserve-3d;
+    position: relative;
+    perspective: 200rem;
+}
+
+mintcard {
+    margin: auto;
+    margin-top: 250px;
+    height: 500px;
+    width: 330px;
+    background: #fff;
+    border-radius: 30px;
+    transform: translate3d(
+            0,
+            0,
+            0
+        )
+        rotate3d(
+            0,
+            0,
+            0,
+            0
+        )
+        rotate(1deg);
+    position: relative;
+    animation: rotate
+        3s linear;
+}
+card *,
+card *:before,
+card *:after,
+card:before,
+card:after {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+card:before,
+card:after {
+    width: 100%;
+    height: 100%;
+    transform: translate3d(
+            0,
+            0,
+            -0.2rem
+        )
+        rotateY(
+            180deg
+        );
+    border-radius: 5rem;
+    animation: light
+        3s linear;
+    box-shadow: inset
+        0 0 1rem
+        rgba(
+            25,
+            13,
+            35,
+            0.5
+        );
+    background-image: linear-gradient(
+        to right
+            bottom,
+        rgba(
+            25,
+            13,
+            35,
+            0.2
+        ),
+        rgba(
+            255,
+            255,
+            255,
+            0
+        ),
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        ),
+        rgba(
+            255,
+            255,
+            255,
+            0
+        ),
+        rgba(
+            25,
+            13,
+            35,
+            0.3
+        )
+    );
+}
+card:after {
+    transform: translate3d(
+            0,
+            0,
+            0.2rem
+        )
+        rotateY(
+            0deg
+        );
+    animation: light
+        3s linear
+        reverse;
+}
+
+back {
+    border-radius: 1rem;
+    height: 93%;
+    width: 90%;
+    border: 2rem
+        solid
+        rgba(
+            255,
+            255,
+            255,
+            0
+        );
+    background-position: 0.9rem
+        0.99rem;
+    /* background-image: */
+    transform: translate3d(
+            0,
+            0,
+            -0.1rem
+        )
+        rotateY(
+            180deg
+        );
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+shadow {
+    margin: auto;
+    height: 100rem;
+    width: 70rem;
+    background: radial-gradient(
+        #190d23,
+        rgba(
+            255,
+            255,
+            255,
+            0
+        )
+    );
+    background: #190d23;
+    border-radius: 10rem;
+    position: relative;
+    animation: shadow
+        3s linear;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    transform: translate3d(
+            0,
+            90rem,
+            -50rem
+        )
+        rotateX(
+            90deg
+        )
+        rotate(0deg)
+        skewY(0)
+        scale(1);
+    opacity: 0.2;
+    box-shadow: 0 0
+            2vmin
+            #190d23,
+        0 0 5vmin
+            #190d23;
+}
+
+hoverspace {
+    height: 100%;
+    width: 50rem;
+    position: absolute;
+    transform: translate3d(
+        0,
+        0,
+        50rem
+    );
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    cursor: grab;
+}
+hoverspace:hover
+    ~ card {
+    animation: rotatehover
+        3s linear;
+}
+hoverspace:hover
+    ~ card:before,
+hoverspace:hover
+    ~ card:after {
+    animation: lighthover
+        3s linear;
+}
+hoverspace:hover
+    ~ card:after {
+    animation: lighthover
+        3s linear
+        reverse;
+}
+hoverspace:hover
+    ~ shadow {
+    animation: shadowhover
+        3s linear;
+}
+
+@keyframes rotate {
+    100% {
+        transform: translate3d(
+                0,
+                0,
+                0
+            )
+            rotate3d(
+                1,
+                1,
+                0,
+                -360deg
+            )
+            rotate(
+                1deg
+            );
+    }
+}
+@keyframes rotatehover {
+    100% {
+        transform: translate3d(
+                0,
+                0,
+                0
+            )
+            rotate3d(
+                1,
+                1,
+                0,
+                -360deg
+            )
+            rotate(
+                1deg
+            );
+    }
+}
+@keyframes light {
+    0%,
+    100%,
+    50% {
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0
+        );
+    }
+    25% {
+        background-color: rgba(
+            245,
+            227,
+            227,
+            0.7
+        );
+    }
+    75% {
+        background-color: #190d23;
+    }
+}
+@keyframes lighthover {
+    0%,
+    100%,
+    50% {
+        background-color: rgba(
+            255,
+            255,
+            255,
+            0
+        );
+    }
+    25% {
+        background-color: rgba(
+            245,
+            227,
+            227,
+            0.7
+        );
+    }
+    75% {
+        background-color: #190d23;
+    }
+}
+@keyframes shadow {
+    25% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(
+                -90deg
+            );
+        opacity: 0;
+    }
+    50% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(0);
+        opacity: 0.2;
+    }
+    75% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(
+                90deg
+            );
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                180deg
+            )
+            skewY(0);
+        opacity: 0.2;
+    }
+}
+@keyframes shadowhover {
+    25% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(
+                -90deg
+            );
+        opacity: 0;
+    }
+    50% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(0);
+        opacity: 0.2;
+    }
+    75% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                90deg
+            )
+            skewY(
+                90deg
+            );
+        opacity: 0;
+    }
+    100% {
+        transform: translate3d(
+                0,
+                90rem,
+                -50rem
+            )
+            rotateX(
+                90deg
+            )
+            rotate(
+                180deg
+            )
+            skewY(0);
+        opacity: 0.2;
+    }
+}
+front {
+    transform: translate3d(
+            0,
+            0,
+            0.1rem
+        )
+        rotateY(
+            0deg
+        );
+    height: 100%;
+    width: 100%;
+}
+front > * {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
