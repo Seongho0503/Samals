@@ -6,11 +6,7 @@ import "swiper/css/bundle";
 
 import reportWebVitals from "./reportWebVitals";
 
-import {
-    BrowserRouter,
-    Routes,
-    Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
@@ -30,8 +26,13 @@ import NftDetail from "./pages/NftDetail";
 import ScrollTo from "./components/base/ScrollToTop";
 import ScrollToTop from "./components/base/ScrollToTop";
 import Footer from "./components/base/ScrollToTop";
-// import { Web3ReactProvider } from "@web3-react/core";
+import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
+
+function getLibrary(provider) {
+  const library = new Web3Provider(provider, "any");
+  return library;
+}
 
 // function getLibrary(
 //     provider
@@ -45,7 +46,7 @@ import { Web3Provider } from "@ethersproject/providers";
 // }
 
 {
-    /* <Web3ReactProvider getLibrary={getLibrary}> */
+  /* <Web3ReactProvider getLibrary={getLibrary}> */
 }
 
 // export default function ScrollToTop() {
@@ -59,16 +60,16 @@ import { Web3Provider } from "@ethersproject/providers";
 // }
 
 ReactDOM.render(
-    <BrowserRouter>
-        {/* <Footer></Footer> */}
-        <ScrollToTop />
-        <App />
-    </BrowserRouter>,
+  <BrowserRouter>
+    {/* <Footer></Footer> */}
+    <ScrollToTop />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <App />
+    </Web3ReactProvider>
+  </BrowserRouter>,
 
-    document.getElementById(
-        "root"
-    )
-    // document.getElementById("root").scrollTo(0, 0)
+  document.getElementById("root")
+  // document.getElementById("root").scrollTo(0, 0)
 );
 
 // If you want to start measuring performance in your app, pass a function

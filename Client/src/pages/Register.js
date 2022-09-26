@@ -115,7 +115,7 @@ const Register = () => {
       {/* <body className="createnft" /> */}
       <Header></Header>
       <PanelHeader size="sm" />
-      <div className="content">
+      <div className="nft-content">
         <Card>
           <CardHeader>
             <h5 className="title">Create New Item</h5>

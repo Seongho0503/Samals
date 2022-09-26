@@ -15,8 +15,13 @@ html.Register {
   background: #fff;
 } */
 
+.nft-content {
+  justify-content: center;
+  align-items: center;
+}
+
 .card-body {
-  width: 500px;
+  width: 630px;
   display: block;
   justify-content: center;
   align-items: center;
@@ -98,8 +103,8 @@ html.Register {
 }
 .element-input {
   margin-top: 0.5rem;
-  width: 60%;
-  height: 2rem;
+  width: 70%;
+  height: 3rem;
   border-radius: 0.5rem;
   border: lightgray 0.1rem solid;
   padding-left: 0.5rem;
