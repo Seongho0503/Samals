@@ -1,18 +1,19 @@
 package com.project.samals.service;
 
-import com.project.samals.domain.Sale;
+import com.project.samals.domain.Ipfs;
+import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
-import com.project.samals.dto.request.ReqUserDto;
-import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.UserDto;
+import com.project.samals.dto.request.ReqProfileDto;
+import com.project.samals.dto.request.ReqUserDto;
+import com.project.samals.repository.IpfsRepository;
+import com.project.samals.repository.ProfileImgRepository;
 import com.project.samals.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Service
 @Transactional
@@ -20,7 +21,9 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    @Transactional
+    private final IpfsRepository ipfsRepository;
+    private final ProfileImgRepository profileImgRepository;
+
     public UserDto signup(ReqUserDto userDto) {
         User user =userDto.toEntity();
         user.setCreatedTime(new Date());
@@ -28,7 +31,7 @@ public class UserService {
 
         userRepository.save(user);
 
-        if(user.getUserNickname().equals(""))
+        if(user.getUserNickname()==null)
             user.setUserNickname("random@"+user.getUserSeq());
 
         User saved=userRepository.save(user);
@@ -52,7 +55,6 @@ public class UserService {
     public UserDto updateUser(ReqUserDto userDto) {
         User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
         user.setUserBio(userDto.getUserBio());
-        user.setUserImgUrl(userDto.getUserImgUrl());
         user.setUserNickname(userDto.getUserNickname());
         user.setUpdatedTime(new Date());
 
@@ -60,13 +62,27 @@ public class UserService {
         return UserDto.convert(saved);
     }
 
-//    public List<SaleDto> getSaleHistory(String address){
-//        User user = userRepository.findByWalletAddress(address);
-//        List<SaleDto> saleHistory = new ArrayList<>();
-//        for(Sale sale : user.getSaleHistory()){
-//            saleHistory.add(SaleDto.convert(sale));
-//        }
-//        return saleHistory;
-//    }
+    public String setProfile(ReqProfileDto profileDto) {
+        User user = userRepository.findByWalletAddress(profileDto.getAddress());
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(profileDto.getIpfsSeq());
+        if(profileImgRepository.findByIpfs(ipfs)!=null)
+            return "fail";
+
+        ProfileImg profile = profileImgRepository.findByUser(user);
+        if(profile ==null){
+            profile=ProfileImg.builder().ipfs(ipfs).user(user).animalSpecies(ipfs.getAnimal().getAnimalSpecies()).build();
+        }else {
+            profile.setIpfs(ipfs);
+            profile.setAnimalSpecies(ipfs.getAnimal().getAnimalSpecies());
+        }
+        profileImgRepository.save(profile);
+        return ipfs.getIpfsUri();
+    }
+
+    public String deleteProfile(String address) {
+        User user = userRepository.findByWalletAddress(address);
+        profileImgRepository.deleteByUser(user);
+        return "Success";
+    }
 
 }

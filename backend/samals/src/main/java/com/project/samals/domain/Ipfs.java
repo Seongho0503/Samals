@@ -38,4 +38,8 @@ public class Ipfs {
 
     @Column(name = "ipfs_token_id")
     private int ipfsTokenId;
+
+
+    @OneToOne(mappedBy = "ipfs")
+    private ProfileImg profileImg;
 }

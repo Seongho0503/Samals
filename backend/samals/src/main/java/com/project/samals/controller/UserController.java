@@ -1,9 +1,8 @@
 package com.project.samals.controller;
 
-import com.project.samals.dto.NftDto;
-import com.project.samals.dto.request.ReqUserDto;
-import com.project.samals.dto.SaleDto;
+import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.UserDto;
+import com.project.samals.dto.request.ReqUserDto;
 import com.project.samals.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,9 +11,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user")
@@ -22,7 +18,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
 
     @ApiOperation(value = "회원 등록")
     @PostMapping("/signup")
@@ -48,5 +43,16 @@ public class UserController {
         return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "프로필 등록")
+    @PostMapping("/profile")
+    public ResponseEntity<String> setProfile(@RequestBody ReqProfileDto profileDto) {
+        return new ResponseEntity<>(userService.setProfile(profileDto), HttpStatus.CREATED);
+    }
+
+    @ApiOperation(value = "프로필 삭제")
+    @DeleteMapping("/profile/{address}")
+    public ResponseEntity<String> deleteProfile(@PathVariable String address) {
+        return new ResponseEntity<>(userService.deleteProfile(address), HttpStatus.OK);
+    }
 
 }

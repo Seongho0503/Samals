@@ -1,6 +1,7 @@
 package com.project.samals.controller;
 
 import com.project.samals.dto.*;
+import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.service.SaleService;
 import io.swagger.annotations.Api;
@@ -40,9 +41,9 @@ public class SaleController {
     }
 
     @ApiOperation(value = "거래 완료")
-    @PutMapping("/{saleSeq}/complete/{buyerAddress}")
-    public ResponseEntity<SaleDto> completeSale(@PathVariable long saleSeq,@PathVariable String buyerAddress) {
-        return new ResponseEntity<>(saleService.completeSale(buyerAddress,saleSeq), HttpStatus.OK);
+    @PutMapping("/complete")
+    public ResponseEntity<SaleDto> completeSale(@RequestBody ReqSaleCompleteDto reqSaleCompleteDto) {
+        return new ResponseEntity<>(saleService.completeSale(reqSaleCompleteDto), HttpStatus.OK);
     }
 
 
