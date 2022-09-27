@@ -28,7 +28,9 @@ mintcard {
             0,
             0
         )
-        rotate(1deg);
+        rotate(
+            0.5deg
+        );
     position: relative;
     animation: rotate
         3s linear;
@@ -198,6 +200,7 @@ hoverspace {
     margin: auto;
     cursor: grab;
 }
+
 hoverspace:hover
     ~ card {
     animation: rotatehover
