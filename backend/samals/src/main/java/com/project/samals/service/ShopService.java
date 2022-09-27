@@ -28,7 +28,7 @@ public class ShopService {
     }
 
     public List<ResProfileCountDto> getProfileCount(){
-        String[] animals = {"bird","elephant","shark","tiger","frog"};
+        String[] animals = {"bird","elephant","shark","tiger","frog","iguana","leopard","penguin","rhino"};
         List<ResProfileCountDto> profileCounts=new ArrayList<>();
         for(String animal : animals){
             List<ProfileImg> profileUse = profileImgRepository.findAllByAnimalSpecies(animal);
