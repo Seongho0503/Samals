@@ -2,7 +2,12 @@ import React, {
     useState,
     useEffect,
 } from "react";
-
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Link,
+} from "react-router-dom";
 import buttonImg from "../../assets/animal-button.png";
 import modalBack from "../../assets/modal-back.jpg";
 import { useNavigate } from "react-router-dom";

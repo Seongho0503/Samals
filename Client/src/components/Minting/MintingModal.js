@@ -2,11 +2,25 @@ import React, {
     useState,
     useEffect,
 } from "react";
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+    Link,
+} from "react-router-dom";
+
 import "../../styles/MintingCard.css";
+import buttonImg from "../../assets/animal-button.png";
+import Button from "@mui/material/Button";
+import Home from "../../pages/MintCard";
 import Footer from "../Footer";
+import { totalSupply } from "../../utils/event";
 
 const MintingModal =
     () => {
+        console.log(
+            totalSupply()
+        );
         return (
             <div>
                 <h2 class="animal-data-title">
@@ -20,6 +34,14 @@ const MintingModal =
                     </h2>
                 </div>
                 {/* <Footer /> */}
+                <Link to="/mintcard">
+                    <img
+                        width="400px"
+                        src={
+                            buttonImg
+                        }
+                    />
+                </Link>
             </div>
         );
     };
