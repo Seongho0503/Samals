@@ -6,6 +6,7 @@ import com.project.samals.domain.User;
 import com.project.samals.dto.UserDto;
 import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.request.ReqUserDto;
+import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.ProfileImgRepository;
 import com.project.samals.repository.UserRepository;
@@ -13,7 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Transactional
@@ -82,6 +85,16 @@ public class UserService {
         User user = userRepository.findByWalletAddress(address);
         profileImgRepository.deleteByUser(user);
         return "Success";
+    }
+
+    public List<ResProfileCountDto> getProfileCount(){
+        String[] animals = {"bird","elephant","shark","tiger","frog","iguana","leopard","penguin","rhino"};
+        List<ResProfileCountDto> profileCounts=new ArrayList<>();
+        for(String animal : animals){
+            List<ProfileImg> profileUse = profileImgRepository.findAllByAnimalSpecies(animal);
+            profileCounts.add(new ResProfileCountDto(animal,profileUse.size()));
+        }
+        return profileCounts;
     }
 
 }
