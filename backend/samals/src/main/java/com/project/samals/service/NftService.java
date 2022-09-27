@@ -80,4 +80,11 @@ public class NftService {
          */
         return ResNftDto.convert(nft);
     }
+
+    public int getTotalDonate(){
+        int price=500;
+        List<Nft> donateCounts= nftRepository.findByNftType("donate");
+        return donateCounts.size()*price;
+    }
 }
+
