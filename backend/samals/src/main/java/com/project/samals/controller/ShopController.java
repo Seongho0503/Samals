@@ -1,6 +1,6 @@
 package com.project.samals.controller;
 
-import com.project.samals.dto.SaleDto;
+import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.dto.response.ResShopDto;
 import com.project.samals.service.ShopService;
 import io.swagger.annotations.Api;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,6 +26,12 @@ public class ShopController {
     @GetMapping("/{animalSpecies}")
     public ResponseEntity<ResShopDto> getShopItem(@PathVariable String animalSpecies){
         return new ResponseEntity<>(shopService.getShopItem(animalSpecies),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "상점 프로필 선호도 조회")
+    @GetMapping("/profile-count")
+    public ResponseEntity<List<ResProfileCountDto>> getProfileCount(){
+        return new ResponseEntity<>(shopService.getProfileCount(),HttpStatus.OK);
     }
 
 }

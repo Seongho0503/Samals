@@ -1,13 +1,17 @@
 package com.project.samals.service;
 
 import com.project.samals.domain.Animal;
+import com.project.samals.domain.ProfileImg;
+import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.dto.response.ResShopDto;
 import com.project.samals.repository.AnimalRepository;
-import com.project.samals.repository.IpfsRepository;
+import com.project.samals.repository.ProfileImgRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -15,13 +19,22 @@ import javax.transaction.Transactional;
 public class ShopService {
 
     private final AnimalRepository animalRepository;
-    private final IpfsRepository ipfsRepository;
+    private final ProfileImgRepository profileImgRepository;
 
     public ResShopDto getShopItem(String species) {
         Animal animal = animalRepository.findByAnimalSpecies(species);
         ResShopDto shopDto = ResShopDto.convert(animal);
-
         return shopDto;
+    }
+
+    public List<ResProfileCountDto> getProfileCount(){
+        String[] animals = {"bird","elephant","shark","tiger","frog"};
+        List<ResProfileCountDto> profileCounts=new ArrayList<>();
+        for(String animal : animals){
+            List<ProfileImg> profileUse = profileImgRepository.findAllByAnimalSpecies(animal);
+            profileCounts.add(new ResProfileCountDto(animal,profileUse.size()));
+        }
+        return profileCounts;
     }
 
 }
