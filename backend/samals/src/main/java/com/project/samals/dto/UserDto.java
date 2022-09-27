@@ -1,13 +1,9 @@
 package com.project.samals.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.project.samals.domain.Sale;
 import com.project.samals.domain.User;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Getter
@@ -21,6 +17,7 @@ public class UserDto {
     private String walletAddress;
     private String userNickname;
     private String userBio;
+
     private String userImgUrl;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
@@ -35,7 +32,6 @@ public class UserDto {
                 .walletAddress(walletAddress)
                 .userNickname(userNickname)
                 .userBio(userBio)
-                .userImgUrl(userImgUrl)
                 .build();
     }
 
@@ -47,7 +43,7 @@ public class UserDto {
                 .walletAddress(user.getWalletAddress())
                 .userNickname(user.getUserNickname())
                 .userBio(user.getUserBio())
-                .userImgUrl(user.getUserImgUrl())
+          //      .userImgUrl(user.getProfileImg().getIpfs().getIpfsUri())
                 .createdTime(user.getCreatedTime())
                 .updatedTime(user.getUpdatedTime())
                 .build();

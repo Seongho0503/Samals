@@ -27,9 +27,6 @@ public class User {
     @Column(name = "user_bio")
     private String userBio;
 
-    @Column(name = "user_img_url")
-    private String userImgUrl;
-
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="user_created_at")
     private Date createdTime;
@@ -37,6 +34,9 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="user_updated_at")
     private Date updatedTime;
+
+    @OneToOne(mappedBy = "user")
+    private ProfileImg profileImg;
 
     // Minted NFT List
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -59,7 +59,6 @@ public class User {
         this.saleLikes.add(saleLike);
         saleLike.setUser(this);
     }
-
     public void removeSaleLike(int saleLikeSeq) {
         saleLikes.removeIf(saleLike ->
                 saleLike.getSaleLikeSeq()==saleLikeSeq);
