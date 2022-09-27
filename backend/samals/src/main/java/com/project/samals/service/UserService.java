@@ -57,7 +57,6 @@ public class UserService {
         user.setUserBio(userDto.getUserBio());
         user.setUserNickname(userDto.getUserNickname());
         user.setUpdatedTime(new Date());
-
         User saved=userRepository.save(user);
         return UserDto.convert(saved);
     }
