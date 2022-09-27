@@ -3,6 +3,7 @@ package com.project.samals.controller;
 import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.UserDto;
 import com.project.samals.dto.request.ReqUserDto;
+import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -53,6 +56,12 @@ public class UserController {
     @DeleteMapping("/profile/{address}")
     public ResponseEntity<String> deleteProfile(@PathVariable String address) {
         return new ResponseEntity<>(userService.deleteProfile(address), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "프로필 선호도 조회")
+    @GetMapping("/profile/count")
+    public ResponseEntity<List<ResProfileCountDto>> getProfileCount(){
+        return new ResponseEntity<>(userService.getProfileCount(),HttpStatus.OK);
     }
 
 }

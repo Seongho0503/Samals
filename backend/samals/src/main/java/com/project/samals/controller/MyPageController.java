@@ -53,4 +53,10 @@ public class MyPageController {
         return new ResponseEntity<>(saleLikeService.getMyLikeList(address), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "내 기부 총액 조회")
+    @GetMapping("/{address}/total-donate")
+    public ResponseEntity<Integer> getMyTotalDonate(@PathVariable String address) {
+        return new ResponseEntity<>(nftService.getMyTotalDonate(address), HttpStatus.OK);
+    }
+
 }

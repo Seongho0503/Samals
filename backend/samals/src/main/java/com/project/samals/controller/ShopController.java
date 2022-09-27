@@ -28,10 +28,4 @@ public class ShopController {
         return new ResponseEntity<>(shopService.getShopItem(animalSpecies),HttpStatus.OK);
     }
 
-    @ApiOperation(value = "상점 프로필 선호도 조회")
-    @GetMapping("/profile-count")
-    public ResponseEntity<List<ResProfileCountDto>> getProfileCount(){
-        return new ResponseEntity<>(shopService.getProfileCount(),HttpStatus.OK);
-    }
-
 }
