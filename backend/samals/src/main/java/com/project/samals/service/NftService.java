@@ -86,5 +86,12 @@ public class NftService {
         List<Nft> donateCounts= nftRepository.findByNftType("donate");
         return donateCounts.size()*price;
     }
+
+    public int getMyTotalDonate(String address){
+        int donatePrice=500;
+        User user = userRepository.findByWalletAddress(address);
+        List<Nft> donateCounts= nftRepository.findByNftTypeAndUser("donate",user);
+        return donateCounts.size()*donatePrice;
+    }
 }
 
