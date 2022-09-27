@@ -344,22 +344,6 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     ) public view returns(uint256){
         return _marketLeftAnimalNumber[species];
     } 
-
-    /*
-    function _getSpecies(
-        uint256 tokenId
-    ) public view returns(string memory){
-        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
-        return MINTED_ANIMALS[tokenId].species;
-    } 
-
-    function _getClass(
-        uint256 tokenId
-    ) public view returns(string memory){
-        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
-        return MINTED_ANIMALS[tokenId].class;
-    }
-    */
     
     function _getTokenUri(
         uint256 tokenId
@@ -407,6 +391,11 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     function _getLimitedNumber()
     public view returns(uint256){
         return limited_number;
+    }
+
+    function _getFirstLimitedNumber()
+    public view returns(uint256){
+        return TOTAL_NUMBER;
     }
 
     function _getTotalMint()
