@@ -45,12 +45,14 @@ public class Nft {
     @JoinColumn(name="user_seq")
     private User user;
 
-    // Sale 거래 내역
+    @OneToOne
+    @JoinColumn(name="ipfs_seq")
+    private Ipfs ipfs;
+
     @OneToMany(mappedBy = "nft", cascade = CascadeType.ALL)
     @Builder.Default
     private List<Sale> nftSaleList = new ArrayList<>();
 
-    // 거래 내역 추가
     public void addNftSaleList(Sale sale) {
         this.nftSaleList.add(sale);
         sale.setNft(this);

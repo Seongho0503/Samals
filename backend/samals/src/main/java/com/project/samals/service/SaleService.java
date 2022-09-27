@@ -3,6 +3,7 @@ package com.project.samals.service;
 import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
 import com.project.samals.dto.SaleDto;
+import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.SaleRepository;
@@ -55,13 +56,13 @@ public class SaleService {
         return SaleDto.convert(saleInfo);
     }
 
-    public SaleDto completeSale(String buyerAddress,long saleSeq) {
-        Sale sale = saleRepository.findBySaleSeq(saleSeq);
+    public SaleDto completeSale(ReqSaleCompleteDto reqSaleCompleteDto) {
+        Sale sale = saleRepository.findBySaleSeq(reqSaleCompleteDto.getSaleSeq());
         sale.setIsSold('Y');
         sale.setCompletedTime(new Date());
         sale.setUpdatedTime(new Date());
-        sale.setBuyerAddress(buyerAddress);
-        sale.getNft().setNftOwner(buyerAddress);
+        sale.setBuyerAddress(reqSaleCompleteDto.getBuyerAddress());
+        sale.getNft().setNftOwner(reqSaleCompleteDto.getBuyerAddress());
         sale.getNft().setUpdatedTime(new Date());
 
         Sale saved = saleRepository.save(sale);

@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface SaleLikeRepository extends JpaRepository<SaleLike, Long> {
 
-
-
     SaleLike findBySaleAndUser(Sale sale, User user);
 
     void deleteByUserAndSale(User user, Sale sale);
 
     List<SaleLike> findAllBySale(Sale sale);
+
+    List<SaleLike> findAllByUser(User user);
 }

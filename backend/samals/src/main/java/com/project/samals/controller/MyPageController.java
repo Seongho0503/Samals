@@ -2,8 +2,11 @@ package com.project.samals.controller;
 
 import com.project.samals.dto.NftDto;
 import com.project.samals.dto.SaleDto;
+import com.project.samals.dto.response.ResSaleLikeDto;
 import com.project.samals.service.NftService;
+import com.project.samals.service.SaleLikeService;
 import com.project.samals.service.SaleService;
+import com.project.samals.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/mypage")
@@ -25,6 +27,7 @@ public class MyPageController {
 
     private final SaleService saleService;
     private final NftService nftService;
+    private final SaleLikeService saleLikeService;
 
     @ApiOperation(value = "내 거래 내역 조회")
     @GetMapping("/{address}/sale")
@@ -44,5 +47,10 @@ public class MyPageController {
         return new ResponseEntity<>(nftService.getMyNftList(address),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "내 좋아요 리스트 조회")
+    @GetMapping("/{address}/like")
+    public ResponseEntity<List<ResSaleLikeDto>> getMyLikeList(@PathVariable String address) {
+        return new ResponseEntity<>(saleLikeService.getMyLikeList(address), HttpStatus.OK);
+    }
 
 }

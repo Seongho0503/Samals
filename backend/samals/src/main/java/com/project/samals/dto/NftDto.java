@@ -34,6 +34,7 @@ public class NftDto {
 
     private String walletAddress;
 
+
     public Nft toEntity(){
         return Nft.builder()
                 .nftSeq(nftSeq)
@@ -60,5 +61,4 @@ public class NftDto {
                 .walletAddress(nft.getUser().getWalletAddress())
                 .build();
     }
-
 }
