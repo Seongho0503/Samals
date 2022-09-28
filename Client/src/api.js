@@ -26,6 +26,7 @@ export async function getDescription() {
     }
 }
 
+// 동물 리스트 조회
 export async function getAnimalData() {
     try {
         const response =
@@ -33,6 +34,24 @@ export async function getAnimalData() {
                 {
                     method: "GET",
                     url: `/api/animal/list`,
+                    // headers :
+                }
+            );
+
+        return response;
+    } catch {
+        return "";
+    }
+}
+
+// 기부 총액 조회
+export async function getTotalDonate() {
+    try {
+        const response =
+            await axios(
+                {
+                    method: "GET",
+                    url: `/api/nft/total-donate`,
                     // headers :
                 }
             );

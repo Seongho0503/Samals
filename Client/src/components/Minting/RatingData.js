@@ -7,6 +7,7 @@ import Collaboration from "../../assets/collaboration.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import { getTotalMint } from "../../utils/event";
+import { getTotalDonate } from "../../api";
 
 // const counter = (
 //     $counter,
@@ -70,6 +71,17 @@ import { getTotalMint } from "../../utils/event";
 
 const RatingData =
     () => {
+        const response =
+            getTotalDonate().then(
+                ({
+                    data,
+                }) => {
+                    console.log(
+                        data
+                    );
+                    return data;
+                }
+            );
         return (
             <div id="rating-data">
                 <Header />
@@ -86,7 +98,11 @@ const RatingData =
                     총액
                 </h1>
 
-                <h1 id="rating-text"></h1>
+                <h1 id="rating-text">
+                    {
+                        response
+                    }
+                </h1>
                 <h5 id="header-subtext-second">
                     Samals는
                     동물보호단체

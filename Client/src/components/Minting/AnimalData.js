@@ -20,37 +20,20 @@ import { getAnimalData } from "../../api";
 
 const AnimalData =
     () => {
-        const response =
-            getAnimalData().then(
-                ({
-                    data,
-                }) => {
-                    console.log(
-                        data[0]
-                            .animalNameKr
-                    );
-                    const toad =
-                        data[2]
-                            .animalNameKr;
-                    const a =
-                        data[3]
-                            .animalNameKr;
-                    const b =
-                        data[5]
-                            .animalNameKr;
-                    const c =
-                        data[6]
-                            .animalNameKr;
-                    return;
-                }
-            );
-        console.log(
-            response
-        );
-        // const toad =
-        //     response.animalNameKr;
+        // const response =
+        //     getAnimalData().then(
+        //         ({
+        //             data,
+        //         }) => {
+        //             console.log(
+        //                 data
+        //             );
+        //             return data;
+        //         }
+        //     );
         // console.log(
-        //     toad
+        //     response
+        //         .data[1]
         // );
         return (
             <div class="animal-nft">
