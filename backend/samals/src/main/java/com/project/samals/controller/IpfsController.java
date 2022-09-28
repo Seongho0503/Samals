@@ -26,7 +26,7 @@ public class IpfsController {
     private  final IpfsService ipfsService;
     private static final Logger log = LoggerFactory.getLogger(IpfsController.class);
 
-    @ApiOperation(value = "기부 랜덤 번호 뽑기 - 기부 or 상점")
+    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or shop")
     @GetMapping("/number/{ipfsType}")
     public ResponseEntity<Integer> getRandom(@PathVariable String ipfsType){
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
