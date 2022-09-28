@@ -3,6 +3,7 @@ package com.project.samals.controller;
 import com.project.samals.dto.*;
 import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
+import com.project.samals.dto.response.ResSaleDetailDto;
 import com.project.samals.dto.response.ResSaleListDto;
 import com.project.samals.service.SaleService;
 import io.swagger.annotations.Api;
@@ -30,14 +31,14 @@ public class SaleController {
     }
 
     @ApiOperation(value = "전체 거래 조회")
-    @GetMapping("/{saleSeq}/list")
+    @GetMapping("/{address}/list")
     public ResponseEntity<List<ResSaleListDto>> getSaleList(String address){
         return new ResponseEntity<>(saleService.getSaleList(address),HttpStatus.OK);
     }
 
     @ApiOperation(value = "거래 상세 조회")
     @GetMapping("/{saleSeq}")
-    public ResponseEntity<SaleDto> getSale(@PathVariable long saleSeq){
+    public ResponseEntity<ResSaleDetailDto> getSale(@PathVariable long saleSeq){
         return new ResponseEntity<>(saleService.getSale(saleSeq),HttpStatus.OK);
     }
 
@@ -45,6 +46,12 @@ public class SaleController {
     @PutMapping("/complete")
     public ResponseEntity<SaleDto> completeSale(@RequestBody ReqSaleCompleteDto reqSaleCompleteDto) {
         return new ResponseEntity<>(saleService.completeSale(reqSaleCompleteDto), HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "거래 검색")
+    @GetMapping("/search/{keyword}")
+    public ResponseEntity<List<ResSaleListDto>> search(@PathVariable String keyword,String address) {
+        return new ResponseEntity<>(saleService.search(keyword,address),HttpStatus.OK);
     }
 
 

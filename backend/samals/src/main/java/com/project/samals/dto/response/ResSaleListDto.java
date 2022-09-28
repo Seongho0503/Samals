@@ -15,6 +15,7 @@ import java.util.Date;
 public class ResSaleListDto {
     private Long saleSeq;
     private int salePrice;
+    private String animalTitle;
     private String animalSpecies;
     private int mintNumber;
     private String animalClass;
@@ -30,6 +31,7 @@ public class ResSaleListDto {
                 .saleSeq(sale.getSaleSeq())
                 .salePrice(sale.getSalePrice())
                 .animalSpecies(sale.getNft().getIpfs().getAnimal().getAnimalSpecies())
+                .animalTitle(sale.getSaleTitle())
                 .mintNumber(sale.getNft().getNftMintNumber())
                 .animalClass(sale.getNft().getIpfs().getAnimal().getAnimalClass())
                 .animalClassNo(sale.getNft().getIpfs().getAnimal().getAnimalClassNo())

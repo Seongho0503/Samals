@@ -1,8 +1,9 @@
-package com.project.samals.dto;
+package com.project.samals.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.project.samals.domain.Sale;
 import lombok.*;
+
 import java.util.Date;
 
 @Getter
@@ -10,38 +11,36 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SaleDto {
+public class ResSaleDetailDto {
     private Long saleSeq;
     private int tokenId;
+    private String animalSpecies;
+    private int mintNumber;
     private String saleContractAddress;
     private String sellerAddress;
-    private String buyerAddress;
     private int salePrice;
     private String saleTitle;
     private String saleDescription;
-    private char isSold;
+    private String tokenImgUrl;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date saleCreatedTime;
 
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
-    private Date saleCompletedTime;
-
-    public static SaleDto convert(Sale sale) {
+    public static ResSaleDetailDto convert(Sale sale) {
         if(sale == null) return null;
 
-        return SaleDto.builder()
+        return ResSaleDetailDto.builder()
                 .saleSeq(sale.getSaleSeq())
                 .tokenId(sale.getNft().getTokenId())
+                .tokenImgUrl("https://ipfs.io/ipfs/"+sale.getNft().getIpfs().getIpfsUri())
+                .animalSpecies(sale.getNft().getIpfs().getAnimal().getAnimalSpecies())
+                .mintNumber(sale.getNft().getNftMintNumber())
                 .saleContractAddress(sale.getSaleContractAddress())
                 .sellerAddress(sale.getSellerAddress())
-                .buyerAddress(sale.getBuyerAddress())
                 .salePrice(sale.getSalePrice())
                 .saleTitle(sale.getSaleTitle())
                 .saleDescription(sale.getSaleDescription())
-                .isSold(sale.getIsSold())
                 .saleCreatedTime(sale.getCreatedTime())
-                .saleCompletedTime(sale.getCompletedTime())
                 .build();
     }
 
