@@ -1,11 +1,9 @@
-import React, {
-    useState,
-    useEffect,
-} from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/MainSub.css";
 import title from "../../assets/our-story.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import { getTotalDonate } from "../../api";
 
 // const counter = (
 //     $counter,
@@ -67,98 +65,46 @@ import Header from "../Header";
 //         );
 //     };
 
-const MainSub =
-    () => {
-        return (
-            <div id="mainsub">
-                {/* <img id='hero-background' src={list[0].src}/> */}
-                <img
-                    width="500px"
-                    src={
-                        title
-                    }
-                />
+const MainSub = () => {
+  const [response, setResponse] = useState();
 
-                <h1 id="header-subtext-first">
-                    0
-                </h1>
+  useEffect(() => {
+    getTotalDonate()
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+      .then((res) => {
+        setResponse(res);
+      });
+  }, []);
+  return (
+    <div id='mainsub'>
+      {/* <img id='hero-background' src={list[0].src}/> */}
+      <img width='500px' src={title} />
 
-                <h5 id="header-subtext-second">
-                    Samals를
-                    통해
-                    기부된
-                    금액은
-                    위와
-                    같아요{" "}
-                    <br />
-                    <br />
-                    환경
-                    파괴로
-                    인한
-                    동물들의
-                    멸종은,
-                    우리의
-                    삶에도
-                    많은
-                    영향을
-                    끼치고
-                    있어요.
-                    <br />
-                    인간들의
-                    이기심으로
-                    많은
-                    동물은
-                    살아갈
-                    곳을
-                    잃어가고,
-                    <br />
-                    지구상에서
-                    사라지고
-                    있어요.
-                    <br />
-                    <br />
-                    저희
-                    팀은
-                    이
-                    위기를
-                    해결할
-                    많은
-                    방법을
-                    고민했습니다.
-                    <br />
-                    우리는
-                    Save
-                    the
-                    animals,
-                    Samals
-                    프로젝트를
-                    통해,{" "}
-                    <br />
-                    멸종
-                    위기
-                    동물을
-                    위한
-                    NFT를
-                    발급하고,
-                    이를
-                    그
-                    동물을
-                    위해
-                    기부하기로
-                    했어요.
-                    <br />
-                    지금
-                    멸종
-                    위기
-                    동물을
-                    위해
-                    팀
-                    올청이와
-                    함께해주세요!
-                    <br />
-                </h5>
-            </div>
-        );
-    };
+      <h1 id='header-subtext-first'>{response}</h1>
+
+      <h5 id='header-subtext-second'>
+        Samals를 통해 기부된 금액은 위와 같아요 <br />
+        <br />
+        환경 파괴로 인한 동물들의 멸종은, 우리의 삶에도 많은 영향을 끼치고 있어요.
+        <br />
+        인간들의 이기심으로 많은 동물은 살아갈 곳을 잃어가고,
+        <br />
+        지구상에서 사라지고 있어요.
+        <br />
+        <br />
+        저희 팀은 이 위기를 해결할 많은 방법을 고민했습니다.
+        <br />
+        우리는 Save the animals, Samals 프로젝트를 통해, <br />
+        멸종 위기 동물을 위한 NFT를 발급하고, 이를 그 동물을 위해 기부하기로 했어요.
+        <br />
+        지금 멸종 위기 동물을 위해 팀 올청이와 함께해주세요!
+        <br />
+      </h5>
+    </div>
+  );
+};
 
 export default MainSub;

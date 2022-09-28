@@ -81,15 +81,15 @@ const RatingData = () => {
   }, []);
 
   return (
-    <div id="rating-data">
+    <div id='rating-data'>
       <Header />
       {/* <img id='hero-background' src={list[0].src}/> */}
 
-      <img width="800px" src={Collaboration} />
-      <h1 id="rating-text">기부 총액</h1>
+      <img width='800px' src={Collaboration} />
+      <h1 id='rating-text'>기부 총액</h1>
 
-      <h1 id="rating-text">{response}</h1>
-      <h5 id="header-subtext-second">
+      <h1 id='rating-text'>{response}</h1>
+      <h5 id='header-subtext-second'>
         Samals는 동물보호단체 care와 함께 합니다! <br />
         <br />
         멸종을 눈앞에 둔 수많은 야생 동물을 지키기 위해서 <br />
