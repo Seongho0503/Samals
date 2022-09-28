@@ -7,100 +7,81 @@ import Minting from ".././pages/Minting";
 import Web3 from "web3";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAddress, setAddress, setUserBio, setUserId, setUserPFPAddress } from "../redux/slice/UserInfoSlice";
 
 const Header = () => {
-  //   const { activateBrowserWallet, account } = useEthers();
-  //   const etherBalance = useEtherBalance(account);
-
-  // 지갑 연결
-  // const [web3, setWeb3] = useState();
-  // const [accounts, setAccount] = useState(
-  //   () => JSON.parse(window.localStorage.getItem("account")) || ""
-  // );
-  // const [isLogin, setIsLogin] = useState(false);
-  // const [caver, setCaver] = useState();
-  // const [myToken, setMyToken] = useState([]);
-  // const [walletType, setWalletType] = useState("");
-  // const [totalToken, setTotalToken] = useState([]);
   const injected = new InjectedConnector();
-  // let accounts;
-  // 지갑 연결 2
-
-  //user persisted data);
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("accounts", JSON.stringify(accounts));
-  // }, [accounts]);
-  // // 1-메타마스크 지갑연결
-  // useEffect(() => {
-  //   if (typeof window.ethereum !== "undefined") {
-  //     try {
-  //       const web = new Web3(window.ethereum);
-  //       setWeb3(web);
-  //       console.log("지갑연결시도");
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  //   // if (typeof klaytn !== "undefined") {
-  //   //   try {
-  //   //     const caver = new Caver(klaytn);
-  //   //     setCaver(caver);
-  //   //   } catch (err) {
-  //   //     console.log(err);
-  //   //   }
-  //   // }
-  // }, []);
-
-  // 로그인 우회 처리
-  //   useEffect(() => {
-  //     if (!isLogin) {
-  //       setMyToken([]);
-  //       setTotalToken([]);
-  //       if (document.location.href !== "http://localhost:3000/") {
-  //         document.location.href = "/";
-  //       }
-  //     }
-  //   }, [isLogin]);
-
-  //지갑 연결
-  // const connectWallet = async () => {
-  //   accounts = await window.ethereum
-  //     .request({
-  //       method: "eth_requestAccounts",
-  //       //method: "ethereum.enable()",
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.code);
-  //     });
-  //   setAccount(accounts[0]);
-  //   // setWalletType("eth");
-  //   console.log(accounts);
-  // };
-  // 1 - 종료;
-
-  // const handleWallet = () => {
-  //   activateBrowserWallet();
-  // };
-
+  //redux의 값을 호출 후 state로 관리
+  const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
   const { chainedId, account, active, activate, deactivate } = useWeb3React();
+  const dispatch = useDispatch();
+  const abcd = () => {
+    console.log("account: ", account);
+  };
 
-  const handdleConnect = () => {
+  //연결 확인
+  async function handleConnect() {
+    // 활성화 => 비활성화 전환
     if (active) {
       deactivate();
+      //초기화
+      dispatch(setAddress(""));
+      dispatch(setUserBio(""));
+      dispatch(setUserId(""));
+      setReduxAddress();
       return;
     }
-    // console.log(account);
     activate(injected, (error) => {
       if ("/No Ethereum provider was found on window.ethereum/".test(error)) {
         window.open("https://metamask.io/download.html");
-        // console.log(account);
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
       }
+    }).finally(() => {
+      console.log(account);
     });
-  };
+  }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(account);
+
+    if (account !== undefined) {
+      //dispatch를 통해 redux에 저장
+      dispatch(setAddress(account));
+      setReduxAddress(account);
+      //해당 지갑 주소의 정보 호출
+      axios({ method: "GET", url: `/api/user/${account}` })
+        .then(({ data }) => {
+          console.log("get res: ", data);
+
+          // 반환 값이 없다면 DB에 저장
+          if (data === "") {
+            axios({
+              method: "POST",
+              url: `/api/user/signup`,
+              data: {
+                walletAddress: account,
+              },
+            })
+              .then((res) => {
+                console.log(res);
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+          // 반환 값이 있다면 dispatch를 통해 redux에 저장
+          else {
+            dispatch(setUserBio(data.user_bio));
+            dispatch(setUserId(data.user_nickname));
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [account]);
 
   return (
     <div id="header">
@@ -113,10 +94,16 @@ const Header = () => {
         <Link to="/explore">MARKET</Link>
         <Link to="/trade">EXPLORE</Link>
         <Link to="/minting">DROPS</Link>
-        {!account ? "" : <Link to="/mypage">MYPAGE</Link>}
+        {!reduxAddress ? "" : <Link to="/mypage">MYPAGE</Link>}
 
-        <button id="connect-wallet" onClick={handdleConnect}>
-          {!account ? "Connect Wallet" : `${account}`}
+        <button
+          id="connect-wallet"
+          onClick={() => {
+            console.log("in return account:", account);
+            handleConnect(account);
+          }}
+        >
+          {!reduxAddress ? "Connect Wallet" : `${reduxAddress}`}
         </button>
       </div>
     </div>
