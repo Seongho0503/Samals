@@ -5,7 +5,8 @@ import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
 import com.project.samals.dto.UserDto;
 import com.project.samals.dto.request.ReqProfileDto;
-import com.project.samals.dto.request.ReqUserDto;
+import com.project.samals.dto.request.UserSignupDto;
+import com.project.samals.dto.request.UserUpdateDto;
 import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.ProfileImgRepository;
@@ -27,16 +28,14 @@ public class UserService {
     private final IpfsRepository ipfsRepository;
     private final ProfileImgRepository profileImgRepository;
 
-    public UserDto signup(ReqUserDto userDto) {
+    public UserDto signup(UserSignupDto userDto) {
+        if(userRepository.findByWalletAddress(userDto.getWalletAddress())!=null)
+            return null;
+
         User user =userDto.toEntity();
-        user.setCreatedTime(new Date());
-        user.setUpdatedTime(new Date());
-
         userRepository.save(user);
-
         if(user.getUserNickname()==null)
             user.setUserNickname("random@"+user.getUserSeq());
-
         User saved=userRepository.save(user);
         return UserDto.convert(saved);
     }
@@ -55,18 +54,18 @@ public class UserService {
         return "delete Success";
     }
 
-    public UserDto updateUser(ReqUserDto userDto) {
+    public UserDto updateUser(UserUpdateDto userDto) {
+        setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId()));
         User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
         user.setUserBio(userDto.getUserBio());
         user.setUserNickname(userDto.getUserNickname());
         user.setUpdatedTime(new Date());
-        User saved=userRepository.save(user);
-        return UserDto.convert(saved);
+        return UserDto.convert(userRepository.save(user));
     }
 
     public String setProfile(ReqProfileDto profileDto) {
         User user = userRepository.findByWalletAddress(profileDto.getAddress());
-        Ipfs ipfs = ipfsRepository.findByIpfsSeq(profileDto.getIpfsSeq());
+        Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
         if(profileImgRepository.findByIpfs(ipfs)!=null)
             return "fail";
 

@@ -11,5 +11,5 @@ import lombok.*;
 @ToString
 public class ReqProfileDto {
     private String address;
-    private int ipfsSeq;
+    private int tokenId;
 }
