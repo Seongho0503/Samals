@@ -63,6 +63,7 @@ ReactDOM.render(
   <BrowserRouter>
     {/* <Footer></Footer> */}
     <ScrollToTop />
+
     <Web3ReactProvider getLibrary={getLibrary}>
       <App />
     </Web3ReactProvider>

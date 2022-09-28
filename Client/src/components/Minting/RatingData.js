@@ -1,7 +1,4 @@
-import React, {
-    useState,
-    useEffect,
-} from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/MintingRating.css";
 import Collaboration from "../../assets/collaboration.png";
 import { useNavigate } from "react-router-dom";
@@ -88,16 +85,10 @@ const RatingData =
                 <Header />
                 {/* <img id='hero-background' src={list[0].src}/> */}
 
-                <img
-                    width="800px"
-                    src={
-                        Collaboration
-                    }
-                />
-                <h1 id="rating-text">
-                    기부
-                    총액
-                </h1>
+
+      <img width="800px" src={Collaboration} />
+      <h1 id="rating-text">기부 총액</h1>
+
 
                 <h1 id="rating-text"></h1>
                 <h5 id="header-subtext-second">

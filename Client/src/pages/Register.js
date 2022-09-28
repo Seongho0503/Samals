@@ -113,7 +113,6 @@ const Register = () => {
     <>
       {/* <div className="register" /> */}
       {/* <body className="createnft" /> */}
-      <Header></Header>
       <PanelHeader size="sm" />
       <div className="nft-content">
         <Card>
