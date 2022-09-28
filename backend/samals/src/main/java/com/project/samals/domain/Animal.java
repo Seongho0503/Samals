@@ -32,8 +32,14 @@ public class Animal {
     @Column(name = "animal_class", nullable = false, length = 100)
     private String animalClass;
 
-    @Column(name ="animal_name", length = 500)
-    private String animalName;
+    @Column(name = "animal_class_no")
+    private int animalClassNo;
+
+    @Column(name ="animal_name_kr")
+    private String animalNameKr;
+
+    @Column(name ="animal_name_en")
+    private String animalNameEn;
 
     @Column(name ="animal_description", length = 500)
     private String animalDescription;
