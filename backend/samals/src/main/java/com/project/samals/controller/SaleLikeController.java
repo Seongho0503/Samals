@@ -1,19 +1,13 @@
 package com.project.samals.controller;
 
-import com.project.samals.dto.SaleDto;
-import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.dto.request.ReqSaleLikeDto;
-import com.project.samals.dto.request.ReqUserDto;
 import com.project.samals.service.SaleLikeService;
-import com.project.samals.service.SaleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 @RestController
