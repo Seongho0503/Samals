@@ -1,16 +1,13 @@
 package com.project.samals.dto.request;
 
-import com.project.samals.domain.User;
 import lombok.*;
-
-import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserUpdateDto {
+public class ReqUserUpdateDto {
 
     private String walletAddress;
     private String userNickname;

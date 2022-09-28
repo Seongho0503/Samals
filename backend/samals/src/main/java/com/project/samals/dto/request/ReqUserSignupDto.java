@@ -10,7 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserSignupDto {
+public class ReqUserSignupDto {
 
     private String walletAddress;
 

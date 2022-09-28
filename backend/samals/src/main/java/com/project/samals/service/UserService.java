@@ -5,8 +5,8 @@ import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
 import com.project.samals.dto.UserDto;
 import com.project.samals.dto.request.ReqProfileDto;
-import com.project.samals.dto.request.UserSignupDto;
-import com.project.samals.dto.request.UserUpdateDto;
+import com.project.samals.dto.request.ReqUserSignupDto;
+import com.project.samals.dto.request.ReqUserUpdateDto;
 import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.ProfileImgRepository;
@@ -28,7 +28,7 @@ public class UserService {
     private final IpfsRepository ipfsRepository;
     private final ProfileImgRepository profileImgRepository;
 
-    public UserDto signup(UserSignupDto userDto) {
+    public UserDto signup(ReqUserSignupDto userDto) {
         if(userRepository.findByWalletAddress(userDto.getWalletAddress())!=null)
             return null;
 
@@ -54,7 +54,7 @@ public class UserService {
         return "delete Success";
     }
 
-    public UserDto updateUser(UserUpdateDto userDto) {
+    public UserDto updateUser(ReqUserUpdateDto userDto) {
         setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId()));
         User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
         user.setUserBio(userDto.getUserBio());

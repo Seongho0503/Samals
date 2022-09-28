@@ -2,8 +2,8 @@ package com.project.samals.controller;
 
 import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.UserDto;
-import com.project.samals.dto.request.UserSignupDto;
-import com.project.samals.dto.request.UserUpdateDto;
+import com.project.samals.dto.request.ReqUserSignupDto;
+import com.project.samals.dto.request.ReqUserUpdateDto;
 import com.project.samals.dto.response.ResProfileCountDto;
 import com.project.samals.service.UserService;
 import io.swagger.annotations.Api;
@@ -25,7 +25,7 @@ public class UserController {
 
     @ApiOperation(value = "회원 등록")
     @PostMapping("/signup")
-    public ResponseEntity<UserDto> signup(@RequestBody UserSignupDto userDto) {
+    public ResponseEntity<UserDto> signup(@RequestBody ReqUserSignupDto userDto) {
         return new ResponseEntity<>(userService.signup(userDto), HttpStatus.CREATED);
     }
 
@@ -43,7 +43,7 @@ public class UserController {
 
     @ApiOperation(value = "회원 정보 수정")
     @PutMapping("/update")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserUpdateDto userDto) {
+    public ResponseEntity<UserDto> updateUser(@RequestBody ReqUserUpdateDto userDto) {
         return new ResponseEntity<>(userService.updateUser(userDto), HttpStatus.OK);
     }
 
