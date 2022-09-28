@@ -2,10 +2,14 @@ package com.project.samals.service;
 
 import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
+import com.project.samals.domain.SaleLike;
+import com.project.samals.domain.User;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
+import com.project.samals.dto.response.ResSaleListDto;
 import com.project.samals.repository.NftRepository;
+import com.project.samals.repository.SaleLikeRepository;
 import com.project.samals.repository.SaleRepository;
 import com.project.samals.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,10 +25,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaleService {
 
-    private final SaleRepository saleRepository;
-    private final UserRepository userRepository;
 
+    private final SaleRepository saleRepository;
+    private final SaleLikeRepository saleLikeRepository;
+    private final UserRepository userRepository;
     private final NftRepository nftRepository;
+
+    private final SaleLikeService saleLikeService;
     //거래 등록
     @Transactional
     public SaleDto createSale(ReqSaleDto saleDto) {
@@ -43,10 +50,18 @@ public class SaleService {
         return SaleDto.convert(sale);
     }
 
-    public List<SaleDto> getSaleList(){
-        List<SaleDto> saleList = new ArrayList<>();
-        for(Sale sale : saleRepository.findAll()){
-            saleList.add(SaleDto.convert(sale));
+    public List<ResSaleListDto> getSaleList(String address){
+        User user = userRepository.findByWalletAddress(address);
+        List<ResSaleListDto> saleList = new ArrayList<>();
+        for(Sale sale : saleRepository.findAllByIsSold('N')){
+            ResSaleListDto saleDto = ResSaleListDto.convert(sale);
+            SaleLike saleLike = saleLikeRepository.findBySaleAndUser(sale,user);
+            if(saleLike!= null)
+                saleDto.setLikePush('Y');
+            else
+                saleDto.setLikePush('N');
+            saleDto.setLikeCount(saleLikeService.getSaleLikeCount(sale.getSaleSeq()));
+            saleList.add(saleDto);
         }
         return saleList;
     }
