@@ -12,7 +12,7 @@ import storage from "redux-persist/lib/storage/session";
 
 //redux 관리 데이터
 import CharSlice from "../slice/CharSlice";
-
+import UserInfoSlice from "../slice/UserInfoSlice";
 //persist 설정
 const persistConfig = {
   key: "root",
@@ -23,6 +23,7 @@ const persistConfig = {
 //rootReducer = 조합된 최종 리듀서
 const rootReducer = combineReducers({
   char: CharSlice,
+  userInfo: UserInfoSlice,
 });
 
 //persistReducer(설정, 최종 리듀서)
