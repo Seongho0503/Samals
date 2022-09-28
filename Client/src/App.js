@@ -1,4 +1,5 @@
 import logo from "./logo.svg";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import "./App.css";
 import { useWeb3React } from "@web3-react/core";
@@ -32,6 +33,36 @@ function App() {
   const [ScrollY, setScrollY] = useState(0);
   const [BtnStatus, setBtnStatus] = useState(false); // 버튼 상태
 
+  const [message, setMessage] = useState("");
+
+  const responseHandler = ({ data }) => {
+    setMessage(data);
+    return data;
+  };
+
+  const errorHandler = ({ message }) => {
+    setMessage(message);
+    return message;
+  };
+
+  const onNonCorsHeaderHandler = () => {
+    axios
+      .get("http://localhost:8080/not-cors")
+      .then(responseHandler)
+      .catch(errorHandler);
+  };
+
+  const onCorsHeaderHandler = () => {
+    axios.get("http://localhost:8080/cors").then(responseHandler);
+  };
+
+  const onNonProxyHandler = () => {
+    axios.get("/not-proxy").then(responseHandler).catch(errorHandler);
+  };
+
+  const onProxyHandler = () => {
+    axios.get("/proxy").then(responseHandler);
+  };
   const handleFollow = () => {
     //  window.addEventListener('scroll', () => setScrollY(window.pageYOffset));
     setScrollY(window.pageYOffset);

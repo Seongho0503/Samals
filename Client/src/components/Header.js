@@ -90,10 +90,11 @@ const Header = () => {
       deactivate();
       return;
     }
-
+    // console.log(account);
     activate(injected, (error) => {
       if ("/No Ethereum provider was found on window.ethereum/".test(error)) {
         window.open("https://metamask.io/download.html");
+        // console.log(account);
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
       }
     });
