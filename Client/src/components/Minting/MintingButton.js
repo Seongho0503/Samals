@@ -88,7 +88,11 @@ const MintingButton =
                         }
                     >
                         <div class="egg-animation">
-                            <em></em>
+                            <Link to="/mintcard">
+                                <div class="egg-animation">
+                                    <em></em>
+                                </div>
+                            </Link>
                         </div>
                     </Box>
                 </Modal>

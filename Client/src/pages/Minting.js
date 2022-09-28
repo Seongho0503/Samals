@@ -14,11 +14,11 @@ const Minting =
     () => {
         return (
             <div id="home">
-                <MintingTitle />
+                {/* <MintingTitle /> */}
                 <RatingData />
                 <MintingButton />
                 <AnimalData />
-                <MintingModal />
+                {/* <MintingModal /> */}
             </div>
         );
     };

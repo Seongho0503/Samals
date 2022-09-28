@@ -6,6 +6,7 @@ import "../../styles/MintingRating.css";
 import Collaboration from "../../assets/collaboration.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import { getTotalMint } from "../../utils/event";
 
 // const counter = (
 //     $counter,
@@ -69,6 +70,19 @@ import Header from "../Header";
 
 const RatingData =
     () => {
+        const Data =
+            getTotalMint().then(
+                (
+                    value
+                ) =>
+                    console.log(
+                        value
+                    )
+            );
+
+        console.log(
+            Data
+        );
         return (
             <div id="rating-data">
                 <Header />
@@ -85,9 +99,7 @@ const RatingData =
                     총액
                 </h1>
 
-                <h1 id="rating-text">
-                    0
-                </h1>
+                <h1 id="rating-text"></h1>
                 <h5 id="header-subtext-second">
                     Samals는
                     동물보호단체

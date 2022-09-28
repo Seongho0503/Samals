@@ -13,12 +13,35 @@
 }
 
 .animal-card {
-    display: flex;
+    display: grid;
     justify-content: center;
+    margin: 0 auto;
+    grid-gap: 1rem;
+    max-width: 1200px;
 }
 
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+    .animal-card {
+        grid-template-columns: repeat(
+            2,
+            1fr
+        );
+    }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+    .animal-card {
+        grid-template-columns: repeat(
+            3,
+            1fr
+        );
+    }
+}
 .animal-card-detail {
-    margin: 20px;
+    margin: 35px;
+
     max-width: 300px;
     max-height: 300px;
     border-radius: 100%;
