@@ -16,33 +16,42 @@ import bg from "../../assets/bg-04.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
-import axios from "axios";
+import { getAnimalData } from "../../api";
 
 const AnimalData =
-    async () => {
-        const url = `/api/animal/list`;
+    () => {
         const response =
-            await axios.get(
-                url
+            getAnimalData().then(
+                ({
+                    data,
+                }) => {
+                    console.log(
+                        data[0]
+                            .animalNameKr
+                    );
+                    const toad =
+                        data[2]
+                            .animalNameKr;
+                    const a =
+                        data[3]
+                            .animalNameKr;
+                    const b =
+                        data[5]
+                            .animalNameKr;
+                    const c =
+                        data[6]
+                            .animalNameKr;
+                    return;
+                }
             );
         console.log(
-            response.data
+            response
         );
-
-        // const res =
-        //     await fetch(
-        //         `http://j7d103.p.ssafy.io/api/animal/list`
-        //     ).then(
-        //         (
-        //             res
-        //         ) => {
-        //             return res;
-        //         }
-        //     );
+        // const toad =
+        //     response.animalNameKr;
         // console.log(
-        //     res
+        //     toad
         // );
-
         return (
             <div class="animal-nft">
                 <h2 class="animal-data-title">
