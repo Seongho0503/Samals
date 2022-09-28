@@ -18,7 +18,7 @@ public class IpfsDto {
     private int ipfs_seq;
     private Animal animal;
     private String ipfs_uri;
-    private String ipfs_is_used;
+    private char ipfs_is_used;
     private int ipfs_token_id;
 
     public Ipfs toEntity(){
