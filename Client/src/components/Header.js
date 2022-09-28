@@ -102,6 +102,8 @@ const Header = () => {
         // console.log(account);
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
       }
+    }).finally(() => {
+      console.log(account);
     });
   }
 
