@@ -7,7 +7,7 @@ import Minting from ".././pages/Minting";
 import Web3 from "web3";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
-
+import axios from "axios";
 const Header = () => {
   //   const { activateBrowserWallet, account } = useEthers();
   //   const etherBalance = useEtherBalance(account);
@@ -85,7 +85,12 @@ const Header = () => {
 
   const { chainedId, account, active, activate, deactivate } = useWeb3React();
 
-  const handdleConnect = () => {
+  const abcd = () => {
+    console.log("account: ", account);
+  };
+
+  //연결 확인
+  async function handleConnect(abc) {
     if (active) {
       deactivate();
       return;
@@ -98,9 +103,35 @@ const Header = () => {
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
       }
     });
-  };
+  }
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(account);
+    axios({ method: "GET", url: `/api/user/${account}` })
+      .then((res) => {
+        console.log("get res: ", res);
+        if (res.data === "") {
+          axios({
+            method: "POST",
+            url: `/api/user/signup`,
+            data: {
+              walletAddress: account,
+            },
+          })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          //res.data === 회원의 정보
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [account]);
 
   return (
     <div id="header">
@@ -115,7 +146,13 @@ const Header = () => {
         <Link to="/minting">DROPS</Link>
         {!account ? "" : <Link to="/mypage">MYPAGE</Link>}
 
-        <button id="connect-wallet" onClick={handdleConnect}>
+        <button
+          id="connect-wallet"
+          onClick={() => {
+            console.log("in return account:", account);
+            handleConnect(account);
+          }}
+        >
           {!account ? "Connect Wallet" : `${account}`}
         </button>
       </div>
