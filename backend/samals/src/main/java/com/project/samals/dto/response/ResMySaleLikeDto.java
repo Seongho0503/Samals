@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResSaleLikeDto {
+public class ResMySaleLikeDto {
 
     private Long saleSeq;
     private int salePrice;

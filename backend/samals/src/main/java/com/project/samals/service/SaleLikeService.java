@@ -4,7 +4,7 @@ import com.project.samals.domain.Sale;
 import com.project.samals.domain.SaleLike;
 import com.project.samals.domain.User;
 import com.project.samals.dto.request.ReqSaleLikeDto;
-import com.project.samals.dto.response.ResSaleLikeDto;
+import com.project.samals.dto.response.ResMySaleLikeDto;
 import com.project.samals.repository.SaleLikeRepository;
 import com.project.samals.repository.SaleRepository;
 import com.project.samals.repository.UserRepository;
@@ -61,13 +61,13 @@ public class SaleLikeService {
         return "Success";
     }
 
-    public List<ResSaleLikeDto> getMyLikeList(String address) {
+    public List<ResMySaleLikeDto> getMyLikeList(String address) {
         User user = userRepository.findByWalletAddress(address);
         List<SaleLike> findLikes = saleLikeRepository.findAllByUser(user);
 
-        List<ResSaleLikeDto> likeList = new ArrayList<>();
+        List<ResMySaleLikeDto> likeList = new ArrayList<>();
         for(SaleLike saleLike : findLikes){
-            likeList.add(ResSaleLikeDto.builder()
+            likeList.add(ResMySaleLikeDto.builder()
                     .saleSeq(saleLike.getSale().getSaleSeq())
                     .salePrice(saleLike.getSale().getSalePrice())
                     .likeCount(getSaleLikeCount(saleLike.getSale().getSaleSeq()))
