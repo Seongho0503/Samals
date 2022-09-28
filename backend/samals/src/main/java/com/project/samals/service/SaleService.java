@@ -7,6 +7,7 @@ import com.project.samals.domain.User;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
+import com.project.samals.dto.response.ResSaleDetailDto;
 import com.project.samals.dto.response.ResSaleListDto;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.SaleLikeRepository;
@@ -25,7 +26,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SaleService {
 
-
     private final SaleRepository saleRepository;
     private final SaleLikeRepository saleLikeRepository;
     private final UserRepository userRepository;
@@ -35,18 +35,11 @@ public class SaleService {
     //거래 등록
     @Transactional
     public SaleDto createSale(ReqSaleDto saleDto) {
-
         Nft nft = nftRepository.findByTokenId(saleDto.getTokenId());
-
-        Sale sale =saleDto.toEntity();
-        sale.setIsSold('N');
-        sale.setCreatedTime(new Date());
-        sale.setUpdatedTime(new Date());
+        Sale sale =saleDto.toEntity(nft);
         saleRepository.save(sale);
-
         nft.addNftSaleList(sale);
         nftRepository.save(nft);
-
         return SaleDto.convert(sale);
     }
 
@@ -66,16 +59,15 @@ public class SaleService {
         return saleList;
     }
 
-    public SaleDto getSale(long saleSeq) {
+    public ResSaleDetailDto getSale(long saleSeq) {
         Sale saleInfo=saleRepository.findBySaleSeq(saleSeq);
-        return SaleDto.convert(saleInfo);
+        return ResSaleDetailDto.convert(saleInfo);
     }
 
     public SaleDto completeSale(ReqSaleCompleteDto reqSaleCompleteDto) {
         Sale sale = saleRepository.findBySaleSeq(reqSaleCompleteDto.getSaleSeq());
         sale.setIsSold('Y');
         sale.setCompletedTime(new Date());
-        sale.setUpdatedTime(new Date());
         sale.setBuyerAddress(reqSaleCompleteDto.getBuyerAddress());
         sale.getNft().setNftOwner(reqSaleCompleteDto.getBuyerAddress());
         sale.getNft().setUpdatedTime(new Date());
@@ -84,11 +76,9 @@ public class SaleService {
         return SaleDto.convert(saved);
     }
 
-
     //내 거래내역 (판매 + 구매)
     public List<SaleDto> getMySaleList(String address){
         List<SaleDto> saleList = new ArrayList<>();
-
         for(Sale sale : saleRepository.findAllBySellerAddress(address)){
             saleList.add(SaleDto.convert(sale));
         }
@@ -103,6 +93,23 @@ public class SaleService {
          */
 
         return saleList;
+    }
+
+    public List<ResSaleListDto> search(String search, String address){
+        User user = userRepository.findByWalletAddress(address);
+        List<ResSaleListDto> saleList = new ArrayList<>();
+        for(Sale sale : saleRepository.findAllByIsSoldAndSaleTitleContainingIgnoreCase('N',search)){
+            ResSaleListDto saleListDto = ResSaleListDto.convert(sale);
+            SaleLike saleLike = saleLikeRepository.findBySaleAndUser(sale,user);
+            if(saleLike!= null)
+                saleListDto.setLikePush('Y');
+            else
+                saleListDto.setLikePush('N');
+            saleListDto.setLikeCount(saleLikeService.getSaleLikeCount(sale.getSaleSeq()));
+            saleList.add(saleListDto);
+        }
+        return saleList;
+
     }
 
 }
