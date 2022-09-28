@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLIntegrityConstraintViolationException;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -21,8 +23,21 @@ import java.util.Map;
 public class IpfsService {
     private final IpfsRepository ipfsRepository;
     private final AnimalRepository animalRepository;
-
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
+
+    public int getRandom(String ipfsType){
+        List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsType('N',ipfsType);
+        int num = (int)(Math.random()*(ipfsList.size()));
+        if(ipfsType.equals("shop"))
+           return ipfsList.get(num).getIpfsSeq()-400;
+        else
+            return ipfsList.get(num).getIpfsSeq();
+    }
+
+
+
+
+
 
     //ipfs 추가
     public Map<String,Object> addIpfs(Map<String, Object> request){
@@ -77,10 +92,11 @@ public class IpfsService {
     }
     public IpfsDto pollIpfs(){
         Ipfs ipfs = ipfsRepository.findTopByIpfsIsUsedIsOrderByIpfsSeq("N");
-        ipfs.setIpfsIsUsed("Y");
+        ipfs.setIpfsIsUsed('Y');
         log.info("ipfs -> {}", ipfs);
         IpfsDto ipfsDto = new IpfsDto().convert(ipfs);
         log.info("ipfsDto -> {}", ipfsDto);
         return ipfsDto;
     }
+
 }

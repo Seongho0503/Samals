@@ -33,8 +33,11 @@ public class Ipfs {
     @Column(name = "ipfs_uri", nullable = false, length = 46, unique = true, columnDefinition = "char(46)")
     private String ipfsUri;
 
-    @Column(name = "ipfs_is_used", columnDefinition = "char(1) default 'N'")
-    private String ipfsIsUsed;
+    @Column(name= "ipfs_type")
+    private String ipfsType;
+
+    @Column(name = "ipfs_is_used")
+    private char ipfsIsUsed;
 
     @Column(name = "ipfs_token_id")
     private int ipfsTokenId;
