@@ -154,16 +154,9 @@ const MyPage = () => {
                   <div id="photos">
                     <div className="tb">
                       <div className="tr">
-                        <div className="td">
-                          {/* <img className="td" src={Toco} /> */}
-                        </div>
-                        <div className="td">
-                          {/* <img className="photo-aml" src={Toco} /> */}
-                        </div>
-                        <div className="td">
-                          {" "}
-                          {/* <img className="photo-aml" src={Toco} /> */}
-                        </div>
+                        <div className="td">{/* <img className="td" src={Toco} /> */}</div>
+                        <div className="td">{/* <img className="photo-aml" src={Toco} /> */}</div>
+                        <div className="td"> {/* <img className="photo-aml" src={Toco} /> */}</div>
                       </div>
                       <div className="tr">
                         <div className="td"></div>
