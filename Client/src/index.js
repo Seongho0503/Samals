@@ -1,5 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+//react-redux 관련 함수
+import { Provider as ReduxProvider } from "react-redux";
+import { store, persistor } from "./redux/store/store.js";
+
+//redux-persist 관련 함수
+import { PersistGate } from "redux-persist/integration/react";
+
 import "./index.css";
 import App from "./App";
 import "swiper/css/bundle";
@@ -27,7 +35,7 @@ import ScrollTo from "./components/base/ScrollToTop";
 import ScrollToTop from "./components/base/ScrollToTop";
 import Footer from "./components/base/ScrollToTop";
 import { Web3ReactProvider } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
+import { Provider, Web3Provider } from "@ethersproject/providers";
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider, "any");
@@ -65,7 +73,11 @@ ReactDOM.render(
     <ScrollToTop />
 
     <Web3ReactProvider getLibrary={getLibrary}>
-      <App />
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </ReduxProvider>
     </Web3ReactProvider>
   </BrowserRouter>,
 
