@@ -9,7 +9,13 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAddress, setAddress, setUserBio, setUserId, setUserPFPAddress } from "../redux/slice/UserInfoSlice";
+import {
+  selectAddress,
+  setAddress,
+  setUserBio,
+  setUserId,
+  setUserPFPAddress,
+} from "../redux/slice/UserInfoSlice";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -30,7 +36,7 @@ const Header = () => {
       dispatch(setAddress(""));
       dispatch(setUserBio(""));
       dispatch(setUserId(""));
-      setReduxAddress();
+      setReduxAddress("");
       return;
     }
     activate(injected, (error) => {
@@ -84,26 +90,26 @@ const Header = () => {
   }, [account]);
 
   return (
-    <div id="header">
-      <Link to="/" id="logo">
+    <div id='header'>
+      <Link to='/' id='logo'>
         SAMALS
       </Link>
 
-      <div id="link-containers">
-        <Link to="/game">GAME</Link>
-        <Link to="/explore">MARKET</Link>
-        <Link to="/trade">EXPLORE</Link>
-        <Link to="/minting">DROPS</Link>
-        {!reduxAddress ? "" : <Link to="/mypage">MYPAGE</Link>}
+      <div id='link-containers'>
+        <Link to='/game'>GAME</Link>
+        <Link to='/explore'>MARKET</Link>
+        <Link to='/trade'>EXPLORE</Link>
+        <Link to='/minting'>DROPS</Link>
+        {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
 
         <button
-          id="connect-wallet"
+          id='connect-wallet'
           onClick={() => {
             console.log("in return account:", account);
             handleConnect(account);
           }}
         >
-          {!reduxAddress ? "Connect Wallet" : `${reduxAddress}`}
+          {reduxAddress === "" ? "Connect Wallet" : `${reduxAddress}`}
         </button>
       </div>
     </div>
