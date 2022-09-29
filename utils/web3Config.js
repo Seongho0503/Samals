@@ -2225,16 +2225,16 @@ export const web3 = new Web3(window.ethereum);
 /* Contract Address */
 
 //AceToken
-export const aceTokenContractAddress = "0x4a82464C63ff4252A32674e2B484545cb70CE3EF";
+export const aceTokenContractAddress = "0xd9145CCE52D386f254917e481eB44e9943F39138";
 
 //AnimalNft
-export const animalNftContractAddress = "0x5e45178E4DE2FA3fEFA86782Fa3faAf94Fd681A0";
+export const animalNftContractAddress = "0xd8b934580fcE35a11B58C6D73aDeE468a2833fa8";
 
 //MascortNft
-export const mascortNftContractAddress = "0x48C0ed27125c9ce0755B54A28D01751feB629f74";
+export const mascortNftContractAddress = "0x7EF2e0048f5bAeDe046f6BF797943daF4ED8CB47";
 
 //NftSaleManager
-export const nftSaleManagerContractAddress = "0xEe2f5FCf1fb842d9e4f6c510aAEeCF8FbaDaE195";
+export const nftSaleManagerContractAddress = "0xDA0bab807633f07f013f94DD0E6A4F96F8742B53";
 
 /* Contract Instance */
 
