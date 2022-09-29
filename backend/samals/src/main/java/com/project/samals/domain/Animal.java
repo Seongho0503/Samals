@@ -32,14 +32,44 @@ public class Animal {
     @Column(name = "animal_class", nullable = false, length = 100)
     private String animalClass;
 
+    @Column(name = "animal_class_no")
+    private int animalClassNo;
+
+    @Column(name ="animal_name_kr")
+    private String animalNameKr;
+
+    @Column(name ="animal_name_en")
+    private String animalNameEn;
+
     @Column(name ="animal_description", length = 500)
     private String animalDescription;
+
+    @Column(name ="animal_habitat")
+    private String animalHabitat;
 
     @Column(name = "animal_total", nullable = false)
     private int animalTotal;
 
     @Column(name = "animal_current",nullable = true)
     private int animalCurrent;
+
+    @Column(name = "animal_img1")
+    private String animalImg1;
+
+    @Column(name = "animal_img2")
+    private String animalImg2;
+
+    @Column(name = "animal_img3")
+    private String animalImg3;
+
+    @Column(name = "animal_img4")
+    private String animalImg4;
+
+    @Column(name = "animal_img5")
+    private String animalImg5;
+
+    @Column(name = "animal_img6")
+    private String animalImg6;
 
 //    @OneToMany(mappedBy = "animal")
 //    @JoinColumn

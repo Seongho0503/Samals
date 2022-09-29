@@ -2,6 +2,7 @@ package com.project.samals.controller;
 
 import com.project.samals.domain.Ipfs;
 import com.project.samals.dto.IpfsDto;
+import com.project.samals.dto.response.ResNftDto;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.service.IpfsService;
 import io.swagger.annotations.Api;
@@ -24,6 +25,12 @@ public class IpfsController {
     private  final IpfsRepository ipfsRepository;
     private  final IpfsService ipfsService;
     private static final Logger log = LoggerFactory.getLogger(IpfsController.class);
+
+    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or shop")
+    @GetMapping("/number/{ipfsType}")
+    public ResponseEntity<Integer> getRandom(@PathVariable String ipfsType){
+        return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
+    }
 
     @ApiOperation(value="ipfs 데이터 추가")
     @PostMapping("/add")
@@ -50,4 +57,6 @@ public class IpfsController {
     public ResponseEntity<IpfsDto> pollIpfs(){
         return new ResponseEntity<>(ipfsService.pollIpfs(), HttpStatus.OK);
     }
+
+
 }

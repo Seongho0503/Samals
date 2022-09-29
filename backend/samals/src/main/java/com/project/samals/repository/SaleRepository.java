@@ -18,4 +18,8 @@ public interface SaleRepository extends JpaRepository<Sale, Long> {
     Sale[] findAllBySellerAddress(String address);
 
     Sale[] findAllByBuyerAddress(String address);
+
+    Sale[] findAllByIsSold(char isSold);
+
+    List<Sale> findAllByIsSoldAndSaleTitleContainingIgnoreCase(char n, String search);
 }

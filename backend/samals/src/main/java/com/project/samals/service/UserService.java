@@ -1,10 +1,15 @@
 package com.project.samals.service;
 
-import com.project.samals.domain.Sale;
+import com.project.samals.domain.Ipfs;
+import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
-import com.project.samals.dto.request.ReqUserDto;
-import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.UserDto;
+import com.project.samals.dto.request.ReqProfileDto;
+import com.project.samals.dto.request.ReqUserSignupDto;
+import com.project.samals.dto.request.ReqUserUpdateDto;
+import com.project.samals.dto.response.ResProfileCountDto;
+import com.project.samals.repository.IpfsRepository;
+import com.project.samals.repository.ProfileImgRepository;
 import com.project.samals.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,17 +25,17 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    @Transactional
-    public UserDto signup(ReqUserDto userDto) {
+    private final IpfsRepository ipfsRepository;
+    private final ProfileImgRepository profileImgRepository;
+
+    public UserDto signup(ReqUserSignupDto userDto) {
+        if(userRepository.findByWalletAddress(userDto.getWalletAddress())!=null)
+            return null;
+
         User user =userDto.toEntity();
-        user.setCreatedTime(new Date());
-        user.setUpdatedTime(new Date());
-
         userRepository.save(user);
-
-        if(user.getUserNickname().equals(""))
+        if(user.getUserNickname()==null)
             user.setUserNickname("random@"+user.getUserSeq());
-
         User saved=userRepository.save(user);
         return UserDto.convert(saved);
     }
@@ -49,24 +54,46 @@ public class UserService {
         return "delete Success";
     }
 
-    public UserDto updateUser(ReqUserDto userDto) {
+    public UserDto updateUser(ReqUserUpdateDto userDto) {
+        setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId()));
         User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
         user.setUserBio(userDto.getUserBio());
-        user.setUserImgUrl(userDto.getUserImgUrl());
         user.setUserNickname(userDto.getUserNickname());
         user.setUpdatedTime(new Date());
-
-        User saved=userRepository.save(user);
-        return UserDto.convert(saved);
+        return UserDto.convert(userRepository.save(user));
     }
 
-//    public List<SaleDto> getSaleHistory(String address){
-//        User user = userRepository.findByWalletAddress(address);
-//        List<SaleDto> saleHistory = new ArrayList<>();
-//        for(Sale sale : user.getSaleHistory()){
-//            saleHistory.add(SaleDto.convert(sale));
-//        }
-//        return saleHistory;
-//    }
+    public String setProfile(ReqProfileDto profileDto) {
+        User user = userRepository.findByWalletAddress(profileDto.getAddress());
+        Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
+        if(profileImgRepository.findByIpfs(ipfs)!=null)
+            return "fail";
+
+        ProfileImg profile = profileImgRepository.findByUser(user);
+        if(profile ==null){
+            profile=ProfileImg.builder().ipfs(ipfs).user(user).animalSpecies(ipfs.getAnimal().getAnimalSpecies()).build();
+        }else {
+            profile.setIpfs(ipfs);
+            profile.setAnimalSpecies(ipfs.getAnimal().getAnimalSpecies());
+        }
+        profileImgRepository.save(profile);
+        return ipfs.getIpfsUri();
+    }
+
+    public String deleteProfile(String address) {
+        User user = userRepository.findByWalletAddress(address);
+        profileImgRepository.deleteByUser(user);
+        return "Success";
+    }
+
+    public List<ResProfileCountDto> getProfileCount(){
+        String[] animals = {"bird","elephant","shark","tiger","frog","iguana","leopard","penguin","rhino"};
+        List<ResProfileCountDto> profileCounts=new ArrayList<>();
+        for(String animal : animals){
+            List<ProfileImg> profileUse = profileImgRepository.findAllByAnimalSpecies(animal);
+            profileCounts.add(new ResProfileCountDto(animal,profileUse.size()));
+        }
+        return profileCounts;
+    }
 
 }

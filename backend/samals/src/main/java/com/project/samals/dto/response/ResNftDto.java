@@ -15,27 +15,15 @@ public class ResNftDto {
 
     private Long nftSeq;
     private int tokenId;
-
+    private String animalSpecies;
     private String nftType;
-
     private int nftMintNumber;
-
     private int nftPrice;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date createdTime;
 
     private String walletAddress;
-
-    public Nft toEntity(){
-        return Nft.builder()
-                .nftSeq(nftSeq)
-                .tokenId(tokenId)
-                .nftType(nftType)
-                .nftMintNumber(nftMintNumber)
-                .nftPrice(nftPrice)
-                .build();
-    }
 
     public static ResNftDto convert(Nft nft) {
         if(nft == null) return null;
@@ -48,6 +36,7 @@ public class ResNftDto {
                 .nftPrice(nft.getNftPrice())
                 .createdTime(nft.getCreatedTime())
                 .walletAddress(nft.getUser().getWalletAddress())
+                .animalSpecies(nft.getIpfs().getAnimal().getAnimalSpecies())
                 .build();
     }
 
