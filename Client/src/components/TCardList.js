@@ -18,7 +18,7 @@ import iguana2 from "../assets/fillter/iguan-col.png";
 import shark3 from "../assets/fillter/shark3.png";
 import toad from "../assets/fillter/toad.png";
 import toad2 from "../assets/fillter/toad2.png";
-import { getAnimalList } from "../api.js";
+import { getAnimalList, getNftInfo } from "../api.js";
 
 // declare var $: $;
 
@@ -40,6 +40,19 @@ const TCardList = ({ list, type = "horizontal" }) => {
       // console.log("이미지" + data[0].itemImgUrl);
     });
   }, []);
+
+  // const [price, setPrice] = useState([]);
+  // useEffect(() => {
+  //   getAnimalList().then(({ data }) => {
+  //     console.log("리스트: ", data);
+  //     console.log(data.animalClassNo);
+  //     setAmlist(data);
+  //     // console.log("애니멀리스트" + amlist);
+  //     // console.log("애니멀사진" + amlist[0].itemImgUrl);
+  //     // console.log("이미지" + data[0]);
+  //     // console.log("이미지" + data[0].itemImgUrl);
+  //   });
+  // }, []);
 
   // 필터링 함수
   // $(function () {
@@ -106,6 +119,10 @@ const TCardList = ({ list, type = "horizontal" }) => {
                 nftSrc={data.itemImgUrl}
                 key={index}
                 starNo={data.animalClassNo}
+                price={data.salePrice}
+                likeCount={data.likeCount}
+                nftName={data.animalTitle}
+                animalClass={data.animalClass}
                 onClick={() => navigate("/detail", { state: { data: data } })}
               />
             );
