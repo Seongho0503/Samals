@@ -52,7 +52,7 @@ export async function getTotalDonate() {
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/nft/total-donate`,
+      url: `http://localhost:8080/api/nft/total-donate`,
     });
 
     return response;
