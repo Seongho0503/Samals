@@ -7,9 +7,9 @@ import title from "../../assets/our-vision.png";
 
 const MainLast = () => {
   return (
-    <div id="hero">
+    <div id='hero'>
       {/* <img id='hero-background' src={list[0].src}/> */}
-      <img id="hero-background3" src={bg} />
+      <img id='hero-background3' src={bg} />
     </div>
   );
 };

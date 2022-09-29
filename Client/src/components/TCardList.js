@@ -18,16 +18,27 @@ import iguana2 from "../assets/fillter/iguan-col.png";
 import shark3 from "../assets/fillter/shark3.png";
 import toad from "../assets/fillter/toad.png";
 import toad2 from "../assets/fillter/toad2.png";
+import { getAnimalList } from "../api.js";
 
 // declare var $: $;
 
-const CardList = ({ list, type = "horizontal" }) => {
+const TCardList = ({ list, type = "horizontal" }) => {
   // 동물 필터
   const [activeAnimal, setActiveAnimal] = useState("All");
   const [animal, setAnimal] = useState(list);
   let navigate = useNavigate();
 
-  
+  const [amlist, setAmlist] = useState([]);
+  useEffect(() => {
+    getAnimalList().then(({ data }) => {
+      console.log("리스트: ", data);
+      setAmlist(data);
+      // console.log("애니멀리스트" + amlist);
+      // console.log("애니멀사진" + amlist[0].itemImgUrl);
+      console.log("이미지" + data[0]);
+      console.log("이미지" + data[0].itemImgUrl);
+    });
+  }, []);
 
   // 필터링 함수
   // $(function () {
@@ -45,11 +56,11 @@ const CardList = ({ list, type = "horizontal" }) => {
   // });
 
   // 동물 필터
-  useEffect(() => {
-    activeAnimal === "All"
-      ? setAnimal(list)
-      : setAnimal(list.filter((vga) => vga.species === activeAnimal));
-  }, [activeAnimal]);
+  // useEffect(() => {
+  //   activeAnimal === "All"
+  //     ? setAnimal(list)
+  //     : setAnimal(list.filter((vga) => vga.species === activeAnimal));
+  // }, [activeAnimal]);
 
   return (
     <div>
@@ -86,16 +97,29 @@ const CardList = ({ list, type = "horizontal" }) => {
       </div>
 
       <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
-        {list.map((item, index) => (
-          <NFTCard
-            nftSrc={item.src}
-            key={index}
-            onClick={() => navigate("/detail", { state: { item: item } })}
-          />
-        ))}
+        {amlist.map(
+          (data, index) => {
+            console.log("card-list: ", data, ", index: ", index);
+            return (
+              <NFTCard
+                nftSrc={data.itemImgUrl}
+                key={index}
+                onClick={() => navigate("/detail", { state: { data: data } })}
+              />
+            );
+          }
+          // (
+          //   console.log(data);
+          //   <NFTCard
+          //     nftSrc={data[index].itemImgUrl}
+          //     key={index}
+          //     onClick={() => navigate("/detail", { state: { data: data } })}
+          //   />
+          // )
+        )}
       </div>
     </div>
   );
 };
 
-export default CardList;
+export default TCardList;

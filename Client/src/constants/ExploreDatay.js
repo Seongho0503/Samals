@@ -4,9 +4,9 @@ import BarramundiFish from "../assets/models/BarramundiFish.glb";
 import Avocado from "../assets/models/Avocado.glb";
 import Tiger from "../assets/card/Tiger.png";
 import Penguin from "../assets/card/penguin.png";
-import Lizard from "../assets/card/lizard.png";
-import Chita from "../assets/card/chita.png";
-import Coco from "../assets/card/coco.png";
+import Iguana from "../assets/card/lizard.png";
+import Leopard from "../assets/card/chita.png";
+import Rhino from "../assets/card/coco.png";
 import Shark from "../assets/card/Shark.png";
 
 export const exploreList = [
@@ -33,31 +33,37 @@ export const exploreList = [
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
     src: Shark,
-  },
-  {
-    name: "Test NFT #1",
-    description:
-      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Penguin,
+    animal: "shark",
   },
   {
     name: "Test NFT #2",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Coco,
+    src: Penguin,
+    animal: "penguin",
   },
   {
     name: "Test NFT #3",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Lizard,
+    src: Rhino,
+    animal: "rhino",
   },
   {
     name: "Test NFT #4",
     description:
       "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
-    src: Chita,
+    src: Iguana,
+    animal: "iguana",
   },
+  {
+    name: "Test NFT #5",
+    description:
+      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+    src: Leopard,
+    animal: "leopard",
+  },
+
   //   {
   //     name: "Test NFT #1",
   //     description:

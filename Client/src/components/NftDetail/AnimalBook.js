@@ -3,42 +3,51 @@ import "../../styles/NftDetail/AnimalBook.scss";
 import { $, jQuery } from "jquery";
 import dictionary from "../../assets/dictionary.png";
 import Wobble from "react-reveal/Wobble";
+import { getDescription } from "../../api.js";
+import { useState, useEffect } from "react";
 
 // const AnimalBook = () => {
-class AnimalBook extends React.Component {
-  render() {
-    return (
-      <div>
-        {/* <div className="imgLoader"></div> */}
-        <Wobble>
-          <img className="subTitle" src={dictionary} />
-        </Wobble>
-        <div className="container">
-          {/* <h1 className="title">멸종 위기 동물 도감</h1> */}
+// class AnimalBook extends React.Component {
+const AnimalBook = () => {
+  const [animals, setAnimals] = useState([]);
+  useEffect(() => {
+    getDescription().then(({ data }) => {
+      console.log("data: ", data);
+      setAnimals(data);
+    });
+  }, []);
+  // render() {
+  return (
+    <div>
+      {/* <div className="imgLoader"></div> */}
+      <Wobble>
+        <img className='subTitle' src={dictionary} />
+      </Wobble>
+      <div className='container'>
+        {/* <h1 className="title">멸종 위기 동물 도감</h1> */}
 
-          {/* <div className="credit">
+        {/* <div className="credit">
                     {/* * Images loaded randomly from Picsum.photos }
                     </div> */}
 
-          <div className="book">
-            <div className="gap"></div>
-            <div className="pages">
-              <div className="page"></div>
-              <div className="page"></div>
-              <div className="page"></div>
-              <div className="page"></div>
-              <div className="page"></div>
-              <div className="page"></div>
-            </div>
-            <div className="flips">
-              <div className="flip flip1">
-                <div className="flip flip2">
-                  <div className="flip flip3">
-                    <div className="flip flip4">
-                      <div className="flip flip5">
-                        <div className="flip flip6">
-                          <div className="flip flip7"></div>
-                        </div>
+        <div className='book'>
+          <div className='gap'></div>
+          <div className='pages'>
+            <div className='page'></div>
+            <div className='page'></div>
+            <div className='page'></div>
+            <div className='page'></div>
+            <div className='page'></div>
+            <div className='page'></div>
+          </div>
+          <div className='flips'>
+            <div className='flip flip1'>
+              <div className='flip flip2'>
+                <div className='flip flip3'>
+                  <div className='flip flip4'>
+                    <div className='flip flip5'>
+                      <div className='flip flip6'>
+                        <div className='flip flip7'></div>
                       </div>
                     </div>
                   </div>
@@ -47,9 +56,10 @@ class AnimalBook extends React.Component {
             </div>
           </div>
         </div>
-        {/* <a target="_top"></a> */}
       </div>
-    );
-  }
-}
+      {/* <a target="_top"></a> */}
+    </div>
+  );
+};
+
 export default AnimalBook;

@@ -44,11 +44,11 @@ const NFTCard = ({
         <>
           {isARSupport ? (
             <model-viewer
-              ar-scale="auto"
+              ar-scale='auto'
               ar
-              ar-modes="webxr scene-viewer quick-look"
-              id="reveal"
-              loading="eager"
+              ar-modes='webxr scene-viewer quick-look'
+              id='reveal'
+              loading='eager'
               camera-controls
               auto-rotate
               src={nftSrc}
@@ -64,29 +64,29 @@ const NFTCard = ({
           ) : (
             <>
               {/*멸종위기 등급 별*/}
-              <div className="info-container">
+              <div className='info-container'>
                 <img
-                  className="star"
+                  className='star'
                   // image={Star}
                   src={Star}
                   //src="../assets/star.png"
-                  alt="star"
+                  alt='star'
                   // style={{ backgroundImage: "url(" + Star + ")" }}
                 />
                 <img
-                  className="star"
+                  className='star'
                   // image={Star}
                   src={Star}
                   //src="../assets/star.png"
-                  alt="star"
+                  alt='star'
                   // style={{ backgroundImage: "url(" + Star + ")" }}
                 />
                 <img
-                  className="star"
+                  className='star'
                   // image={Star}
                   src={Star}
                   //src="../assets/star.png"
-                  alt="star"
+                  alt='star'
                   // style={{ backgroundImage: "url(" + Star + ")" }}
                 />
                 {/* <p className="owner"> LEJOURN.DARK.NFT</p>
@@ -98,12 +98,12 @@ const NFTCard = ({
                   image={Star}
                   // style={{ backgroundImage: "url(" + Star + ")" }}
                 /> */}
-                <img className="nft-image" src={nftSrc} />
+                <img className='nft-image' src={nftSrc} />
               </ColorExtractor>
             </>
           )}
 
-          <div className="wrapper">
+          <div className='wrapper'>
             {/* <img
               className="star"
               image={Star}
@@ -125,37 +125,33 @@ const NFTCard = ({
               }}
             /> */}
 
-            <div className="info-container">
+            <div className='info-container'>
               {/* <img
                 className="star"
                 style={{ backgroundImage: "url(" + Star + ")" }}
               /> */}
-              <p className="owner"> LEJOURN.DARK.NFT</p>
-              <p className="name">Alien Cry</p>
+              <p className='owner'> LEJOURN.DARK.NFT</p>
+              <p className='name'>Alien Cry</p>
             </div>
 
-            <div className="price-container">
-              <p className="price-label">Price</p>
-              <p className="price">
+            <div className='price-container'>
+              <p className='price-label'>Price</p>
+              <p className='price'>
                 {" "}
                 <FaEthereum /> 4.555
               </p>
             </div>
           </div>
-          <div className="buttons">
+          <div className='buttons'>
             {/* <button className="buy-now">Buy Now</button> */}
-            <Button
-              color={Colors.buttons.primary}
-              textContent="Buy Now"
-              onClick={onClick}
-            />
-            <div className="like-container">
-              <button className="like" onClick={like}>
+            <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
+            <div className='like-container'>
+              <button className='like' onClick={like}>
                 {!isLike ? (
-                  <AiOutlineHeart size="30" color="white" />
+                  <AiOutlineHeart size='30' color='white' />
                 ) : (
                   <AiFillHeart
-                    size="30"
+                    size='30'
                     style={{
                       stroke: `-webkit-linear-gradient(
                     to bottom,
@@ -163,11 +159,11 @@ const NFTCard = ({
                     #11998e
                   );`,
                     }}
-                    color="#00f5c966"
+                    color='#00f5c966'
                   />
                 )}
               </button>
-              <p className="like-count">123</p>
+              <p className='like-count'>123</p>
             </div>
           </div>
         </>

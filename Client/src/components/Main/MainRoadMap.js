@@ -11,16 +11,11 @@ import { EffectCards } from "swiper";
 
 const MainRoadMap = () => {
   return (
-    <div id="hero2">
-      <img width="30%" src={title} />
+    <div id='hero2'>
+      <img width='30%' src={title} />
       <br />
-      <div className="roadmap">
-        <Swiper
-          effect={"cards"}
-          grabCursor={true}
-          modules={[EffectCards]}
-          className="mySwiper"
-        >
+      <div className='roadmap'>
+        <Swiper effect={"cards"} grabCursor={true} modules={[EffectCards]} className='mySwiper'>
           <SwiperSlide>ACE 토큰 경제 시스템</SwiperSlide>
           <SwiperSlide>'아틀란티스 아일랜드' 활성화</SwiperSlide>
           <SwiperSlide>NFT 커뮤니티 확장</SwiperSlide>

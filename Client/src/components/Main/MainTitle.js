@@ -17,13 +17,13 @@ const MainTitle = () => {
   };
 
   return (
-    <div id="hero">
+    <div id='hero'>
       {/* <img id='hero-background' src={list[0].src}/> */}
 
       {/* <Header /> */}
-      <img id="hero-background" src={bg} />
-      <div id="hero-background2">
-        <img width="77%" src={font} />
+      <img id='hero-background' src={bg} />
+      <div id='hero-background2'>
+        <img width='77%' src={font} />
         {/* <img
                         width="10%"
                         src={
