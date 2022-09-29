@@ -20,7 +20,6 @@ export async function getDescription(animalSpecies) {
   }
 }
 
-// 동물 리스트 조회
 export async function getAnimalData() {
   try {
     const response = await axios({
@@ -34,12 +33,12 @@ export async function getAnimalData() {
     return "";
   }
 }
-
+// 거래소 거래 nft 리스트
 export async function getAnimalList() {
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/sale/1/list`,
+      url: `/api/sale/list`,
     });
     return response;
   } catch {
