@@ -20,7 +20,6 @@ export async function getDescription(animalSpecies) {
   }
 }
 
-// 동물 리스트 조회
 export async function getAnimalData() {
   try {
     const response = await axios({

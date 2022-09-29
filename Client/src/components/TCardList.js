@@ -35,9 +35,10 @@ const TCardList = ({ list, type = "horizontal" }) => {
       setAmlist(data);
       // console.log("애니멀리스트" + amlist);
       // console.log("애니멀사진" + amlist[0].itemImgUrl);
-      console.log("이미지" + data[0]);
-      console.log("이미지" + data[0].itemImgUrl);
+      // console.log("이미지" + data[0]);
+      // console.log("이미지" + data[0].itemImgUrl);
     });
+        {amlist.map(
   }, []);
 
   // 필터링 함수
@@ -99,7 +100,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
       <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
         {amlist.map(
           (data, index) => {
-            console.log("card-list: ", data, ", index: ", index);
+            console.log("card-lSist: ", data, ", index: ", index);
             return (
               <NFTCard
                 nftSrc={data.itemImgUrl}
