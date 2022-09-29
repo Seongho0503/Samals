@@ -60,3 +60,15 @@ export async function getTotalDonate() {
     return "";
   }
 }
+
+export async function getAnimalClass(animalClass) {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/shop/${animalClass}`,
+    });
+    return response;
+  } catch {
+    return "";
+  }
+}

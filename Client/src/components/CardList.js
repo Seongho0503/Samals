@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import NFTCard from "./NFTCard";
+import MNFTCard from "./MNFTCard";
 import "../styles/CardList.css";
 import { useNavigate } from "react-router-dom";
 import { $, jQuery } from "jquery";
@@ -26,8 +26,6 @@ const CardList = ({ list, type = "horizontal" }) => {
   const [activeAnimal, setActiveAnimal] = useState("All");
   const [animal, setAnimal] = useState(list);
   let navigate = useNavigate();
-
-  
 
   // 필터링 함수
   // $(function () {
@@ -87,7 +85,7 @@ const CardList = ({ list, type = "horizontal" }) => {
 
       <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
         {list.map((item, index) => (
-          <NFTCard
+          <MNFTCard
             nftSrc={item.src}
             key={index}
             onClick={() => navigate("/detail", { state: { item: item } })}

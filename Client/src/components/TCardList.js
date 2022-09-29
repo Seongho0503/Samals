@@ -32,13 +32,14 @@ const TCardList = ({ list, type = "horizontal" }) => {
   useEffect(() => {
     getAnimalList().then(({ data }) => {
       console.log("리스트: ", data);
+      console.log(data.animalClassNo);
       setAmlist(data);
       // console.log("애니멀리스트" + amlist);
       // console.log("애니멀사진" + amlist[0].itemImgUrl);
       // console.log("이미지" + data[0]);
       // console.log("이미지" + data[0].itemImgUrl);
     });
-  }, [amlist]);
+  }, []);
 
   // 필터링 함수
   // $(function () {
@@ -104,6 +105,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
               <NFTCard
                 nftSrc={data.itemImgUrl}
                 key={index}
+                starNo={data.animalClassNo}
                 onClick={() => navigate("/detail", { state: { data: data } })}
               />
             );
