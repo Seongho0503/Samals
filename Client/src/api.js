@@ -61,11 +61,25 @@ export async function getTotalDonate() {
   }
 }
 
+// 동물 등급으로 조회 (필터)
 export async function getAnimalClass(animalClass) {
   try {
     const response = await axios({
       method: "GET",
       url: `/api/shop/${animalClass}`,
+    });
+    return response;
+  } catch {
+    return "";
+  }
+}
+
+// nft 정보 조회 (tokenid로 조회)
+export async function getNftInfo(tokenId) {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/nft/${tokenId}`,
     });
     return response;
   } catch {

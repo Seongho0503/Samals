@@ -22,6 +22,7 @@ const NFTCard = ({
   species,
   animalClass,
   starNo,
+  animalSpecies,
 }) => {
   const [isLike, setIsLike] = useState(false);
   const [colors, setColors] = useState([]);
@@ -156,15 +157,15 @@ const NFTCard = ({
                 className="star"
                 style={{ backgroundImage: "url(" + Star + ")" }}
               /> */}
-              <p className='owner'> LEJOURN.DARK.NFT</p>
-              <p className='name'>Alien Cry</p>
+              <p className='owner'> 멸종위기등급 : {animalClass}</p>
+              <p className='name'>{nftName}</p>
             </div>
 
             <div className='price-container'>
               <p className='price-label'>Price</p>
               <p className='price'>
                 {" "}
-                <FaEthereum /> 4.555
+                <FaEthereum /> {price}
               </p>
             </div>
           </div>
@@ -189,7 +190,7 @@ const NFTCard = ({
                   />
                 )}
               </button>
-              <p className='like-count'>123</p>
+              <p className='like-count'>{likeCount}</p>
             </div>
           </div>
         </>
