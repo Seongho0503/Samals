@@ -6,6 +6,7 @@ import com.project.samals.domain.User;
 import com.project.samals.dto.NftDto;
 import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqNftDto;
+import com.project.samals.dto.response.ResMyNftDto;
 import com.project.samals.dto.response.ResNftDto;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.UserRepository;
@@ -64,11 +65,21 @@ public class NftService {
         return mintHistory;
     }
 
-    public List<NftDto> getMyNftList(String address) {
+    public List<NftDto> getMyDonateHistory(String address) {
+        User user = userRepository.findByWalletAddress(address);
+        List<Nft> donates = nftRepository.findByNftTypeAndUser("donate",user);
+        List<NftDto> donateHistory = new ArrayList<>();
+        for (Nft nft : donates) {
+            donateHistory.add(NftDto.convert(nft));
+        }
+        return donateHistory;
+    }
+
+    public List<ResMyNftDto> getMyNftList(String address) {
         List<Nft> myNft = nftRepository.findAllByNftOwner(address);
-        List<NftDto> nftList = new ArrayList<>();
+        List<ResMyNftDto> nftList = new ArrayList<>();
         for (Nft nft : myNft) {
-            nftList.add(NftDto.convert(nft));
+            nftList.add(ResMyNftDto.convert(nft));
         }
         return nftList;
     }
@@ -80,4 +91,18 @@ public class NftService {
          */
         return ResNftDto.convert(nft);
     }
+
+    public int getTotalDonate(){
+        int price=500;
+        List<Nft> donateCounts= nftRepository.findByNftType("donate");
+        return donateCounts.size()*price;
+    }
+
+    public int getMyTotalDonate(String address){
+        int donatePrice=500;
+        User user = userRepository.findByWalletAddress(address);
+        List<Nft> donateCounts= nftRepository.findByNftTypeAndUser("donate",user);
+        return donateCounts.size()*donatePrice;
+    }
 }
+

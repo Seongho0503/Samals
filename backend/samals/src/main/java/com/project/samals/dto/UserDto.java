@@ -37,16 +37,28 @@ public class UserDto {
 
     public static UserDto convert(User user) {
         if(user == null) return null;
+        if(user.getProfileImg()!=null) {
+            return UserDto.builder()
+                    .userSeq(user.getUserSeq())
+                    .walletAddress(user.getWalletAddress())
+                    .userNickname(user.getUserNickname())
+                    .userBio(user.getUserBio())
+                    .userImgUrl("https://ipfs.io/ipfs/"+user.getProfileImg().getIpfs().getIpfsUri())
+                    .createdTime(user.getCreatedTime())
+                    .updatedTime(user.getUpdatedTime())
+                    .build();
+        }
+        else {
+            return UserDto.builder()
+                    .userSeq(user.getUserSeq())
+                    .walletAddress(user.getWalletAddress())
+                    .userNickname(user.getUserNickname())
+                    .userBio(user.getUserBio())
+                    .createdTime(user.getCreatedTime())
+                    .updatedTime(user.getUpdatedTime())
+                    .build();
+        }
 
-        return UserDto.builder()
-                .userSeq(user.getUserSeq())
-                .walletAddress(user.getWalletAddress())
-                .userNickname(user.getUserNickname())
-                .userBio(user.getUserBio())
-          //      .userImgUrl(user.getProfileImg().getIpfs().getIpfsUri())
-                .createdTime(user.getCreatedTime())
-                .updatedTime(user.getUpdatedTime())
-                .build();
     }
 
 }

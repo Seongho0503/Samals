@@ -30,6 +30,9 @@ public class Sale {
     @Column(name = "sale_price")
     private int salePrice;
 
+    @Column(name = "sale_title")
+    private String saleTitle;
+
     @Column(name = "sale_description")
     private String saleDescription;
 
@@ -39,10 +42,6 @@ public class Sale {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="sale_created_at")
     private Date createdTime;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="sale_updated_at")
-    private Date updatedTime;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="sale_completed_at")

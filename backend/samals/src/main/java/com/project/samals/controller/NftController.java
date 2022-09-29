@@ -46,23 +46,10 @@ public class NftController {
         return new ResponseEntity<>(nftService.getNft(tokenId),HttpStatus.OK);
     }
 
-
-//
-//    @ApiOperation(value = "NFT 연동")
-//    @PostMapping("/add")
-//    public ResponseEntity<NftDto> addNft(@RequestBody ReqNftDto nftDto) {
-//        return new ResponseEntity<>(nftService.addNft(nftDto), HttpStatus.CREATED);
-//    }
-//
-
-
-//
-//    @ApiOperation(value = "보유 NFT 연동 해제")
-//    @DeleteMapping("/{address}/delete/{tokenId}")
-//    public ResponseEntity<String> removeNft(@PathVariable String address,@PathVariable int tokenId) {
-//        return new ResponseEntity<>(nftService.removeNft(address,tokenId), HttpStatus.OK);
-//    }
-//
-
+    @ApiOperation(value = "NFT 기부 총액")
+    @GetMapping("/total-donate")
+    public ResponseEntity<Integer> getTotalDonate(){
+        return new ResponseEntity<>(nftService.getTotalDonate(),HttpStatus.OK);
+    }
 
 }

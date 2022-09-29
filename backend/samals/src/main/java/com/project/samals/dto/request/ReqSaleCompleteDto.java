@@ -8,9 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class ReqSaleCompleteDto {
-
     private long saleSeq;
-
     private String buyerAddress;
-
 }

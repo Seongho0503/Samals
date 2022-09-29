@@ -1,6 +1,5 @@
 package com.project.samals.dto.request;
 
-
 import lombok.*;
 
 @Getter
@@ -8,8 +7,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
-public class ReqProfileDto {
-    private String address;
+public class ReqUserUpdateDto {
+
+    private String walletAddress;
+    private String userNickname;
+    private String userBio;
     private int tokenId;
+
 }
