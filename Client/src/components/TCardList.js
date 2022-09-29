@@ -38,8 +38,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
       // console.log("이미지" + data[0]);
       // console.log("이미지" + data[0].itemImgUrl);
     });
-        {amlist.map(
-  }, []);
+  }, [amlist]);
 
   // 필터링 함수
   // $(function () {
