@@ -35,26 +35,24 @@ export async function getAnimalData() {
   }
 }
 
-// 기부 총액 조회
-export async function getTotalDonate() {
+export async function getAnimalList() {
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/nft/total-donate`,
-      // headers :
+      url: `/api/sale/1/list`,
     });
-
     return response;
   } catch {
     return "";
   }
 }
 
-export async function getAnimalList() {
+// 기부 총액 조회
+export async function getTotalDonate() {
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/sale/1/list`,
+      url: `/api/nft/total-donate`,
       // headers :
     });
 
