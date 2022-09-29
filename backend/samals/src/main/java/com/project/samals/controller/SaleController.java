@@ -31,7 +31,7 @@ public class SaleController {
     }
 
     @ApiOperation(value = "전체 거래 조회")
-    @GetMapping("/{address}/list")
+    @GetMapping("/list")
     public ResponseEntity<List<ResSaleListDto>> getSaleList(String address){
         return new ResponseEntity<>(saleService.getSaleList(address),HttpStatus.OK);
     }
