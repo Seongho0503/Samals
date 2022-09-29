@@ -1,4 +1,5 @@
 import axios from "axios";
+import { env } from "process";
 
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
@@ -52,7 +53,6 @@ export async function getTotalDonate() {
     const response = await axios({
       method: "GET",
       url: `/api/nft/total-donate`,
-      // headers :
     });
 
     return response;

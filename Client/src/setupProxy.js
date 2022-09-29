@@ -7,9 +7,9 @@ module.exports = function (app) {
       target: process.env.REACT_APP_API,
       changeOrigin: true,
       secure: false,
-      pathRewrite: {
-        "^/api": "",
-      },
+      // pathRewrite: {
+      //   "^/api": "",
+      // },
     })
   );
 };
