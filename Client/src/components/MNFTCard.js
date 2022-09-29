@@ -10,7 +10,7 @@ import Star from "../assets/star.png";
 import { ModelViewerElement } from "@google/model-viewer";
 import { useARStatus } from "../hooks/isARStatus";
 import { getAnimalClass } from "../api";
-const NFTCard = ({
+const MNFTCard = ({
   username,
   nftName,
   price,
@@ -20,8 +20,6 @@ const NFTCard = ({
   onClick,
   image,
   species,
-  animalClass,
-  starNo,
 }) => {
   const [isLike, setIsLike] = useState(false);
   const [colors, setColors] = useState([]);
@@ -48,23 +46,24 @@ const NFTCard = ({
   //   });
   // }, []);
 
-  useEffect(() => {
-    console.log({ starNo });
-    // function starCount() {
-    //   for (var i = 0; i < { starNo }; i++) {
-    //     console.log({ starNo });
-    //     stars.push(<img className='star' src={Star} alt='star' />);
-    //   }
-    // }
-  }, []);
+  // useEffect(() => {
+  //   console.log({ starNo });
+  //   // function starCount() {
+  //   //   for (var i = 0; i < { starNo }; i++) {
+  //   //     console.log({ starNo });
+  //   //     stars.push(<img className='star' src={Star} alt='star' />);
+  //   //   }
+  //   // }
+  // }, []);
 
+  //상점에서 쓰는거
   const staring = () => {
     //console.log("타입" + typeof starNo);
     const stars = [];
-    for (let i = 0; i < starNo; i++) {
+    for (let i = 0; i < 2; i++) {
       stars.push(<img key={i} className='star' src={Star} alt='star' />);
     }
-    console.log(stars);
+    //console.log(stars);
     return stars;
   };
 
@@ -106,15 +105,16 @@ const NFTCard = ({
               {/*멸종위기 등급 별*/}
               <div className='info-container'>
                 {staring()}
-                {/* <img className='star' src={Star} alt='star' /> */}
-                {/* <img
+                {/* <img className='star' src={Star} alt='star' />
+                <img className='star' src={Star} alt='star' /> */}
+                <img
                   className='star'
                   // image={Star}
                   src={Star}
                   //src="../assets/star.png"
                   alt='star'
                   // style={{ backgroundImage: "url(" + Star + ")" }}
-                /> */}
+                />
                 {/* <p className="owner"> LEJOURN.DARK.NFT</p>
                 <p className="name">Alien Cry</p> */}
               </div>
@@ -198,4 +198,4 @@ const NFTCard = ({
   );
 };
 
-export default NFTCard;
+export default MNFTCard;
