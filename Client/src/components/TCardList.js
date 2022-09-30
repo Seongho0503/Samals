@@ -19,10 +19,13 @@ import shark3 from "../assets/fillter/shark3.png";
 import toad from "../assets/fillter/toad.png";
 import toad2 from "../assets/fillter/toad2.png";
 import { getAnimalList, getNftInfo } from "../api.js";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAddress } from "../redux/slice/UserInfoSlice";
 
 // declare var $: $;
 
 const TCardList = ({ list, type = "horizontal" }) => {
+  const [reduxAddress] = useState(useSelector(selectAddress));
   // 동물 필터
   const [activeAnimal, setActiveAnimal] = useState("All");
   const [animal, setAnimal] = useState(list);
@@ -30,7 +33,8 @@ const TCardList = ({ list, type = "horizontal" }) => {
 
   const [amlist, setAmlist] = useState([]);
   useEffect(() => {
-    getAnimalList().then(({ data }) => {
+    console.log("reduxAddress: ", reduxAddress);
+    getAnimalList(reduxAddress).then(({ data }) => {
       console.log("리스트: ", data);
       console.log(data.animalClassNo);
       setAmlist(data);
@@ -101,41 +105,26 @@ const TCardList = ({ list, type = "horizontal" }) => {
           <img className='animal-fillter' src={toucan} />{" "}
           <h2 className='animal-name'> {"Toucan"} </h2>
         </button>
-        {/* <button>
-          <img className="animal-fillter" src={elephant2} />{" "}
-        </button> */}
-        {/* <button id="web">호랑이</button>
-        <button id="ux">사자</button>
-        <button id="graphic">백상아리</button>
-        <button id="motion">토끼</button> */}
       </div>
 
-      <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
-        {amlist.map(
-          (data, index) => {
-            console.log("card-lSist: ", data, ", index: ", index);
-            return (
-              <NFTCard
-                nftSrc={data.itemImgUrl}
-                key={index}
-                starNo={data.animalClassNo}
-                price={data.salePrice}
-                likeCount={data.likeCount}
-                nftName={data.animalTitle}
-                animalClass={data.animalClass}
-                onClick={() => navigate("/detail", { state: { data: data } })}
-              />
-            );
-          }
-          // (
-          //   console.log(data);
-          //   <NFTCard
-          //     nftSrc={data[index].itemImgUrl}
-          //     key={index}
-          //     onClick={() => navigate("/detail", { state: { data: data } })}
-          //   />
-          // )
-        )}
+      <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
+        {amlist.map((data, index) => {
+          console.log("TcardList: ", data, ", index: ", index);
+          return (
+            <NFTCard
+              saleSeq={data.saleSeq}
+              nftSrc={data.itemImgUrl}
+              key={index}
+              starNo={data.animalClassNo}
+              price={data.salePrice}
+              likeCount={data.likeCount}
+              nftName={data.animalTitle}
+              animalClass={data.animalClass}
+              likePush={data.likePush}
+              onClick={() => navigate("/detailTrade", { state: { item: data } })}
+            />
+          );
+        })}
       </div>
     </div>
   );
