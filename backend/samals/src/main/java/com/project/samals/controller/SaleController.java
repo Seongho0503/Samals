@@ -32,7 +32,13 @@ public class SaleController {
 
     @ApiOperation(value = "전체 거래 조회")
     @GetMapping("/list")
-    public ResponseEntity<List<ResSaleListDto>> getSaleList(String animalSpecies,String address){
+    public ResponseEntity<List<ResSaleListDto>> getSaleList(String address){
+        return new ResponseEntity<>(saleService.getSaleList(null,address),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "동물 전체 거래 조회")
+    @GetMapping("/list/{animalSpecies}")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByAnimalSpecies(@PathVariable String animalSpecies,String address){
         return new ResponseEntity<>(saleService.getSaleList(animalSpecies,address),HttpStatus.OK);
     }
 
