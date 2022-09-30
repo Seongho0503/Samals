@@ -1,227 +1,405 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
-//0x9dE8aCDbFe898E579F8B79D9141F5e595ca09E99
-//0x09746Ad311D1A792411b1FEA1473D4cea88FA589
-
-
-//본체 : 
+//ERC20: 0x9dE8aCDbFe898E579F8B79D9141F5e595ca09E99
+//TOKENURI: https://ipfs.io/ipfs/QmfZ4wKyngPnAZuZFHsrbKsiibCmbFDhBksFk5hQFxNoHA
+//TOTAL_NUMBER: 5
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "./NftSale.sol";
-import "./AnimalNft.sol";
-import "./MascortNft.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
 /*
-* P2P 거래 정보를 관리하는 Factory Contract
-* 
-* @author 
-* @version 0.1
-* @see None
+기부금으로 발행하는 NFT 토큰
+구매를 진행한 사람들이게 랜덤한 동물의 소유권이 기록된다.
 */
-
-contract NftSaleManager is Ownable {
+contract AnimalNft is ERC721URIStorage, Ownable {
     
-    // 거래 등록 관리
-    struct Sale {
-        address saleAddress;
-        address saleOwner;
+    // 기부 등록 관리를 위한 Struct
+    struct Donate {
+        uint256 donatedAt;
+        address donator;
     }
 
+    // 동물 정보 보관을 위한 Struct
+    struct AnimalInfo {
+        string tokenUri; //IPFS에 대한 경로
+
+        // 편의성을 고려한 변수값들
+        uint256 donatedAt;
+        address minter;
+        address owner;
+    }
+    
+    // 이벤트 : 로깅
+    event Donated(uint256 indexed newAnimalId, address indexed donator);
+
+    // using 키워드 : 내부 라이브러리 사용
     using Counters for Counters.Counter;
 
-    event SaleCreated(address indexed newNftSaleAddress, uint256 indexed animalId);
+    // 현재까지 발급된 토큰의 개수 반환: 뽑기할 때마다 1씩 증가
+    Counters.Counter private _tokenIds;
+
+    // constant 키워드를 활용해 명시
+    uint256 constant public MINT_PRICE = 500;
+
+    // constant 키워드를 활용해 변하지 않는 뽑기 마리 수를 명시
+    uint256 public TOTAL_NUMBER;
+
+    // limited_number은 TOTAL_NUMBER 중 남은 동물의 값
+    uint256 private limited_number;
+
+    //기부 시: LIMITED_ANIMALS(랜덤) => MINTED_ANIMALS(순서)
+    mapping(uint256 => AnimalInfo) private LIMITED_ANIMALS; 
+    mapping(uint256 => AnimalInfo) private MINTED_ANIMALS;
+
+    // 상점에서 판매하고 있는 동물의 정보
+    mapping(string => AnimalInfo[]) private MARKET_ANIMALS;
+
+    // 상점에서 판매하고 있는 동물의 개수 - 기준 species
+    mapping(string => uint256) private _marketAnimalNumber;
+
+    // 상점에서 팔고 남은 동물의 개수
+    mapping(string => uint256) private _marketLeftAnimalNumber;
+
+    // 특정 지갑에 따른 기부 ID 목록
+    mapping(address => uint256[]) private _donateIdsByWallet;
+
     
-    // 거래 Id
-    Counters.Counter private _saleIds; 
 
-    //Sale Contract에 대한 소유권 명시
-    mapping(uint256 => Sale) private _sales;
-
-    //approve 문제로 인해 임시로 주소를 보관할 mapping
-    mapping(uint256 => address) private _saleAddress;
-
-    // 특정 동물에 따른 거래 ID 목록 => To Much인가? => Id값만 기록되기 때문에 성능에 비해 gas 효율 보통
-    mapping(uint256 => uint256[]) private _salesByAnimal;
-
-    // 특정 지갑이 생성한 거래 ID 목록 => To Much인가? => Id값만 기록되기 때문에 성능에 비해 gas 효율 보통
-    mapping(address => uint256[]) private _saleIdsByWallet;
-
-    // 배포 된 ERC-20 토큰 계약 주소
-    address private _currencyAddress;
-    // ERC20 객체화
+    // ERC20 Contract 객체
     IERC20 private _currencyContract;
 
-    // 배포 된 AnimalNft(ERC-721) 토큰 계약 주소
-    address private _animalNftAddress;
-    // PRIVATE 서버의 AnimalNft(ERC-721) 객체화
-    AnimalNft private _animalNftContract; 
- 
-    /*
-    * constructor
-    * P2P 거래 정보 관리 객체를 생성
-    * 
-    * @ param address currencyAddress ERC-20 토큰 계약 주소
-    * @ param address animalNftAddress AnimalNft(ERC-721) 토큰 계약 주소
-    * @ return None
-    * @ exception None
+    /* constructor : 계약서 생성(AnimalNFT, AMT)
+        - memory 키워드 사용 : 임시 변수로 사용, 가변성 존재
+       @param address currencyContractAddress : 거래를 위한 ERC-20 컨트랙트 주소 받기
+       @param string memory tokenUri : 해당 동물의 IPFS 폴더 주소
+       @param uint256 memory total_number : 등록할 동물의 총 마리 수
+       @parmam bool[] check : 내부에서 사용할 배열, function 내부에서 memory로 생성하기 위해서는 동물의 수를 constant로 한정 지어 사용할 수 있다. 하지만 테스트를 위해 유동적으로 가져가기 위한 목적으로 매개변수로 받아준다.
     */
     constructor(
-        address currencyAddress,
-        address animalNftAddress
-    ){
-        _currencyAddress = currencyAddress;
-        _animalNftAddress = animalNftAddress;
+        address currencyContractAddress,
+        string memory tokenUri,
+        uint256 total_number
+    ) ERC721("AnimalNFT", "AMT") {
+        
+        // constant 값을 옮긴 후
+        TOTAL_NUMBER = total_number;
 
-        _currencyContract = IERC20(_currencyAddress);
-        _animalNftContract = AnimalNft(_animalNftAddress);
+        /* 
+           랜덤 로직에 사용할 일시적인 메모리를 부여
+           초기값 : false
+        */ 
+        bool[] memory check = new bool[](TOTAL_NUMBER);
+
+        // ERC20 Contract 불러오기
+        _currencyContract = IERC20(currencyContractAddress);
+
+        // 동물의 수 정하기
+        limited_number = check.length;
+
+        /* 생성자 단계에서 랜덤한 배치
+            - 동물의 수(= 배치 횟수) : N
+            - 초반에 가스 비용이 발생하지만 Race Condition의 가능성을 줄일 수 있다 
+        */
+        for(uint256 i = 0; i < limited_number; i++){
+            uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, i + limited_number))) % limited_number;
+            for(uint256 j = random; j < random + limited_number; j++){
+
+                /* 탈중앙화 및 gas 소모 고려
+                    - 단순 조회는 가스가 발생하지 않는다 : 랜덤으로 뽑고 내부에서 빈 값을 찾을 때까지 이동하는 방식
+                    - 배포하는 개발자조차 뽑기의 결과를 예측할 수 없음
+                */
+                if(check[j % limited_number] == false){
+                    // json 번호는 1부터 시작하므로 1을 더해주어야 한다.
+                    LIMITED_ANIMALS[i] = 
+                        AnimalInfo
+                        (
+                            string.concat(tokenUri, "/" , Strings.toString((j % limited_number) + 1), ".json"),
+                            uint256(0),
+                            address(0),
+                            address(0)
+                        );
+
+                    check[j % limited_number] = true;
+
+                    // 조건을 만족하면 반복문 종료
+                    j  = random + limited_number;
+                }
+            }
+        
+        }
+    }
+    
+    /*
+    * register
+    * Donate Struct를 생성해 상점 상품의 동물 정보를 기록
+    * @param uint32 memory species : 동물의 종
+    * @param string memory tokenUri : 해당 동물의 IPFS 주소
+    * @param uint256 tmpAnimalNumber : 해당 동물 종이 등록될 총 개수
+    * @ return newTokenId
+    */
+    function register(
+        string memory species,
+        string memory tokenUri,
+        uint256 tmpAnimalNumber
+    ) public returns (string memory){
+        // 이전에 등록했던 동물은 더 이상 등록할 수 없다. : 이미 등록한 동물의 개수는 실제 개수 + 1 이다.
+        require(_marketAnimalNumber[species] == 0, "THIS KIND OF ANIMAL WAS ALREADY ISSUED");
+        require(tmpAnimalNumber > 0, "NO ANIMAL DATA EXISTS");
+        
+        //최초 발행 기록용
+        _marketAnimalNumber[species] = tmpAnimalNumber;
+        //남은 상품 수 
+        _marketLeftAnimalNumber[species] = tmpAnimalNumber;
+
+        /* 
+           랜덤 로직에 사용할 일시적인 메모리를 부여
+           초기값 : false
+        */
+        bool[] memory check = new bool[](tmpAnimalNumber);
+        
+        /* 상점 동물 등록에서 랜덤한 배치
+            - 동물의 수(= 배치 횟수) : N
+            - 초반에 가스 비용이 발생
+        */
+        for(uint256 i = 0; i < tmpAnimalNumber; i++){
+            uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, i + tmpAnimalNumber))) % tmpAnimalNumber;
+            for(uint256 j = random; j < random + tmpAnimalNumber; j++){
+
+                /* 탈중앙화 및 gas 소모 고려
+                    - 단순 조회는 가스가 발생하지 않는다 : 랜덤으로 뽑고 내부에서 빈 값을 찾을 때까지 이동하는 방식
+                    - 배포하는 개발자조차 뽑기의 결과를 예측할 수 없음
+                */
+                if(check[j % tmpAnimalNumber] == false){
+                    MARKET_ANIMALS[species].push( 
+                        AnimalInfo(
+                            string.concat(tokenUri, "/" , Strings.toString((j % limited_number) + 1), ".json"),
+                            uint(0),
+                            address(0),
+                            address(0)
+                        )
+                    );
+                    
+                    check[j % tmpAnimalNumber] = true;
+
+                    // 조건을 만족하면 반복문 종료
+                    j  = random + tmpAnimalNumber;
+                }
+            }
+        
+        }
+
+        return species;
     }
 
+    /*
+    * buy
+    * 상점에서 구매 후 mint 수행
+    * @ param uint256 donatedAt : UNIX TIME STAMP 기반한 시간 정보 기록
+    * @ return newTokenId
+    */
+    function buy (
+            string memory species,
+            uint256 donatedAt
+    ) public returns (uint256){
+            require(_marketLeftAnimalNumber[species] > 0, "ALL ANIMALS WERE ISSUED");
+            require(_currencyContract.balanceOf(msg.sender) >= MINT_PRICE, "balance is exhausted");
+            _currencyContract.transferFrom(msg.sender, owner(), MINT_PRICE);
+
+            // 먼저 배분
+            uint256 newTokenId = _tokenIds.current();
+
+            _tokenIds.increment();
+            
+            //남은 동물의 수 감소 후 할당
+            uint256 tmpAnimalNumber = -- _marketLeftAnimalNumber[species];
+            
+            // ERC721의 소유권 기록
+            _mint(msg.sender, newTokenId);
+            // ERC721URIStorage에 URI 기록
+            _setTokenURI(newTokenId, MARKET_ANIMALS[species][tmpAnimalNumber].tokenUri);
+
+            // AnimalInfo : 자체 관리 Struct
+            MARKET_ANIMALS[species][tmpAnimalNumber].donatedAt = donatedAt;
+            MARKET_ANIMALS[species][tmpAnimalNumber].minter = msg.sender;
+            MARKET_ANIMALS[species][tmpAnimalNumber].owner = msg.sender;
+            
+            MINTED_ANIMALS[newTokenId] = MARKET_ANIMALS[species][tmpAnimalNumber];
+
+            /* 빠른 검색에 사용될 mapping 내부 기록
+                1. tokenId 기준 데이터 저장
+                2. 지갑 주소 기준 데이터 저장
+            */
+            _donateIdsByWallet[msg.sender].push(newTokenId);
+
+            // 로깅을 위한 Event 발생 부분
+            emit Donated(newTokenId, msg.sender);
+
+            return newTokenId;
+    }
 
     /*
-    * createSale
-    * 새로운 P2P 거래 정보를 가진 Contract를 생성
-    * @ param uint256 animalId 동물 ID
-    * @ param address seller 판매자 지갑 주소
-    * @ param uint256 price 판매 가격
-    * @ param uint256 startedAt 판매 시작 시간
-    * @ param uint256 endedAt 판매 종료 시간
-    * @ return (animalId, address) 판매할 animalId, 판매글 Contract 주소 반환
+    * donate
+    * @ return newTokenId
     */
-    function createSale(
-            uint256 animalId,
-            uint256 price,
-            uint256 startedAt,
-            uint256 endedAt 
-        ) public returns(
-            uint256,
-            address)
-    {
+    function donate (
+        uint256 donatedAt
+    )
+    public returns (uint256){
+
         /* 유효성 검사
-            1. 글 등록자가 동물 Id를 실제로 소유하는지 확인
-            2. 판매 가격은 0을 넘어야 함 
+            - 모든 동물들이 민트가 진행되었다면 더 이상 NFT를 발행할 수 없다
+            - 구매자에게 잔고가 있는지 확인한다
         */
-        // Nft-721 내부 정보 기준 소유권 판단
-        require(msg.sender == AnimalNft(_animalNftAddress).ownerOf(animalId), "Animal NFT is not owned by Register");
-        require(price > 0, "You must set price over 0");
+        require(0 < limited_number, "ALL ANIMALS WERE ISSUED");
         
-        //거래 객체 생성
-        NftSale newNftSale = new NftSale(_currencyAddress, _animalNftAddress, animalId, msg.sender, price, startedAt, endedAt);
+        // tokenId 작동 방식 수정할 것
+        require(_currencyContract.balanceOf(msg.sender) >= MINT_PRICE, "balance is exhausted");
         
-        //이벤트 발생
-        emit SaleCreated(address(newNftSale), animalId);
-
-        //외부에서 NftSale의 주소에 대한 거래를 ERC20에서 approve 해주어야 한다.
-        _saleAddress[animalId] = address(newNftSale);
-
-        return (animalId, address(newNftSale));
+        // 거래 진행 : ERC-20에 대한 허가 필요
+        _currencyContract.transferFrom(msg.sender, owner(), MINT_PRICE);
         
-    }
-
-    /*
-    * recordSale
-    * approve 문제 : 먼저 해당 NftSale Contract의 권한을 외부에서 approve 진행
-    * 이후 현 객체를 NftTradeManager Contract 내부에 등록
-    *
-    * @ param uint256 animalId 동물 ID
-    * @ param address nftSaleAddress 등록할 NftSale 글 주소
-    * @ return uint256 newNftSaleId 등록된 NftSale 글 ID
-    */
-    function recordSale(
-        uint256 animalId,
-        address nftSaleAddress
-    ) public returns(uint256)
-    {
-        //거래 번호 증가
-        _saleIds.increment();
-        uint256 newNftSaleId = _saleIds.current();
-
-        //ERC20 거래에 대한 허가는 외부에서 해주어야 한다.
-        //IERC20(_currencyAddress).approve(address(nftSaleAddress), MINT_PRICE);
-        
-        //ERC721 계약에 의해 animalId는 현 계약서로만 거래가 가능하다.
-        //AnimalNft(_animalNftAddress).approve(nftSaleAddress, animalId);
-
-        /* Sale Struct에 값 저장
-            1. 계약서 주소
-            2. 작성자
+        /* Race Condition 방지
+            거래 성사 후 tokenIds를 먼저 증가시킨다.
         */
-        Sale memory newSale = Sale(address(nftSaleAddress), msg.sender);
-        _sales[newNftSaleId] = newSale; 
-        _salesByAnimal[animalId].push(newNftSaleId);
-        _saleIdsByWallet[msg.sender].push(newNftSaleId);
+        uint256 newTokenId = _tokenIds.current();
+        _tokenIds.increment();
+        uint256 tmpAnimalNumber = -- limited_number;
+        
+        /* 소유권 기록 부분 
+            1. 표준 ERC721 내부 기록
+            2. 자체 관리 Struct 내부 기록
+            3. 빠른 검색에 사용될 mapping 내부 기록
+        */
 
-        return newNftSaleId;
+        // ERC721의 소유권 기록
+        _mint(msg.sender, newTokenId);
+
+        // ERC721URIStorage에 URI 기록
+        _setTokenURI(newTokenId, LIMITED_ANIMALS[tmpAnimalNumber].tokenUri);
+
+        // AnimalInfo : 자체 관리 Struct
+        LIMITED_ANIMALS[tmpAnimalNumber].donatedAt = donatedAt;
+        LIMITED_ANIMALS[tmpAnimalNumber].minter = msg.sender;
+        LIMITED_ANIMALS[tmpAnimalNumber].owner = msg.sender;
+
+        MINTED_ANIMALS[newTokenId] = LIMITED_ANIMALS[tmpAnimalNumber];
+
+        /* 빠른 검색에 사용될 mapping 내부 기록
+            1. tokenId 기준 데이터 저장
+            2. 지갑 주소 기준 데이터 저장
+        */
+        _donateIdsByWallet[msg.sender].push(newTokenId);
+
+        // 로깅을 위한 Event 발생 부분
+        emit Donated(newTokenId, msg.sender);
+
+        return newTokenId;
     }
 
     /*
-    * ownerOfSale
-    * 해당 거래의 판매자를 반환
-    *
-    * @ param uint256 saleId 거래 ID
-    * @ return address 거래 소유 Wallet address
-    * @ exception 발행된 saleId를 초과하는 요청을 할 수 없다.
+    * transferFrom
+    * ERC721 토큰의 transferFrom 함수를 override 해서 사용
+    * @ param address from : NFT 판매자
+    * @ param address to : NFT 구매자
+    * @ param uint256 tokenId : 양도할 토큰 animalId
+    * @ return newTokenId
     */
-    function ownerOfSale(uint256 saleId) public view
-    returns(address) {
-        require(saleId <= _saleIds.current(), "SALE ID IS BIGGER THAN CREATED SALES NUMBER");
-        return _sales[saleId].saleOwner;
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public virtual override{
+        //solhint-disable-next-line max-line-length
+        //내용을 덮어씌운다
+        require(_isApprovedOrOwner(_msgSender(), tokenId), "ERC721: caller is not token owner nor approved");
+
+        _transfer(from, to, tokenId);
+
+        MINTED_ANIMALS[tokenId].owner = to;
     }
 
     /*
-    * getSaleInfo
-    * 해당 거래의 Contract 주소와 판매자를 반환
-    *
-    * @ param uint256 saleId 거래 ID
-    * @ return (address, address) 거래 Contract address, Owner address
-    * @ exception 발행된 saleId를 초과하는 요청을 할 수 없다.
+    * _getMarketAnimalNumber
+    * 최초 상점 발급 개수 조회
+    * @ param string species : 동물 종류
+    * @ return uint256 : 동물의 최초 발급 수
     */
-    function getSaleInfo(uint256 saleId) public view
-    returns(address, address) {
-        require(saleId <= _saleIds.current(), "SALE ID IS BIGGER THAN CREATED SALES NUMBER");
-        return (_sales[saleId].saleAddress, _sales[saleId].saleOwner);
-    }
+    function _getMarketAnimalNumber(
+        string memory species
+    ) public view returns(uint256){
+        return _marketAnimalNumber[species];
+    } 
 
     /*
-    * getCountSales
-    * 현재까지 등록된 모든 거래의 개수를 반환
-    *
-    * @ param None
-    * @ return uint256 등록된 거래 개수
-    * @ exception None
+    * _getMarketLeftAnimalNumber
+    * 남은 상점 발급 개수 조회
+    * @ param string species : 동물 종류
+    * @ return uint256 : 동물의 남은 발급 수
     */
-    function getCountSales() public view
-    returns (uint256) {
-        return _saleIds.current();
+    function _getMarketLeftAnimalNumber(
+        string memory species
+    ) public view returns(uint256){
+        return _marketLeftAnimalNumber[species];
+    } 
+    
+    function _getTokenUri(
+        uint256 tokenId
+    ) public view returns(string memory){
+        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
+        return MINTED_ANIMALS[tokenId].tokenUri;
     }
 
-    /*
-    * getSalesOfAnimal
-    * 해당 동물 ID로 지금까지의 saleId를 반환
-    * @ param uint256 animalId 동물 ID
-    * @ return uint256[] 거래 ID 목록
-    * @ exception None
-    */
-    function getSalesOfAnimal(uint256 animalId) public view returns(uint256[] memory) {
-        return _salesByAnimal[animalId];
+    //Animal Info 내부 mint값 초기화
+    function _setMinter (
+        uint256 tokenId,
+        address minter 
+    ) private {
+        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
+        MINTED_ANIMALS[tokenId].minter = minter;
     }
 
-    /*
-    * getSaleIdsByWallet
-    * 해당 지갑의 모든 거래 목록을 반환
-    * @ param address walletAddr 지갑 주소
-    * @ return uint256[] 거래 ID 목록
-    * @ exception None
-    */
-    function getSaleIdsByWallet(address walletAddr) public view returns(uint256[] memory) {
-        return _saleIdsByWallet[walletAddr];
+    function _getMinter (
+        uint256 tokenId
+    ) public view returns(address){
+        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
+        return MINTED_ANIMALS[tokenId].minter;
     }
 
-    function getBalanceOf() public view returns(uint256) {
-        return _currencyContract.balanceOf(msg.sender);
+    function _setOwner (
+        uint256 tokenId,
+        address newOwner
+    ) private {
+        MINTED_ANIMALS[tokenId].owner = newOwner;
     }
 
-    function getTimeNow() public view returns(uint256) {
-        return block.timestamp;
+    function _getOwner (
+        uint256 tokenId
+    ) public view returns(address){
+        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
+        return MINTED_ANIMALS[tokenId].owner;
+    }
+
+    function _getDonatesByWallet(
+        address wallet
+    ) public view returns(uint256[] memory){
+        return _donateIdsByWallet[wallet];
+    }
+
+    function _getLimitedNumber()
+    public view returns(uint256){
+        return limited_number;
+    }
+
+    function _getFirstLimitedNumber()
+    public view returns(uint256){
+        return TOTAL_NUMBER;
+    }
+
+    function _getTotalMint()
+    public view returns(uint256){
+        return _tokenIds.current();
     }
 }
