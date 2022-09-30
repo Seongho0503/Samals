@@ -10,7 +10,11 @@ import Star from "../assets/star.png";
 import { ModelViewerElement } from "@google/model-viewer";
 import { useARStatus } from "../hooks/isARStatus";
 import { getAnimalClass } from "../api";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAddress } from "../redux/slice/UserInfoSlice";
+import axios from "axios";
 const NFTCard = ({
+  saleSeq,
   username,
   nftName,
   price,
@@ -23,18 +27,63 @@ const NFTCard = ({
   animalClass,
   starNo,
   animalSpecies,
+  likePush,
 }) => {
-  const [isLike, setIsLike] = useState(false);
+  const dispatch = useDispatch();
+  const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
+  const [isLike, setIsLike] = useState(likePush === "Y" ? true : false);
   const [colors, setColors] = useState([]);
-  // const [stars, setStar] = useState([]);
-
+  const [stateLikeCount, setStateLikeCount] = useState(likeCount);
   const isARSupport = useARStatus(nftSrc);
 
-  // useEffect(() => {
-  //   console.log(isARSupport);
-  // }, []);
+  const Like = () => {
+    let sessionAddress = JSON.parse(sessionStorage.getItem("persist:root"));
 
-  const like = () => setIsLike(!isLike);
+    if (sessionAddress === undefined || JSON.parse(sessionAddress.userInfo).address === "") {
+      alert("지갑을 연결해주세요. 모달 창 및 문구 변경 필요");
+      return;
+    }
+
+    sessionAddress = JSON.parse(sessionAddress.userInfo).address;
+    console.log("current Address: ", sessionAddress);
+
+    //만약 isLike가 True(하트 클릭 상태)일 경우
+    if (isLike) {
+      axios({
+        url: "api/sale/like/delete",
+        method: "POST",
+        data: { saleSeq: saleSeq, walletAddress: sessionAddress },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data === "Success") {
+            setStateLikeCount(stateLikeCount - 1);
+            alert("좋아요 취소 성공");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      axios({
+        url: "api/sale/like/add",
+        method: "POST",
+        data: { saleSeq: saleSeq, walletAddress: sessionAddress },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data === "Success") {
+            setStateLikeCount(stateLikeCount + 1);
+            alert("좋아요 성공");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    setIsLike(!isLike);
+  };
 
   const getColors = (colors) => {
     setColors((c) => [...c, ...colors]);
@@ -49,23 +98,13 @@ const NFTCard = ({
   //   });
   // }, []);
 
-  useEffect(() => {
-    console.log({ starNo });
-    // function starCount() {
-    //   for (var i = 0; i < { starNo }; i++) {
-    //     console.log({ starNo });
-    //     stars.push(<img className='star' src={Star} alt='star' />);
-    //   }
-    // }
-  }, []);
-
   const staring = () => {
     //console.log("타입" + typeof starNo);
     const stars = [];
     for (let i = 0; i < starNo; i++) {
       stars.push(<img key={i} className='star' src={Star} alt='star' />);
     }
-    console.log(stars);
+    // console.log(stars);
     return stars;
   };
 
@@ -93,70 +132,19 @@ const NFTCard = ({
               camera-controls
               auto-rotate
               src={nftSrc}
-              // image={Star}
-            >
-              {" "}
-              {/* <img
-                className="star"
-                // image={Star}
-                style={{ backgroundImage: "url(" + Star + ")" }}
-              /> */}
-            </model-viewer>
+            ></model-viewer>
           ) : (
             <>
               {/*멸종위기 등급 별*/}
-              <div className='info-container'>
-                {staring()}
-                {/* <img className='star' src={Star} alt='star' /> */}
-                {/* <img
-                  className='star'
-                  // image={Star}
-                  src={Star}
-                  //src="../assets/star.png"
-                  alt='star'
-                  // style={{ backgroundImage: "url(" + Star + ")" }}
-                /> */}
-                {/* <p className="owner"> LEJOURN.DARK.NFT</p>
-                <p className="name">Alien Cry</p> */}
-              </div>
+              <div className='info-container'>{staring()}</div>
               <ColorExtractor getColors={getColors}>
-                {/* <img
-                  className="star"
-                  image={Star}
-                  // style={{ backgroundImage: "url(" + Star + ")" }}
-                /> */}
                 <img className='nft-image' src={nftSrc} />
               </ColorExtractor>
             </>
           )}
 
           <div className='wrapper'>
-            {/* <img
-              className="star"
-              image={Star}
-              // style={{ backgroundImage: "url(" + Star + ")" }}
-            />
-            <img
-              className="star"
-              image={Star}
-              // style={{ backgroundImage: "url(" + Star + ")" }}
-            />
-            <img
-              className="star"
-              image={Star}
-              // style={{ backgroundImage: "url(" + Star + ")" }}
-            /> */}
-            {/* <div
-              style={{
-                backgroundImage: "url(" + Star + ")",
-              }}
-            /> */}
-
             <div className='info-container'>
-              {/* <img
-                className="star"
-                style={{ backgroundImage: "url(" + Star + ")" }}
-              /> */}
               <p className='owner'> 멸종위기등급 : {animalClass}</p>
               <p className='name'>{nftName}</p>
             </div>
@@ -170,13 +158,21 @@ const NFTCard = ({
             </div>
           </div>
           <div className='buttons'>
-            {/* <button className="buy-now">Buy Now</button> */}
+            {/* Buy now 버튼 */}
             <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
             <div className='like-container'>
-              <button className='like' onClick={like}>
+              {/* 하트 버튼 클릭 */}
+              <button
+                className='like'
+                onClick={() => {
+                  Like();
+                }}
+              >
                 {!isLike ? (
+                  // 좋아요 상태 아닐 시
                   <AiOutlineHeart size='30' color='white' />
                 ) : (
+                  // 좋아요 상태 일 시
                   <AiFillHeart
                     size='30'
                     style={{
@@ -184,13 +180,13 @@ const NFTCard = ({
                     to bottom,
                     #38ef7d,
                     #11998e
-                  );`,
+                  )`,
                     }}
                     color='#00f5c966'
                   />
                 )}
               </button>
-              <p className='like-count'>{likeCount}</p>
+              <p className='like-count'>{stateLikeCount}</p>
             </div>
           </div>
         </>

@@ -23,13 +23,19 @@ import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
 import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
+import axios from "axios";
 
-const NftDetail = () => {
+const NftDetailExplore = () => {
   const isMobile = useMobile();
 
   const [colors, setColors] = useState([]);
-
   const [isLike, setIsLike] = useState(false);
+  const [detailData, setDetailData] = useState({
+    saleDescription: "",
+    tokenImgUrl: "",
+    salePrice: "",
+    animalSpecies: "",
+  });
 
   const like = () => setIsLike(!isLike);
 
@@ -43,9 +49,18 @@ const NftDetail = () => {
 
   useEffect(() => {
     setColors([]);
-  }, [state]);
 
-  const isARSupport = useARStatus(state.item.src);
+    axios({ url: `/api/sale/${state.item.saleSeq}`, method: "GET" })
+      .then(({ data }) => {
+        setDetailData(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const isARSupport = useARStatus(state.item.itemImgUrl);
   // const isARSupport = false;
   //!! aciklama karakter sayisi sinirlanmali.
   //!! scroll sorununa cozum bulunmali.
@@ -81,7 +96,7 @@ const NftDetail = () => {
                   loading='eager'
                   camera-controlsk
                   auto-rotate
-                  src={state.item.src}
+                  src={detailData.tokenImgUrl}
                 >
                   {" "}
                 </model-viewer>
@@ -89,16 +104,16 @@ const NftDetail = () => {
                 <>
                   {" "}
                   <ColorExtractor getColors={getColors}>
-                    <img id='detail-image' src={state.item.src} />
+                    <img id='detail-image' src={detailData.tokenImgUrl} alt='NFT_PFP' />
                   </ColorExtractor>
                 </>
               )}
 
               <div id='detail-info' style={{}}>
                 <div id='detail-info-container'>
-                  <p id='collection'> {state.item.name} </p>
-                  <p id='name'> {state.item.name} </p>
-                  <p id='description'> {state.item.description} </p>
+                  <p id='collection'> {detailData.saleTitle} </p>
+                  <p id='name'> </p>
+                  <p id='description'> {detailData.saleDescription} </p>
                 </div>
 
                 <div id='detail-controls'>
@@ -108,7 +123,7 @@ const NftDetail = () => {
                     child={
                       <div id='button-child'>
                         <FaEthereum size='28px' />
-                        <p id='price'>1254</p>
+                        <p id='price'>{detailData.salePrice}</p>
                       </div>
                     }
                   ></Button>
@@ -124,13 +139,13 @@ const NftDetail = () => {
                     to bottom,
                     #38ef7d,
                     #11998e
-                  );`,
+                  )`,
                           }}
                           color='#00f5c966'
                         />
                       )}
                     </button>
-                    <p className='like-count'>123</p>
+                    <p className='like-count'>{state.item.likeCount}</p>
                   </div>
                 </div>
               </div>
@@ -141,7 +156,7 @@ const NftDetail = () => {
 
       {/* <AnimalDetail animalDetail={dummyList} /> */}
       <AnimalBook></AnimalBook>
-      <AnimalInfo animal={state.item.animal} />
+      <AnimalInfo animal={state.item.animalSpecies} />
       <TradeHistory></TradeHistory>
       {/* <Test /> */}
       <TradeChart></TradeChart>
@@ -150,4 +165,4 @@ const NftDetail = () => {
   );
 };
 
-export default NftDetail;
+export default NftDetailExplore;

@@ -22,6 +22,7 @@ import MyPage from "./pages/MyPage";
 //dapp
 import { DAppProvider } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
+import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
 // import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
@@ -46,10 +47,7 @@ function App() {
   };
 
   const onNonCorsHeaderHandler = () => {
-    axios
-      .get("http://localhost:8080/not-cors")
-      .then(responseHandler)
-      .catch(errorHandler);
+    axios.get("http://localhost:8080/not-cors").then(responseHandler).catch(errorHandler);
   };
 
   const onCorsHeaderHandler = () => {
@@ -105,7 +103,7 @@ function App() {
   const [searchKeyword, setSearchKeyword] = useState("");
 
   return (
-    <div className="App">
+    <div className='App'>
       {/* <ScrollToTop /> */}
       {/* <Routes>
         <App />
@@ -130,7 +128,7 @@ function App() {
       <Header></Header>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             <DAppProvider config={{}}>
               <Home />
@@ -138,7 +136,7 @@ function App() {
           }
         />
         <Route
-          path="/create"
+          path='/create'
           element={
             <DAppProvider>
               <Create />
@@ -146,7 +144,7 @@ function App() {
           }
         />
         <Route
-          path="/explore"
+          path='/explore'
           element={
             <DAppProvider config={{}}>
               <Explore />
@@ -154,7 +152,7 @@ function App() {
           }
         />
         <Route
-          path="/detail"
+          path='/detail'
           element={
             <DAppProvider config={{}}>
               <NftDetail />
@@ -162,7 +160,7 @@ function App() {
           }
         />
         <Route
-          path="/minting"
+          path='/minting'
           element={
             <DAppProvider config={{}}>
               <Minting />
@@ -170,7 +168,7 @@ function App() {
           }
         />{" "}
         <Route
-          path="/game"
+          path='/game'
           element={
             <DAppProvider config={{}}>
               <Game />
@@ -178,7 +176,7 @@ function App() {
           }
         />
         <Route
-          path="/trade"
+          path='/trade'
           element={
             <DAppProvider config={{}}>
               <Trade />
@@ -186,7 +184,15 @@ function App() {
           }
         />
         <Route
-          path="/mintcard"
+          path='/detailTrade'
+          element={
+            <DAppProvider config={{}}>
+              <NftDetailTrade />
+            </DAppProvider>
+          }
+        />
+        <Route
+          path='/mintcard'
           element={
             <DAppProvider config={{}}>
               <MintCard />
@@ -194,7 +200,7 @@ function App() {
           }
         />
         <Route
-          path="/register"
+          path='/register'
           element={
             <DAppProvider config={{}}>
               <Register />
@@ -202,7 +208,7 @@ function App() {
           }
         />
         <Route
-          path="/mypage"
+          path='/mypage'
           element={
             <DAppProvider config={{}}>
               <MyPage></MyPage>
@@ -225,7 +231,7 @@ function App() {
         className={BtnStatus ? "topBtn active" : "topBtn"} // 버튼 노출 여부
         onClick={handleTop} // 버튼 클릭시 함수 호출
         src={Panda}
-        alt="panda"
+        alt='panda'
       />
       {/* </div> */}
       {/* <header className="App-header">

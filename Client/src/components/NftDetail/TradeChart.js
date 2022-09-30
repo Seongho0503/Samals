@@ -265,134 +265,82 @@ const TradeChart = () => {
     <div>
       {/* <h1>Stats animation remake of Virgil Pana dribbble shot</h1> */}
 
-      <div className="charts-container cf">
-        <div className="chart" id="graph-1-container">
-          <h2 className="title">최근 가격 변동</h2>
-          <div className="chart-svg">
-            <svg className="chart-line" id="chart-1" viewBox="0 0 80 40">
+      <div className='charts-container cf'>
+        <div className='chart' id='graph-1-container'>
+          <h2 className='title'>최근 가격 변동</h2>
+          <div className='chart-svg'>
+            <svg className='chart-line' id='chart-1' viewBox='0 0 80 40'>
               <defs>
-                <clipPath id="clip" x="0" y="0" width="80" height="40">
-                  <rect id="clip-rect" x="-80" y="0" width="77" height="38.7" />
+                <clipPath id='clip' x='0' y='0' width='80' height='40'>
+                  <rect id='clip-rect' x='-80' y='0' width='77' height='38.7' />
                 </clipPath>
 
-                <linearGradient id="gradient-1">
-                  <stop offset="0" stop-color="#00d5bd" />
-                  <stop offset="100" stop-color="#24c1ed" />
+                <linearGradient id='gradient-1'>
+                  <stop offset='0' stopColor='#00d5bd' />
+                  <stop offset='100' stopColor='#24c1ed' />
                 </linearGradient>
 
-                <linearGradient id="gradient-2">
-                  <stop offset="0" stop-color="#954ce9" />
-                  <stop offset="0.3" stop-color="#954ce9" />
-                  <stop offset="0.6" stop-color="#24c1ed" />
-                  <stop offset="1" stop-color="#24c1ed" />
+                <linearGradient id='gradient-2'>
+                  <stop offset='0' stopColor='#954ce9' />
+                  <stop offset='0.3' stopColor='#954ce9' />
+                  <stop offset='0.6' stopColor='#24c1ed' />
+                  <stop offset='1' stopColor='#24c1ed' />
                 </linearGradient>
 
-                <linearGradient
-                  id="gradient-3"
-                  x1="0%"
-                  y1="0%"
-                  x2="0%"
-                  y2="100%"
-                >
-                  <stop
-                    offset="0"
-                    stop-color="rgba(0, 213, 189, 1)"
-                    stop-opacity="0.07"
-                  />
-                  <stop
-                    offset="0.5"
-                    stop-color="rgba(0, 213, 189, 1)"
-                    stop-opacity="0.13"
-                  />
-                  <stop
-                    offset="1"
-                    stop-color="rgba(0, 213, 189, 1)"
-                    stop-opacity="0"
-                  />
+                <linearGradient id='gradient-3' x1='0%' y1='0%' x2='0%' y2='100%'>
+                  <stop offset='0' stopColor='rgba(0, 213, 189, 1)' stopOpacity='0.07' />
+                  <stop offset='0.5' stopColor='rgba(0, 213, 189, 1)' stopOpacity='0.13' />
+                  <stop offset='1' stopColor='rgba(0, 213, 189, 1)' stopOpacity='0' />
                 </linearGradient>
 
-                <linearGradient
-                  id="gradient-4"
-                  x1="0%"
-                  y1="0%"
-                  x2="0%"
-                  y2="100%"
-                >
-                  <stop
-                    offset="0"
-                    stop-color="rgba(149, 76, 233, 1)"
-                    stop-opacity="0.07"
-                  />
-                  <stop
-                    offset="0.5"
-                    stop-color="rgba(149, 76, 233, 1)"
-                    stop-opacity="0.13"
-                  />
-                  <stop
-                    offset="1"
-                    stop-color="rgba(149, 76, 233, 1)"
-                    stop-opacity="0"
-                  />
+                <linearGradient id='gradient-4' x1='0%' y1='0%' x2='0%' y2='100%'>
+                  <stop offset='0' stopColor='rgba(149, 76, 233, 1)' stopOpacity='0.07' />
+                  <stop offset='0.5' stopColor='rgba(149, 76, 233, 1)' stopOpacity='0.13' />
+                  <stop offset='1' stopColor='rgba(149, 76, 233, 1)' stopOpacity='0' />
                 </linearGradient>
               </defs>
             </svg>
-            <h3 className="valueX">time</h3>
+            <h3 className='valueX'>time</h3>
           </div>
-          <div className="chart-values">
-            <p className="h-value">1689h</p>
-            <p className="percentage-value"></p>
-            <p className="total-gain"></p>
+          <div className='chart-values'>
+            <p className='h-value'>1689h</p>
+            <p className='percentage-value'></p>
+            <p className='total-gain'></p>
           </div>
-          <div className="triangle green"></div>
+          <div className='triangle green'></div>
         </div>
-        <div className="chart" id="graph-2-container">
-          <h2 className="title">최근 가격 변동</h2>
-          <div className="chart-svg">
-            <svg className="chart-line" id="chart-2" viewBox="0 0 80 40"></svg>
-            <h3 className="valueX">time</h3>
+        <div className='chart' id='graph-2-container'>
+          <h2 className='title'>최근 가격 변동</h2>
+          <div className='chart-svg'>
+            <svg className='chart-line' id='chart-2' viewBox='0 0 80 40'></svg>
+            <h3 className='valueX'>time</h3>
           </div>
-          <div className="chart-values">
-            <p className="h-value">322h</p>
-            <p className="percentage-value"></p>
-            <p className="total-gain"></p>
+          <div className='chart-values'>
+            <p className='h-value'>322h</p>
+            <p className='percentage-value'></p>
+            <p className='total-gain'></p>
           </div>
-          <div className="triangle red"></div>
+          <div className='triangle red'></div>
         </div>
-        <div className="chart circle" id="circle-1">
-          <h2 className="title">프로필 선호도</h2>
-          <div className="chart-svg align-center">
-            <h2 className="circle-percentage"></h2>
-            <svg
-              className="chart-circle"
-              id="chart-3"
-              width="50%"
-              viewBox="0 0 100 100"
-            >
-              <path
-                className="underlay"
-                d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"
-              />
+        <div className='chart circle' id='circle-1'>
+          <h2 className='title'>프로필 선호도</h2>
+          <div className='chart-svg align-center'>
+            <h2 className='circle-percentage'></h2>
+            <svg className='chart-circle' id='chart-3' width='50%' viewBox='0 0 100 100'>
+              <path className='underlay' d='M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50' />
             </svg>
           </div>
-          <div className="triangle green"></div>
+          <div className='triangle green'></div>
         </div>
-        <div className="chart circle" id="circle-2">
-          <h2 className="title">거래 횟수</h2>
-          <div className="chart-svg align-center">
-            <h2 className="circle-percentage"></h2>
-            <svg
-              className="chart-circle"
-              id="chart-4"
-              width="50%"
-              viewBox="0 0 100 100"
-            >
-              <path
-                className="underlay"
-                d="M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50"
-              />
+        <div className='chart circle' id='circle-2'>
+          <h2 className='title'>거래 횟수</h2>
+          <div className='chart-svg align-center'>
+            <h2 className='circle-percentage'></h2>
+            <svg className='chart-circle' id='chart-4' width='50%' viewBox='0 0 100 100'>
+              <path className='underlay' d='M5,50 A45,45,0 1 1 95,50 A45,45,0 1 1 5,50' />
             </svg>
           </div>
-          <div className="triangle red"></div>
+          <div className='triangle red'></div>
         </div>
       </div>
 

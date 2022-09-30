@@ -35,11 +35,11 @@ export async function getAnimalData() {
   }
 }
 // 거래소 거래 nft 리스트
-export async function getAnimalList() {
+export async function getAnimalList(myAddress) {
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/sale/list`,
+      url: `/api/sale/list?address=${myAddress}`,
     });
     return response;
   } catch {
@@ -52,7 +52,7 @@ export async function getTotalDonate() {
   try {
     const response = await axios({
       method: "GET",
-      url: `http://localhost:8080/api/nft/total-donate`,
+      url: `/api/nft/total-donate`,
     });
 
     return response;

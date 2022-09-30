@@ -71,6 +71,7 @@ const Header = () => {
               },
             })
               .then((res) => {
+                //DB 저장 결과 반환
                 console.log(res);
               })
               .catch((err) => {
