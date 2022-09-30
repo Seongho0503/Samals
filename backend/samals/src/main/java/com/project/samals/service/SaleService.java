@@ -43,7 +43,7 @@ public class SaleService {
         return SaleDto.convert(sale);
     }
 
-    public List<ResSaleListDto> getSaleList(String address){
+    public List<ResSaleListDto> getSaleList(String animalSpecies,String address){
         User user = userRepository.findByWalletAddress(address);
         List<ResSaleListDto> saleList = new ArrayList<>();
         for(Sale sale : saleRepository.findAllByIsSold('N')){
@@ -54,7 +54,10 @@ public class SaleService {
             else
                 saleDto.setLikePush('N');
             saleDto.setLikeCount(saleLikeService.getSaleLikeCount(sale.getSaleSeq()));
-            saleList.add(saleDto);
+            if(animalSpecies!=null&&saleDto.getAnimalSpecies().equals(animalSpecies))
+                saleList.add(saleDto);
+            else if(animalSpecies==null)
+                saleList.add(saleDto);
         }
         return saleList;
     }

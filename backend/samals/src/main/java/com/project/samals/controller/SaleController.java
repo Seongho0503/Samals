@@ -32,8 +32,8 @@ public class SaleController {
 
     @ApiOperation(value = "전체 거래 조회")
     @GetMapping("/list")
-    public ResponseEntity<List<ResSaleListDto>> getSaleList(String address){
-        return new ResponseEntity<>(saleService.getSaleList(address),HttpStatus.OK);
+    public ResponseEntity<List<ResSaleListDto>> getSaleList(String animalSpecies,String address){
+        return new ResponseEntity<>(saleService.getSaleList(animalSpecies,address),HttpStatus.OK);
     }
 
     @ApiOperation(value = "거래 상세 조회")
