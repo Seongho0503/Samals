@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/MainSub.css";
-import bg from "../../assets/minting-title.png";
+import bg from "../../assets/donate.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 
