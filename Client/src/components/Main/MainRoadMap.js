@@ -12,7 +12,7 @@ import { EffectCards } from "swiper";
 const MainRoadMap = () => {
   return (
     <div id='hero2'>
-      <img width='30%' src={title} />
+      <img width='500px' src={title} />
       <br />
       <div className='roadmap'>
         <Swiper effect={"cards"} grabCursor={true} modules={[EffectCards]} className='mySwiper'>
