@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
-//THIS: 0x5e45178E4DE2FA3fEFA86782Fa3faAf94Fd681A0
-//ERC20: 0x4a82464C63ff4252A32674e2B484545cb70CE3EF
-//TOKENURI: https://ipfs.io/ipfs/Qmaw3ZREDkRUYuLHCiGgyxettBQDssM8yzhDktKQZfRU17/donate/
-//TOTAL_NUMBER: 400
+//ERC20: 0x9dE8aCDbFe898E579F8B79D9141F5e595ca09E99
+//TOKENURI: https://ipfs.io/ipfs/QmfZ4wKyngPnAZuZFHsrbKsiibCmbFDhBksFk5hQFxNoHA
+//TOTAL_NUMBER: 5
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
@@ -34,8 +33,7 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     }
     
     // 이벤트 : 로깅
-    event Donated(uint256 indexed newAnimalId, string indexed tokenUri, address indexed donator);
-    event Register(string indexed species, string indexed tokenUri, uint256 indexed tmpAnimalNumber);
+    event Donated(uint256 indexed newAnimalId, address indexed donator);
 
     // using 키워드 : 내부 라이브러리 사용
     using Counters for Counters.Counter;
@@ -46,23 +44,14 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     // constant 키워드를 활용해 명시
     uint256 constant public MINT_PRICE = 500;
 
-    // 변하지 않는 뽑기 마리 수를 명시
-    uint256 public constant TOTAL_NUMBER = 400;
-
-    // 랜덤 뽑기 IPFS 주소
-    string public constant TOKEN_URI = "https://ipfs.io/ipfs/Qmaw3ZREDkRUYuLHCiGgyxettBQDssM8yzhDktKQZfRU17/donate/";
-
-    // 상점 뽑기 IPFS 주소
-    mapping(string => string) market_token_uri;
+    // constant 키워드를 활용해 변하지 않는 뽑기 마리 수를 명시
+    uint256 public TOTAL_NUMBER;
 
     // limited_number은 TOTAL_NUMBER 중 남은 동물의 값
-    uint256 private limited_number = 400;
+    uint256 private limited_number;
 
-    // 동물이 민트되었는지 확인
-    mapping(uint256 => bool) private isAnimalMinted;
-    mapping(string => mapping (uint256 => bool)) private isStoreAnimalMinted;    
-
-    //기부 시: MINTED_ANIMALS에 기록
+    //기부 시: LIMITED_ANIMALS(랜덤) => MINTED_ANIMALS(순서)
+    mapping(uint256 => AnimalInfo) private LIMITED_ANIMALS; 
     mapping(uint256 => AnimalInfo) private MINTED_ANIMALS;
 
     // 상점에서 판매하고 있는 동물의 정보
@@ -90,11 +79,57 @@ contract AnimalNft is ERC721URIStorage, Ownable {
        @parmam bool[] check : 내부에서 사용할 배열, function 내부에서 memory로 생성하기 위해서는 동물의 수를 constant로 한정 지어 사용할 수 있다. 하지만 테스트를 위해 유동적으로 가져가기 위한 목적으로 매개변수로 받아준다.
     */
     constructor(
-        address currencyContractAddress
+        address currencyContractAddress,
+        string memory tokenUri,
+        uint256 total_number
     ) ERC721("AnimalNFT", "AMT") {
         
+        // constant 값을 옮긴 후
+        TOTAL_NUMBER = total_number;
+
+        /* 
+           랜덤 로직에 사용할 일시적인 메모리를 부여
+           초기값 : false
+        */ 
+        bool[] memory check = new bool[](TOTAL_NUMBER);
+
         // ERC20 Contract 불러오기
         _currencyContract = IERC20(currencyContractAddress);
+
+        // 동물의 수 정하기
+        limited_number = check.length;
+
+        /* 생성자 단계에서 랜덤한 배치
+            - 동물의 수(= 배치 횟수) : N
+            - 초반에 가스 비용이 발생하지만 Race Condition의 가능성을 줄일 수 있다 
+        */
+        for(uint256 i = 0; i < limited_number; i++){
+            uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, i + limited_number))) % limited_number;
+            for(uint256 j = random; j < random + limited_number; j++){
+
+                /* 탈중앙화 및 gas 소모 고려
+                    - 단순 조회는 가스가 발생하지 않는다 : 랜덤으로 뽑고 내부에서 빈 값을 찾을 때까지 이동하는 방식
+                    - 배포하는 개발자조차 뽑기의 결과를 예측할 수 없음
+                */
+                if(check[j % limited_number] == false){
+                    // json 번호는 1부터 시작하므로 1을 더해주어야 한다.
+                    LIMITED_ANIMALS[i] = 
+                        AnimalInfo
+                        (
+                            string.concat(tokenUri, "/" , Strings.toString((j % limited_number) + 1), ".json"),
+                            uint256(0),
+                            address(0),
+                            address(0)
+                        );
+
+                    check[j % limited_number] = true;
+
+                    // 조건을 만족하면 반복문 종료
+                    j  = random + limited_number;
+                }
+            }
+        
+        }
     }
     
     /*
@@ -110,7 +145,6 @@ contract AnimalNft is ERC721URIStorage, Ownable {
         string memory tokenUri,
         uint256 tmpAnimalNumber
     ) public returns (string memory){
-        
         // 이전에 등록했던 동물은 더 이상 등록할 수 없다. : 이미 등록한 동물의 개수는 실제 개수 + 1 이다.
         require(_marketAnimalNumber[species] == 0, "THIS KIND OF ANIMAL WAS ALREADY ISSUED");
         require(tmpAnimalNumber > 0, "NO ANIMAL DATA EXISTS");
@@ -120,9 +154,43 @@ contract AnimalNft is ERC721URIStorage, Ownable {
         //남은 상품 수 
         _marketLeftAnimalNumber[species] = tmpAnimalNumber;
 
-        market_token_uri[species] = tokenUri;
+        /* 
+           랜덤 로직에 사용할 일시적인 메모리를 부여
+           초기값 : false
+        */
+        bool[] memory check = new bool[](tmpAnimalNumber);
+        
+        /* 상점 동물 등록에서 랜덤한 배치
+            - 동물의 수(= 배치 횟수) : N
+            - 초반에 가스 비용이 발생
+        */
+        for(uint256 i = 0; i < tmpAnimalNumber; i++){
+            uint256 random = uint(keccak256(abi.encodePacked(block.timestamp, msg.sender, i + tmpAnimalNumber))) % tmpAnimalNumber;
+            for(uint256 j = random; j < random + tmpAnimalNumber; j++){
 
-        emit Register(species, tokenUri, tmpAnimalNumber);
+                /* 탈중앙화 및 gas 소모 고려
+                    - 단순 조회는 가스가 발생하지 않는다 : 랜덤으로 뽑고 내부에서 빈 값을 찾을 때까지 이동하는 방식
+                    - 배포하는 개발자조차 뽑기의 결과를 예측할 수 없음
+                */
+                if(check[j % tmpAnimalNumber] == false){
+                    MARKET_ANIMALS[species].push( 
+                        AnimalInfo(
+                            string.concat(tokenUri, "/" , Strings.toString((j % limited_number) + 1), ".json"),
+                            uint(0),
+                            address(0),
+                            address(0)
+                        )
+                    );
+                    
+                    check[j % tmpAnimalNumber] = true;
+
+                    // 조건을 만족하면 반복문 종료
+                    j  = random + tmpAnimalNumber;
+                }
+            }
+        
+        }
+
         return species;
     }
 
@@ -134,33 +202,31 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     */
     function buy (
             string memory species,
-            uint256 tmpAnimalNumber,
             uint256 donatedAt
     ) public returns (uint256){
             require(_marketLeftAnimalNumber[species] > 0, "ALL ANIMALS WERE ISSUED");
-            require(isStoreAnimalMinted[species][tmpAnimalNumber] == false, "ALREADY ISSUED");
             require(_currencyContract.balanceOf(msg.sender) >= MINT_PRICE, "balance is exhausted");
-            
             _currencyContract.transferFrom(msg.sender, owner(), MINT_PRICE);
-            isStoreAnimalMinted[species][tmpAnimalNumber] = true;
+
             // 먼저 배분
             uint256 newTokenId = _tokenIds.current();
 
             _tokenIds.increment();
-
+            
+            //남은 동물의 수 감소 후 할당
+            uint256 tmpAnimalNumber = -- _marketLeftAnimalNumber[species];
+            
             // ERC721의 소유권 기록
             _mint(msg.sender, newTokenId);
-            
-            string memory tmpString = string.concat(market_token_uri[species], "/", Strings.toString(tmpAnimalNumber), ".json");
             // ERC721URIStorage에 URI 기록
-            _setTokenURI(newTokenId, tmpString);
-
-            AnimalInfo memory tmpAnimalInfo = AnimalInfo(
-                tmpString, donatedAt, msg.sender, msg.sender
-            );
+            _setTokenURI(newTokenId, MARKET_ANIMALS[species][tmpAnimalNumber].tokenUri);
 
             // AnimalInfo : 자체 관리 Struct
-            MINTED_ANIMALS[newTokenId] = tmpAnimalInfo;
+            MARKET_ANIMALS[species][tmpAnimalNumber].donatedAt = donatedAt;
+            MARKET_ANIMALS[species][tmpAnimalNumber].minter = msg.sender;
+            MARKET_ANIMALS[species][tmpAnimalNumber].owner = msg.sender;
+            
+            MINTED_ANIMALS[newTokenId] = MARKET_ANIMALS[species][tmpAnimalNumber];
 
             /* 빠른 검색에 사용될 mapping 내부 기록
                 1. tokenId 기준 데이터 저장
@@ -169,20 +235,17 @@ contract AnimalNft is ERC721URIStorage, Ownable {
             _donateIdsByWallet[msg.sender].push(newTokenId);
 
             // 로깅을 위한 Event 발생 부분
-            
-            emit Donated(newTokenId, tmpString, msg.sender);
+            emit Donated(newTokenId, msg.sender);
+
             return newTokenId;
     }
 
     /*
     * donate
-    * uint256 donatedAt 민트 시간
-    * uint256 animalId 민트 번호
     * @ return newTokenId
     */
     function donate (
-        uint256 donatedAt,
-        uint256 animalId
+        uint256 donatedAt
     )
     public returns (uint256){
 
@@ -191,19 +254,19 @@ contract AnimalNft is ERC721URIStorage, Ownable {
             - 구매자에게 잔고가 있는지 확인한다
         */
         require(0 < limited_number, "ALL ANIMALS WERE ISSUED");
-        require(isAnimalMinted[animalId] == false, "ALREADY ISSUED ONE");
+        
         // tokenId 작동 방식 수정할 것
         require(_currencyContract.balanceOf(msg.sender) >= MINT_PRICE, "balance is exhausted");
         
         // 거래 진행 : ERC-20에 대한 허가 필요
         _currencyContract.transferFrom(msg.sender, owner(), MINT_PRICE);
-        isAnimalMinted[animalId] = true;
+        
         /* Race Condition 방지
             거래 성사 후 tokenIds를 먼저 증가시킨다.
         */
         uint256 newTokenId = _tokenIds.current();
         _tokenIds.increment();
-        -- limited_number;
+        uint256 tmpAnimalNumber = -- limited_number;
         
         /* 소유권 기록 부분 
             1. 표준 ERC721 내부 기록
@@ -214,17 +277,15 @@ contract AnimalNft is ERC721URIStorage, Ownable {
         // ERC721의 소유권 기록
         _mint(msg.sender, newTokenId);
 
-        string memory tmpString = string.concat(TOKEN_URI, Strings.toString(animalId), ".json");
-        
         // ERC721URIStorage에 URI 기록
-        _setTokenURI(newTokenId, tmpString);
+        _setTokenURI(newTokenId, LIMITED_ANIMALS[tmpAnimalNumber].tokenUri);
 
         // AnimalInfo : 자체 관리 Struct
-        AnimalInfo memory tmpAnimalInfo = AnimalInfo(
-                tmpString, donatedAt, msg.sender, msg.sender
-            );
-        
-        MINTED_ANIMALS[newTokenId] = tmpAnimalInfo;
+        LIMITED_ANIMALS[tmpAnimalNumber].donatedAt = donatedAt;
+        LIMITED_ANIMALS[tmpAnimalNumber].minter = msg.sender;
+        LIMITED_ANIMALS[tmpAnimalNumber].owner = msg.sender;
+
+        MINTED_ANIMALS[newTokenId] = LIMITED_ANIMALS[tmpAnimalNumber];
 
         /* 빠른 검색에 사용될 mapping 내부 기록
             1. tokenId 기준 데이터 저장
@@ -233,7 +294,7 @@ contract AnimalNft is ERC721URIStorage, Ownable {
         _donateIdsByWallet[msg.sender].push(newTokenId);
 
         // 로깅을 위한 Event 발생 부분
-        emit Donated(newTokenId, tmpString, msg.sender);
+        emit Donated(newTokenId, msg.sender);
 
         return newTokenId;
     }
@@ -283,22 +344,6 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     ) public view returns(uint256){
         return _marketLeftAnimalNumber[species];
     } 
-
-    /*
-    function _getSpecies(
-        uint256 tokenId
-    ) public view returns(string memory){
-        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
-        return MINTED_ANIMALS[tokenId].species;
-    } 
-
-    function _getClass(
-        uint256 tokenId
-    ) public view returns(string memory){
-        require( tokenId <= _tokenIds.current(), "tokenId is a cause of OverFlow");
-        return MINTED_ANIMALS[tokenId].class;
-    }
-    */
     
     function _getTokenUri(
         uint256 tokenId
@@ -346,6 +391,11 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     function _getLimitedNumber()
     public view returns(uint256){
         return limited_number;
+    }
+
+    function _getFirstLimitedNumber()
+    public view returns(uint256){
+        return TOTAL_NUMBER;
     }
 
     function _getTotalMint()
