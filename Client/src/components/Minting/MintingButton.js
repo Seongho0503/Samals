@@ -28,14 +28,29 @@ const style = {
 
 const MintingButton = () => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+
+  //"기부하고, NFT받기" 버튼 클릭 시
+  const handleOpen = () => {
+    let sessionAddress = JSON.parse(sessionStorage.getItem("persist:root"));
+
+    if (sessionAddress === undefined || JSON.parse(sessionAddress.userInfo).address === "") {
+      alert("지갑을 연결해주세요. 모달 창 및 문구 변경 필요");
+      return;
+    }
+
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   return (
     <div>
       {/* <img id='hero-background' src={list[0].src}/> */}
-      <Button onClick={handleOpen}>
-        <img width='400px' src={buttonImg} />
+      <Button
+        onClick={() => {
+          handleOpen();
+        }}
+      >
+        <img width='400px' src={buttonImg} alt='기부하고, NFT받기' />
       </Button>
       <Modal
         open={open}
@@ -44,9 +59,9 @@ const MintingButton = () => {
         aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
-          <div class='egg-animation'>
+          <div className='egg-animation'>
             <Link to='/mintcard'>
-              <div class='egg-animation'>
+              <div className='egg-animation'>
                 <em></em>
               </div>
             </Link>

@@ -29,8 +29,6 @@ const NFTCard = ({
   animalSpecies,
   likePush,
 }) => {
-  const dispatch = useDispatch();
-  const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
   const [isLike, setIsLike] = useState(likePush === "Y" ? true : false);
   const [colors, setColors] = useState([]);
   const [stateLikeCount, setStateLikeCount] = useState(likeCount);
@@ -57,14 +55,16 @@ const NFTCard = ({
         .then((res) => {
           console.log(res);
           if (res.data === "Success") {
-            setStateLikeCount(stateLikeCount - 1);
             alert("좋아요 취소 성공");
+            setStateLikeCount(stateLikeCount - 1);
           }
         })
         .catch((err) => {
           console.log(err);
         });
-    } else {
+    }
+    // isLike가 fasle일 경우
+    else {
       axios({
         url: "api/sale/like/add",
         method: "POST",
@@ -73,8 +73,8 @@ const NFTCard = ({
         .then((res) => {
           console.log(res);
           if (res.data === "Success") {
-            setStateLikeCount(stateLikeCount + 1);
             alert("좋아요 성공");
+            setStateLikeCount(stateLikeCount + 1);
           }
         })
         .catch((err) => {
