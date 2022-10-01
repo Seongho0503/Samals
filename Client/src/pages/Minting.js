@@ -10,17 +10,16 @@ import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
 import MintingTitle from "../components/Minting/MintingTitle";
 
-const Minting =
-    () => {
-        return (
-            <div id="home">
-                {/* <MintingTitle /> */}
-                <RatingData />
-                <MintingButton />
-                <AnimalData />
-                {/* <MintingModal /> */}
-            </div>
-        );
-    };
+const Minting = () => {
+  return (
+    <div id='home'>
+      <MintingTitle />
+      <RatingData />
+      <MintingButton />
+      <AnimalData />
+      {/* <MintingModal /> */}
+    </div>
+  );
+};
 
 export default Minting;

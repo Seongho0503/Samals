@@ -25,6 +25,15 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: "한수원";
+  src: url("../src/assets/font/한수원_한울림_R.ttf");
+}
+
+@font-face {
+  font-family: "김포평화";
+  src: url("../src/assets/font/김포평화고딕.ttf");
+}
 /* *::-webkit-scrollbar {
   display: inline;
 } */
