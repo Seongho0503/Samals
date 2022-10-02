@@ -1,4 +1,4 @@
-import react, { useEffect } from "react";
+import react, { useEffect, useRef } from "react";
 
 import "../styles/Home.css";
 import MintCardData from "../components/Minting/MintCardData";
@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { totalSupply, donate } from "../utils/event";
 const MintCard = () => {
+  const nftSeq = useRef(0);
   //백 솔 백
   console.log("MintCard.js");
   useEffect(() => {
@@ -22,27 +23,57 @@ const MintCard = () => {
 
     //랜덤하게 뽑을 카드를 백엔드에서 선택
     axios({
-      method: "POST",
-      url: "/api/nft/mint",
-      data: {
-        nftPrice: 0,
-        nftType: "string",
-        tokenId: 0,
-        walletAddress: sessionAddress,
-      },
+      method: "GET",
+      url: "/api/ipfs/number/donate",
     })
       .then(({ data }) => {
-        console.log("", data);
-        donate(data.ntfSeq)
+        nftSeq.current = data;
+        //랜덤 IPFS 번호 뽑기
+        console.log("다음 민팅할 카드 넘버: ", nftSeq.current);
+
+        //블록체인 저장
+        donate(nftSeq.current)
           .then((res) => {
-            console.log("after donate: ", res);
+            console.log("donate return value: ", res);
+            //블록체인 저장 성공 시 해당 정보를 DB 저장
+            axios({
+              method: "POST",
+              url: "api/nft/mint",
+              data: {
+                nftPrice: 500,
+                nftType: "donate",
+                tokenId: nftSeq.current,
+                walletAddress: window.ethereum.selectedAddress,
+              },
+            })
+              .then(({ data }) => {
+                //DB 저장 성공 MSG
+                console.log("DB 저장 성공 MSG: ", data);
+
+                axios({
+                  method: "POST",
+                  url: "api/ipfs/pollOne",
+                  data: {
+                    ipfsSeq: nftSeq.current,
+                  },
+                })
+                  .then(({ data }) => {
+                    console.log("DB ipfs 변경 처리 성공");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              })
+              .catch((err) => {
+                console.log("DB 저장 실패 MSG:", err);
+              });
           })
           .catch((err) => {
-            console.log(err);
+            console.log("도네이트 실패 err: ", err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        console.log("다음 민팅할 카드 넘버 실패 err: ", err);
       });
   }, []);
 

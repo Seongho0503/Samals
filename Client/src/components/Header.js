@@ -16,7 +16,7 @@ import {
   setUserId,
   setUserPFPAddress,
 } from "../redux/slice/UserInfoSlice";
-import { approveERC20ForMint, firstSupply, totalSupply } from "../utils/event";
+import { approveERC20ForMint, totalSupply } from "../utils/event";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -37,6 +37,7 @@ const Header = () => {
       setReduxAddress("");
       return;
     }
+    //메타마스크 연결
     activate(injected, (error) => {
       if ("/No Ethereum provider was found on window.ethereum/".test(error)) {
         window.open("https://metamask.io/download.html");
@@ -46,13 +47,6 @@ const Header = () => {
   }
 
   useEffect(() => {
-    // firstSupply()
-    //   .then((res) => {
-    //     console.log();
-    //   })
-    //   .then((err) => {
-    //     console.log(err);
-    //   });
     if (account !== undefined) {
       //dispatch를 통해 redux에 저장
       dispatch(setAddress(account));
@@ -65,9 +59,8 @@ const Header = () => {
           // 반환 값이 없다면 ERC20 승인함수 실행 및 DB에 저장
           if (data === "") {
             // 민트 권한 허가
-            // approveERC20ForMint();
-            //
-
+            approveERC20ForMint();
+            //DB 가입 처리
             axios({
               method: "POST",
               url: `/api/user/signup`,
@@ -107,12 +100,11 @@ const Header = () => {
         <Link to='/trade'>EXPLORE</Link>
         <Link to='/minting'>DROPS</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
-
         <button
           id='connect-wallet'
           onClick={() => {
             console.log("in return account:", account);
-            // handleConnect(account);
+            handleConnect();
           }}
         >
           {reduxAddress === "" ? "Connect Wallet" : `${reduxAddress}`}
