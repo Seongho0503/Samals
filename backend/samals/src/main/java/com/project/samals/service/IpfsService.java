@@ -34,11 +34,6 @@ public class IpfsService {
             return ipfsList.get(num).getIpfsSeq();
     }
 
-
-
-
-
-
     //ipfs 추가
     public Map<String,Object> addIpfs(Map<String, Object> request){
         Map<String,Object> result = new HashMap<>();
@@ -90,6 +85,7 @@ public class IpfsService {
         log.info("ipfsDto -> {}", ipfsDto);
         return ipfsDto;
     }
+
     public IpfsDto pollIpfs(){
         Ipfs ipfs = ipfsRepository.findTopByIpfsIsUsedIsOrderByIpfsSeq("N");
         ipfs.setIpfsIsUsed('Y');
@@ -99,4 +95,11 @@ public class IpfsService {
         return ipfsDto;
     }
 
+    public IpfsDto pollOneIpfs(int ipfsSeq){
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq);
+        ipfs.setIpfsIsUsed('Y');
+        IpfsDto ipfsDto = new IpfsDto().convert(ipfs);
+        log.info("ipfsDto -> {}", ipfsDto);
+        return ipfsDto;
+    }
 }

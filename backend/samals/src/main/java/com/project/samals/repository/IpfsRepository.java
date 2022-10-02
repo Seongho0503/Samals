@@ -8,7 +8,8 @@ import java.util.List;
 public interface IpfsRepository extends JpaRepository<Ipfs, Long> {
     //전체 IPFS 조회
     List<Ipfs> findAllBy();
-    //다음 IPFS 조회
+
+    //사용하지 않은 다음 IPFS 조회
     Ipfs findTopByIpfsIsUsedIsOrderByIpfsSeq(String is);
 
     Ipfs findByIpfsSeq(int ipfsSeq);
