@@ -13,13 +13,9 @@ export function MetaMaskLogin() {
     console.log("Ethereum successfully detected!");
 
     // 계정연결
-    window.ethereum
-      .request({
-        method: "eth_requestAccounts",
-      })
-      .then((accounts) => {
-        console.log("연결된 계정", accounts);
-      });
+    window.ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
+      console.log("연결된 계정", accounts);
+    });
 
     // 설치가 안되었다면 에러 발생
   } else {
@@ -31,14 +27,24 @@ export function MetaMaskLogin() {
 // 총 민트수 반환
 export var totalSupply = async () => {
   const res = await aceTokenContract.methods.totalSupply().call();
+
   return res;
 };
 
-// 첫 가입 시 금액 지불
+//첫 발금액
 export var firstSupply = async () => {
-  const res = await aceTokenContract.methods.firstSupply().sendAsync({
-    from: window.ethereum.selectedAddress,
-  });
+  console.log("current address: ", window.ethereum.selectedAddress);
+  const res = await aceTokenContract.methods
+    .firstSupply()
+    .send({ from: window.ethereum.selectedAddress });
+
+  return res;
+};
+
+//첫 발금액
+export var balanceOf = async () => {
+  const res = await aceTokenContract.methods.balanceOf(window.ethereum.selectedAddress).call();
+
   return res;
 };
 
@@ -46,42 +52,49 @@ export var firstSupply = async () => {
 export var approveERC20ForMint = async () => {
   const res = await aceTokenContract.methods
     .approve(animalNftContractAddress, 1000000000)
-    .sendAsync({
-      from: window.ethereum.selectedAddress,
-    }); //유저 지갑 주소를 넣어줄 것
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
 
   return res;
 };
 
 // 판매 결제 허가 : 구매자가 NftSale에 대한 구매 승인
 export var approveERC20ForSale = async (saleNftContractAddress) => {
-  const res = await aceTokenContract.methods.approve(saleNftContractAddress, 1000000000).sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+  const res = await aceTokenContract.methods
+    .approve(saleNftContractAddress, 1000000000)
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
 
   console.log(res);
 };
 
 // 판매 양도 허가 : 판매글을 올린 사람은 글이 생성된 이후 곧바로 NFT 거래 허가
 export var approveERC721ForSale = async (saleNftContractAddress, animalId) => {
-  const res = await animalNftContract.methods.approve(saleNftContractAddress, animalId).sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+  const res = await animalNftContract.methods
+    .approve(saleNftContractAddress, animalId)
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
 
   console.log(res);
 };
 
 // 기부(민트-유료) 진행
-export var donate = async (animalId) => {
-  const res = await animalNftContract.methods.donate(Date.now(), animalId).sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+export var donate = async (nftSeq) => {
+  console.log("Date.now(): ", Date.now(), ", nftSeq: ", nftSeq);
+  console.log("window.ethereum.selectedAddress: ", window.ethereum.selectedAddress);
+  const res = await animalNftContract.methods
+    .donate(Date.now(), nftSeq)
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
 
   return res;
 };
 
-// 기부(민트-유료) 총 개수 조회
+// 기부(민트-유료) 현재까지 발급된 민트 개수 조회
 export var getTotalMint = async () => {
+  const res = await animalNftContract.methods._getTotalMint().call();
+
+  return res;
+};
+
+// 기부(민트-유료) 최초 발행한 뽑기 NFT 개수 조회
+export var getLimitedNumber = async () => {
   const res = await animalNftContract.methods._getLimitedNumber().call();
 
   return res;
@@ -89,9 +102,9 @@ export var getTotalMint = async () => {
 
 // 증정(민트-무료) 진행
 export var createMascortNft = async () => {
-  const res = await mascortNftContract.methods._createMascortNft(Date.now()).sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+  const res = await mascortNftContract.methods
+    ._createMascortNft(Date.now())
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
 
   return res;
 };
@@ -110,26 +123,20 @@ export var createSale = async (animalId, price, startedAt, endedAt) => {
   // 1 : 글을 등록하고 글의 주소를 받아온다.
   const _createSale = await nftSaleManagerContract.methods
     .createSale(animalId, price, startedAt, endedAt)
-    .sendAsync({
-      from: window.ethereum.selectedAddress,
-    })
+    .send({ from: window.ethereum.selectedAddress })
     .then("1", console.log); //유저 지갑 주소를 넣어줄 것
   console.log("판매 contract 주소", _createSale.events.SaleCreated.returnValues.newNftSaleAddress);
 
   // 2 : 글에 대한 NFT 양도 허가를 진행한다.
   const res1 = await animalNftContract.methods
     .approve(_createSale.events.SaleCreated.returnValues.newNftSaleAddress, animalId)
-    .sendAsync({
-      from: window.ethereum.selectedAddress,
-    }); //유저 지갑 주소를 넣어줄 것
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log("1 : NFT 양도 허가", res1);
 
   // 게시글 솔리디티 등록
   const res2 = await nftSaleManagerContract.methods
     .recordSale(animalId, _createSale.events.SaleCreated.returnValues.newNftSaleAddress)
-    .sendAsync({
-      from: window.ethereum.selectedAddress,
-    }); //유저 지갑 주소를 넣어줄 것
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log("2 : 게시글 등록", res2);
 };
 
@@ -140,17 +147,17 @@ export var salePurchase = async (nftSaleAddress) => {
 
   const nftSaleContract = createNftSaleContract(nftSaleAddress);
   // 게시글 솔리디티 등록
-  const res = await nftSaleContract.methods.purchase().sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+  const res = await nftSaleContract.methods
+    .purchase()
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log(res);
 };
 
 // 무료 증정 NFT에 대한 소유권 부여
 export var getMascortNft = async () => {
-  const res = await mascortNftContract.methods.createMascortNft().sendAsync({
-    from: window.ethereum.selectedAddress,
-  }); //유저 지갑 주소를 넣어줄 것
+  const res = await mascortNftContract.methods
+    .createMascortNft()
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log(res);
 };
 
