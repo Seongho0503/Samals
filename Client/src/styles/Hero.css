@@ -8,7 +8,6 @@
   background-size: cover;
   /* z-index: 1; */
   margin-top: 6rem;
-  top: -82px;
 }
 #hero2 {
   width: 100%;
@@ -88,16 +87,16 @@
   opacity: 0.3;
 }
 #header {
-  height: 77px;
+  height: 70px;
   /* border: 0.001px solid red; */
   display: flex;
+  z-index: 999;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   position: fixed;
   /* margin-bottom: 13rem; */
   top: 0;
-  z-index: 1;
   right: 0;
   left: 0;
   background: #064f11;
