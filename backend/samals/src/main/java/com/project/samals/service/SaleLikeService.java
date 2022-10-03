@@ -26,6 +26,8 @@ public class SaleLikeService {
 
     public int getSaleLikeCount(long saleSeq) {
         Sale sale = saleRepository.findBySaleSeq(saleSeq);
+        if(sale==null)
+            return -1;
         List<SaleLike> saleLikes = saleLikeRepository.findAllBySale(sale);
         return saleLikes.size();
     }
@@ -34,9 +36,12 @@ public class SaleLikeService {
         User user = userRepository.findByWalletAddress(saleLikeDto.getWalletAddress());
         Sale sale = saleRepository.findBySaleSeq(saleLikeDto.getSaleSeq());
 
+        if(user==null || sale ==null)
+            return "fail - No user Or No Sale";
+
         SaleLike findLike = saleLikeRepository.findBySaleAndUser(sale,user);
         if(findLike!=null)
-            return "fail";
+            return "fail - Already Push";
 
         SaleLike saleLike = SaleLike.builder().sale(sale).user(user).build();
         saleLikeRepository.save(saleLike);
@@ -46,12 +51,15 @@ public class SaleLikeService {
 
         saleRepository.save(sale);
         userRepository.save(user);
-        return "Success";
+        return "Success - Push";
     }
 
     public String deleteSaleLike(ReqSaleLikeDto saleLikeDto) {
         User user = userRepository.findByWalletAddress(saleLikeDto.getWalletAddress());
         Sale sale = saleRepository.findBySaleSeq(saleLikeDto.getSaleSeq());
+
+        if(user==null || sale ==null)
+            return "fail - No user Or No Sale";
 
         SaleLike findLike = saleLikeRepository.findBySaleAndUser(sale,user);
         if(findLike==null)
@@ -63,19 +71,14 @@ public class SaleLikeService {
 
     public List<ResMySaleLikeDto> getMyLikeList(String address) {
         User user = userRepository.findByWalletAddress(address);
+        if(user==null)
+            return null;
+
         List<SaleLike> findLikes = saleLikeRepository.findAllByUser(user);
 
         List<ResMySaleLikeDto> likeList = new ArrayList<>();
         for(SaleLike saleLike : findLikes){
-            likeList.add(ResMySaleLikeDto.builder()
-                    .saleSeq(saleLike.getSale().getSaleSeq())
-                    .salePrice(saleLike.getSale().getSalePrice())
-                    .likeCount(getSaleLikeCount(saleLike.getSale().getSaleSeq()))
-                    .isSold(saleLike.getSale().getIsSold())
-                    .imgUri(saleLike.getSale().getNft().getIpfs().getIpfsUri())
-                    .animalSpecies(saleLike.getSale().getNft().getIpfs().getAnimal().getAnimalSpecies())
-                    .nftMintNumber(saleLike.getSale().getNft().getNftMintNumber())
-                    .build());
+             likeList.add(new ResMySaleLikeDto(saleLike,getSaleLikeCount(saleLike.getSale().getSaleSeq())));
         }
         return likeList;
     }
