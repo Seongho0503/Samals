@@ -32,7 +32,7 @@ public class ResSaleDetailDto {
         return ResSaleDetailDto.builder()
                 .saleSeq(sale.getSaleSeq())
                 .tokenId(sale.getNft().getTokenId())
-                .tokenImgUrl("https://ipfs.io/ipfs/"+sale.getNft().getIpfs().getIpfsUri())
+                .tokenImgUrl(sale.getNft().getIpfs().getIpfsUri())
                 .animalSpecies(sale.getNft().getIpfs().getAnimal().getAnimalSpecies())
                 .mintNumber(sale.getNft().getNftMintNumber())
                 .saleContractAddress(sale.getSaleContractAddress())

@@ -28,10 +28,24 @@ public class IpfsService {
     public IpfsDto getRandom(String ipfsType){
         List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsType('N',ipfsType);
         int num = (int)(Math.random()*(ipfsList.size()));
-        if(ipfsType.equals("shop"))
+        if(ipfsType.equals("market"))
            return new IpfsDto().convert(ipfsList.get(num));
         else
             return new IpfsDto().convert(ipfsList.get(num));
+    }
+
+    public String add(String animalSpecies){
+
+        for(int i=1;i<101;i++){
+            Ipfs ipfs = Ipfs.builder()
+                    .ipfsUri("https://j7d103.p.ssafy.io/image/downloadFile/"+animalSpecies+"%20("+i+").png")
+                    .ipfsType("donate")
+                    .ipfsIsUsed('N')
+                    .animal(animalRepository.findByAnimalSpecies(animalSpecies))
+                    .build();
+            ipfsRepository.save(ipfs);
+        }
+        return "Success";
     }
 
     //ipfs 추가

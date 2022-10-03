@@ -1,6 +1,7 @@
 package com.project.samals.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.project.samals.domain.Ipfs;
 import com.project.samals.domain.Nft;
 import com.project.samals.domain.User;
 import lombok.*;
@@ -20,15 +21,20 @@ public class ReqNftDto {
 
     private String nftType;
 
-    private int ipfs_seq;
+    private int ipfsSeq;
 
     private int nftPrice;
 
-    public Nft toEntity(){
+    public Nft toEntity(Ipfs ipfs){
         return Nft.builder()
                 .tokenId(tokenId)
                 .nftType(nftType)
                 .nftPrice(nftPrice)
+                .createdTime(new Date())
+                .updatedTime(new Date())
+                .nftOwner(walletAddress)
+                .ipfs(ipfs)
+                .nftMintNumber(ipfs.getAnimal().getAnimalCurrent())
                 .build();
     }
 

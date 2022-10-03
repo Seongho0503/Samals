@@ -26,7 +26,7 @@ public class IpfsController {
     private  final IpfsService ipfsService;
     private static final Logger log = LoggerFactory.getLogger(IpfsController.class);
 
-    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or shop")
+    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or market")
     @GetMapping("/number/{ipfsType}")
     public ResponseEntity<IpfsDto> getRandom(@PathVariable String ipfsType){
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
@@ -36,6 +36,12 @@ public class IpfsController {
     @PostMapping("/add")
     public ResponseEntity<Map> addIpfs(@RequestBody Map<String, Object> request){
         return new ResponseEntity<>(ipfsService.addIpfs(request), HttpStatus.OK);
+    }
+
+    @ApiOperation(value="ipfs 데이터 추가(jh)")
+    @PostMapping("/addData")
+    public ResponseEntity<String> add(String animalSpecies){
+        return new ResponseEntity<>(ipfsService.add(animalSpecies), HttpStatus.OK);
     }
 
     @ApiOperation(value="모든 ipfs 데이터 조회")
