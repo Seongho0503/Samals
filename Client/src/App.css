@@ -34,6 +34,14 @@ body {
   font-family: "김포평화";
   src: url("../src/assets/font/김포평화고딕.ttf");
 }
+
+@font-face {
+  font-family: "GangwonEdu_OTFBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 /* *::-webkit-scrollbar {
   display: inline;
 } */

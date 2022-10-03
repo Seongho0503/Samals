@@ -108,8 +108,9 @@
   }
 }
 .egg-animation {
-  margin: auto;
   position: absolute;
+  margin-left: 90px;
+  margin-top: 50px;
   top: 0;
   right: 0;
   bottom: 0;
@@ -126,7 +127,7 @@
   height: 2.5em;
   margin-left: -4em;
   margin-top: -1.2em;
-  background-color: rgba(0, 0, 0, 0.1);
+  /* background-color: rgba(0, 0, 0, 0.1); */
   border-radius: 50%;
   -webkit-animation: shadow-wobble 2.2s ease-in-out infinite;
   animation: shadow-wobble 2.2s ease-in-out infinite;
