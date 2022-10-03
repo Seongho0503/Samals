@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/sale")
@@ -66,7 +65,7 @@ public class SaleController {
         return new ResponseEntity<>(saleService.completeSale(reqSaleCompleteDto), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "거래 검색")
+    @ApiOperation(value = "거래 검색(By 제목)")
     @GetMapping("/search/{keyword}")
     public ResponseEntity<List<ResSaleListDto>> search(@PathVariable String keyword,String address) {
         return new ResponseEntity<>(saleService.search(keyword,address),HttpStatus.OK);
