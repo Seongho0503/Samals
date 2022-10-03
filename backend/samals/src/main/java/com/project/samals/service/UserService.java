@@ -1,6 +1,7 @@
 package com.project.samals.service;
 
 import com.project.samals.domain.Ipfs;
+import com.project.samals.domain.Nft;
 import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
 import com.project.samals.dto.UserDto;
@@ -8,9 +9,7 @@ import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.request.ReqUserSignupDto;
 import com.project.samals.dto.request.ReqUserUpdateDto;
 import com.project.samals.dto.response.ResProfileCountDto;
-import com.project.samals.repository.IpfsRepository;
-import com.project.samals.repository.ProfileImgRepository;
-import com.project.samals.repository.UserRepository;
+import com.project.samals.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,8 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final IpfsRepository ipfsRepository;
+    private final SaleRepository saleRepository;
+    private final NftRepository nftRepository;
     private final ProfileImgRepository profileImgRepository;
 
     public UserDto signup(ReqUserSignupDto userDto) {
@@ -67,6 +68,10 @@ public class UserService {
     public String setProfile(ReqProfileDto profileDto) {
         User user = userRepository.findByWalletAddress(profileDto.getAddress());
         Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
+        Nft nft = nftRepository.findByTokenId(profileDto.getTokenId());
+
+        if(saleRepository.findByNftAndSellerAddress(nft,user.getWalletAddress())!=null)
+            return "fail - on Sale";
 
         if(user==null||ipfs==null)
             return "fail";

@@ -34,8 +34,14 @@ public class NftService {
         if(user==null)
             return null;
 
+        if(ipfsRepository.findByIpfsTokenId(nftDto.getTokenId()-1)==null)
+            return null;
+
         Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq());
-        if(ipfs==null)
+        if(ipfs==null||ipfs.getIpfsIsUsed()=='Y')
+            return null;
+
+        if(ipfsRepository.findByIpfsTokenId(nftDto.getTokenId())!=null)
             return null;
 
         ipfs.getAnimal().setAnimalCurrent(ipfs.getAnimal().getAnimalCurrent()+1);
