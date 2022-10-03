@@ -123,7 +123,7 @@ function App() {
           <Route
             path='/mypage'
             element={
-              <MyPage></MyPage>
+              <UserPage></UserPage>
               // {/* <MyPage nftList={nftList} address={address}></MyPage> */}
             }
           />
