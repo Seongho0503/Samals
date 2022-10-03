@@ -14,13 +14,14 @@ import "../styles/Game.css";
 const Game = () => {
   const [loadingInProgress, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener, unload } =
+  const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener, unload, loadingProgression } =
     useUnityContext({
       loaderUrl: "Unity/WebGLbuild_new.loader.js",
       dataUrl: "Unity/WebGLbuild_new.data",
       frameworkUrl: "Unity/WebGLbuild_new.framework.js",
       codeUrl: "Unity/WebGLbuild_new.wasm",
     });
+  const loadingPercentage = Math.round(loadingProgression * 100);
     
   useEffect(() => {
     if (document.querySelector(`script[src="web3/index.js"]`)) return;
@@ -56,15 +57,17 @@ const Game = () => {
         <Button2></Button2>
       </div>
       {isLoaded === false && (
-        <ProgressBar
-          height='80'
-          width='80'
-          ariaLabel='progress-bar-loading'
-          wrapperStyle={{}}
-          wrapperClass='progress-bar-wrapper'
-          borderColor='#F4442E'
-          barColor='#51E5FF'
-        />
+        <div><ProgressBar
+        height='80'
+        width='80'
+        ariaLabel='progress-bar-loading'
+        wrapperStyle={{}}
+        wrapperClass='progress-bar-wrapper'
+        borderColor='#F4442E'
+        barColor='#51E5FF'
+      />
+      <p>{loadingPercentage}%</p></div>
+        
       )} 
         <Unity
           unityProvider={unityProvider}
