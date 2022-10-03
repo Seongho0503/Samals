@@ -68,22 +68,24 @@ import { getTotalDonate } from "../../api";
 const MainSub = () => {
   const [response, setResponse] = useState();
 
-  // useEffect(() => {
-  //   getTotalDonate()
-  //     .then(({ data }) => {
-  //       console.log(data);
-  //       return data;
-  //     })
-  //     .then((res) => {
-  //       setResponse(res);
-  //     });
-  // }, []);
+  useEffect(() => {
+    getTotalDonate()
+      .then(({ data }) => {
+        console.log(data);
+        return data;
+      })
+      .then((res) => {
+        setResponse(res);
+      });
+  }, []);
+  const ex1 = response?.toString() || "";
+  let result = ex1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <div id='mainsub'>
       {/* <img id='hero-background' src={list[0].src}/> */}
       <img width='500px' src={title} />
 
-      <h1 id='header-subtext-first'>{response}</h1>
+      <h1 id='header-subtext-first'>{result}</h1>
 
       <h5 id='header-subtext-second'>
         Samals를 통해 기부된 금액은 위와 같아요 <br />
