@@ -55,7 +55,8 @@ public class UserService {
     }
 
     public UserDto updateUser(ReqUserUpdateDto userDto) {
-        setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId()));
+        if(setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId())).equals("fail"))
+            return null;
         User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
         user.setUserBio(userDto.getUserBio());
         user.setUserNickname(userDto.getUserNickname());
@@ -66,6 +67,10 @@ public class UserService {
     public String setProfile(ReqProfileDto profileDto) {
         User user = userRepository.findByWalletAddress(profileDto.getAddress());
         Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
+
+        if(user==null||ipfs==null)
+            return "fail";
+
         if(profileImgRepository.findByIpfs(ipfs)!=null)
             return "fail";
 
@@ -82,6 +87,8 @@ public class UserService {
 
     public String deleteProfile(String address) {
         User user = userRepository.findByWalletAddress(address);
+        if(user ==null)
+            return "Fail - no user";
         profileImgRepository.deleteByUser(user);
         return "Success";
     }
