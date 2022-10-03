@@ -20,7 +20,7 @@ import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
 
 //dapp
-import { DAppProvider } from "@usedapp/core";
+
 import NftDetail from "./pages/NftDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
@@ -102,31 +102,25 @@ function App() {
 
   return (
     <div className='App'>
-      <DAppProvider
-        config={{
-          multicallAddresses: { 1337: window.ethereum.selectedAddress },
-        }}
-      >
-        <Header></Header>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/create' element={<Create />} />
-          <Route path='/explore' element={<Explore />} />
-          <Route path='/detail' element={<NftDetail />} />
-          <Route path='/minting' element={<Minting />} /> <Route path='/game' element={<Game />} />
-          <Route path='/trade' element={<Trade />} />
-          <Route path='/detailTrade' element={<NftDetailTrade />} />
-          <Route path='/mintcard' element={<MintCard />} />
-          <Route path='/register' element={<Register />} />
-          <Route
-            path='/mypage'
-            element={
-              <MyPage></MyPage>
-              // {/* <MyPage nftList={nftList} address={address}></MyPage> */}
-            }
-          />
-        </Routes>
-      </DAppProvider>
+      <Header></Header>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/create' element={<Create />} />
+        <Route path='/explore' element={<Explore />} />
+        <Route path='/detail' element={<NftDetail />} />
+        <Route path='/minting' element={<Minting />} /> <Route path='/game' element={<Game />} />
+        <Route path='/trade' element={<Trade />} />
+        <Route path='/detailTrade' element={<NftDetailTrade />} />
+        <Route path='/mintcard' element={<MintCard />} />
+        <Route path='/register' element={<Register />} />
+        <Route
+          path='/mypage'
+          element={
+            <MyPage></MyPage>
+            // {/* <MyPage nftList={nftList} address={address}></MyPage> */}
+          }
+        />
+      </Routes>
       <img
         className={BtnStatus ? "topBtn active" : "topBtn"} // 버튼 노출 여부
         onClick={handleTop} // 버튼 클릭시 함수 호출

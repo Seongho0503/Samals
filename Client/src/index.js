@@ -29,13 +29,23 @@ import Register from "./pages/Register";
 import scrollTo from "./components/base/Footer";
 
 //dapp
-import { DAppProvider } from "@usedapp/core";
+import { DAppProvider, Mainnet } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
 import ScrollTo from "./components/base/ScrollToTop";
 import ScrollToTop from "./components/base/ScrollToTop";
 import Footer from "./components/base/ScrollToTop";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Provider, Web3Provider } from "@ethersproject/providers";
+
+const config = {
+  readOnlyChainId: 1337,
+  readOnlyUrls: {
+    1337: "http://13.209.82.138:8545",
+  },
+  multicallAddresses: {
+    1337: "http://13.209.82.138:8545",
+  },
+};
 
 function getLibrary(provider) {
   const library = new Web3Provider(provider, "any");
@@ -75,7 +85,9 @@ ReactDOM.render(
     <Web3ReactProvider getLibrary={getLibrary}>
       <ReduxProvider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <DAppProvider config={config}>
+            <App />
+          </DAppProvider>
         </PersistGate>
       </ReduxProvider>
     </Web3ReactProvider>
