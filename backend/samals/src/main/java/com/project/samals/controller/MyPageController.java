@@ -29,7 +29,7 @@ public class MyPageController {
     private final NftService nftService;
     private final SaleLikeService saleLikeService;
 
-    @ApiOperation(value = "내 거래 내역 조회")
+    @ApiOperation(value = "내 거래 내역 조회 (판매 + 구매 - 날짜 내림차순")
     @GetMapping("/{address}/sale")
     public ResponseEntity<List<SaleDto>> getMySaleList(@PathVariable String address){
         return new ResponseEntity<>(saleService.getMySaleList(address),HttpStatus.OK);
