@@ -65,7 +65,7 @@ const BirdList = () => {
   const myLikeList = async (address: string) => {
     try {
       await axios.get(`/api/mypage/${address}` + `/like`).then((res) => {
-        console.log("마의리스트", res);
+        console.log("나의좋아요리스트", res);
         //setSaleDate(res.data[0].saleCompletedTime);
         // console.log(saleDetail);
       });
