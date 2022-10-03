@@ -4,7 +4,7 @@ import "../styles/TradeSelect.css";
 const TradeSelect = () => {
   function onClick() {
     console.log("Hi there, user!");
-    window.location.replace("/register");
+    window.location.replace("/create");
   }
   return (
     <div className='animal-container'>

@@ -26,19 +26,11 @@
 }
 .items-wrap:before {
   left: 0;
-  background: linear-gradient(
-    90deg,
-    rgb(10, 11, 19) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(90deg, rgb(10, 11, 19) 0%, rgba(#e7e7e7, 0) 100%);
 }
 .items-wrap:after {
   right: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgb(10, 11, 19) 100%
-  );
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgb(#e7e7e7) 100%);
 }
 .items {
   flex-shrink: 0;

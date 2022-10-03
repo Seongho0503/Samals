@@ -9,7 +9,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import Create from "./pages/Create";
 import Explore from "./pages/Explore";
 import Trade from "./pages/Trade";
 import Register from "./pages/Register2";
@@ -18,14 +17,17 @@ import Minting from "./pages/Minting";
 import MintCard from "./pages/MintCard";
 import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
+import Create from "./components/trade/Create";
 
 //dapp
 
 import NftDetail from "./pages/NftDetail";
+import NftMDetail from "./pages/NftMDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
 import Footer from "./components/base/Footer";
 import Panda from "./assets/panda.png";
+import UserPage from "./pages/UserPage";
 
 function App() {
   const { pathname } = useLocation();

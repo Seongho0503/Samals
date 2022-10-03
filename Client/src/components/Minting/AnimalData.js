@@ -9,7 +9,7 @@ import animal07 from "../../assets/card/lizard2.png";
 import animal08 from "../../assets/card/penguin.png";
 
 import "../../styles/MintingCard.css";
-import bg from "../../assets/bg-04.png";
+import bg from "../../assets/bg-05.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";

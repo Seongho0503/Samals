@@ -21,7 +21,7 @@ import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
 import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
-import TradeChart from "../components/NftDetail/TradeChart";
+// import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 
 import axios from "axios";
@@ -152,7 +152,7 @@ const NftDetail = () => {
       <AnimalInfo animal={state.item.animal} />
       <TradeHistory></TradeHistory>
       {/* <Test /> */}
-      <TradeChart></TradeChart>
+      {/* <TradeChart></TradeChart> */}
       <MainLast />
     </div>
   );

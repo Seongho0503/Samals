@@ -35,6 +35,7 @@ const NftDetailExplore = () => {
     tokenImgUrl: "",
     salePrice: "",
     animalSpecies: "",
+    tokenId: "",
   });
 
   const like = () => setIsLike(!isLike);
@@ -54,6 +55,7 @@ const NftDetailExplore = () => {
       .then(({ data }) => {
         setDetailData(data);
         console.log(data);
+        console.log("아이템", state.item);
       })
       .catch((err) => {
         console.log(err);
@@ -153,13 +155,14 @@ const NftDetailExplore = () => {
           }
         />
       </div>
-
+      <TradeHistory sale={state.item.saleSeq}></TradeHistory>
+      {/* <TradeChart></TradeChart> */}
       {/* <AnimalDetail animalDetail={dummyList} /> */}
-      <AnimalBook></AnimalBook>
+      <AnimalBook animal={state.item.animalSpecies}></AnimalBook>
       <AnimalInfo animal={state.item.animalSpecies} />
-      <TradeHistory></TradeHistory>
+
       {/* <Test /> */}
-      <TradeChart></TradeChart>
+      {/* <TradeChart></TradeChart> */}
       <MainLast />
     </div>
   );
