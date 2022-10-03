@@ -16,6 +16,7 @@ import {
   setUserId,
   setUserPFPAddress,
 } from "../redux/slice/UserInfoSlice";
+import { approveERC20ForMint, totalSupply } from "../utils/event";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -23,9 +24,6 @@ const Header = () => {
   const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
   const { chainedId, account, active, activate, deactivate } = useWeb3React();
   const dispatch = useDispatch();
-  const abcd = () => {
-    console.log("account: ", account);
-  };
 
   //연결 확인
   async function handleConnect() {
@@ -39,30 +37,30 @@ const Header = () => {
       setReduxAddress("");
       return;
     }
+    //메타마스크 연결
     activate(injected, (error) => {
       if ("/No Ethereum provider was found on window.ethereum/".test(error)) {
         window.open("https://metamask.io/download.html");
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
       }
-    }).finally(() => {
-      console.log(account);
     });
   }
 
   useEffect(() => {
-    console.log(account);
-
     if (account !== undefined) {
       //dispatch를 통해 redux에 저장
       dispatch(setAddress(account));
       setReduxAddress(account);
-      //해당 지갑 주소의 정보 호출
+      //DB에서 해당 지갑 주소의 정보 호출
       axios({ method: "GET", url: `/api/user/${account}` })
         .then(({ data }) => {
           console.log("get res: ", data);
 
-          // 반환 값이 없다면 DB에 저장
+          // 반환 값이 없다면 ERC20 승인함수 실행 및 DB에 저장
           if (data === "") {
+            // 민트 권한 허가
+            approveERC20ForMint();
+            //DB 가입 처리
             axios({
               method: "POST",
               url: `/api/user/signup`,
@@ -97,17 +95,16 @@ const Header = () => {
       </Link>
 
       <div id='link-containers'>
-        <Link to='/game'>GAME</Link>
+        <Link to='/game'>Island</Link>
         <Link to='/explore'>MARKET</Link>
         <Link to='/trade'>EXPLORE</Link>
         <Link to='/minting'>DROPS</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
-
         <button
           id='connect-wallet'
           onClick={() => {
             console.log("in return account:", account);
-            handleConnect(account);
+            handleConnect();
           }}
         >
           {reduxAddress === "" ? "Connect Wallet" : `${reduxAddress}`}

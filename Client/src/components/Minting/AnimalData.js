@@ -9,7 +9,7 @@ import animal07 from "../../assets/card/lizard2.png";
 import animal08 from "../../assets/card/penguin.png";
 
 import "../../styles/MintingCard.css";
-import bg from "../../assets/bg-04.png";
+import bg from "../../assets/bg-05.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Footer from "../Footer";
@@ -46,49 +46,49 @@ const AnimalData = () => {
   }, []);
 
   return (
-    <div class='animal-nft'>
-      <h2 class='animal-data-title'>현재 이 만큼의 NFT가 남아있어요!</h2>
-      <div class='animal-card'>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal01} />
+    <div className='animal-nft'>
+      <h2 className='animal-data-title'>현재 이 만큼의 NFT가 남아있어요!</h2>
+      <div className='animal-card'>
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal01} />
           <h2>와이오밍 두꺼비</h2>
 
           <h2>{frog}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal02} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal02} />
           <h2>아프리카 숲 코끼리</h2>
           <h2>{elephant}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal03} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal03} />
           <h2>호랑이</h2>
           <h2>{tiger}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal04} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal04} />
           <h2>백상아리</h2>
           <h2>{shark}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal05} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal05} />
           <h2>아무르표범</h2>
 
           <h2>{leopard}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal06} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal06} />
           <h2>큰뿔코뿔소</h2>
 
           <h2>{rhino}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal07} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal07} />
           <h2>바다 이구아나</h2>
           <h2>{iguana}개</h2>
         </div>
-        <div class='animal-card-detail'>
-          <img class='animal-card-img' src={animal08} />
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal08} />
           <h2>남부 바위뛰기 펭귄</h2>
 
           <h2>{penguin}개</h2>
