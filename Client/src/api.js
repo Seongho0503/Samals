@@ -86,3 +86,16 @@ export async function getNftInfo(tokenId) {
     return "";
   }
 }
+
+// 동물 리스트 조회
+export async function getSomeList(animalSpecies) {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/sale/list/${animalSpecies}`,
+    });
+    return response;
+  } catch {
+    return "";
+  }
+}

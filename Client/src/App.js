@@ -9,7 +9,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import Home from "./pages/Home";
-import Create from "./pages/Create";
 import Explore from "./pages/Explore";
 import Trade from "./pages/Trade";
 import Register from "./pages/Register2";
@@ -18,16 +17,19 @@ import Minting from "./pages/Minting";
 import MintCard from "./pages/MintCard";
 import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
+import Create from "./components/trade/Create";
 
 //dapp
 import { DAppProvider } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
+import NftMDetail from "./pages/NftMDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
 // import { Web3ReactProvider } from "@web3-react/core";
 import { Web3Provider } from "@ethersproject/providers";
 import Footer from "./components/base/Footer";
 import Panda from "./assets/panda.png";
+import UserPage from "./pages/UserPage";
 
 function App() {
   const { pathname } = useLocation();
@@ -155,7 +157,7 @@ function App() {
           path='/detail'
           element={
             <DAppProvider config={{}}>
-              <NftDetail />
+              <NftMDetail />
             </DAppProvider>
           }
         />
@@ -203,7 +205,7 @@ function App() {
           path='/register'
           element={
             <DAppProvider config={{}}>
-              <Register />
+              <Trade />
             </DAppProvider>
           }
         />
@@ -211,7 +213,8 @@ function App() {
           path='/mypage'
           element={
             <DAppProvider config={{}}>
-              <MyPage></MyPage>
+              <UserPage></UserPage>
+              {/* <MyPage></MyPage> */}
               {/* <MyPage nftList={nftList} address={address}></MyPage> */}
             </DAppProvider>
           }
