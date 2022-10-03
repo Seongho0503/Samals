@@ -25,13 +25,13 @@ public class IpfsService {
     private final AnimalRepository animalRepository;
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
 
-    public int getRandom(String ipfsType){
+    public IpfsDto getRandom(String ipfsType){
         List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsType('N',ipfsType);
         int num = (int)(Math.random()*(ipfsList.size()));
         if(ipfsType.equals("shop"))
-           return ipfsList.get(num).getIpfsSeq()-400;
+           return new IpfsDto().convert(ipfsList.get(num));
         else
-            return ipfsList.get(num).getIpfsSeq();
+            return new IpfsDto().convert(ipfsList.get(num));
     }
 
 
