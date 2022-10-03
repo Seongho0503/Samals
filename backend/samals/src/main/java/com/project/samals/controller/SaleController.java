@@ -36,6 +36,18 @@ public class SaleController {
         return new ResponseEntity<>(saleService.getSaleList(null,address),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "오름차순 거래 조회")
+    @GetMapping("/list/asc")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByAsc(String address){
+        return new ResponseEntity<>(saleService.getSaleListByOrder(address,"asc"),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "내림차순 거래 조회")
+    @GetMapping("/list/dsc")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByDesc(String address){
+        return new ResponseEntity<>(saleService.getSaleListByOrder(address,"desc"),HttpStatus.OK);
+    }
+
     @ApiOperation(value = "동물 카테고리 거래 조회")
     @GetMapping("/list/{animalSpecies}")
     public ResponseEntity<List<ResSaleListDto>> getSaleListByAnimalSpecies(@PathVariable String animalSpecies,String address){
