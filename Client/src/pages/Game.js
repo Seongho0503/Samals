@@ -55,7 +55,7 @@ const Game = () => {
         <Button1></Button1>
         <Button2></Button2>
       </div>
-      {loadingInProgress ? (
+      {isLoaded === false && (
         <ProgressBar
           height='80'
           width='80'
@@ -65,7 +65,7 @@ const Game = () => {
           borderColor='#F4442E'
           barColor='#51E5FF'
         />
-      ) : (
+      )} 
         <Unity
           unityProvider={unityProvider}
           style={{
@@ -76,10 +76,9 @@ const Game = () => {
             borderRadius: 50,
           }}
         ></Unity>
-      )}
       <img width='100%' src={bg2} />
     </div>
-  );
+  )
 };
 
 export default Game;
