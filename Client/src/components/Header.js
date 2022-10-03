@@ -95,7 +95,7 @@ const Header = () => {
       </Link>
 
       <div id='link-containers'>
-        <Link to='/game'>GAME</Link>
+        <Link to='/game'>Island</Link>
         <Link to='/explore'>MARKET</Link>
         <Link to='/trade'>EXPLORE</Link>
         <Link to='/minting'>DROPS</Link>
