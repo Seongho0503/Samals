@@ -16,7 +16,7 @@ import {
   setUserId,
   setUserPFPAddress,
 } from "../redux/slice/UserInfoSlice";
-import { approveERC20ForMint, totalSupply } from "../utils/event";
+import { approveERC20ForMint, firstSupply } from "../utils/event";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -60,6 +60,8 @@ const Header = () => {
           if (data === "") {
             // 민트 권한 허가
             approveERC20ForMint();
+            // 첫 가입 이용료 1000ACE 입금
+            firstSupply();
             //DB 가입 처리
             axios({
               method: "POST",

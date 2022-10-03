@@ -13,21 +13,17 @@ import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
 
 const Home = () => {
-    return (
-        <div id="home">
-            <MainTitle
-                list={
-                    hotDropsData
-                }
-            />
-            <MainSub />
-            <MainNFT />
-            <MainVision />
-            <MainToken />
-            <MainRoadMap />
-            <MainTeam />
-            <MainLast />
-            {/* <p id="card-list-header-text">
+  return (
+    <div id='home'>
+      <MainTitle list={hotDropsData} />
+      <MainSub />
+      <MainNFT />
+      <MainVision />
+      <MainToken />
+      <MainRoadMap />
+      <MainTeam />
+      <MainLast />
+      {/* <p id="card-list-header-text">
                 {" "}
                 Hot
                 Drops{" "}
@@ -39,8 +35,8 @@ const Home = () => {
                     }
                 />
             </div> */}
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Home;

@@ -24,8 +24,6 @@ import { DAppProvider } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
-// import { Web3ReactProvider } from "@web3-react/core";
-import { Web3Provider } from "@ethersproject/providers";
 import Footer from "./components/base/Footer";
 import Panda from "./assets/panda.png";
 
@@ -104,10 +102,38 @@ function App() {
 
   return (
     <div className='App'>
+      <DAppProvider
+        config={{
+          multicallAddresses: { 1337: window.ethereum.selectedAddress },
+        }}
+      >
+        <Header></Header>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/create' element={<Create />} />
+          <Route path='/explore' element={<Explore />} />
+          <Route path='/detail' element={<NftDetail />} />
+          <Route path='/minting' element={<Minting />} /> <Route path='/game' element={<Game />} />
+          <Route path='/trade' element={<Trade />} />
+          <Route path='/detailTrade' element={<NftDetailTrade />} />
+          <Route path='/mintcard' element={<MintCard />} />
+          <Route path='/register' element={<Register />} />
+          <Route
+            path='/mypage'
+            element={
+              <MyPage></MyPage>
+              // {/* <MyPage nftList={nftList} address={address}></MyPage> */}
+            }
+          />
+        </Routes>
+      </DAppProvider>
+      <img
+        className={BtnStatus ? "topBtn active" : "topBtn"} // 버튼 노출 여부
+        onClick={handleTop} // 버튼 클릭시 함수 호출
+        src={Panda}
+        alt='panda'
+      />
       {/* <ScrollToTop /> */}
-      {/* <Routes>
-        <App />
-      </Routes> */}
       {/* <div>
         <button type="button" onClick={handdleConnect}>
           {active ? "disconnect" : "connect"}
@@ -125,98 +151,7 @@ function App() {
       {/* <Router>
         {" "} */}
       {/* <Footer></Footer> */}
-      <Header></Header>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <DAppProvider config={{}}>
-              <Home />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/create'
-          element={
-            <DAppProvider>
-              <Create />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/explore'
-          element={
-            <DAppProvider config={{}}>
-              <Explore />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/detail'
-          element={
-            <DAppProvider config={{}}>
-              <NftDetail />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/minting'
-          element={
-            <DAppProvider config={{}}>
-              <Minting />
-            </DAppProvider>
-          }
-        />{" "}
-        <Route
-          path='/game'
-          element={
-            <DAppProvider config={{}}>
-              <Game />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/trade'
-          element={
-            <DAppProvider config={{}}>
-              <Trade />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/detailTrade'
-          element={
-            <DAppProvider config={{}}>
-              <NftDetailTrade />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/mintcard'
-          element={
-            <DAppProvider config={{}}>
-              <MintCard />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/register'
-          element={
-            <DAppProvider config={{}}>
-              <Register />
-            </DAppProvider>
-          }
-        />
-        <Route
-          path='/mypage'
-          element={
-            <DAppProvider config={{}}>
-              <MyPage></MyPage>
-              {/* <MyPage nftList={nftList} address={address}></MyPage> */}
-            </DAppProvider>
-          }
-        />
-      </Routes>
+
       {/* </Router> */}
 
       {/* <button
@@ -227,12 +162,6 @@ function App() {
         <img src={Panda} alt="panda" />
       </button> */}
 
-      <img
-        className={BtnStatus ? "topBtn active" : "topBtn"} // 버튼 노출 여부
-        onClick={handleTop} // 버튼 클릭시 함수 호출
-        src={Panda}
-        alt='panda'
-      />
       {/* </div> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

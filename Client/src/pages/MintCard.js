@@ -27,7 +27,8 @@ const MintCard = () => {
       url: "/api/ipfs/number/donate",
     })
       .then(({ data }) => {
-        nftSeq.current = data;
+        console.log("debug: ", data);
+        nftSeq.current = data.ipfs_seq;
         //랜덤 IPFS 번호 뽑기
         console.log("다음 민팅할 카드 넘버: ", nftSeq.current);
 
@@ -35,14 +36,16 @@ const MintCard = () => {
         donate(nftSeq.current)
           .then((res) => {
             console.log("donate return value: ", res);
+            console.log("tokenId: ", res.events.Donated.returnValues[0]);
             //블록체인 저장 성공 시 해당 정보를 DB 저장
             axios({
               method: "POST",
               url: "api/nft/mint",
               data: {
+                nft_token_id: res.events.Donated.returnValues[0],
+                ipfs_seq: nftSeq.current,
                 nftPrice: 500,
                 nftType: "donate",
-                tokenId: nftSeq.current,
                 walletAddress: window.ethereum.selectedAddress,
               },
             })
