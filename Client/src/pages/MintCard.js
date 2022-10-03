@@ -45,7 +45,7 @@ const MintCard = () => {
                 nftPrice: 500,
                 nftType: "donate",
                 tokenId: res.events.Donated.returnValues[0],
-                ipfs_seq: nftSeq.current,
+                ipfsSeq: nftSeq.current,
                 walletAddress: window.ethereum.selectedAddress,
               },
             })
