@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Header from "../components/Header";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -13,6 +13,15 @@ import { ProgressBar } from "react-loader-spinner";
 import "../styles/Game.css";
 const Game = () => {
   const [loadingInProgress, setLoading] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener, unload } =
+    useUnityContext({
+      loaderUrl: "Unity/WebGLbuild_new.loader.js",
+      dataUrl: "Unity/WebGLbuild_new.data",
+      frameworkUrl: "Unity/WebGLbuild_new.framework.js",
+      codeUrl: "Unity/WebGLbuild_new.wasm",
+    });
+    
   useEffect(() => {
     if (document.querySelector(`script[src="web3/index.js"]`)) return;
     const script = document.createElement("script");
@@ -20,12 +29,25 @@ const Game = () => {
     script.async = true;
     document.body.appendChild(script);
   });
-  const { unityProvider } = useUnityContext({
-    loaderUrl: "Unity/WebGLbuild_new.loader.js",
-    dataUrl: "Unity/WebGLbuild_new.data",
-    frameworkUrl: "Unity/WebGLbuild_new.framework.js",
-    codeUrl: "Unity/WebGLbuild_new.wasm",
-  });
+  
+
+  const handleAuth = useCallback(() => {
+    setIsAuth(true);
+  }, []);
+
+  useEffect(() => {
+    addEventListener("Auth", handleAuth);
+    return () => {
+      removeEventListener("Auth", handleAuth);
+    };
+  }, [addEventListener, removeEventListener, handleAuth]);
+  useEffect(() => {
+    setUserName();
+  }, [isAuth]);
+
+  function setUserName() {
+    sendMessage("UIManager", "setUserName", "Hello");
+  }
   return (
     <div>
       <img width='100%' src={bg} />
