@@ -43,7 +43,7 @@ public class SaleController {
     }
 
     @ApiOperation(value = "내림차순 거래 조회")
-    @GetMapping("/list/dsc")
+    @GetMapping("/list/dessc")
     public ResponseEntity<List<ResSaleListDto>> getSaleListByDesc(String address){
         return new ResponseEntity<>(saleService.getSaleListByOrder(address,"desc"),HttpStatus.OK);
     }
