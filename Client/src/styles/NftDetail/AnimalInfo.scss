@@ -1,4 +1,4 @@
-$primary: #3f51b5;
+$primary: #ffffff00;
 $dark-primary: #303f9f;
 $light-primary: #c5cae9;
 $text: #ffffff;
@@ -30,21 +30,15 @@ h1 {
 }
 
 header {
-  background: linear-gradient(
-    -45deg,
-    #ee7752,
-    #e73c7e,
-    #23a6d5,
-    #23d5ab
-  ); //$primary;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); //$primary;
   animation: gradient 15s ease infinite;
   // text-align: center;
   color: $text;
   // padding: 3px;
-  height: 160px;
+  height: 229px;
   // margin-top: -300px;
   background-size: 400% 400%;
-  margin-top: 355px;
+  margin-top: 500px;
 
   @keyframes gradient {
     0% {
@@ -74,8 +68,8 @@ header {
   &::before {
     content: "";
     background: $light-primary;
-    width: 5px;
-    height: 160%;
+    width: 18px;
+    height: 75%;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -125,6 +119,49 @@ header {
 
   p.content {
     color: black;
+    font-size: 30px;
+    padding: 54px;
+  }
+
+  &:nth-child(even) {
+    .timeline-content {
+      float: right;
+      padding: 40px 30px 10px 30px;
+
+      .date {
+        right: auto;
+        left: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        top: 30px;
+        left: -15px;
+        border-width: 10px 15px 10px 0;
+        border-color: transparent #f5f5f5 transparent transparent;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.timeline-items {
+  width: 100%;
+  margin-bottom: 50px;
+
+  p.content {
+    color: black;
+    font-size: 30px;
+    padding: 54px;
   }
 
   &:nth-child(even) {
@@ -160,7 +197,7 @@ header {
 
 .timeline-content {
   position: relative;
-  width: 35%;
+  width: 43%;
   padding: 10px 30px;
   border-radius: 4px;
   background: #f5f5f5;
@@ -179,10 +216,11 @@ header {
   }
 }
 
-// .timeline-content js--fadeInLeft {
-//   position: relative;
-//   right: 30px;
-// }
+.timeline-content js--fadeInLeft {
+  position: relative;
+  right: 30px;
+  padding: 40px;
+}
 
 .timeline-img {
   width: 30px;
@@ -220,8 +258,9 @@ a {
   padding: 0 !important;
 
   p {
-    padding: 0 20px;
+    padding: 60px;
     color: black;
+    font-size: 30px;
   }
 
   a {
@@ -254,7 +293,8 @@ blockquote {
   margin-top: 30px;
   color: $secondary-text;
   border-left-color: $primary;
-  padding: 0 20px;
+  padding: 40px;
+  font-size: 30px;
 }
 
 .date {
@@ -265,6 +305,9 @@ blockquote {
   position: absolute;
   top: 0;
   right: 0;
+  font-size: 30px;
+  width: 100%;
+  font-size: 30px;
 }
 
 @media screen and (max-width: 768px) {

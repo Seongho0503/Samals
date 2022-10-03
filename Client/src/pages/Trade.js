@@ -15,7 +15,7 @@ const Trade = () => {
     <div id='explore'>
       <Header />
       <CardMotion></CardMotion>
-      <AnimalSearch></AnimalSearch>
+      {/* <AnimalSearch></AnimalSearch> */}
       <TradeSelect></TradeSelect>
 
       {/* <AnimalFiller></AnimalFiller> */}

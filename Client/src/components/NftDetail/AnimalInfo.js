@@ -8,6 +8,7 @@ import LightSpeed from "react-reveal/LightSpeed";
 import Roll from "react-reveal/Roll";
 import { getDescription } from "../../api.js";
 import { useState, useEffect } from "react";
+import sign from "../../assets/sign/EW.png";
 // import { useARStatus } from "../../hooks/isARStatus";
 // import { useLocation, Navigate } from "react-router";
 
@@ -40,8 +41,6 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-img'></div>
 
               <div className='timeline-content js--fadeInLeft'>
-                <h2>Title</h2>
-
                 <div className='date'>{animals.animalNameKr}</div>
                 <div className='AnimalName'>
                   <p className='content'>{animals.animalNameEn}</p>
@@ -58,14 +57,9 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-img'></div>
 
               <div className='timeline-content timeline-card js--fadeInRight'>
-                <div className='timeline-img-header'>
-                  <h2>Card Title</h2>
-                </div>
+                <div className='timeline-img-header'></div>
                 <div className='date'>{animals.animalClass}</div>
-                <p>이미지로 대체</p>
-                {/* <a className="bnt-more" href="javascript:void(0)">
-                    More
-                  </a> */}
+                <img className='date' src={sign}></img>
               </div>
             </Roll>
           </div>
@@ -75,9 +69,9 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-img'></div>
 
               <div className='timeline-content js--fadeInLeft'>
-                <div className='date'>{animals.animalCurrent}</div>
-                <h2>Quote</h2>
-                <blockquote>{animals.animalTotal}</blockquote>
+                <div className='date'>현재 남은 개체 수</div>
+                {/* <div className='date'>{animals.animalCurrent}</div> */}
+                <blockquote>{animals.animalTotal}마리</blockquote>
               </div>
             </LightSpeed>
           </div>
@@ -87,13 +81,13 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-img'></div>
 
               <div className='timeline-content js--fadeInRight'>
-                <h2>Title</h2>
                 <div className='date'>{animals.animalHabitat}</div>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime ipsa ratione
-                  omnis alias cupiditate saepe atque totam aperiam sed nulla voluptatem recusandae
-                  dolor, nostrum excepturi amet in dolores. Alias, ullam.
-                </p>
+
+                <img
+                  className='date'
+                  src='https://www.water.or.kr/images/egovframework/life/weast/ws2_65.jpg'
+                ></img>
+
                 {/* <a className="bnt-more" href="javascript:void(0)">
                     More
                   </a> */}

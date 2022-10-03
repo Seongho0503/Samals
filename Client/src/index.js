@@ -19,7 +19,6 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 import Home from "./pages/Home";
-import Create from "./pages/Create";
 import Explore from "./pages/Explore";
 import Minting from "./pages/Minting";
 import Game from "./pages/Game";
