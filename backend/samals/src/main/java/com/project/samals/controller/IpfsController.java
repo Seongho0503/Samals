@@ -32,6 +32,12 @@ public class IpfsController {
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "상점 각 동물 랜덤 번호 뽑기 - donate or market")
+    @GetMapping("/number/market/{animalSpecies}")
+    public ResponseEntity<IpfsDto> getRandomAnimal(@PathVariable String animalSpecies){
+        return new ResponseEntity<>(ipfsService.getRandomAnimal(animalSpecies),HttpStatus.OK);
+    }
+
     @ApiOperation(value="ipfs 데이터 추가")
     @PostMapping("/add")
     public ResponseEntity<Map> addIpfs(@RequestBody Map<String, Object> request){
