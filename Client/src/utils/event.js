@@ -166,3 +166,9 @@ export var isOwnerOfMascortNft = async () => {
   const res = await mascortNftContract.methods._isOwner(window.ethereum.selectedAddress).call(); //유저 지갑 주소를 넣어줄 것
   console.log(res);
 };
+
+export let buy = async (species, tmpAnimalNumber, donatedAt) => {
+  const res = await animalNftContract.methods
+    .buy(species, tmpAnimalNumber, donatedAt)
+    .send({ from: window.ethereum.selectedAddress });
+};

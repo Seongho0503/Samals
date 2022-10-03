@@ -68,16 +68,16 @@ import { getTotalDonate } from "../../api";
 const MainSub = () => {
   const [response, setResponse] = useState();
 
-  useEffect(() => {
-    getTotalDonate()
-      .then(({ data }) => {
-        console.log(data);
-        return data;
-      })
-      .then((res) => {
-        setResponse(res);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getTotalDonate()
+  //     .then(({ data }) => {
+  //       console.log(data);
+  //       return data;
+  //     })
+  //     .then((res) => {
+  //       setResponse(res);
+  //     });
+  // }, []);
   return (
     <div id='mainsub'>
       {/* <img id='hero-background' src={list[0].src}/> */}
