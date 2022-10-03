@@ -35,7 +35,7 @@ public class ResSaleListDto {
                 .mintNumber(sale.getNft().getNftMintNumber())
                 .animalClass(sale.getNft().getIpfs().getAnimal().getAnimalClass())
                 .animalClassNo(sale.getNft().getIpfs().getAnimal().getAnimalClassNo())
-                .itemImgUrl("https://ipfs.io/ipfs/"+sale.getNft().getIpfs().getIpfsUri())
+                .itemImgUrl(sale.getNft().getIpfs().getIpfsUri())
                 .build();
     }
 

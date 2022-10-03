@@ -43,7 +43,7 @@ public class UserDto {
                     .walletAddress(user.getWalletAddress())
                     .userNickname(user.getUserNickname())
                     .userBio(user.getUserBio())
-                    .userImgUrl("https://ipfs.io/ipfs/"+user.getProfileImg().getIpfs().getIpfsUri())
+                    .userImgUrl(user.getProfileImg().getIpfs().getIpfsUri())
                     .createdTime(user.getCreatedTime())
                     .updatedTime(user.getUpdatedTime())
                     .build();

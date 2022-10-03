@@ -1,5 +1,6 @@
 package com.project.samals.service;
 
+import com.project.samals.domain.Ipfs;
 import com.project.samals.domain.Nft;
 import com.project.samals.domain.Sale;
 import com.project.samals.domain.User;
@@ -8,6 +9,7 @@ import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.response.ResMyNftDto;
 import com.project.samals.dto.response.ResNftDto;
+import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,15 +27,15 @@ public class NftService {
 
     private final NftRepository nftRepository;
     private final UserRepository userRepository;
+    private final IpfsRepository ipfsRepository;
 
     public NftDto mintNft(ReqNftDto nftDto) {
         User user = userRepository.findByWalletAddress(nftDto.getWalletAddress());
-
-        Nft saved = nftDto.toEntity();
-        saved.setCreatedTime(new Date());
-        saved.setUpdatedTime(new Date());
-        saved.setNftOwner(nftDto.getWalletAddress());
-        saved.setNftMintNumber(0);
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq());
+        ipfs.getAnimal().setAnimalCurrent(ipfs.getAnimal().getAnimalCurrent()+1);
+        ipfs.setIpfsIsUsed('Y');
+        ipfs.setIpfsTokenId(nftDto.getTokenId());
+        Nft saved = nftDto.toEntity(ipfs);
         nftRepository.save(saved);
 
         user.addMintedNft(saved);
