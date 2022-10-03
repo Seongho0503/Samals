@@ -20,6 +20,8 @@ public class ReqNftDto {
 
     private String nftType;
 
+    private int ipfs_seq;
+
     private int nftPrice;
 
     public Nft toEntity(){
