@@ -56,7 +56,7 @@ contract AnimalNft is ERC721URIStorage, Ownable {
     mapping(string => string) market_token_uri;
 
     // limited_number은 TOTAL_NUMBER 중 남은 동물의 값
-    uint256 private limited_number;
+    uint256 private limited_number = 400;
 
     // 동물이 민트되었는지 확인
     mapping(uint256 => bool) private isAnimalMinted;
