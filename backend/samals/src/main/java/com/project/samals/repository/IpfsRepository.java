@@ -1,5 +1,6 @@
 package com.project.samals.repository;
 
+import com.project.samals.domain.Animal;
 import com.project.samals.domain.Ipfs;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -18,4 +19,6 @@ public interface IpfsRepository extends JpaRepository<Ipfs, Long> {
 
     List<Ipfs> findAllByIpfsIsUsedAndIpfsType(char isUsed, String ipfsType);
     //다음 IPFS 조회 및 사용
+
+    List<Ipfs> findAllByIpfsIsUsedAndIpfsTypeAndAnimal(char isUsed, String ipfsType, Animal animalSpecies);
 }

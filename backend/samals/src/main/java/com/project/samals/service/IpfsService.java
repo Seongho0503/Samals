@@ -36,6 +36,14 @@ public class IpfsService {
             return new IpfsDto().convert(ipfsList.get(num));
     }
 
+    public IpfsDto getRandomAnimal(String animalSpecies){
+        Animal animal = new Animal();
+        animal.setAnimalSpecies(animalSpecies);
+        List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsTypeAndAnimal('N',"market", animal);
+        int num = (int)(Math.random()*(ipfsList.size()));
+            return new IpfsDto().convert(ipfsList.get(num));
+    }
+
     public String add(String animalSpecies){
         for(int i=1;i<101;i++){
             Ipfs ipfs = Ipfs.builder()
