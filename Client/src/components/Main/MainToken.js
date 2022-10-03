@@ -6,7 +6,7 @@ import Header from "../Header";
 import coinimg from "../../assets/coin-img.png";
 const MainToken = () => {
   return (
-    <div id='hero' className='box-container'>
+    <div id='hero2' className='box-container'>
       <div>
         <img width='500px' src={title} />
 

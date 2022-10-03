@@ -8,7 +8,7 @@ import nftexample from "../../assets/nftexample.jpg";
 
 const MainNFT = () => {
   return (
-    <div id='hero' className='box-container'>
+    <div id='hero2' className='box-container'>
       <div className='box'>
         <img width='500px' src={title} />
 

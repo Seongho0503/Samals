@@ -6,7 +6,7 @@ import Header from "../Header";
 
 const MainVision = () => {
   return (
-    <div id='hero' className='box-container'>
+    <div id='hero2' className='box-container'>
       <div className='card2'>
         <div className='content2'>
           <div className='front'></div>
