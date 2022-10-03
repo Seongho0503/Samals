@@ -15,6 +15,14 @@ import {
   Top,
   EmptyImg,
 } from "./BirdList.styles";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectAddress,
+  setAddress,
+  setUserBio,
+  setUserId,
+  setUserPFPAddress,
+} from "../../../../redux/slice/UserInfoSlice";
 import { faker } from "@faker-js/faker";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -22,6 +30,7 @@ import { useCallback } from "react";
 import Detail from "../../detail/Detail";
 import Bird from "../bird/Bird";
 import empty from "assets/empty.png";
+import axios from "axios";
 
 const title = faker.lorem.word();
 const text1 = faker.lorem.word();
@@ -37,8 +46,36 @@ const BirdList = () => {
   const [clickedBird, setClickedBird] = useState<IBird | null>(null);
   const [birds, setBirds] = useState<IBird[]>([]);
   const [isDetail, setIsDetail] = useState(false);
+  const [address, setAddress] = useState(useSelector(selectAddress));
+
+  // 나의 nft 조회
+  const myNftList = async (address: string) => {
+    try {
+      await axios.get(`/api/mypage/${address}` + `/nft`).then((res) => {
+        console.log("마의리스트", res);
+        //setSaleDate(res.data[0].saleCompletedTime);
+        // console.log(saleDetail);
+      });
+    } catch (e) {
+      console.log("error:", e);
+    }
+  };
+
+  //내 좋아요 리스트 조회
+  const myLikeList = async (address: string) => {
+    try {
+      await axios.get(`/api/mypage/${address}` + `/like`).then((res) => {
+        console.log("마의리스트", res);
+        //setSaleDate(res.data[0].saleCompletedTime);
+        // console.log(saleDetail);
+      });
+    } catch (e) {
+      console.log("error:", e);
+    }
+  };
 
   useEffect(() => {
+    myNftList(address);
     const birdArr = [...new Array(32)].map((_, i) => ({
       id: i + 1,
       name: faker.lorem.word(),
@@ -75,6 +112,7 @@ const BirdList = () => {
 
       <IllustratedBook>
         {<button onClick={onClick}>{isDetail ? "전국 도감" : "도감보기"}</button>}
+        {<button onClick={onClick}> 내 좋아요 리스트</button>}
       </IllustratedBook>
 
       {isDetail && clickedBird ? (

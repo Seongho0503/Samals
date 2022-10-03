@@ -27,6 +27,7 @@ h1 {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: 400;
+  font-family: "GangwonEdu_OTFBoldA";
 }
 
 header {
@@ -59,6 +60,7 @@ header {
     margin-bottom: 0;
     font-size: 60px;
     margin-top: px;
+    font-family: "GangwonEdu_OTFBoldA";
   }
 }
 
@@ -85,6 +87,7 @@ header {
     .timeline-content {
       float: right;
       padding: 40px 30px 10px 30px;
+      border-radius: 20px;
 
       .date {
         right: auto;
@@ -119,8 +122,10 @@ header {
 
   p.content {
     color: black;
-    font-size: 30px;
-    padding: 54px;
+    font-size: 50px;
+    padding: 50px;
+    font-family: "GangwonEdu_OTFBoldA";
+    margin-top: 40px;
   }
 
   &:nth-child(even) {
@@ -202,6 +207,7 @@ header {
   border-radius: 4px;
   background: #f5f5f5;
   box-shadow: 0 20px 25px -15px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
 
   &::after {
     content: "";
@@ -231,6 +237,7 @@ header {
   left: 50%;
   margin-top: 25px;
   margin-left: -15px;
+  background-color: green;
 }
 
 a {
@@ -258,9 +265,12 @@ a {
   padding: 0 !important;
 
   p {
-    padding: 60px;
+    padding: 78px;
     color: black;
     font-size: 30px;
+    font-family: "GangwonEdu_OTFBoldA";
+    line-height: 1.5;
+    word-spacing: 5px;
   }
 
   a {
@@ -294,7 +304,9 @@ blockquote {
   color: $secondary-text;
   border-left-color: $primary;
   padding: 40px;
-  font-size: 30px;
+  font-size: 40px;
+  font-family: "GangwonEdu_OTFBoldA";
+  margin-top: 40px;
 }
 
 .date {
@@ -308,6 +320,8 @@ blockquote {
   font-size: 30px;
   width: 100%;
   font-size: 30px;
+  border-radius: 20px;
+  font-family: "GangwonEdu_OTFBoldA";
 }
 
 @media screen and (max-width: 768px) {
