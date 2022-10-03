@@ -5,66 +5,6 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import { getTotalDonate } from "../../api";
 
-// const counter = (
-//     $counter,
-//     max
-// ) => {
-//     let now = max;
-
-//     const handle =
-//         setInterval(
-//             () => {
-//                 $counter.innerHTML =
-//                     counter &&
-//                     Math.ceil(
-//                         max -
-//                             now
-//                     );
-
-//                 // 목표수치에 도달하면 정지
-//                 if (
-//                     now <
-//                     1
-//                 ) {
-//                     clearInterval(
-//                         handle
-//                     );
-//                 }
-
-//                 // 증가되는 값이 계속하여 작아짐
-//                 const step =
-//                     now /
-//                     10;
-
-//                 // 값을 적용시키면서 다음 차례에 영향을 끼침
-//                 now -=
-//                     step;
-//             },
-//             50
-//         );
-// };
-
-// window.onload =
-//     () => {
-//         // 카운트를 적용시킬 요소
-//         const $counter =
-//             document.querySelector(
-//                 ".count"
-//             );
-
-//         // 목표 수치
-//         const max = 129983;
-
-//         setTimeout(
-//             () =>
-//                 counter(
-//                     $counter,
-//                     max
-//                 ),
-//             2000
-//         );
-//     };
-
 const MainSub = () => {
   const [response, setResponse] = useState();
 
@@ -85,7 +25,7 @@ const MainSub = () => {
       {/* <img id='hero-background' src={list[0].src}/> */}
       <img width='500px' src={title} />
 
-      <h1 id='header-subtext-first'>{result}</h1>
+      <h1 id='header-subtext-first2'>{result}</h1>
 
       <h5 id='header-subtext-second'>
         Samals를 통해 기부된 금액은 위와 같아요 <br />
