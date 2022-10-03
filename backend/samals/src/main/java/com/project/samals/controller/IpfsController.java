@@ -28,7 +28,7 @@ public class IpfsController {
 
     @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or shop")
     @GetMapping("/number/{ipfsType}")
-    public ResponseEntity<Integer> getRandom(@PathVariable String ipfsType){
+    public ResponseEntity<IpfsDto> getRandom(@PathVariable String ipfsType){
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
     }
 
