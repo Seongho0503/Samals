@@ -18,8 +18,10 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -61,6 +63,19 @@ public class SaleService {
         }
         return saleList;
     }
+
+    public List<ResSaleListDto> getSaleListByOrder(String address,String order) {
+        List<ResSaleListDto> lists = getSaleList(null, address);
+        Comparator<ResSaleListDto> compare=Comparator.comparing(ResSaleListDto::getSalePrice, Comparator.naturalOrder());
+        if (order.equals("desc")){
+            compare = Comparator.comparing(ResSaleListDto::getSalePrice, Comparator.reverseOrder());
+        }
+        List<ResSaleListDto> resList = lists.stream()
+                .sorted(compare)
+                .collect(Collectors.toList());
+        return resList;
+    }
+
 
     public ResSaleDetailDto getSale(long saleSeq) {
         Sale saleInfo=saleRepository.findBySaleSeq(saleSeq);
