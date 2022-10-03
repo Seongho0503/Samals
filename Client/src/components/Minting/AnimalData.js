@@ -7,6 +7,7 @@ import animal05 from "../../assets/card/chita.png";
 import animal06 from "../../assets/card/coco.png";
 import animal07 from "../../assets/card/lizard2.png";
 import animal08 from "../../assets/card/penguin.png";
+import animal09 from "../../assets/card/Toco.png";
 
 import "../../styles/MintingCard.css";
 import bg from "../../assets/bg-05.png";
@@ -16,6 +17,7 @@ import Footer from "../Footer";
 import { getAnimalData } from "../../api";
 
 const AnimalData = () => {
+  const [bird, setBird] = useState();
   const [elephant, setElephant] = useState();
   const [frog, setFrog] = useState();
   const [iguana, setIguana] = useState();
@@ -34,6 +36,7 @@ const AnimalData = () => {
       })
       .then((res) => {
         setResponse(res);
+        setBird(res[0].animalTotal - res[0].animalCurrent);
         setElephant(res[1].animalTotal - res[1].animalCurrent);
         setFrog(res[2].animalTotal - res[2].animalCurrent);
         setIguana(res[3].animalTotal - res[3].animalCurrent);
@@ -92,6 +95,12 @@ const AnimalData = () => {
           <h2>남부 바위뛰기 펭귄</h2>
 
           <h2>{penguin}개</h2>
+        </div>
+        <div className='animal-card-detail'>
+          <img className='animal-card-img' src={animal09} />
+          <h2>토코투칸</h2>
+
+          <h2>{bird}개</h2>
         </div>
       </div>
     </div>

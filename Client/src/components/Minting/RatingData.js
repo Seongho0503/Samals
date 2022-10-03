@@ -79,7 +79,8 @@ const RatingData = () => {
         setResponse(res);
       });
   }, []);
-
+  const ex1 = response?.toString() || "";
+  let result = ex1.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   return (
     <div id='rating-data'>
       <Header />
@@ -88,7 +89,7 @@ const RatingData = () => {
       <img width='800px' src={Collaboration} />
       <h1 id='rating-text'>기부 총액</h1>
 
-      <h1 id='rating-text'>{response}</h1>
+      <h1 id='rating-text'>{result}</h1>
       <h5 id='header-subtext-second'>
         Samals는 동물보호단체 care와 함께 합니다! <br />
         <br />
