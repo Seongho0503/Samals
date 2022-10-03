@@ -26,9 +26,9 @@ public class IpfsController {
     private  final IpfsService ipfsService;
     private static final Logger log = LoggerFactory.getLogger(IpfsController.class);
 
-    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or shop")
+    @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or market")
     @GetMapping("/number/{ipfsType}")
-    public ResponseEntity<Integer> getRandom(@PathVariable String ipfsType){
+    public ResponseEntity<IpfsDto> getRandom(@PathVariable String ipfsType){
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
     }
 
@@ -38,7 +38,13 @@ public class IpfsController {
         return new ResponseEntity<>(ipfsService.addIpfs(request), HttpStatus.OK);
     }
 
-    @ApiOperation(value="다음 ipfs 데이터 조회")
+    @ApiOperation(value="ipfs 데이터 추가(jh)")
+    @PostMapping("/addData")
+    public ResponseEntity<String> add(String animalSpecies){
+        return new ResponseEntity<>(ipfsService.add(animalSpecies), HttpStatus.OK);
+    }
+
+    @ApiOperation(value="모든 ipfs 데이터 조회")
     @GetMapping("/list")
     public ResponseEntity<List<Ipfs>> getIpfsList(){
         List<Ipfs> ipfsList = ipfsRepository.findAllBy();
@@ -58,5 +64,13 @@ public class IpfsController {
         return new ResponseEntity<>(ipfsService.pollIpfs(), HttpStatus.OK);
     }
 
+    @ApiOperation(value="특정 ipfs 데이터 사용처리")
+    @PostMapping("/pollOne")
+    public ResponseEntity<IpfsDto> pollEachIpfs(@RequestBody Map<String, Object> request){
+        if((Integer)request.get("ipfsSeq") == null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(ipfsService.pollOneIpfs((Integer)request.get("ipfsSeq")), HttpStatus.OK);
+    }
 
 }

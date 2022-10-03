@@ -25,19 +25,29 @@ public class IpfsService {
     private final AnimalRepository animalRepository;
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
 
-    public int getRandom(String ipfsType){
+    public IpfsDto getRandom(String ipfsType){
+        if(!ipfsType.equals("donate")&&!ipfsType.equals("market"))
+            return null;
         List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsType('N',ipfsType);
         int num = (int)(Math.random()*(ipfsList.size()));
-        if(ipfsType.equals("shop"))
-           return ipfsList.get(num).getIpfsSeq()-400;
+        if(ipfsType.equals("market"))
+           return new IpfsDto().convert(ipfsList.get(num));
         else
-            return ipfsList.get(num).getIpfsSeq();
+            return new IpfsDto().convert(ipfsList.get(num));
     }
 
-
-
-
-
+    public String add(String animalSpecies){
+        for(int i=1;i<101;i++){
+            Ipfs ipfs = Ipfs.builder()
+                    .ipfsUri("https://j7d103.p.ssafy.io/image/downloadFile/"+animalSpecies+"%20("+i+").png")
+                    .ipfsType("donate")
+                    .ipfsIsUsed('N')
+                    .animal(animalRepository.findByAnimalSpecies(animalSpecies))
+                    .build();
+            ipfsRepository.save(ipfs);
+        }
+        return "Success";
+    }
 
     //ipfs 추가
     public Map<String,Object> addIpfs(Map<String, Object> request){
@@ -90,6 +100,7 @@ public class IpfsService {
         log.info("ipfsDto -> {}", ipfsDto);
         return ipfsDto;
     }
+
     public IpfsDto pollIpfs(){
         Ipfs ipfs = ipfsRepository.findTopByIpfsIsUsedIsOrderByIpfsSeq("N");
         ipfs.setIpfsIsUsed('Y');
@@ -99,4 +110,11 @@ public class IpfsService {
         return ipfsDto;
     }
 
+    public IpfsDto pollOneIpfs(int ipfsSeq){
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq);
+        ipfs.setIpfsIsUsed('Y');
+        IpfsDto ipfsDto = new IpfsDto().convert(ipfs);
+        log.info("ipfsDto -> {}", ipfsDto);
+        return ipfsDto;
+    }
 }

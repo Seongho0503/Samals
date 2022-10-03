@@ -13,20 +13,25 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ResSaleListDto {
+    // 거래 Data
     private Long saleSeq;
     private int salePrice;
+
+    // NFT 동물 Data
     private String animalTitle;
     private String animalSpecies;
-    private int mintNumber;
     private String animalClass;
     private int animalClassNo;
+    private String itemImgUrl;
+    private int mintNumber;
+
+    // 사용자 좋아요 정보
     private int likeCount;
     private char likePush;
-    private String itemImgUrl;
+
 
     public static ResSaleListDto convert(Sale sale) {
         if(sale == null) return null;
-
         return ResSaleListDto.builder()
                 .saleSeq(sale.getSaleSeq())
                 .salePrice(sale.getSalePrice())
@@ -35,7 +40,7 @@ public class ResSaleListDto {
                 .mintNumber(sale.getNft().getNftMintNumber())
                 .animalClass(sale.getNft().getIpfs().getAnimal().getAnimalClass())
                 .animalClassNo(sale.getNft().getIpfs().getAnimal().getAnimalClassNo())
-                .itemImgUrl("https://ipfs.io/ipfs/"+sale.getNft().getIpfs().getIpfsUri())
+                .itemImgUrl(sale.getNft().getIpfs().getIpfsUri())
                 .build();
     }
 

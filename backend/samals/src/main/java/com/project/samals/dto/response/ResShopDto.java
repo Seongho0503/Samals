@@ -21,8 +21,10 @@ public class ResShopDto {
 
     private String animalHabitat;
     private String animalDescription;
+
     private int animalTotal;
     private int mintOrder;
+
     private String img1;
     private String img2;
     private String img3;

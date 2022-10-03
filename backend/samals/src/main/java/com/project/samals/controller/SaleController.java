@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/sale")
@@ -33,7 +32,25 @@ public class SaleController {
     @ApiOperation(value = "전체 거래 조회")
     @GetMapping("/list")
     public ResponseEntity<List<ResSaleListDto>> getSaleList(String address){
-        return new ResponseEntity<>(saleService.getSaleList(address),HttpStatus.OK);
+        return new ResponseEntity<>(saleService.getSaleList(null,address),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "오름차순 거래 조회")
+    @GetMapping("/list/asc")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByAsc(String address){
+        return new ResponseEntity<>(saleService.getSaleListByOrder(address,"asc"),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "내림차순 거래 조회")
+    @GetMapping("/list/desc")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByDesc(String address){
+        return new ResponseEntity<>(saleService.getSaleListByOrder(address,"desc"),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "동물 카테고리 거래 조회")
+    @GetMapping("/list/{animalSpecies}")
+    public ResponseEntity<List<ResSaleListDto>> getSaleListByAnimalSpecies(@PathVariable String animalSpecies,String address){
+        return new ResponseEntity<>(saleService.getSaleList(animalSpecies,address),HttpStatus.OK);
     }
 
     @ApiOperation(value = "거래 상세 조회")
@@ -48,7 +65,7 @@ public class SaleController {
         return new ResponseEntity<>(saleService.completeSale(reqSaleCompleteDto), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "거래 검색")
+    @ApiOperation(value = "거래 검색(By 제목)")
     @GetMapping("/search/{keyword}")
     public ResponseEntity<List<ResSaleListDto>> search(@PathVariable String keyword,String address) {
         return new ResponseEntity<>(saleService.search(keyword,address),HttpStatus.OK);

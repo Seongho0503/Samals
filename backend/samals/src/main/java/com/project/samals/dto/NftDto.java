@@ -14,16 +14,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class NftDto {
-
     private Long nftSeq;
     private int tokenId;
-
     private String nftOwner;
-
     private String nftType;
-
     private int nftMintNumber;
-
     private int nftPrice;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")

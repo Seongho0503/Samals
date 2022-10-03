@@ -19,7 +19,6 @@ import java.util.List;
 public class ShopService {
 
     private final AnimalRepository animalRepository;
-    private final ProfileImgRepository profileImgRepository;
 
     public ResShopDto getShopItem(String species) {
         Animal animal = animalRepository.findByAnimalSpecies(species);

@@ -30,7 +30,7 @@ public class ResMyNftDto {
         return ResMyNftDto.builder()
                 .tokenId(nft.getTokenId())
                 .animalSpecies(nft.getIpfs().getAnimal().getAnimalSpecies())
-                .nftImgUrl("https://ipfs.io/ipfs/"+nft.getIpfs().getIpfsUri())
+                .nftImgUrl(nft.getIpfs().getIpfsUri())
                 .nftMintNumber(nft.getNftMintNumber())
                 .getTime(nft.getUpdatedTime())
                 .build();
