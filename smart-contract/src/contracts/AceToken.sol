@@ -33,7 +33,7 @@ contract AceToken is ERC20, Ownable {
     function firstSupply()
     public returns(bool){
         if(first_supply[msg.sender] == false){
-            _mint(msg.sender, 1000);
+            _mint(msg.sender, 1000000);
             first_supply[msg.sender] = true;
             return true;
         }
