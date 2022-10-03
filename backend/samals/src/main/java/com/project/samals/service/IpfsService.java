@@ -26,6 +26,8 @@ public class IpfsService {
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
 
     public IpfsDto getRandom(String ipfsType){
+        if(!ipfsType.equals("donate")&&!ipfsType.equals("market"))
+            return null;
         List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsType('N',ipfsType);
         int num = (int)(Math.random()*(ipfsList.size()));
         if(ipfsType.equals("market"))
@@ -35,7 +37,6 @@ public class IpfsService {
     }
 
     public String add(String animalSpecies){
-
         for(int i=1;i<101;i++){
             Ipfs ipfs = Ipfs.builder()
                     .ipfsUri("https://j7d103.p.ssafy.io/image/downloadFile/"+animalSpecies+"%20("+i+").png")
