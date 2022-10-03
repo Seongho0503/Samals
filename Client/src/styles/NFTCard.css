@@ -32,7 +32,7 @@
   backdrop-filter: blur(50px);
   /* filter:blur(4px); */
   /* background-color: #eb5160; */
-  background-color: brown;
+  background-color: rgb(17, 83, 0);
   /* background: radial-gradient(
     circle,
     rgba(255, 255, 255, 0.05) 0%,
@@ -62,9 +62,9 @@
   border-radius: 10px;
   background-image: linear-gradient(
     var(--rotate),
-    #5ddcff,
-    #3c67e3 30%,
-    /* #fff, */ /* #fff, */ #4e00c2
+    #279e45,
+    #1e6b29 30%,
+    /* #fff, */ /* #fff, */ #124b02
   );
   position: absolute;
   z-index: -1;

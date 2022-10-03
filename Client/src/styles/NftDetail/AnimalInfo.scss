@@ -1,4 +1,4 @@
-$primary: #3f51b5;
+$primary: #ffffff00;
 $dark-primary: #303f9f;
 $light-primary: #c5cae9;
 $text: #ffffff;
@@ -30,13 +30,7 @@ h1 {
 }
 
 header {
-  background: linear-gradient(
-    -45deg,
-    #ee7752,
-    #e73c7e,
-    #23a6d5,
-    #23d5ab
-  ); //$primary;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); //$primary;
   animation: gradient 15s ease infinite;
   // text-align: center;
   color: $text;
