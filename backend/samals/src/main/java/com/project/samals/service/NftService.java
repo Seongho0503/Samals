@@ -31,7 +31,13 @@ public class NftService {
 
     public NftDto mintNft(ReqNftDto nftDto) {
         User user = userRepository.findByWalletAddress(nftDto.getWalletAddress());
+        if(user==null)
+            return null;
+
         Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq());
+        if(ipfs==null)
+            return null;
+
         ipfs.getAnimal().setAnimalCurrent(ipfs.getAnimal().getAnimalCurrent()+1);
         ipfs.setIpfsIsUsed('Y');
         ipfs.setIpfsTokenId(nftDto.getTokenId());
@@ -51,6 +57,8 @@ public class NftService {
 
     public List<SaleDto> getNftHistory(int tokenId) {
         Nft nft = nftRepository.findByTokenId(tokenId);
+        if(nft ==null)
+            return null;
         List<SaleDto> nftHistory = new ArrayList<>();
         for (Sale sale : nft.getNftSaleList()) {
             nftHistory.add(SaleDto.convert(sale));
@@ -60,6 +68,8 @@ public class NftService {
 
     public List<NftDto> getMyMintHistory(String address) {
         User user = userRepository.findByWalletAddress(address);
+        if(user == null)
+            return null;
         List<NftDto> mintHistory = new ArrayList<>();
         for (Nft nft : user.getMintList()) {
             mintHistory.add(NftDto.convert(nft));
@@ -69,6 +79,8 @@ public class NftService {
 
     public List<NftDto> getMyDonateHistory(String address) {
         User user = userRepository.findByWalletAddress(address);
+        if(user == null)
+            return null;
         List<Nft> donates = nftRepository.findByNftTypeAndUser("donate",user);
         List<NftDto> donateHistory = new ArrayList<>();
         for (Nft nft : donates) {
@@ -78,6 +90,8 @@ public class NftService {
     }
 
     public List<ResMyNftDto> getMyNftList(String address) {
+        if(userRepository.findByWalletAddress(address)==null)
+            return null;
         List<Nft> myNft = nftRepository.findAllByNftOwner(address);
         List<ResMyNftDto> nftList = new ArrayList<>();
         for (Nft nft : myNft) {
@@ -88,9 +102,6 @@ public class NftService {
 
     public ResNftDto getNft(int tokenId) {
         Nft nft = nftRepository.findByTokenId(tokenId);
-        /*
-        TODO 반환할 nft 정보 추가
-         */
         return ResNftDto.convert(nft);
     }
 
@@ -103,6 +114,8 @@ public class NftService {
     public int getMyTotalDonate(String address){
         int donatePrice=500;
         User user = userRepository.findByWalletAddress(address);
+        if(user ==null)
+            return -1;
         List<Nft> donateCounts= nftRepository.findByNftTypeAndUser("donate",user);
         return donateCounts.size()*donatePrice;
     }
