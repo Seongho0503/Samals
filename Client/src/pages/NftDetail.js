@@ -24,6 +24,8 @@ import TradeHistory from "../components/NftDetail/TradeHistory";
 // import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 
+import axios from "axios";
+import { buy } from "../utils/event";
 const NftDetail = () => {
   const isMobile = useMobile();
 
@@ -102,15 +104,21 @@ const NftDetail = () => {
                 </div>
 
                 <div id='detail-controls'>
+                  {/* 상점 NFT 구매 버튼 */}
                   <Button
                     width={isMobile ? "70%" : "70%"}
                     height='50px'
                     child={
                       <div id='button-child'>
                         <FaEthereum size='28px' />
-                        <p id='price'>1254</p>
+                        <p id='price'>200</p>
                       </div>
                     }
+                    onClick={() => {
+                      // 가격 적힌 버튼 클릭 시
+                      axios({ url: "/api/ipfs/number/shop", method: "GET" }).then(() => {});
+                      buy();
+                    }}
                   ></Button>
                   <div className='like-container'>
                     <button className='like' onClick={like}>

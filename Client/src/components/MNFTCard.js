@@ -162,10 +162,7 @@ const MNFTCard = ({
 
             <div className='price-container'>
               <p className='price-label'>Price</p>
-              <p className='price'>
-                {" "}
-                <FaEthereum /> 4.555
-              </p>
+              <p className='price'>{/* <FaEthereum /> 4.555 */}</p>
             </div>
           </div>
           <div className='buttons'>
@@ -189,7 +186,7 @@ const MNFTCard = ({
                   />
                 )}
               </button>
-              <p className='like-count'>123</p>
+              {/* <p className='like-count'>123</p> */}
             </div>
           </div>
         </>
