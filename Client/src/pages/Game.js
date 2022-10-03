@@ -46,7 +46,7 @@ const Game = () => {
   }, [isAuth]);
 
   function setUserName() {
-    sendMessage("UIManager", "setUserName", "Hello");
+    sendMessage("UIManager", "setUserName", "0x43f11C9559F116ae60ed23987aE5CC4B5Caa5DbE");
   }
   return (
     <div>
