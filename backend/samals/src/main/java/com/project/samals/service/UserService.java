@@ -74,8 +74,9 @@ public class UserService {
     public String setProfile(ReqProfileDto profileDto) {
         User user = userRepository.findByWalletAddress(profileDto.getAddress())
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
-        Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId())
-                .orElseThrow(() -> new IpfsNotFoundException("해당 토큰의 IPFS 데이터를 찾을 수 없습니다."));
+        Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
+        if(ipfs ==null)
+            throw new IpfsNotFoundException("해당 토큰의 IPFS 데이터를 찾을 수 없습니다.");
         Nft nft = nftRepository.findByTokenId(profileDto.getTokenId())
                 .orElseThrow(() -> new NFTNotFoundException("등록되지 않은 Token입니다."));
 
