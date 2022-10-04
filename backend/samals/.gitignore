@@ -5,7 +5,8 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-!**/src/main/**/exception/
+!**/src/main/java/com.project.samals/
+
 
 ### STS ###
 .apt_generated
@@ -14,7 +15,7 @@ build/
 .project
 .settings
 .springBeans
-.sts4-cache
+.sts4-cached
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
