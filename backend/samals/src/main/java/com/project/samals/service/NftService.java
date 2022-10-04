@@ -9,6 +9,7 @@ import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.response.ResMyNftDto;
 import com.project.samals.dto.response.ResNftDto;
+import com.project.samals.dto.response.ResSaleHistoryDto;
 import com.project.samals.exception.*;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.NftRepository;
@@ -64,12 +65,19 @@ public class NftService {
         return NftDto.convert(mintHistory);
     }
 
-    public List<SaleDto> getNftHistory(int tokenId) {
+    public List<ResSaleHistoryDto> getNftHistory(int tokenId) {
         Nft nft = nftRepository.findByTokenId(tokenId)
                 .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", tokenId)));
-        List<SaleDto> nftHistory = new ArrayList<>();
+        List<ResSaleHistoryDto> nftHistory = new ArrayList<>();
         for (Sale sale : nft.getNftSaleList()) {
-            nftHistory.add(SaleDto.convert(sale));
+            ResSaleHistoryDto dto = ResSaleHistoryDto.convert(sale);
+            dto.setSellerNickname(userRepository.findByWalletAddress(sale.getSellerAddress())
+                    .orElseThrow(() -> new UserNotFoundException("판매자 지갑의 사용자 정보를 찾을 수 없습니다.")).getUserNickname());
+            if(sale.getBuyerAddress()!=null) {
+                dto.setBuyerNickname(userRepository.findByWalletAddress(sale.getBuyerAddress())
+                        .orElseThrow(() -> new UserNotFoundException("구매자 지갑의 사용자 정보를 찾을 수 없습니다.")).getUserNickname());
+            }
+            nftHistory.add(dto);
         }
         return nftHistory;
     }

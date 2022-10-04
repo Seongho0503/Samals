@@ -3,6 +3,7 @@ package com.project.samals.controller;
 import com.project.samals.dto.*;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.response.ResNftDto;
+import com.project.samals.dto.response.ResSaleHistoryDto;
 import com.project.samals.service.NftService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,9 +29,9 @@ public class NftController {
         return new ResponseEntity<>(nftService.mintNft(nftDto), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "NFT 거래 내역 조회")
+    @ApiOperation(value = "해당 NFT의 거래 내역 조회")
     @GetMapping("/{tokenId}/sale")
-    public ResponseEntity<List<SaleDto>> getNftHistory(@PathVariable int tokenId) {
+    public ResponseEntity<List<ResSaleHistoryDto>> getNftHistory(@PathVariable int tokenId) {
         return new ResponseEntity<>(nftService.getNftHistory(tokenId), HttpStatus.OK);
     }
 
