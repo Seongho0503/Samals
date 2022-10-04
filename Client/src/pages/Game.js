@@ -43,11 +43,15 @@ const Game = () => {
     };
   }, [addEventListener, removeEventListener, handleAuth]);
   useEffect(() => {
-    setUserName();
+    if (isAuth === true)
+    {
+      setUserName();
+    }
   }, [isAuth]);
 
   function setUserName() {
-    sendMessage("UIManager", "setUserName", "0x43f11C9559F116ae60ed23987aE5CC4B5Caa5DbE");
+    sendMessage("LoginManager", "setUserName", "0x43f11C9559F116ae60ed23987aE5CC4B5Caa5DbE");
+    setIsAuth(false);
   }
   return (
     <div>
