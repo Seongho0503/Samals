@@ -25,7 +25,7 @@ public class UserController {
 
     @ApiOperation(value = "회원 등록")
     @PostMapping("/signup")
-    public ResponseEntity<UserDto> signup(@RequestBody ReqUserSignupDto userDto) {
+    public ResponseEntity<UserDto> signup(@RequestBody ReqUserSignupDto userDto) throws Exception {
         return new ResponseEntity<>(userService.signup(userDto), HttpStatus.CREATED);
     }
 

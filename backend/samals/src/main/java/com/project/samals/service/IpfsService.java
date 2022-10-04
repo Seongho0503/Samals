@@ -3,6 +3,8 @@ package com.project.samals.service;
 import com.project.samals.domain.Animal;
 import com.project.samals.domain.Ipfs;
 import com.project.samals.dto.IpfsDto;
+import com.project.samals.exception.AnimalNotFoundException;
+import com.project.samals.exception.IpfsNotFoundException;
 import com.project.samals.repository.AnimalRepository;
 import com.project.samals.repository.IpfsRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,7 @@ public class IpfsService {
                     .ipfsUri("https://j7d103.p.ssafy.io/image/downloadFile/"+animalSpecies+"%20("+i+").png")
                     .ipfsType("donate")
                     .ipfsIsUsed('N')
-                    .animal(animalRepository.findByAnimalSpecies(animalSpecies))
+                    .animal(animalRepository.findByAnimalSpecies(animalSpecies).orElseThrow())
                     .build();
             ipfsRepository.save(ipfs);
         }
@@ -65,7 +67,8 @@ public class IpfsService {
             return result;
         }
         //동물 검색
-        Animal animal = animalRepository.findByAnimalSpecies((String)request.get("animal_species"));
+        Animal animal = animalRepository.findByAnimalSpecies((String)request.get("animal_species"))
+                .orElseThrow(null);
 
         //해당 동물이 없으면 리턴
         if(animal == null){
@@ -111,7 +114,8 @@ public class IpfsService {
     }
 
     public IpfsDto pollOneIpfs(int ipfsSeq){
-        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq);
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq)
+                .orElseThrow(() -> new IpfsNotFoundException("해당 IPFS 데이터를 찾을 수 없습니다."));
         ipfs.setIpfsIsUsed('Y');
         IpfsDto ipfsDto = new IpfsDto().convert(ipfs);
         log.info("ipfsDto -> {}", ipfsDto);
