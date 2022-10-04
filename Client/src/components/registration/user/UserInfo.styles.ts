@@ -19,10 +19,14 @@ export const Block = styled.div`
 
 export const UserName = styled.div`
   font-size: 2rem;
+  font-family: "GangwonEdu_OTFBoldA";
+  margin-bottom: 20px;
 `;
 
 export const BirdName = styled.div`
   font-size: 1.2rem;
+  font-family: "GangwonEdu_OTFBoldA";
+  margin-bottom: 30px;
 `;
 
 export const Images = styled.div`

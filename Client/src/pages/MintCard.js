@@ -42,6 +42,8 @@ const MintCard = () => {
               method: "POST",
               url: "api/nft/mint",
               data: {
+                nft_token_id: res.events.Donated.returnValues[0],
+                ipfs_seq: nftSeq.current,
                 nftPrice: 500,
                 nftType: "donate",
                 tokenId: res.events.Donated.returnValues[0],

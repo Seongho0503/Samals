@@ -31,7 +31,6 @@ import Detail from "../../detail/Detail";
 import Bird from "../bird/Bird";
 import empty from "assets/empty (5).png";
 import axios from "axios";
-import { CompassOutlined } from "@ant-design/icons";
 
 const title = faker.lorem.word();
 const text1 = faker.lorem.word();
@@ -43,7 +42,6 @@ export interface IBird {
   nftImgUrl: string;
   getTime: string;
   animalSpecies: string;
-  nftMintNumber: string;
 }
 
 const BirdList = () => {
@@ -60,10 +58,8 @@ const BirdList = () => {
     try {
       await axios.get(`/api/mypage/${address}` + `/nft`).then((res) => {
         console.log("마의리스트", res.data);
-        console.log(`지갑`, address);
         setMyList(res.data);
         setAnimal(res.data.animalSpecies);
-
         //console.log("피까츄", res.data[0].animalSpecies);
         //setSaleDate(res.data[0].saleCompletedTime);
         // console.log(saleDetail);
@@ -132,8 +128,8 @@ const BirdList = () => {
           {/* <Circle /> */}
           {/* <span>{text1}</span>
           <span>{text2}</span> */}
-          {/* <span>현재 보유 NFT 수</span>
-          <span>23 마리</span> */}
+          <span>현재 보유 NFT 수</span>
+          <span>23 마리</span>
         </Block>
       </Top>
 
@@ -147,7 +143,7 @@ const BirdList = () => {
         <Detail birdImg={clickedBird.nftImgUrl} animal={clickedBird.animalSpecies} />
       ) : (
         <Box>
-          {isLike ? (
+          {isLike && clickedBird ? (
             <ScrollBox isEmpty={likeList.length === 0}>
               {likeList.length ? (
                 likeList.map((like, index) => (
@@ -190,15 +186,12 @@ const BirdList = () => {
             ) : (
               <EmptyImg src={empty} alt='empty' />
             )} */}
-
           <CharacterBox>
             <Button onClick={openDetail}>상세보기</Button>
             <Character src={clickedBird ? clickedBird.nftImgUrl : birds[0]?.nftImgUrl} />
 
             <CharacterMetaBox>
-              <CharacterNumber>
-                {clickedBird?.animalSpecies}#{clickedBird?.nftMintNumber}
-              </CharacterNumber>
+              <CharacterNumber>{clickedBird?.animalSpecies}</CharacterNumber>
               <CharacterName>{clickedBird?.getTime}</CharacterName>
               {/* <CharacterName>{clickedBird?.name}</CharacterName> */}
             </CharacterMetaBox>
