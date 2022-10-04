@@ -16,9 +16,9 @@ import sign from "../../assets/sign/EW.png";
 // class AnimalInfo extends React.Component {
 //   render() {
 const AnimalInfo = ({ animal }) => {
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState({ animalNameKr: "", animalNameEn: "", animalClass: "" });
   useEffect(() => {
-    console.log("애니" + animal);
+    console.log("애니멀 출력: " + animal);
     getDescription(animal).then(({ data }) => {
       console.log("data: ", data);
       setAnimals(data);
@@ -86,11 +86,8 @@ const AnimalInfo = ({ animal }) => {
                 <img
                   className='date'
                   src='https://www.water.or.kr/images/egovframework/life/weast/ws2_65.jpg'
-                ></img>
-
-                {/* <a className="bnt-more" href="javascript:void(0)">
-                    More
-                  </a> */}
+                  alt='rhinoImg'
+                />
               </div>
             </LightSpeed>
           </div>
@@ -100,14 +97,8 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-img'></div>
 
               <div className='timeline-content timeline-card js--fadeInLeft'>
-                {/* <div className='timeline-img-header'>
-                  <h2>Card Title</h2>
-                </div> */}
                 <div className='date'>동물 설명</div>
                 <p>{animals.animalDescription}</p>
-                {/* <a className="bnt-more" href="javascript:void(0)">
-                    More
-                  </a> */}
               </div>
             </Roll>
           </div>

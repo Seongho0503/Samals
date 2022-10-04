@@ -171,4 +171,6 @@ export let buy = async (species, tmpAnimalNumber, donatedAt) => {
   const res = await animalNftContract.methods
     .buy(species, tmpAnimalNumber, donatedAt)
     .send({ from: window.ethereum.selectedAddress });
+
+  return res;
 };
