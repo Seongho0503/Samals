@@ -28,11 +28,10 @@ import Register from "./pages/Register";
 import scrollTo from "./components/base/Footer";
 
 //dapp
-import { DAppProvider, Mainnet } from "@usedapp/core";
+import { DAppProvider } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
 import ScrollTo from "./components/base/ScrollToTop";
 import ScrollToTop from "./components/base/ScrollToTop";
-import Footer from "./components/base/ScrollToTop";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Provider, Web3Provider } from "@ethersproject/providers";
 

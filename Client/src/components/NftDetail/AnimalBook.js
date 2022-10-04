@@ -26,10 +26,10 @@ const AnimalBook = ({ animal }) => {
   const [imgs, setImgs] = useState([]);
   useEffect(() => {
     getDescription(animal).then(({ data }) => {
-      console.log("사전: ", data);
+      // console.log("사전: ", data);
       setAnimals(data);
-      console.log(data.img1);
-      console.log(data.img2);
+      // console.log(data.img1);
+      // console.log(data.img2);
       setImgs([data.img1, data.img2]);
       // console.log(data.img1);
       // console.log(data.img1);
@@ -37,7 +37,7 @@ const AnimalBook = ({ animal }) => {
       // console.log(data.img1);
     });
   }, []);
-  console.log(imgs, "imgs");
+  // console.log(imgs, "imgs");
   // render() {
   return (
     <div>
