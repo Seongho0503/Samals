@@ -14,6 +14,8 @@ public interface IpfsRepository extends JpaRepository<Ipfs, Long> {
     //사용하지 않은 다음 IPFS 조회
     Ipfs findTopByIpfsIsUsedIsOrderByIpfsSeq(String is);
 
+    Optional<Ipfs> findByIpfsSeq(int ipfsSeq);
+
     List<Ipfs> findAllByIpfsIsUsedAndIpfsType(char isUsed, String ipfsType);
     //다음 IPFS 조회 및 사용
 
