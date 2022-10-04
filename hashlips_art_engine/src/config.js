@@ -5,9 +5,9 @@ const { NETWORK } = require(`${basePath}/constants/network.js`);
 const network = NETWORK.eth;
 
 // General metadata for Ethereum
-const namePrefix = "Your Collection";
-const description = "Remember to replace this description";
-const baseUri = "ipfs://NewUriToReplace";
+const namePrefix = "SAVE THE ANIMALS";
+const description = "You can save the animals";
+const baseUri = "https://ipfs.io/ipfs/QmfA2UzgLcDCBy7xx27eswENqojdGvLSyfWZUMFsRFgadh/market/shark";
 
 const solanaMetadata = {
   symbol: "YC",
@@ -24,18 +24,203 @@ const solanaMetadata = {
 // If you have selected Solana then the collection starts from 0 automatically
 const layerConfigurations = [
   {
-    growEditionSizeTo: 5,
+    growEditionSizeTo: 25,
     layersOrder: [
-      // { name: "Background" },
-      // { name: "Eyeball" },
-      // { name: "Eye color" },
-      // { name: "Iris" },
-      // { name: "Shine" },
-      // { name: "Bottom lid" },
-      // { name: "Top lid" },
-      { name: "aniaml" },
-      { name: "backpack" },
-      { name: "shoes" },
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/animalResize/donate/elephant" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 50,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/animalResize/donate/elephant" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 75,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/elephant" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 100,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/elephant" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 125,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/animalResize/donate/frog" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 150,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/animalResize/donate/frog" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 175,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/frog" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 200,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/frog" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 225,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/animalResize/donate/tiger" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 250,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/animalResize/donate/tiger" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 275,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/tiger" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 300,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/tiger" },
+      { name: "Main/glassNormal" }, // glassNormal
+      { name: "Main/hatNormal" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 325,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/animalResize/donate/Toco Toucan" },
+      { name: "Main/glassOneEye" }, // glassNormal
+      { name: "Main/hatOneEye" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 350,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/animalResize/donate/Toco Toucan" },
+      { name: "Main/glassOneEye" }, // glassNormal
+      { name: "Main/hatOneEye" }, // hatNormal
+      { name: "Main/frontWeapon" },
+    ],
+  },
+  {
+    growEditionSizeTo: 375,
+    layersOrder: [
+      {
+        name: "Main/backgroundPremium",
+        options: {
+          blend: MODE.colorBurn,
+        },
+      },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/Toco Toucan" },
+      { name: "Main/glassOneEye" }, // glassNormal
+      { name: "Main/hatOneEye" }, // hatNormal
+    ],
+  },
+  {
+    growEditionSizeTo: 400,
+    layersOrder: [
+      { name: "Main/backgroundPremium" },
+      { name: "Main/backWeapon" },
+      { name: "Main/animalResize/donate/Toco Toucan" },
+      { name: "Main/glassOneEye" }, // glassNormal
+      { name: "Main/hatOneEye" }, // hatNormal
     ],
   },
 ];
@@ -45,9 +230,9 @@ const shuffleLayerConfigurations = false;
 const debugLogs = false;
 
 const format = {
-  width: 512,
-  height: 512,
-  smoothing: false,
+  width: 1600,
+  height: 1600,
+  smoothing: true,
 };
 
 const gif = {

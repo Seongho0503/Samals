@@ -25,7 +25,7 @@ const CardMotion = () => {
 
     function goToPage(pageNumber = 0) {
       currentPage = Math.min(maxPageCount(), Math.max(0, pageNumber));
-      console.log(currentPage);
+      // console.log(currentPage);
       hero && hero.style.setProperty("--page", currentPage);
     }
 

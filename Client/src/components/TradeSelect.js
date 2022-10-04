@@ -4,29 +4,29 @@ import "../styles/TradeSelect.css";
 const TradeSelect = () => {
   function onClick() {
     console.log("Hi there, user!");
-    window.location.replace("/register");
+    window.location.replace("/create");
   }
   return (
-    <div className="animal-container">
-      <button className="register" id="register" onClick={onClick}>
+    <div className='animal-container'>
+      <button className='register' id='register' onClick={onClick}>
         NFT 등록
       </button>
-      <div className="animal-control-group">
+      <div className='animal-control-group'>
         <h1>Price</h1>
         {/* <label className="control control--checkbox">
           First checkbox
           <input type="checkbox" checked="checked" />
           <div className="control__indicator"></div>
         </label> */}
-        <label className="control control--checkbox">
+        <label className='control control--checkbox'>
           최저가순
-          <input type="checkbox" />
-          <div className="control__indicator"></div>
+          <input type='checkbox' />
+          <div className='control__indicator'></div>
         </label>
-        <label className="control control--checkbox">
+        <label className='control control--checkbox'>
           최고가순
-          <input type="checkbox" />
-          <div className="control__indicator"></div>
+          <input type='checkbox' />
+          <div className='control__indicator'></div>
         </label>
         {/* <label className="control control--checkbox">
           Disabled
@@ -39,17 +39,17 @@ const TradeSelect = () => {
           <div className="control__indicator"></div>
         </label> */}
       </div>
-      <div className="animal-control-group">
+      <div className='animal-control-group'>
         <h1>PRICE</h1>
-        <label className="control control--radio">
+        <label className='control control--radio'>
           최저가순
-          <input type="radio" name="radio" checked="checked" />
-          <div className="control__indicator"></div>
+          <input type='radio' name='radio' checked='checked' />
+          <div className='control__indicator'></div>
         </label>
-        <label className="control control--radio">
+        <label className='control control--radio'>
           최고가순
-          <input type="radio" name="radio" />
-          <div className="control__indicator"></div>
+          <input type='radio' name='radio' />
+          <div className='control__indicator'></div>
         </label>
         {/* <label className="control control--radio">
           Disabled
@@ -67,15 +67,15 @@ const TradeSelect = () => {
           <div className="control__indicator"></div>
         </label> */}
       </div>
-      <div className="animal-control-group">
+      <div className='animal-control-group'>
         <h1>아이템</h1>
-        <div className="select">
+        <div className='select'>
           <select>
             <option>산타모</option>
             <option>캡</option>
             <option>밀집모자</option>
           </select>
-          <div className="select__arrow"></div>
+          <div className='select__arrow'></div>
         </div>
         {/* <div className="select">
           <select>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import NFTCard from "./NFTCard";
+import MNFTCard from "./MNFTCard";
 import "../styles/CardList.css";
 import { useNavigate } from "react-router-dom";
 import { $, jQuery } from "jquery";
@@ -51,31 +51,28 @@ const CardList = ({ list, type = "horizontal" }) => {
 
   return (
     <div>
-      <div className="toggles">
+      <div className='toggles'>
         {/* <button id="showall">Show All</button> */}
-        <button
-          animalActive={activeAnimal === "tiger" ? true : false}
-          onClick={setActiveAnimal}
-        >
-          <img className="animal-fillter" src={tiger4} />{" "}
-          <h2 className="animal-name"> {"Tiger"} </h2>
+        <button animalActive={activeAnimal === "tiger" ? true : false} onClick={setActiveAnimal}>
+          <img className='animal-fillter' src={tiger4} />{" "}
+          <h2 className='animal-name'> {"Tiger"} </h2>
         </button>
         <button>
-          <img className="animal-fillter" src={elephant5} />
-          <h2 className="animal-name"> {"Elephant"} </h2>
+          <img className='animal-fillter' src={elephant5} />
+          <h2 className='animal-name'> {"Elephant"} </h2>
         </button>
         <button>
-          <img className="animal-fillter" src={toad2} />
-          <h2 className="animal-name"> {"Toad"} </h2>
+          <img className='animal-fillter' src={toad2} />
+          <h2 className='animal-name'> {"Toad"} </h2>
         </button>
         <button>
           {/* {"ddd "} */}
-          <img className="animal-fillter" src={shark3} />{" "}
-          <h2 className="animal-name"> {"Shark"} </h2>
+          <img className='animal-fillter' src={shark3} />{" "}
+          <h2 className='animal-name'> {"Shark"} </h2>
         </button>
         <button>
-          <img className="animal-fillter" src={toucan} />{" "}
-          <h2 className="animal-name"> {"Toucan"} </h2>
+          <img className='animal-fillter' src={toucan} />{" "}
+          <h2 className='animal-name'> {"Toucan"} </h2>
         </button>
         {/* <button>
           <img className="animal-fillter" src={elephant2} />{" "}
@@ -86,12 +83,9 @@ const CardList = ({ list, type = "horizontal" }) => {
         <button id="motion">토끼</button> */}
       </div>
 
-      <div
-        id="card-list"
-        style={{ flexDirection: type == "horizontal" ? "row" : "column" }}
-      >
+      <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
         {list.map((item, index) => (
-          <NFTCard
+          <MNFTCard
             nftSrc={item.src}
             key={index}
             onClick={() => navigate("/detail", { state: { item: item } })}

@@ -4,17 +4,11 @@ import "../../styles/base/Card.css";
 
 const Card = React.forwardRef(
   (
-    {
-      width = "270px",
-      height = "460px",
-      child,
-      blurColor = "rgba(48,118,234,0.2)",
-      onClick,
-    },
+    { width = "270px", height = "460px", child, blurColor = "rgba(48,118,234,0.2)", onClick },
     ref
   ) => (
     <div
-      className="card"
+      className='card'
       style={{
         width: `${width}`,
         height: `${height}`,

@@ -1,40 +1,42 @@
 .roadmap {
-    position: relative;
-    height: 100%;
-    margin-top: 40px;
+  position: relative;
+  height: 500px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .swiper {
-    width: 60%;
-    height: 50%;
+  width: 60%;
+  height: 100%;
 }
 
 .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 18px;
-    font-size: 22px;
-    font-weight: bold;
-    color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
 }
 
 .swiper-slide:nth-child(1n) {
-    background: url("../assets/carousel-1.png");
+  background: url("../assets/carousel-01.png");
 }
 
 .swiper-slide:nth-child(2n) {
-    background: url("../assets/carousel-2.png");
+  background: url("../assets/carousel-02.png");
 }
 
 .swiper-slide:nth-child(3n) {
-    background: url("../assets/carousel-3.png");
+  background: url("../assets/carousel-03.png");
 }
 
 .swiper-slide:nth-child(4n) {
-    background: url("../assets/carousel-4.png");
+  background: url("../assets/carousel-04.png");
 }
 
 .swiper-slide:nth-child(5n) {
-    background: url("../assets/carousel-5.png");
+  background: url("../assets/carousel-05.png");
 }

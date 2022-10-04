@@ -7,7 +7,7 @@ export default function ScrollToTop() {
   useLayoutEffect(() => {
     //window.scrollTo(0, 0);
     document.getElementById("root").scrollTo(0, 0);
-    console.log(`${pathname}`);
+    // console.log(`${pathname}`);
   }, [pathname]);
 
   return null;
