@@ -33,9 +33,9 @@ public class NftService {
         User user = userRepository.findByWalletAddress(nftDto.getWalletAddress())
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
 
-        ipfsRepository.findByIpfsTokenId(nftDto.getTokenId()-1)
-                .orElseThrow(() -> new IpfsNotFoundException(
-                        String.format("%d Token의 민팅 차례가 아닙니다. Token 순서를 확인하세요.", nftDto.getTokenId())));
+//        ipfsRepository.findByIpfsTokenId(nftDto.getTokenId()-1)
+//                .orElseThrow(() -> new IpfsNotFoundException(
+//                        String.format("%d Token의 민팅 차례가 아닙니다. Token 순서를 확인하세요.", nftDto.getTokenId())));
 
         Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq())
                 .orElseThrow(() -> new IpfsNotFoundException("해당 IPFS 데이터를 찾을 수 없습니다."));
