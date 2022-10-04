@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -27,6 +24,30 @@ public class IpfsService {
     private final AnimalRepository animalRepository;
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
 
+    public List<String> getNftImgList(){
+        List<String> imgList=new ArrayList<>();
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/bird%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(55).png");
+
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/bird%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(15).png");
+
+        return imgList;
+    }
     public IpfsDto getRandom(String ipfsType){
         if(!ipfsType.equals("donate")&&!ipfsType.equals("market"))
             return null;
