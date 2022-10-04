@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const DetailBox = styled.div`
   position: relative;
@@ -16,12 +16,19 @@ export const LeftBox = styled.div`
   left: 0;
   margin-left: 2rem;
   width: 200px;
+  font-weight: bold;
+  color: black;
 
   div:first-of-type {
     background: #0ca678;
     padding: 12px;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+    font-size: 2px;
+    font-family: "GangwonEdu_OTFBoldA";
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   div:last-of-type {
@@ -31,6 +38,9 @@ export const LeftBox = styled.div`
     padding: 12px;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 `;
 
@@ -40,8 +50,8 @@ interface MetaBoxWrapperProps {
 }
 
 export const MetaBoxWrapper = styled.div<MetaBoxWrapperProps>`
-  margin-left: ${({ marginLeft }) => marginLeft && '2rem'};
-  margin-right: ${({ marginRight }) => marginRight && '2rem'};
+  margin-left: ${({ marginLeft }) => marginLeft && "2rem"};
+  margin-right: ${({ marginRight }) => marginRight && "2rem"};
 `;
 
 interface MetaBoxProps {
@@ -50,13 +60,17 @@ interface MetaBoxProps {
 
 export const MetaBox = styled.div<MetaBoxProps>`
   width: 200px;
-  margin-bottom: ${({ marginBottom }) => marginBottom && '1rem'};
+  margin-bottom: ${({ marginBottom }) => marginBottom && "1rem"};
+  font-family: "GangwonEdu_OTFBoldA";
 
   div:first-of-type {
     background: #0ca678;
     padding: 12px;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 
   div:last-of-type {
@@ -66,6 +80,9 @@ export const MetaBox = styled.div<MetaBoxProps>`
     padding: 12px;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
   }
 `;
 
@@ -77,9 +94,11 @@ export const Img = styled.img`
 `;
 
 export const Description = styled.div`
-  background: #fff;
+  background: #ffebcd;
   padding: 1rem;
   padding-left: 10rem;
   padding-right: 10rem;
-  color: #868e96;
+  color: black;
+  font-family: "GangwonEdu_OTFBoldA";
+  font-size: 25px;
 `;

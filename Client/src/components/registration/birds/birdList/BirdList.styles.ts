@@ -4,6 +4,7 @@ export const BirdListContainer = styled.div`
   flex: 1;
   background: linear-gradient(to bottom, #e6fcf5 5%, #96f2d7 20%);
   top: 77px;
+  height: calc(100vh - 200px);
 `;
 
 export const Top = styled.div`
@@ -11,11 +12,13 @@ export const Top = styled.div`
 `;
 
 export const Title = styled.span`
-  color: #ffc581;
-  width: 200px;
-  font-size: 2rem;
+  color: black;
+  width: 279px;
+  font-size: 27px;
   align-items: center;
   margin-left: 1rem;
+  margin-top: 30px;
+  font-family: "GangwonEdu_OTFBoldA";
 `;
 
 export const Block = styled.div`
@@ -44,20 +47,25 @@ export const Circle = styled.div`
 `;
 
 export const IllustratedBook = styled.div`
-  margin-left: 16rem;
+  margin-left: 0rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 
   button {
     padding: 0.5rem;
-    border-radius: 4px;
+    border-radius: 10px;
+    font-family: "GangwonEdu_OTFBoldA";
+    font-size: 23px;
+    background-color: #0ca678;
+    margin-right: 30px;
+    cursor: pointer;
   }
 `;
 
 export const Box = styled.div`
   display: flex;
 
-  height: calc(100vh - 90px);
+  height: calc(100vh - 200px);
 `;
 
 interface ScrollBoxProps {
@@ -72,11 +80,9 @@ export const ScrollBox = styled.div<ScrollBoxProps>`
   padding-bottom: 3rem;
 
   display: ${({ isEmpty }) => (isEmpty ? "flex" : "grid")};
-
-  justify-content: center;
-  align-items: center;
-
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
+  align-items: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 2.5rem;
   width: 66%;
   background: #c3fae8;
@@ -110,14 +116,17 @@ export const CharacterBox = styled.div`
   justify-content: center;
   margin-bottom: 10%;
   background: linear-gradient(to bottom, #c3fae8, #63e6be);
+  height: 100%;
 `;
 
 export const Button = styled.button`
   padding: 12px;
   border-radius: 5rem;
   margin-bottom: 1rem;
-  font-size: 50px;
-  background-color: #74992e;
+  font-size: 40px;
+  background-color: #0ca678;
+  font-family: "GangwonEdu_OTFBoldA";
+  cursor: pointer;
 `;
 
 export const Character = styled.img`
@@ -146,6 +155,8 @@ const CharacterMeta = styled.div`
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
   height: 50px;
+  font-size: 35px;
+  font-family: "GangwonEdu_OTFBoldA";
 `;
 
 export const CharacterNumber = styled(CharacterMeta)``;
