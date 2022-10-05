@@ -10,10 +10,7 @@ import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.dto.response.ResSaleDetailDto;
 import com.project.samals.dto.response.ResSaleListDto;
 import com.project.samals.exception.*;
-import com.project.samals.repository.NftRepository;
-import com.project.samals.repository.SaleLikeRepository;
-import com.project.samals.repository.SaleRepository;
-import com.project.samals.repository.UserRepository;
+import com.project.samals.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +26,7 @@ import java.util.stream.Collectors;
 public class SaleService {
     private final SaleRepository saleRepository;
     private final SaleLikeRepository saleLikeRepository;
+    private final ProfileImgRepository profileImgRepository;
     private final UserRepository userRepository;
     private final NftRepository nftRepository;
     private final SaleLikeService saleLikeService;
@@ -40,6 +38,9 @@ public class SaleService {
 
         userRepository.findByWalletAddress(saleDto.getSellerAddress())
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
+        if(profileImgRepository.findByIpfs(nft.getIpfs())!=null)
+            throw new ProfileImgAlreadyUseException("프로필 이미지로 사용중입니다.");
 
         if(saleRepository.findByNftAndIsSold(nft,'N')!=null)
             throw new SaleDuplicateException("이미 거래 중인 NFT 입니다");
