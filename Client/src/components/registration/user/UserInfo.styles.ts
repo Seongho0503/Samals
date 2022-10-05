@@ -20,25 +20,27 @@ export const Block = styled.div`
 export const UserName = styled.div`
   font-size: 2rem;
   font-family: "GangwonEdu_OTFBoldA";
-  margin-bottom: 20px;
+  margin: 20px 20px;
 `;
 
 export const BirdName = styled.div`
   font-size: 1.2rem;
   font-family: "GangwonEdu_OTFBoldA";
-  margin-bottom: 30px;
-  margin-top: 20px;
+`;
+
+export const BirdSum = styled.div`
+  font-size: 20px;
+  font-family: "GangwonEdu_OTFBoldA";
 `;
 
 export const Images = styled.div`
   position: absolute;
   top: 0;
-  left: 3rem;
+  left: 5rem;
 `;
 
 export const Bird = styled.img`
   width: 280px;
-  margin-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,8 +70,9 @@ export const CircleWrapper = styled.div`
 `;
 
 export const Circle = styled.div`
-  width: 4rem;
-  height: 4rem;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
   background: #ccc;
+  margin-bottom: 10px;
 `;

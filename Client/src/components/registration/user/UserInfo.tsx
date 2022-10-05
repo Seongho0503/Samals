@@ -23,20 +23,47 @@ import {
   Person,
   UserInfoContainer,
   UserName,
+  BirdSum,
 } from "./UserInfo.styles";
 import { faker } from "@faker-js/faker";
+import Sea from "assets/sea.png";
+import {
+  approveERC20ForMint,
+  getTotalMint,
+  getLimitedNumber,
+  firstSupply,
+  balanceOf,
+} from "../../../utils/event";
+import ProfileEdit from "../../../components/MyPage/ProfileEdit";
 
 const UserInfo = () => {
   const [address, setAddress] = useState(useSelector(selectAddress));
+  const [alltoken, setAlltoken] = useState(0);
   const [userInfo, setUserInfo] = useState({
     userBio: "",
     createdTime: "",
     userNickname: "",
+    userImgUrl: "",
   });
+  const [grade1Is, setGrade1Is] = useState(0);
   const [nftCount, setNftCount] = useState(0);
+  const [myToken, setMytoken] = useState();
+
   useEffect(() => {
     fetchUserInfo();
     fetchNftList();
+    balanceOf().then((res) => {
+      console.log("현재토큰수 얼마: ", res);
+    });
+    // approveERC20ForMint().then((res) => {
+    //   setAlltoken(res);
+    //});
+    balanceOf().then((res) => {
+      setMytoken(res);
+      // console.log(`내 토큰 수 how`, res);
+    });
+    // fetchDonateSum();
+    //console.log("평균", donateSum);
 
     console.log(`새로운`, address);
   }, [address]);
@@ -50,6 +77,7 @@ const UserInfo = () => {
           userNickname: res.data.userNickname,
           userBio: res.data.userBio,
           createdTime: res.data.createdTime,
+          userImgUrl: res.data.userImgUrl,
         });
       });
     } catch (e) {
@@ -65,11 +93,19 @@ const UserInfo = () => {
     } catch (e) {}
   };
 
+  // // 기부 평균
+  // const fetchDonateSum = async () => {
+  //   try {
+  //     const response = await axios.get(`/api/nft/avg-donate`).then((res) => {
+  //       setDonateSum(res.data);
+  //     });
+  //   } catch (e) {}
+  // };
   return (
     <UserInfoContainer>
       <Block>
         <Images>
-          <Bird src={bird} alt='' />
+          <Bird src={userInfo.userImgUrl} alt='' />
           {/* <Person src={person} alt='' /> */}
         </Images>
       </Block>
@@ -82,7 +118,10 @@ const UserInfo = () => {
         <span>23개</span> */}
         <UserName>닉네임 : {userInfo.userNickname}</UserName>
         <BirdName>지갑 주소 : {address}</BirdName>
-        <BirdName>구한 멸종 위기 동물 수 : {nftCount}마리</BirdName>
+        <BirdName> {myToken} 토큰 보유</BirdName>
+        <BirdName>
+          <BirdSum>{nftCount} 마리의 멸종 위기 동물을 구하셨습니다</BirdSum>
+        </BirdName>
         {/* <UserName>
           {userInfo.userBio == null ? (
             <span className='use-bio'>자기 소개 내용이 없습니다</span>
@@ -92,20 +131,28 @@ const UserInfo = () => {
         </UserName> */}
       </Meta>
 
+      {/* <ProfileEdit></ProfileEdit> */}
       <Circles>
         <CircleWrapper>
-          <Circle />
+          {nftCount > 7 ? (
+            <Circle>
+              {" "}
+              <img src={Sea} />{" "}
+            </Circle>
+          ) : (
+            <Circle />
+          )}
           <BirdName>동물보호입문</BirdName>
         </CircleWrapper>
 
         <CircleWrapper>
           <Circle />
-          <BirdName>동물보호중급</BirdName>
+          <BirdName>동물보호지킴이</BirdName>
         </CircleWrapper>
 
         <CircleWrapper>
           <Circle />
-          <BirdName>동물보호마스터</BirdName>
+          <BirdName>동물보호수호자</BirdName>
         </CircleWrapper>
       </Circles>
     </UserInfoContainer>

@@ -46,6 +46,7 @@ export interface IBird {
   getTime: string;
   animalSpecies: string;
   nftMintNumber: string;
+  tokenId: number;
 }
 
 const BirdList = () => {
@@ -60,6 +61,8 @@ const BirdList = () => {
   const [likeList, setLikeList] = useState([]);
   const [myList, setMyList] = useState([]);
   const [animal, setAnimal] = useState("");
+  const [tokenId, setTokenId] = useState();
+
   // 나의 nft 조회
   const myNftList = async (address: string) => {
     try {
@@ -111,6 +114,7 @@ const BirdList = () => {
 
   const openDetail = useCallback(() => setIsDetail(true), []);
   const closeDetail = useCallback(() => setIsDetail(false), []);
+  const storeProfile = useCallback((tokenid: any) => setTokenId(tokenId), []);
 
   const openLike = useCallback(() => setIsLike(true), []);
   const closeLike = useCallback(() => setIsLike(false), []);
@@ -152,7 +156,12 @@ const BirdList = () => {
         {/* {<button onClick={onClick}> 구매 내역</button>} */}
       </IllustratedBook>
       {isDetail && clickedBird ? (
-        <Detail birdImg={clickedBird.nftImgUrl} animal={clickedBird.animalSpecies} />
+        <Detail
+          birdImg={clickedBird.nftImgUrl}
+          animal={clickedBird.animalSpecies}
+          // tokenid={clickedBird.tokenid}
+          // tokenid={clickedBird.tokenid}
+        />
       ) : (
         <Box>
           {isDonation ? null : isLike ? (
@@ -209,6 +218,7 @@ const BirdList = () => {
             // </div>
             <CharacterBox>
               <Button onClick={openDetail}>상세보기</Button>
+              <Button onClick={storeProfile}>프로필 설정</Button>
               <Character
                 src={
                   isLike

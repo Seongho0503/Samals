@@ -12,7 +12,7 @@ const TradeHistory = (props) => {
   //const [saleDate, setSaleDate] = useState(saleDate === null ? "출석날짜가 없습니" : saleDate);
 
   useEffect(() => {
-    console.log("하", props.sale);
+    console.log("얼마", props.sale);
     SaleDetail(props.sale);
     SaleHistory(tokenid).then((res) => {
       console.log("날짜체크", saleDate);

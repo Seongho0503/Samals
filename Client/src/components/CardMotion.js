@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "../styles/CardMotion.scss";
-import Tiger from "../assets/card/Tiger.png";
+import Tiger from "../assets/minting04.png";
 import Toad from "../assets/card/Toad.png";
 import Shark from "../assets/card/Shark.png";
 import Elephant from "../assets/card/Elephant.png";

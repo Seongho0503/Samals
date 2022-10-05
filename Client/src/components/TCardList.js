@@ -46,6 +46,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
       getSomeList(activeAnimal).then((res) => {
         //console.log("해당리스트: ", res.data);
         setAmlist(res.data);
+        console.log(`해당`, res.data);
       });
     }
     // console.log("애니멀리스트" + amlist);

@@ -9,7 +9,7 @@ interface BirdProps {
 
 const Bird: React.FC<BirdProps> = ({ bird, setClickedBird }) => {
   const [isHover, setIsHover] = useState(false);
-
+  const [amltoken, setAmltoken] = useState();
   const onMouseOver = useCallback(() => setIsHover(true), []);
   const onMouseOut = useCallback(() => setIsHover(false), []);
 

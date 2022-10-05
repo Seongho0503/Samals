@@ -84,13 +84,14 @@ const CardList = ({ list, type = "horizontal" }) => {
       </div>
 
       <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
-        {list.map((item, index) => (
-          <MNFTCard
-            nftSrc={item.src}
-            key={index}
-            onClick={() => navigate("/detail", { state: { item: item } })}
-          />
-        ))}
+        {list &&
+          list.map((item, index) => (
+            <MNFTCard
+              nftSrc={item.src}
+              key={index}
+              onClick={() => navigate("/detail", { state: { item: item } })}
+            />
+          ))}
       </div>
     </div>
   );
