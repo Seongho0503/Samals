@@ -9,27 +9,27 @@ const TradeHistory = (props) => {
   const [tokenid, setTokenid] = useState();
   const [saleDate, setSaleDate] = useState([] || "판매날짜가 없습니다");
   const [sellDates, setSellDates] = useState({
-    date1: [] || "판매내역이 없습니다.",
-    date2: [] || "판매내역이 없습니다.",
-    date3: [] || "판매내역이 없습니다.",
-    date4: [] || "판매내역이 없습니다.",
-    date5: [] || "판매내역이 없습니다.",
+    date1: "",
+    date2: "",
+    date3: "",
+    date4: "",
+    date5: "",
   });
 
   const [sellByer, setSellByer] = useState({
-    buy1: [] || "판매내역이 없습니다.",
-    buy2: [] || "판매내역이 없습니다.",
-    buy3: [] || "판매내역이 없습니다.",
-    buy4: [] || "판매내역이 없습니다.",
-    buy5: [] || "판매내역이 없습니다.",
+    buy1: "",
+    buy2: "",
+    buy3: "",
+    buy4: "",
+    buy5: "",
   });
 
   const [sellPrices, setSellPrices] = useState({
-    price1: sellDates.date1 == [] || "판매내역이 없습니다.",
-    price2: sellDates.date2 == [] || "판매내역이 없습니다.",
-    price3: sellDates.date3 == [] || "판매내역이 없습니다.",
-    price4: sellDates.date4 == [] || "판매내역이 없습니다.",
-    price5: sellDates.date5 == [] || "판매내역이 없습니다.",
+    price1: sellDates.date1 == null || "최근 거래 내역이 없습니다.",
+    price2: sellDates.date2 == null || "최근 거래 내역이 없습니다.",
+    price3: sellDates.date3 == null || "최근 거래 내역이 없습니다.",
+    price4: sellDates.date4 == null || "최근 거래 내역이 없습니다.",
+    price5: sellDates.date5 == null || "최근 거래 내역이 없습니다.",
   });
   const [saleData, setSaleData] = useState([]);
   // [] ||  [] || "판매날짜가 없습니다"
@@ -37,12 +37,12 @@ const TradeHistory = (props) => {
 
   useEffect(() => {
     console.log("얼마", props.sale);
+    console.log("얼마2", props);
     SaleDetail(props.sale).then((res) => {
-      SaleHistory(tokenid).then((res) => {
+      SaleHistory(res.data.tokenId).then((res) => {
         console.log("날짜체크", saleDate);
       });
     });
-    console.log("토큰", tokenid);
   }, []);
 
   // 거래 상세 조회
@@ -65,6 +65,7 @@ const TradeHistory = (props) => {
         console.log("detailsss", res.data.tokenId);
         setTokenid(res.data.tokenId);
         // console.log(saleDetail);
+        return SaleHistory(res.data.tokenId);
       });
     } catch (e) {
       console.log("error:", e);
@@ -121,7 +122,7 @@ const TradeHistory = (props) => {
   return (
     <div className='history'>
       {/* <TradeChart date={saleDate} price={tokenid}></TradeChart> */}
-      <TradeChart2 />
+      <TradeChart2 sellPrices={sellPrices} sellDates={sellDates} />
       <div id='table-container'>
         <table>
           <tbody>

@@ -36,6 +36,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
   const [amlist, setAmlist] = useState([]);
   useEffect(() => {
     if (activeAnimal == "All") {
+      console.log("리덕스", reduxAddress);
       getAnimalList(reduxAddress).then(({ data }) => {
         //console.log("리스트: ", data);
         //console.log(data.animalClassNo);
