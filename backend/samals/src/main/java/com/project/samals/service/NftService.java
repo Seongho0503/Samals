@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -140,6 +141,17 @@ public class NftService {
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> donateCounts= nftRepository.findByNftTypeAndUser("donate",user);
         return donateCounts.size()*donatePrice;
+    }
+
+    public int getDonateAvg(){
+        int price=500;
+        List<String> temp = new ArrayList<>();
+        List<Nft> donateList= nftRepository.findAllByNftType("donate");
+        for(Nft nft : donateList){
+            temp.add(nft.getUser().getWalletAddress());
+        }
+        List<String> minters = temp.stream().distinct().collect(Collectors.toList());
+        return donateList.size()*price/minters.size();
     }
 }
 

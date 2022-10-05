@@ -17,4 +17,6 @@ public interface NftRepository extends JpaRepository<Nft, Long> {
     List<Nft> findByNftType(String donate);
 
     List<Nft> findByNftTypeAndUser(String donate, User user);
+
+    List<Nft> findAllByNftType(String donate);
 }

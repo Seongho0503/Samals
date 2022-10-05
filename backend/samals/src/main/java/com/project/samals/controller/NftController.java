@@ -53,4 +53,10 @@ public class NftController {
         return new ResponseEntity<>(nftService.getTotalDonate(),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Nft 기부 평균 금액 조회")
+    @GetMapping("/avg-donate")
+    public ResponseEntity<Integer> getDonateAvg() {
+        return new ResponseEntity<>(nftService.getDonateAvg(), HttpStatus.OK);
+    }
+
 }

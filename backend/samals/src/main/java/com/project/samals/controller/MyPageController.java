@@ -65,4 +65,5 @@ public class MyPageController {
         return new ResponseEntity<>(nftService.getMyTotalDonate(address), HttpStatus.OK);
     }
 
+
 }
