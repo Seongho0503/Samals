@@ -138,6 +138,8 @@ export var createSale = async (animalId, price, startedAt, endedAt) => {
     .recordSale(animalId, _createSale.events.SaleCreated.returnValues.newNftSaleAddress)
     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log("2 : 게시글 등록", res2);
+
+  return _createSale.events.SaleCreated.returnValues.newNftSaleAddress;
 };
 
 // 판매글 컨트랙트 주소를 통해 NFT 구매
@@ -151,6 +153,7 @@ export var salePurchase = async (nftSaleAddress) => {
     .purchase()
     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log(res);
+  return res;
 };
 
 // 무료 증정 NFT에 대한 소유권 부여

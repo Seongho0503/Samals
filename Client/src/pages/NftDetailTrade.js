@@ -24,10 +24,10 @@ import TradeHistory from "../components/NftDetail/TradeHistory";
 import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 import axios from "axios";
-
+import { salePurchase, balanceOf, MetaMaskLogin } from "../utils/event";
 const NftDetailExplore = () => {
   const isMobile = useMobile();
-
+  const [balance] = useState(balanceOf());
   const [colors, setColors] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [detailData, setDetailData] = useState({
@@ -78,6 +78,36 @@ const NftDetailExplore = () => {
   //       "중앙아메리카와 남아메리카의 열대 우림 지역에 서식하며, 오색조류와 혈연관계가 있다.왕부리새의 부리는 크지만, 무겁지 않다. 단단한 열매를 쪼아먹거나 나무 기둥에 구멍을 뚫어 둥지를 만들 때 유용하게 쓰인다. 또한 부리로 열을 발산하거나 억제하는 식으로 체온을 조절할 수 있다.",
   //   },
   // ];
+  const onSaleTradeNft = () => {
+    //예외처리
+    if (window.ethereum.selectedAddress === undefined) {
+      alert("구매하기 위해선 메타마스크 로그인이 필요합니다.");
+      MetaMaskLogin();
+      return;
+    } else if (detailData.sellerAddress === window.ethereum.selectedAddress) {
+      alert("자신이 등록한 NFT는 판매할 수 없습니다.");
+      return;
+    } else if (balance < detailData.salePrice) {
+      alert("현재 보유중인 ACE 토큰이 부족합니다.");
+      return;
+    }
+    salePurchase(detailData.saleContractAddress).then(() => {
+      axios({
+        method: "PUT",
+        url: "api/sale/complete",
+        data: {
+          buyerAddress: window.ethereum.selectedAddress,
+          saleSeq: detailData.saleSeq,
+        },
+      }).then((res) => {
+        console.log(res);
+        if (res !== "") {
+          alert("NFT 구매 완료, my페이지로 이동");
+          navigate("/mypage");
+        }
+      });
+    });
+  };
   return (
     <div>
       <Header />
@@ -128,6 +158,7 @@ const NftDetailExplore = () => {
                         <p id='price'>{detailData.salePrice}</p>
                       </div>
                     }
+                    onClick={onSaleTradeNft}
                   ></Button>
                   <div className='like-container'>
                     <button className='like' onClick={like}>
