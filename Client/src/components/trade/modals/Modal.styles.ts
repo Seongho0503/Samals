@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const modalStyles: { content: React.CSSProperties } = {
   content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
     padding: 0,
   },
 };
@@ -33,7 +33,7 @@ export const TopBar = styled.div`
   }
 `;
 
-export const Box = styled.div`
+export const Box = styled.img`
   width: 200px;
   height: 160px;
   background: #fff;
@@ -69,15 +69,15 @@ export const Button = styled.button<ButtonProps>`
   height: 3rem;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
-  margin-right: ${({ marginRight }) => marginRight && "12px"};
-  margin: ${({ marginAuto }) => marginAuto && "0 auto"};
+  margin-right: ${({ marginRight }) => marginRight && '12px'};
+  margin: ${({ marginAuto }) => marginAuto && '0 auto'};
 
-  background: #11998e;
-  border: 1px solid #11998e;
+  background: #1e0d86;
+  border: 1px solid #1e0d86;
   font-size: 1rem;
 
   &:hover {
-    background: #11998e;
+    background: #1e0d86;
     border: 1px solid #1e0d86;
   }
 `;

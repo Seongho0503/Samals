@@ -24,7 +24,7 @@ const AnimalInfo = ({ animal }) => {
       setAnimals(data);
     });
   }, []);
-
+  console.log("animal : ", animal);
   return (
     <div>
       <header>
