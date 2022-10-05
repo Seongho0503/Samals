@@ -48,7 +48,7 @@ const TradeChart2 = ({ sellPrices, sellDates }) => {
           width={730}
           height={400}
           data={chartData}
-          margin={{ top: 0, right: 30, left: 20, bottom: 150 }}
+          margin={{ top: 30, right: 10, left: 10, bottom: 100 }}
         >
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis dataKey='transaction' />

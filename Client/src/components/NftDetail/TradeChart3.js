@@ -9,6 +9,11 @@ import {
   YAxis,
   Bar,
   BarChart,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
 } from "recharts";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -21,6 +26,7 @@ import {
   setUserId,
   setUserPFPAddress,
 } from "../../redux/slice/UserInfoSlice";
+import FavorChart from "./FavorChart";
 
 const ContainerWrapper = styled.div`
   & > .recharts-responsive-container {
@@ -99,7 +105,7 @@ const TradeChart3 = () => {
         <Bar dataKey='pv' fill='#8884d8' name='내 기부 총액' />
         <Bar dataKey='uv' fill='#FF9326' name='유저 평균 기부금' />
       </BarChart>
-
+      <FavorChart></FavorChart>
       {/* <ResponsiveContainer width={600} height={400}>
         <LineChart
           width={730}

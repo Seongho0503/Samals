@@ -44,6 +44,7 @@ export const Bird = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
+  front-size: 25px;
 `;
 
 export const Person = styled.img`

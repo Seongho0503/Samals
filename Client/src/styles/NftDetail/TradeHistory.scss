@@ -18,9 +18,9 @@ body {
   justify-content: center;
   align-items: center;
 }
-.history {
-  margin: auto;
-}
+// .history {
+//   margin: auto;
+// }
 #table-container {
   border-radius: 15px;
   //border: 10px solid rgba(255, 255, 255, 0.03);
@@ -29,7 +29,7 @@ body {
   overflow: auto;
   justify-content: center;
   align-items: center;
-  width: 63%;
+  width: 53%;
 
   table {
     border-collapse: collapse;
@@ -40,13 +40,13 @@ body {
 
     tbody {
       height: 120%;
-      width: 120%;
+      width: 100%;
     }
 
     tr {
       td,
       th {
-        padding: 20px;
+        padding: 12px;
         text-align: center;
         border-collapse: collapse;
         border: 1px solid black;
