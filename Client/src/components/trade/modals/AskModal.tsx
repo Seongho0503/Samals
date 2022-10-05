@@ -1,8 +1,8 @@
-import { CloseOutlined } from '@ant-design/icons';
-import { ListProps } from '@mui/material';
-import React, { ReactNode, useCallback, useState } from 'react';
-import Modal from 'react-modal';
-import { List } from 'reactstrap';
+import { CloseOutlined } from "@ant-design/icons";
+import { ListProps } from "@mui/material";
+import React, { ReactNode, useCallback, useState } from "react";
+import Modal from "react-modal";
+import { List } from "reactstrap";
 
 import {
   AskModalBlock,
@@ -13,15 +13,14 @@ import {
   ConfirmText,
   Meta,
   modalStyles,
-  TopBar,
-} from './Modal.styles';
+} from "./Modal.styles";
 
-interface nft{
-  tokenId: BigInteger,
-  nftMintNumber: BigInteger,
-  nftImagUrl: String,
-  animalSpecies: String,
-  getTime:String
+interface nft {
+  tokenId: BigInteger;
+  nftMintNumber: BigInteger;
+  nftImagUrl: String;
+  animalSpecies: String;
+  getTime: String;
 }
 
 interface AskModalProps {
@@ -30,9 +29,9 @@ interface AskModalProps {
   nftList: nft[];
 }
 
-const AskModal = ({ nftList, isModalOpen, closeModal } : AskModalProps) => {
-  console.log("nftList: ",nftList);
-  
+const AskModal = ({ nftList, isModalOpen, closeModal }: AskModalProps) => {
+  console.log("nftList: ", nftList);
+
   const [isCompleted, setIsCompleted] = useState(false);
 
   const onSale = useCallback(() => setIsCompleted(true), []);
@@ -46,9 +45,9 @@ const AskModal = ({ nftList, isModalOpen, closeModal } : AskModalProps) => {
   return (
     <Modal isOpen={isModalOpen} onRequestClose={onClose} style={modalStyles} ariaHideApp={false}>
       <AskModalBlock>
-        <TopBar onClick={onClose}>
+        {/* <TopBar onClick={onClose}>
           <CloseOutlined />
-        </TopBar>
+        </TopBar> */}
 
         {isCompleted ? (
           <ConfirmDialog>
@@ -58,7 +57,9 @@ const AskModal = ({ nftList, isModalOpen, closeModal } : AskModalProps) => {
             </Button>
           </ConfirmDialog>
         ) : (
-            ()=>{return (nftList.map((data, index)=>{}))}
+          () => {
+            return nftList.map((data, index) => {});
+          }
           // <>
           //   <Box />
 
