@@ -95,13 +95,31 @@ public class SaleService {
     }
 
 
-    public ResSaleDetailDto getSale(long saleSeq) {
+    public ResSaleDetailDto getSale(long saleSeq,String address) {
         Sale sale=saleRepository.findBySaleSeq(saleSeq)
                 .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
-        User user = userRepository.findByWalletAddress(sale.getSellerAddress())
-                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        User seller = userRepository.findByWalletAddress(sale.getSellerAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 판매자를를 찾을 수 없습니다"));
 
-        return ResSaleDetailDto.convert(sale,user);
+        User user;
+        if(address!=null) {
+            user = userRepository.findByWalletAddress(address)
+                    .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        }else{
+            user=null;
+        }
+
+        ResSaleDetailDto detailDto = ResSaleDetailDto.convert(sale,seller);
+
+        SaleLike saleLike = saleLikeRepository.findBySaleAndUser(sale,user);
+        if(saleLike!= null)
+            detailDto.setLikePush('Y');
+        else
+            detailDto.setLikePush('N');
+
+        detailDto.setLikeCount(saleLikeService.getSaleLikeCount(sale.getSaleSeq()));
+
+        return detailDto;
     }
 
 
