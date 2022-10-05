@@ -61,7 +61,10 @@ const CardMotion = () => {
       hoverSlide(slideSeq[0]);
       await sleep(1200);
       goToPage(pageSeq[1]);
-      dribbble.classList.add("hover");
+      try {
+        dribbble.classList.add("hover");
+      } catch (e) {}
+
       unhoverSlide(slideSeq[0]);
       await sleep(500);
       hoverSlide(slideSeq[1]);

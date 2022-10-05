@@ -34,15 +34,15 @@ const TradeHistory = (props) => {
   // };
 
   const SaleDetail = async (saleSeq) => {
-    try {
-      await axios.get(`/api/sale/${saleSeq}`).then((res) => {
-        console.log("detailsss", res.data.tokenId);
-        setTokenid(res.data.tokenId);
-        // console.log(saleDetail);
-      });
-    } catch (e) {
-      console.log("error:", e);
-    }
+    // try {
+    //   await axios.get(`/api/sale/${saleSeq}`).then((res) => {
+    //     console.log("detailsss", res.data.tokenId);
+    //     setTokenid(res.data.tokenId);
+    //     // console.log(saleDetail);
+    //   });
+    // } catch (e) {
+    //   console.log("error:", e);
+    // }
   };
 
   // const SaleDetail = async (tokenId) => {

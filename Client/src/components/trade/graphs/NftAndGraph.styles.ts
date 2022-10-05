@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const NftAndGraphContainer = styled.div`
   display: flex;
@@ -23,8 +23,8 @@ export const Button = styled.button`
   border-radius: 0.5rem;
   margin-bottom: 2rem;
 
-  background: #11998e;
-  border: 1px solid #11998e;
+  background: #1e0d86;
+  border: 1px solid #1e0d86;
   font-size: 1rem;
 
   &:hover {

@@ -13,7 +13,7 @@ import Toco from "../assets/card/Toco.png";
 export const exploreList = [
   {
     animalTitle: "토코투칸",
-    animal: "Toco Toucan",
+    animal: "bird",
     animalClass: "NT",
     animalClassNo: 1,
     count: 3500,
@@ -59,7 +59,7 @@ export const exploreList = [
   {
     animalTitle: "큰뿔코뿔소",
     // animalEn: "Greater One-Horned Rhino",
-    animal: "Rhino",
+    animal: "rhino",
     animalClass: "VU",
     animalClassNo: 1,
     count: 3700,
@@ -73,7 +73,7 @@ export const exploreList = [
   },
   {
     animalTitle: "바다 이구아나",
-    animal: "Marine Iguana",
+    animal: "iguana",
     animalClass: "VU",
     animalClassNo: 1,
     count: 15000,
@@ -87,7 +87,7 @@ export const exploreList = [
   },
   {
     animalTitle: "아무르 표범",
-    animal: "Amur Leopard",
+    animal: "leopard",
     animalClass: "VU",
     animalClassNo: 1,
     count: 84,

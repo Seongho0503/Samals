@@ -21,7 +21,7 @@ const Trade = () => {
       <TradeSelect></TradeSelect>
 
       {/* <AnimalFiller></AnimalFiller> */}
-      <div id='list-container'>
+      <div id='list-container' style={{ zIndex: 1 }}>
         <TCardList list={exploreList} />
       </div>
       <MainLast />

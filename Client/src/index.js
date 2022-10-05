@@ -37,9 +37,9 @@ import { Provider, Web3Provider } from "@ethersproject/providers";
 
 const config = {
   readOnlyChainId: 1337,
-  readOnlyUrls: {
-    1337: "http://13.209.82.138:8545",
-  },
+  // readOnlyUrls: {
+  //   1337: "http://13.209.82.138:8545",
+  // },
   multicallAddresses: {
     1337: "http://13.209.82.138:8545",
   },
