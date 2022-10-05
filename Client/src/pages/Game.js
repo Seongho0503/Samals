@@ -48,7 +48,14 @@ const Game = () => {
       setUserName();
     }
   }, [isAuth]);
+  
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    }
+  },[])
 
+  
   function setUserName() {
     sendMessage("LoginManager", "setUserName", "0x43f11C9559F116ae60ed23987aE5CC4B5Caa5DbE");
     setIsAuth(false);
