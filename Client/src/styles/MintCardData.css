@@ -10,17 +10,20 @@ screen *:after {
   perspective: 200rem;
 }
 
-mintcard {
+/* mintcard {
   margin: auto;
-  margin-top: 250px;
+  margin-top: 100px;
   height: 500px;
-  width: 330px;
+  width: 500px;
   background: #fff;
   border-radius: 30px;
   transform: translate3d(0, 0, 0) rotate3d(0, 0, 0, 0) rotate(0.5deg);
   position: relative;
   animation: rotate 3s linear;
-}
+  background: url("https://j7d103.p.ssafy.io/image/downloadFile/bird%20(38).png");
+  background-size: cover;
+} */
+
 card *,
 card *:before,
 card *:after,
@@ -63,24 +66,6 @@ back {
   bottom: 0;
   right: 0;
   margin: auto;
-}
-
-shadow {
-  margin: auto;
-  height: 100rem;
-  width: 70rem;
-  background: radial-gradient(#190d23, rgba(255, 255, 255, 0));
-  background: #190d23;
-  border-radius: 10rem;
-  position: relative;
-  animation: shadow 3s linear;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  transform: translate3d(0, 90rem, -50rem) rotateX(90deg) rotate(0deg) skewY(0) scale(1);
-  opacity: 0.2;
-  box-shadow: 0 0 2vmin #190d23, 0 0 5vmin #190d23;
 }
 
 hoverspace {
@@ -139,7 +124,7 @@ hoverspace:hover ~ shadow {
     background-color: rgba(255, 255, 255, 0);
   }
   25% {
-    background-color: rgba(245, 227, 227, 0.7);
+    background-color: rgba(112, 37, 37, 0.7);
   }
   75% {
     background-color: #190d23;
@@ -163,28 +148,12 @@ hoverspace:hover ~ shadow {
     opacity: 0.2;
   }
 }
-@keyframes shadowhover {
-  25% {
-    transform: translate3d(0, 90rem, -50rem) rotateX(90deg) rotate(90deg) skewY(-90deg);
-    opacity: 0;
-  }
-  50% {
-    transform: translate3d(0, 90rem, -50rem) rotateX(90deg) rotate(90deg) skewY(0);
-    opacity: 0.2;
-  }
-  75% {
-    transform: translate3d(0, 90rem, -50rem) rotateX(90deg) rotate(90deg) skewY(90deg);
-    opacity: 0;
-  }
-  100% {
-    transform: translate3d(0, 90rem, -50rem) rotateX(90deg) rotate(180deg) skewY(0);
-    opacity: 0.2;
-  }
-}
+
 front {
   transform: translate3d(0, 0, 0.1rem) rotateY(0deg);
   height: 100%;
   width: 100%;
+  /* background-color: red; */
 }
 front > * {
   width: 100%;

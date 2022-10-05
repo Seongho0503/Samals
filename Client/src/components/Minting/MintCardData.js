@@ -1,73 +1,29 @@
+import { style } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import "../../styles/MintCardData.css";
+import modalBack from "../../assets/game-modal2.png";
 import Footer from "../Footer";
 
-const MintCardData = () => {
+const MintCardData = (props) => {
+  const data = props.name;
+  console.log(data);
+  const mintcard2 = {
+    margin: "auto",
+    marginTop: 100,
+    width: 500,
+    height: 500,
+    borderRadius: 30,
+    transform: "translate3d(0, 0, 0) rotate3d(0, 0, 0, 0) rotate(0.3deg)",
+    animation: "rotate 1.5s linear",
+    position: "relative",
+    // backgroundImage: `url(${plz})`,
+    backgroundSize: "cover",
+  };
+
   return (
     <div>
-      <screen>
-        <hoverspace></hoverspace>
-        <shadow></shadow>
-        <mintcard>
-          <back></back>
-          <front>
-            <x>
-              <x></x>
-              <x>
-                <x>
-                  {" "}
-                  <x></x>{" "}
-                </x>
-                <x>
-                  <x>
-                    {" "}
-                    <x></x> <x></x>{" "}
-                  </x>
-
-                  <x>
-                    {" "}
-                    <x></x>{" "}
-                  </x>
-                  <x></x>
-                </x>
-                <x></x> <x></x> <x></x> <x></x>
-                <x>
-                  {" "}
-                  <x></x> <x></x> <x></x> <x></x> <x></x> <x></x> <x></x> <x></x>{" "}
-                </x>
-                <x></x> <x></x> <x></x> <x></x> <x></x> <x></x>
-              </x>
-            </x>
-
-            <x>
-              <x></x>
-              <x>
-                <x>
-                  {" "}
-                  <x></x>{" "}
-                </x>
-                <x>
-                  <x>
-                    {" "}
-                    <x></x> <x></x>{" "}
-                  </x>
-                  <x>
-                    {" "}
-                    <x></x>{" "}
-                  </x>{" "}
-                  <x></x>
-                </x>
-                <x></x> <x></x> <x></x> <x></x>
-                <x>
-                  {" "}
-                  <x></x> <x></x> <x></x> <x></x> <x></x> <x></x> <x></x> <x></x>{" "}
-                </x>
-                <x></x> <x></x> <x></x> <x></x> <x></x> <x></x>
-              </x>
-            </x>
-          </front>
-        </mintcard>
-      </screen>
+      <img width='500px' src={data} style={mintcard2} />
+      <screen></screen>
     </div>
   );
 };
