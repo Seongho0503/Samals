@@ -28,19 +28,18 @@ import Register from "./pages/Register";
 import scrollTo from "./components/base/Footer";
 
 //dapp
-import { DAppProvider, Mainnet } from "@usedapp/core";
+import { DAppProvider } from "@usedapp/core";
 import NftDetail from "./pages/NftDetail";
 import ScrollTo from "./components/base/ScrollToTop";
 import ScrollToTop from "./components/base/ScrollToTop";
-import Footer from "./components/base/ScrollToTop";
 import { Web3ReactProvider } from "@web3-react/core";
 import { Provider, Web3Provider } from "@ethersproject/providers";
 
 const config = {
   readOnlyChainId: 1337,
-  readOnlyUrls: {
-    1337: "http://13.209.82.138:8545",
-  },
+  // readOnlyUrls: {
+  //   1337: "http://13.209.82.138:8545",
+  // },
   multicallAddresses: {
     1337: "http://13.209.82.138:8545",
   },

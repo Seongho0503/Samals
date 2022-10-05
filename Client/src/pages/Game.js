@@ -55,7 +55,6 @@ const Game = () => {
       setUserName();
     }
   }, [isAuth]);
-  
 
   function setUserName() {
     sendMessage("LoginManager", "setUserName", account);

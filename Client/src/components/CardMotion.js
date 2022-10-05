@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "../styles/CardMotion.scss";
-import Tiger from "../assets/card/Tiger.png";
+import Tiger from "../assets/minting04.png";
 import Toad from "../assets/card/Toad.png";
 import Shark from "../assets/card/Shark.png";
 import Elephant from "../assets/card/Elephant.png";
@@ -19,8 +19,7 @@ const CardMotion = () => {
     let slideCount = slideChildren && slides.children.length;
     let currentlyDemoing = false;
     let currentPage = 0;
-    let slidesPerPage = () =>
-      window.innerWidth > 1700 ? 4 : window.innerWidth > 1200 ? 3 : 2;
+    let slidesPerPage = () => (window.innerWidth > 1700 ? 4 : window.innerWidth > 1200 ? 3 : 2);
     let maxPageCount = () => slideCount / slidesPerPage() - 1;
 
     function goToPage(pageNumber = 0) {
@@ -62,7 +61,10 @@ const CardMotion = () => {
       hoverSlide(slideSeq[0]);
       await sleep(1200);
       goToPage(pageSeq[1]);
-      dribbble.classList.add("hover");
+      try {
+        dribbble.classList.add("hover");
+      } catch (e) {}
+
       unhoverSlide(slideSeq[0]);
       await sleep(500);
       hoverSlide(slideSeq[1]);
@@ -79,20 +81,10 @@ const CardMotion = () => {
     }
 
     next.forEach(
-      (n) =>
-        n &&
-        n.addEventListener(
-          "click",
-          () => !currentlyDemoing && goToPage(currentPage + 1)
-        )
+      (n) => n && n.addEventListener("click", () => !currentlyDemoing && goToPage(currentPage + 1))
     );
     prev.forEach(
-      (n) =>
-        n &&
-        n.addEventListener(
-          "click",
-          () => !currentlyDemoing && goToPage(currentPage - 1)
-        )
+      (n) => n && n.addEventListener("click", () => !currentlyDemoing && goToPage(currentPage - 1))
     );
     menu && menu.addEventListener("click", demo);
 
@@ -104,7 +96,7 @@ const CardMotion = () => {
   }, []);
   return (
     <div>
-      <div id="hero-slides">
+      <div id='hero-slides'>
         {/* <div id="header">
           <div id="logo"></div>
           <div id="menu">
@@ -115,12 +107,12 @@ const CardMotion = () => {
             </div>
           </div>
         </div> */}
-        <div id="slides-cont">
-          <div className="button" id="next"></div>
-          <div className="button" id="prev"></div>
-          <div id="slides">
+        <div id='slides-cont'>
+          <div className='button' id='next'></div>
+          <div className='button' id='prev'></div>
+          <div id='slides'>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Toad + ")",
                 // background: Tiger,
@@ -130,20 +122,17 @@ const CardMotion = () => {
               }}
               // style="background-image: url(https://alca.tv/static/u/ef5af971-fc46-4ee1-a589-980346478696_opt.png)"
             >
-              <div className="number">01</div>
-              <div className="body">
-                <div className="location">두꺼비, EN</div>
-                <div className="headline">날뛰는 두꺼비</div>
-                <a
-                  href="https://unsplash.com/photos/EYmhcdGuYmI"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>01</div>
+              <div className='body'>
+                <div className='location'>두꺼비, EN</div>
+                <div className='headline'>날뛰는 두꺼비</div>
+                <a href='https://unsplash.com/photos/EYmhcdGuYmI' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               // style="background-image: url(https://alca.tv/static/u/522d6a86-0dcf-4554-8b22-7655d65a1f66_opt.png)"
               style={{
                 backgroundImage: "url(" + Shark + ")",
@@ -151,20 +140,17 @@ const CardMotion = () => {
                 //   "url(https://alca.tv/static/u/522d6a86-0dcf-4554-8b22-7655d65a1f66_opt.png)",
               }}
             >
-              <div className="number">02</div>
-              <div className="body">
-                <div className="location">백상아리, EN</div>
-                <div className="headline">화가난 백상아리</div>
-                <a
-                  href="https://unsplash.com/photos/ANJHXftvvJ8"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>02</div>
+              <div className='body'>
+                <div className='location'>백상아리, EN</div>
+                <div className='headline'>화가난 백상아리</div>
+                <a href='https://unsplash.com/photos/ANJHXftvvJ8' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Elephant + ")",
                 // background:
@@ -173,20 +159,17 @@ const CardMotion = () => {
               //   style="background-image: url(https://alca.tv/static/u/9b5f71cb-34a3-4fb4-a3a6-0ce9557c0acd_opt.png)"
               //
             >
-              <div className="number">03</div>
-              <div className="body">
-                <div className="location">아프리카 코끼리, EN </div>
-                <div className="headline">배고픈 코끼리</div>
-                <a
-                  href="https://unsplash.com/photos/73aocAAt7rs"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>03</div>
+              <div className='body'>
+                <div className='location'>아프리카 코끼리, EN </div>
+                <div className='headline'>배고픈 코끼리</div>
+                <a href='https://unsplash.com/photos/73aocAAt7rs' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Toco + ")",
                 // background:
@@ -194,20 +177,17 @@ const CardMotion = () => {
               }}
               // style="background-image: url(https://alca.tv/static/u/10cfd52d-e217-41e9-bb8b-ad43384a5e63_opt.png)"
             >
-              <div className="number">04</div>
-              <div className="body">
-                <div className="location">토코토칸, EN</div>
-                <div className="headline">졸린 토코토칸</div>
-                <a
-                  href="https://unsplash.com/photos/aPDCEoW7B78"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>04</div>
+              <div className='body'>
+                <div className='location'>토코토칸, EN</div>
+                <div className='headline'>졸린 토코토칸</div>
+                <a href='https://unsplash.com/photos/aPDCEoW7B78' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Tiger + ")",
                 // background:
@@ -215,20 +195,17 @@ const CardMotion = () => {
               }}
               // style="background-image: url(https://alca.tv/static/u/b9669f2a-17fc-47dc-b6b5-3f863004efa8_opt.png)"
             >
-              <div className="number">05</div>
-              <div className="body">
-                <div className="location">호랑이, EN</div>
-                <div className="headline">용맹한 호랑이</div>
-                <a
-                  href="https://unsplash.com/photos/Akz00I_GGjU"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>05</div>
+              <div className='body'>
+                <div className='location'>호랑이, EN</div>
+                <div className='headline'>용맹한 호랑이</div>
+                <a href='https://unsplash.com/photos/Akz00I_GGjU' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Toad + ")",
                 // background:
@@ -237,20 +214,17 @@ const CardMotion = () => {
 
               // style="background-image: url(https://alca.tv/static/u/31979576-5060-4513-aae2-b379b87e7fe6_opt.png)"
             >
-              <div className="number">06</div>
-              <div className="body">
-                <div className="location">두꺼비, EN</div>
-                <div className="headline">날뛰는 두꺼비</div>
-                <a
-                  href="https://unsplash.com/photos/pTn26knnKVw"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>06</div>
+              <div className='body'>
+                <div className='location'>두꺼비, EN</div>
+                <div className='headline'>날뛰는 두꺼비</div>
+                <a href='https://unsplash.com/photos/pTn26knnKVw' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
             <div
-              className="slide"
+              className='slide'
               style={{
                 backgroundImage: "url(" + Shark + ")",
                 // background:
@@ -259,30 +233,27 @@ const CardMotion = () => {
 
               // style="background-image: url(https://alca.tv/static/u/429b83b8-1ad4-4450-b0de-0a0c1073cf1e_opt.jpg)"
             >
-              <div className="number">07</div>
-              <div className="body">
-                <div className="location">백상아리, EN</div>
-                <div className="headline">화가난 백상아리</div>
-                <a
-                  href="https://unsplash.com/photos/v63B_MUiFw8"
-                  target="_blank"
-                >
-                  <div className="link">3000 달러</div>
+              <div className='number'>07</div>
+              <div className='body'>
+                <div className='location'>백상아리, EN</div>
+                <div className='headline'>화가난 백상아리</div>
+                <a href='https://unsplash.com/photos/v63B_MUiFw8' target='_blank'>
+                  <div className='link'>3000 달러</div>
                 </a>
               </div>
             </div>
           </div>
-          <div id="next-catch"></div>
-          <div id="prev-catch"></div>
+          <div id='next-catch'></div>
+          <div id='prev-catch'></div>
         </div>
-        <div id="footer">
+        {/* <div id="footer">
           <a
             href="https://dribbble.com/shots/3888265-Motion-Study"
             target="_blank"
           >
             <div id="dribbble"></div>
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

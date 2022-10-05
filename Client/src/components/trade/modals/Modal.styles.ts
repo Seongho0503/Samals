@@ -33,7 +33,7 @@ export const TopBar = styled.div`
   }
 `;
 
-export const Box = styled.div`
+export const Box = styled.img`
   width: 200px;
   height: 160px;
   background: #fff;

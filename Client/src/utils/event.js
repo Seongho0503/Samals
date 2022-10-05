@@ -9,9 +9,7 @@ import { web3, animalNftContractAddress, createNftSaleContract } from "./web3Con
 // 메타마스크 로그인
 export function MetaMaskLogin() {
   // 메타마스크 설치확인
-  if (typeof web3 !== "undefined") {
-    console.log("Ethereum successfully detected!");
-
+  if (web3.currentProvider !== null) {
     // 계정연결
     window.ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
       console.log("연결된 계정", accounts);
@@ -20,7 +18,7 @@ export function MetaMaskLogin() {
     // 설치가 안되었다면 에러 발생
   } else {
     // if the provider is not detected, detectEthereumProvider resolves to null
-    console.error("Please install MetaMask!");
+    // console.error("Please install MetaMask!");
   }
 }
 
@@ -138,6 +136,8 @@ export var createSale = async (animalId, price, startedAt, endedAt) => {
     .recordSale(animalId, _createSale.events.SaleCreated.returnValues.newNftSaleAddress)
     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log("2 : 게시글 등록", res2);
+
+  return _createSale.events.SaleCreated.returnValues.newNftSaleAddress;
 };
 
 // 판매글 컨트랙트 주소를 통해 NFT 구매
@@ -151,6 +151,7 @@ export var salePurchase = async (nftSaleAddress) => {
     .purchase()
     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
   console.log(res);
+  return res;
 };
 
 // 무료 증정 NFT에 대한 소유권 부여
@@ -171,4 +172,6 @@ export let buy = async (species, tmpAnimalNumber, donatedAt) => {
   const res = await animalNftContract.methods
     .buy(species, tmpAnimalNumber, donatedAt)
     .send({ from: window.ethereum.selectedAddress });
+
+  return res;
 };

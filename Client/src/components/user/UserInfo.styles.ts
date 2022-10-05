@@ -21,7 +21,7 @@ export const UserName = styled.div`
 `;
 
 export const BirdName = styled.div`
-  font-size: 1.2rem;
+  font-size: 28px;
 `;
 
 export const Images = styled.div`

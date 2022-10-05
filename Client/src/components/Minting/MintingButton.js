@@ -34,7 +34,7 @@ const MintingButton = () => {
     let sessionAddress = JSON.parse(sessionStorage.getItem("persist:root"));
 
     if (sessionAddress === undefined || JSON.parse(sessionAddress.userInfo).address === "") {
-      alert("지갑을 연결해주세요. 모달 창 및 문구 변경 필요");
+      alert("지갑을 연결해주세요.");
       return;
     }
 

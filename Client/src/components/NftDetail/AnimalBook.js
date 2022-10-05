@@ -1,5 +1,6 @@
 import * as React from "react";
 import "../../styles/NftDetail/AnimalBook.scss";
+
 import { $, jQuery } from "jquery";
 import dictionary from "../../assets/dictionary.png";
 import Wobble from "react-reveal/Wobble";
@@ -7,6 +8,8 @@ import { getDescription } from "../../api.js";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import BookImage from "./BookImage.js";
+// import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 // const BookImage = styled.div`
 //   $images: url("https://cdn.newspenguin.com/news/photo/202110/5634_19658_3146.jpg");
@@ -24,20 +27,24 @@ import BookImage from "./BookImage.js";
 const AnimalBook = ({ animal }) => {
   const [animals, setAnimals] = useState([]);
   const [imgs, setImgs] = useState([]);
+  // const DynamicComponent = dynamic(
+  //   (data) => import("../../styles/NftDetail/AnimalBook_" + `${data.animalSpecies}` + ".scss"),
+  //   {
+  //     suspense: true,
+  //   }
+  // );
   useEffect(() => {
     getDescription(animal).then(({ data }) => {
-      console.log("사전: ", data);
+      console.log("사전2: ", data);
       setAnimals(data);
-      console.log(data.img1);
-      console.log(data.img2);
+      // dynamic(data);
+      // ("../../styles/NftDetail/AnimalBook_{data.animalSpecies}.scss");
+      // console.log(data.img1);
+      // console.log(data.img2);
       setImgs([data.img1, data.img2]);
-      // console.log(data.img1);
-      // console.log(data.img1);
-      // console.log(data.img1);
-      // console.log(data.img1);
     });
   }, []);
-  console.log(imgs, "imgs");
+  // console.log(imgs, "imgs");
   // render() {
   return (
     <div>

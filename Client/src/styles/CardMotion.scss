@@ -21,7 +21,7 @@ a {
 #hero-slides {
   --page: 0;
   margin-left: -100px;
-  height: 100vh;
+  height: 55vh;
   //   background: hsl(210, 23%, 19%);
   //   background: linear-gradient(
   //     90deg,
@@ -173,7 +173,7 @@ a {
   }
   //간격
   #slides {
-    --slides-height: 76vh;
+    --slides-height: 49vh;
     width: auto;
     height: var(--slides-height);
     padding: 0 10vw;
@@ -182,7 +182,7 @@ a {
     position: absolute;
     transform: translate3D(calc(var(--page) * -80vw), 0, 0);
     transition: 1500ms transform $curve;
-    margin-top: 50px;
+    margin-top: -16px;
 
     .slide {
       display: inline-block;
