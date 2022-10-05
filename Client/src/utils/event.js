@@ -9,9 +9,7 @@ import { web3, animalNftContractAddress, createNftSaleContract } from "./web3Con
 // 메타마스크 로그인
 export function MetaMaskLogin() {
   // 메타마스크 설치확인
-  if (typeof web3 !== "undefined") {
-    console.log("Ethereum successfully detected!");
-
+  if (web3.currentProvider !== null) {
     // 계정연결
     window.ethereum.request({ method: "eth_requestAccounts" }).then((accounts) => {
       console.log("연결된 계정", accounts);
@@ -20,7 +18,7 @@ export function MetaMaskLogin() {
     // 설치가 안되었다면 에러 발생
   } else {
     // if the provider is not detected, detectEthereumProvider resolves to null
-    console.error("Please install MetaMask!");
+    // console.error("Please install MetaMask!");
   }
 }
 

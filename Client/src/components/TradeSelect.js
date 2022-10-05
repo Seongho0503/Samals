@@ -7,7 +7,7 @@ const TradeSelect = () => {
     window.location.replace("/create");
   }
   return (
-    <div className='animal-container'>
+    <div className='animal-container' style={{ zIndex: 10 }}>
       <button className='register' id='register' onClick={onClick}>
         NFT 등록
       </button>
@@ -39,12 +39,12 @@ const TradeSelect = () => {
           <div className="control__indicator"></div>
         </label> */}
       {/* </div> */}
-      <div className='animal-control-group'>
-        <h1>PRICE</h1>
+      <div className='animal-control-group' style={{ zIndex: 10 }}>
+        <h1 style={{ cursor: "default" }}>PRICE</h1>
 
         <label className='control control--radio'>
           최저가순
-          <input type='radio' name='radio' checked='checked' />
+          <input type='radio' name='radio' defaultChecked='checked' />
           <div className='control__indicator'></div>
         </label>
         <label className='control control--radio'>

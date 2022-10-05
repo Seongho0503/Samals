@@ -132,7 +132,9 @@ a {
   cursor: pointer;
   transition: border 1.5s ease;
 }
-
+.clicked {
+  color: gold;
+}
 #link-containers a:hover {
   border: 1px solid #ffffff;
 }

@@ -16,8 +16,10 @@ import {
   setUserId,
   setUserPFPAddress,
 } from "../redux/slice/UserInfoSlice";
-import { approveERC20ForMint, firstSupply } from "../utils/event";
+import { MetaMaskLogin, approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -28,7 +30,7 @@ const Header = () => {
 
   //연결 확인
   async function handleConnect() {
-    // 활성화 => 비활성화 전환
+    // 비활성화 전환
     if (active) {
       deactivate();
       //초기화
@@ -38,14 +40,19 @@ const Header = () => {
       setReduxAddress("");
       return;
     }
-    //메타마스크 연결
-    activate(injected, (error) => {
-      if ("/No Ethereum provider was found on window.ethereum/".test(error)) {
+    // 활성화 시
+    else {
+      //메타마스크 연결 확인 및 연결
+      activate(injected, (error) => {
+        alert("동물을 구하기 위해선 메타 마스크 연결이 필요합니다!");
         window.open("https://metamask.io/download.html");
         window.localStorage.setItem("active", JSON.stringify(active)); //user persisted data
-      }
-    });
+      });
+    }
   }
+  useEffect(() => {
+    return () => {};
+  }, []);
 
   useEffect(() => {
     if (account !== undefined) {
@@ -91,6 +98,7 @@ const Header = () => {
     }
   }, [account]);
 
+  const addClickEvent = () => {};
   return (
     <div id='header'>
       <Link to='/' id='logo' width='1px'>
@@ -98,18 +106,15 @@ const Header = () => {
       </Link>
 
       <div id='link-containers'>
-        <Link to='/game'>MADAGASCAR</Link>
+        <Button variant='outlined' size='medium'>
+          <Link to='/game'>MADAGASCAR</Link>
+        </Button>
+
         <Link to='/explore'>MARKET</Link>
         <Link to='/trade'>EXPLORE</Link>
         <Link to='/minting'>DONATION</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
-        <button
-          id='connect-wallet'
-          onClick={() => {
-            console.log("in return account:", account);
-            handleConnect();
-          }}
-        >
+        <button id='connect-wallet' onClick={handleConnect}>
           {reduxAddress === "" ? "Connect Wallet" : `${reduxAddress}`}
         </button>
       </div>
