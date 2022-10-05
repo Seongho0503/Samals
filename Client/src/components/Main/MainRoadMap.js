@@ -16,11 +16,22 @@ const MainRoadMap = () => {
       <br />
       <div className='roadmap'>
         <Swiper effect={"cards"} grabCursor={true} modules={[EffectCards]} className='mySwiper'>
-          <SwiperSlide>ACE 토큰 경제 시스템</SwiperSlide>
-          <SwiperSlide>'아틀란티스 아일랜드' 활성화</SwiperSlide>
-          <SwiperSlide>NFT 커뮤니티 확장</SwiperSlide>
-          <SwiperSlide>홀더들을 위한 SAMALS만의 리워드</SwiperSlide>
-          <SwiperSlide>SAMALS 가상사회 구축</SwiperSlide>
+          <SwiperSlide>
+            <h2>멸종 위기 등급에 따른 차등 확률</h2>
+            <br />
+          </SwiperSlide>
+          <SwiperSlide>
+            <h2>'아틀란티스 아일랜드' 활성화</h2>
+          </SwiperSlide>
+          <SwiperSlide>
+            <h2>NFT 커뮤니티 확장</h2>
+          </SwiperSlide>
+          <SwiperSlide>
+            <h2>홀더들을 위한 SAMALS만의 리워드</h2>
+          </SwiperSlide>
+          <SwiperSlide>
+            <h2>SAMALS 가상사회 구축</h2>
+          </SwiperSlide>
         </Swiper>
       </div>
     </div>
