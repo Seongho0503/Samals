@@ -110,8 +110,8 @@ public class SaleService {
         Sale sale = saleRepository.findBySaleSeq(reqSaleCompleteDto.getSaleSeq())
                 .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
 
-        if(sale.getSellerAddress().equals(reqSaleCompleteDto.getBuyerAddress()))
-            throw new BuyerValidException("판매자는 본인 NFT를 구매할 수 없습니다.");
+//        if(sale.getSellerAddress().equals(reqSaleCompleteDto.getBuyerAddress()))
+//            throw new BuyerValidException("판매자는 본인 NFT를 구매할 수 없습니다.");
 
         Sale saved = reqSaleCompleteDto.complete(sale);
         return SaleDto.convert(saleRepository.save(saved));

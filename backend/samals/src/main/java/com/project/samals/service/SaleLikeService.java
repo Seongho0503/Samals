@@ -63,8 +63,8 @@ public class SaleLikeService {
                 .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
 
         SaleLike findLike = saleLikeRepository.findBySaleAndUser(sale,user);
-        if(findLike==null)
-            throw new LikeNotPushException("좋아요를 누른 거래를 찾을 수 없습니다.");
+//        if(findLike==null)
+//            throw new LikeNotPushException("좋아요를 누른 거래를 찾을 수 없습니다.");
 
         saleLikeRepository.deleteByUserAndSale(user,sale);
         return "Success";
