@@ -56,8 +56,13 @@ public class SaleService {
     }
 
     public List<ResSaleListDto> getSaleList(String animalSpecies,String address){
-        User user = userRepository.findByWalletAddress(address)
-                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        User user;
+        if(address!=null) {
+            user = userRepository.findByWalletAddress(address)
+                    .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        }else{
+            user=null;
+        }
         List<ResSaleListDto> saleList = new ArrayList<>();
 
         for(Sale sale : saleRepository.findAllByIsSold('N')){
