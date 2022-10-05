@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createRef } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+// import { useLocation, Navigate } from "react-router";
 import { useLocation, Navigate } from "react-router";
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
@@ -107,6 +108,7 @@ const NftDetail = () => {
                       });
 
                       console.log("speciesAnimal: ", speciesAnimal);
+                      let plz = speciesAnimal.data.ipfs_uri;
                       console.log("date:", Date.now());
                       const buyNft = await buy(
                         state.item.animal,
@@ -134,6 +136,9 @@ const NftDetail = () => {
                           data: {
                             ipfsSeq: speciesAnimal.data.ipfs_seq,
                           },
+                        }).then(({ data }) => {
+                          console.log("DB ipfs 변경 처리 성공");
+                          navigate(`/mintresult`, { state: plz });
                         });
                         console.log("pollOne: ", pollOne);
                       }
