@@ -7,6 +7,7 @@ import bg from "../assets/madagascar.png";
 import bg2 from "../assets/bg-05.png";
 import Button1 from "../components/Game/Button1";
 import Button2 from "../components/Game/Button2";
+import { useWeb3React } from "@web3-react/core";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ProgressBar } from "react-loader-spinner";
 
