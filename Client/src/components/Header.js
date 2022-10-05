@@ -17,6 +17,7 @@ import {
   setUserPFPAddress,
 } from "../redux/slice/UserInfoSlice";
 import { approveERC20ForMint, firstSupply } from "../utils/event";
+import logo from "../assets/nav_logo_clean.png";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -92,15 +93,15 @@ const Header = () => {
 
   return (
     <div id='header'>
-      <Link to='/' id='logo'>
-        SAMALS
+      <Link to='/' id='logo' width='1px'>
+        <img width='50px' src={logo} />
       </Link>
 
       <div id='link-containers'>
-        <Link to='/game'>Island</Link>
+        <Link to='/game'>MADAGASCAR</Link>
         <Link to='/explore'>MARKET</Link>
         <Link to='/trade'>EXPLORE</Link>
-        <Link to='/minting'>DROPS</Link>
+        <Link to='/minting'>DONATION</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
         <button
           id='connect-wallet'
