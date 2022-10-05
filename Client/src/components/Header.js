@@ -111,7 +111,7 @@ const Header = () => {
         {/* </Button> */}
 
         <Link to='/explore'>MARKET</Link>
-        <Link to='/trade'>EXPLORE</Link>
+        <Link to='/trade'>TRADE</Link>
         <Link to='/minting'>DONATION</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
         <button id='connect-wallet' onClick={handleConnect}>
