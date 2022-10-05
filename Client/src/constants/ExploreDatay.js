@@ -4,12 +4,27 @@ import BarramundiFish from "../assets/models/BarramundiFish.glb";
 import Avocado from "../assets/models/Avocado.glb";
 import Tiger from "../assets/card/Tiger.png";
 import Penguin from "../assets/card/penguin.png";
-import Iguana from "../assets/card/lizard.png";
+import Iguana from "../assets/card/lizard2.png";
 import Leopard from "../assets/card/chita.png";
 import Rhino from "../assets/card/coco.png";
 import Shark from "../assets/card/Shark.png";
+import Toco from "../assets/card/Toco.png";
 
 export const exploreList = [
+  {
+    animalTitle: "토코투칸",
+    animal: "Toco Toucan",
+    animalClass: "NT",
+    animalClassNo: 1,
+    count: 3500,
+    detail: `토코투칸은 왕부리새과에서 가장 잘 알려져 있고, 크기도 가장 큰 종입니다. 이들은 중부 및 동부 남아메리카에 서식한다고 알려져 있습니다. 부리는 커서 무거워 보이지만, 실제로는 유공성으로 가벼운 편입니다.
+    멸종 위기 관심 보호 종으로, 개인이 사육할 수 없습니다.`,
+    description:
+      "희귀 등급 EN 호랑이 지금 구매 가능합니다.    4500 마리  한정 판매 되는 호랑이 아직 없으신 분들!  지금 안 사면 평생 못 삽니다. 저가 매수 놓치지 마세요! .",
+    itemImgUrl: Toco,
+    salePrice: 500,
+    likePush: "none",
+  },
   {
     animalTitle: "백상아리",
     animal: "shark",

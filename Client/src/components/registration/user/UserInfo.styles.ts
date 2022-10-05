@@ -27,6 +27,7 @@ export const BirdName = styled.div`
   font-size: 1.2rem;
   font-family: "GangwonEdu_OTFBoldA";
   margin-bottom: 30px;
+  margin-top: 20px;
 `;
 
 export const Images = styled.div`
@@ -36,8 +37,11 @@ export const Images = styled.div`
 `;
 
 export const Bird = styled.img`
-  width: 220px;
+  width: 280px;
   margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Person = styled.img`
@@ -45,7 +49,7 @@ export const Person = styled.img`
 `;
 
 export const Meta = styled.div`
-  padding-top: 360px;
+  padding-top: 278px;
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -77,7 +77,7 @@ export const ScrollBox = styled.div<ScrollBoxProps>`
 
   padding: 1rem;
   padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-bottom: 20rem;
 
   display: ${({ isEmpty }) => (isEmpty ? "flex" : "grid")};
   justify-content: ${({ isEmpty }) => (isEmpty ? "center" : "flex-start")};

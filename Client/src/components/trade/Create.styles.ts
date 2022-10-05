@@ -1,7 +1,6 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const TradeContainer = styled.div`
-  background: #000824;
   color: #fefefe;
 
   height: 100vh;
@@ -33,8 +32,8 @@ export const SubmitButton = styled.button`
   border-radius: 0.5rem;
   margin-bottom: 2rem;
 
-  background: #1e0d86;
-  border: 1px solid #1e0d86;
+  background: #11998e;
+  border: 1px solid #11998e;
   font-size: 1rem;
 
   display: block;

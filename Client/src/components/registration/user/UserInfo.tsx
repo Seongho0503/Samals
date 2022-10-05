@@ -1,4 +1,4 @@
-import bird from "assets/image_readtop.jpeg";
+import bird from "assets/profile-example.png";
 import person from "assets/person.png";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -33,8 +33,10 @@ const UserInfo = () => {
     createdTime: "",
     userNickname: "",
   });
+  const [nftCount, setNftCount] = useState(0);
   useEffect(() => {
     fetchUserInfo();
+    fetchNftList();
 
     console.log(`새로운`, address);
   }, [address]);
@@ -54,11 +56,20 @@ const UserInfo = () => {
       console.log("error:", e);
     }
   };
+
+  // 내 NFT 리스트 조회
+  const fetchNftList = async () => {
+    try {
+      const response = await axios.get(`/api/mypage/` + address + `/nft`);
+      setNftCount(response.data.length);
+    } catch (e) {}
+  };
+
   return (
     <UserInfoContainer>
       <Block>
         <Images>
-          {/* <Bird src={bird} alt='' /> */}
+          <Bird src={bird} alt='' />
           {/* <Person src={person} alt='' /> */}
         </Images>
       </Block>
@@ -71,29 +82,30 @@ const UserInfo = () => {
         <span>23개</span> */}
         <UserName>닉네임 : {userInfo.userNickname}</UserName>
         <BirdName>지갑 주소 : {address}</BirdName>
-        <UserName>
+        <BirdName>구한 멸종 위기 동물 수 : {nftCount}마리</BirdName>
+        {/* <UserName>
           {userInfo.userBio == null ? (
             <span className='use-bio'>자기 소개 내용이 없습니다</span>
           ) : (
             <span className='use-bio'>{userInfo.userBio}</span>
           )}
-        </UserName>
+        </UserName> */}
       </Meta>
 
       <Circles>
         <CircleWrapper>
           <Circle />
-          <div>동물보호입문</div>
+          <BirdName>동물보호입문</BirdName>
         </CircleWrapper>
 
         <CircleWrapper>
           <Circle />
-          <div>동물보호중급</div>
+          <BirdName>동물보호중급</BirdName>
         </CircleWrapper>
 
         <CircleWrapper>
           <Circle />
-          <div>동물보호마스터</div>
+          <BirdName>동물보호마스터</BirdName>
         </CircleWrapper>
       </Circles>
     </UserInfoContainer>

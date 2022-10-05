@@ -101,4 +101,5 @@ export const Description = styled.div`
   color: black;
   font-family: "GangwonEdu_OTFBoldA";
   font-size: 25px;
+  top: -31px;
 `;

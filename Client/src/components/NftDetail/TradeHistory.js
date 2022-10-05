@@ -3,10 +3,12 @@ import "../../styles/NftDetail/TradeHistory.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TradeChart from "./TradeChart";
+import TradeChart2 from "./TradeChart2";
 
 const TradeHistory = (props) => {
   const [tokenid, setTokenid] = useState([]);
   const [saleDate, setSaleDate] = useState([] || "판매날짜가 없습니다");
+  // [] ||  [] || "판매날짜가 없습니다"
   //const [saleDate, setSaleDate] = useState(saleDate === null ? "출석날짜가 없습니" : saleDate);
 
   useEffect(() => {
@@ -68,7 +70,8 @@ const TradeHistory = (props) => {
   };
   return (
     <div className='history'>
-      <TradeChart date={saleDate} price={tokenid}></TradeChart>
+      {/* <TradeChart date={saleDate} price={tokenid}></TradeChart> */}
+      <TradeChart2 />
       <div id='table-container'>
         <table>
           <tbody>

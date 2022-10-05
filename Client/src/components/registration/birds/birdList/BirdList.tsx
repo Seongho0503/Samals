@@ -32,6 +32,8 @@ import Bird from "../bird/Bird";
 import empty from "assets/empty (5).png";
 import axios from "axios";
 import { CompassOutlined } from "@ant-design/icons";
+import Like, { ILike } from "../like/Like";
+import TradeChart3 from "components/NftDetail/TradeChart3";
 
 const title = faker.lorem.word();
 const text1 = faker.lorem.word();
@@ -48,9 +50,12 @@ export interface IBird {
 
 const BirdList = () => {
   const [clickedBird, setClickedBird] = useState<IBird | null>(null);
+  const [clickedLike, setClickedLike] = useState<ILike | null>(null);
+
   const [birds, setBirds] = useState<IBird[]>([]);
   const [isDetail, setIsDetail] = useState(false);
   const [isLike, setIsLike] = useState(false);
+  const [isDonation, setIsDonation] = useState(false);
   const [address, setAddress] = useState(useSelector(selectAddress));
   const [likeList, setLikeList] = useState([]);
   const [myList, setMyList] = useState([]);
@@ -111,12 +116,15 @@ const BirdList = () => {
   const closeLike = useCallback(() => setIsLike(false), []);
 
   const onClick = useCallback(() => {
+    if (isDonation) setIsDonation(false);
+    if (isLike) closeLike();
     if (!isDetail) return;
 
     closeDetail();
-  }, [closeDetail, isDetail]);
+  }, [closeDetail, isDetail, isLike, isDonation]);
 
   const onLike = useCallback(() => {
+    if (isDonation) setIsDonation(false);
     if (!isLike) return;
 
     closeLike();
@@ -126,7 +134,7 @@ const BirdList = () => {
     <BirdListContainer>
       <Top>
         {/* <Title>{title}</Title> */}
-        <Title>내가 구한 야생동물</Title>
+        <Title>내가 구한 멸종 위기 동물</Title>
 
         <Block>
           {/* <Circle /> */}
@@ -140,18 +148,18 @@ const BirdList = () => {
       <IllustratedBook>
         {<button onClick={onClick}>{isDetail ? "전국 도감" : "도감보기"}</button>}
         {<button onClick={openLike}> 좋아요</button>}
-        {<button onClick={onClick}> 기부 내역</button>}
-        {<button onClick={onClick}> 구매 내역</button>}
+        {<button onClick={() => setIsDonation(true)}> 기부 내역</button>}
+        {/* {<button onClick={onClick}> 구매 내역</button>} */}
       </IllustratedBook>
       {isDetail && clickedBird ? (
         <Detail birdImg={clickedBird.nftImgUrl} animal={clickedBird.animalSpecies} />
       ) : (
         <Box>
-          {isLike ? (
+          {isDonation ? null : isLike ? (
             <ScrollBox isEmpty={likeList.length === 0}>
               {likeList.length ? (
                 likeList.map((like, index) => (
-                  <Bird key={index} bird={like} setClickedBird={setClickedBird} />
+                  <Like key={index} like={like} setClickedLike={setClickedLike} />
                   //
                 ))
               ) : (
@@ -191,18 +199,37 @@ const BirdList = () => {
               <EmptyImg src={empty} alt='empty' />
             )} */}
 
-          <CharacterBox>
-            <Button onClick={openDetail}>상세보기</Button>
-            <Character src={clickedBird ? clickedBird.nftImgUrl : birds[0]?.nftImgUrl} />
+          {isDonation ? (
+            <TradeChart3 />
+          ) : (
+            // <div>
+            //   {[...new Array(30)].map(() => (
+            //     <div>Test</div>
+            //   ))}
+            // </div>
+            <CharacterBox>
+              <Button onClick={openDetail}>상세보기</Button>
+              <Character
+                src={
+                  isLike
+                    ? clickedLike
+                      ? clickedLike.imgUri
+                      : (likeList[0] as { imgUri: string }).imgUri
+                    : clickedBird
+                    ? clickedBird.nftImgUrl
+                    : birds[0]?.nftImgUrl
+                }
+              />
 
-            <CharacterMetaBox>
-              <CharacterNumber>
-                {clickedBird?.animalSpecies}#{clickedBird?.nftMintNumber}
-              </CharacterNumber>
-              <CharacterName>{clickedBird?.getTime}</CharacterName>
-              {/* <CharacterName>{clickedBird?.name}</CharacterName> */}
-            </CharacterMetaBox>
-          </CharacterBox>
+              <CharacterMetaBox>
+                <CharacterNumber>
+                  {clickedBird?.animalSpecies}#{clickedBird?.nftMintNumber}
+                </CharacterNumber>
+                <CharacterName>{clickedBird?.getTime}</CharacterName>
+                {/* <CharacterName>{clickedBird?.name}</CharacterName> */}
+              </CharacterMetaBox>
+            </CharacterBox>
+          )}
         </Box>
       )}
     </BirdListContainer>

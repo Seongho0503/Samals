@@ -1,5 +1,8 @@
 .toggles {
   margin-left: 250px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
 }
 
 .toggles button {

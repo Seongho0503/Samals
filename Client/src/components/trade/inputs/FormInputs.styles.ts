@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const FormInputsWrapper = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ export const FormInputsWrapper = styled.div`
 `;
 
 export const Input = styled.input`
-  background: #1e0d86;
+  background: #11998e;
   outline: none;
   border: 1px solid #1e0d86;
   border-radius: 0.5rem;
@@ -26,7 +26,7 @@ export const Input = styled.input`
 `;
 
 export const PromotionTextarea = styled.textarea`
-  background: #1e0d86;
+  background: #11998e;
   outline: none;
   border: 1px solid #1e0d86;
   border-radius: 0.5rem;
