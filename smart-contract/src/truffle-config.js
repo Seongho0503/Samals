@@ -85,6 +85,13 @@ module.exports = {
       network_id: "*",
       from: WALLET
     },
+    besu: {
+      provider: () => new HDWalletProvider(PrivateKEY,"http://13.209.82.138:8545"),
+      host: "13.209.82.138",
+      port: 8545,
+      network_id: "1337",
+      from: WALLET
+    },
 
     //
     // An additional network, but with some advanced options…
