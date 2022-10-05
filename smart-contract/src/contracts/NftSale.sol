@@ -141,6 +141,9 @@ contract NftSale is Ownable, IERC721Receiver {
         
         // 판매자가 동물 주인인가 확인
         require(_animalNftContract.ownerOf(_animalId) == _seller, "seller is not owner");
+        
+        // 이용할 수 있는 컨트랙트인지 확인
+        require(_isClosed == false, "already Closed Sale");
 
         // 구매자에게 현재 잔고가 있는가 확인
         require(_currencyContract.balanceOf(msg.sender) >= _price, "balance is exhausted");
@@ -176,6 +179,11 @@ contract NftSale is Ownable, IERC721Receiver {
         return (_startedAt, _endedAt);
     }
     
+    function _closeSale() public {
+        require(msg.sender == _seller, "You are not a seller");
+        closed();
+    }
+
     //IERC721Receiver는 interface므로 이 메서드를 필수로 상속해야한다.
     function onERC721Received(
         address operator,
