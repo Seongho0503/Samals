@@ -98,8 +98,8 @@ public class NftService {
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> donates = nftRepository.findByNftTypeAndUser("donate",user);
 
-        if(donates.size()==0)
-            throw new DonateNotFoundException("기부 기록을 찾을 수 없습니다.");
+//        if(donates.size()==0)
+//            throw new DonateNotFoundException("기부 기록을 찾을 수 없습니다.");
 
         List<NftDto> donateHistory = new ArrayList<>();
         for (Nft nft : donates) {
@@ -113,8 +113,8 @@ public class NftService {
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> myNft = nftRepository.findAllByNftOwner(address);
 
-        if(myNft.size()==0)
-            throw new NFTNotOwnException("보유한 NFT가 없습니다");
+//        if(myNft.size()==0)
+//            throw new NFTNotOwnException("보유한 NFT가 없습니다");
 
         List<ResMyNftDto> nftList = new ArrayList<>();
         for (Nft nft : myNft) {

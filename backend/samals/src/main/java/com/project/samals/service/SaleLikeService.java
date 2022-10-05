@@ -75,9 +75,9 @@ public class SaleLikeService {
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
 
         List<SaleLike> findLikes = saleLikeRepository.findAllByUser(user);
-        if(findLikes.size()==0){
-            throw new LikeNotPushException("좋아요를 누른 거래를 찾을 수 없습니다.");
-        }
+//        if(findLikes.size()==0){
+//            throw new LikeNotPushException("좋아요를 누른 거래를 찾을 수 없습니다.");
+//        }
 
         List<ResMySaleLikeDto> likeList = new ArrayList<>();
         for(SaleLike saleLike : findLikes){
