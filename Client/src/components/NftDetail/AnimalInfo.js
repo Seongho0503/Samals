@@ -18,13 +18,13 @@ import sign from "../../assets/sign/EW.png";
 const AnimalInfo = ({ animal }) => {
   const [animals, setAnimals] = useState({ animalNameKr: "", animalNameEn: "", animalClass: "" });
   useEffect(() => {
-    console.log("애니멀 출력: " + animal);
+    //console.log("애니멀 출력: " + animal);
     getDescription(animal).then(({ data }) => {
-      console.log("동물정보: ", data);
+      // console.log("동물정보: ", data);
       setAnimals(data);
     });
   }, []);
-  console.log("animal : ", animal);
+  //console.log("animal : ", animal);
   return (
     <div>
       <header>

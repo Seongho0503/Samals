@@ -13,10 +13,11 @@ import styled from "@emotion/styled";
 const ContainerWrapper = styled.div`
   & > .recharts-responsive-container {
     margin: 0 auto;
+    float: left;
   }
 `;
 
-const TradeChart2 = () => {
+const TradeChart2 = ({ sellPrices, sellDates }) => {
   //   const chartData = {
   //     labels: ["거래내역", "2", "3", "4", "5", "6", "7"],
   //     datasets: [
@@ -33,21 +34,21 @@ const TradeChart2 = () => {
   //   }
 
   const chartData = [
-    { transaction: "2022-03-24", value: 1 },
-    { transaction: "2022-03-25", value: 2 },
-    { transaction: "2022-03-26", value: 3 },
-    { transaction: "2022-03-27", value: 4 },
-    { transaction: "2022-03-29", value: 5 },
+    { transaction: sellDates.date1, value: sellPrices.price1 },
+    { transaction: sellDates.date2, value: sellPrices.price2 },
+    { transaction: sellDates.date3, value: sellPrices.price3 },
+    { transaction: sellDates.date4, value: sellPrices.price4 },
+    { transaction: sellDates.date5, value: sellPrices.price5 },
   ];
 
   return (
     <ContainerWrapper>
-      <ResponsiveContainer width={600} height={400}>
+      <ResponsiveContainer width={700} height={600}>
         <LineChart
           width={730}
           height={400}
           data={chartData}
-          margin={{ top: 60, right: 30, left: 20, bottom: 5 }}
+          margin={{ top: 30, right: 10, left: 10, bottom: 100 }}
         >
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis dataKey='transaction' />

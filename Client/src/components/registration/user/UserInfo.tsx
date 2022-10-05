@@ -132,7 +132,7 @@ const UserInfo = () => {
       </Meta>
 
       {/* <ProfileEdit></ProfileEdit> */}
-      <Circles>
+      {/* <Circles>
         <CircleWrapper>
           {nftCount > 7 ? (
             <Circle>
@@ -154,7 +154,8 @@ const UserInfo = () => {
           <Circle />
           <BirdName>동물보호수호자</BirdName>
         </CircleWrapper>
-      </Circles>
+      </Circles> */}
+      {/* <ProfileEdit></ProfileEdit> */}
     </UserInfoContainer>
   );
 };
