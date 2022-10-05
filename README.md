@@ -1,8 +1,6 @@
-# <img src="" align="left" width="40" height="40"> SAMALS - 멸종 위기 동물 보호를 위한 NFT 거래 플랫폼
+#  SAMALS - 멸종 위기 동물 보호를 위한 NFT 거래 플랫폼
 > **Save the Animals, SAMALS**
 
-
-<img src="" align="left" width="90%" height="50%">
 
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
@@ -31,12 +29,12 @@
 ## 🐧 **팀원**
 <table>
  <tr>
-    <td align="center"><a href=""><img src="" width="80px;" alt=""></td>
-    <td align="center"><a href=""><img src="" width="80px;" alt=""></td>
-    <td align="center"><a href=""><img src="" width="80px;" alt=""></td>
-    <td align="center"><a href=""><img src="" width="80px;" alt=""></td>
+    <td align="center"><a href=""><img src="" alt=""></td>
+    <td align="center"><a href=""><img src="" alt=""></td>
+    <td align="center"><a href=""><img src=""  alt=""></td>
+    <td align="center"><a href=""><img src="" alt=""></td>
     <td align="center"><a href="https://github.com/Jaehwany"><img src="https://avatars.githubusercontent.com/Jaehwany" width="80px;" alt=""></td>
-    <td align="center"><a href=""><img src="" width="80px;" alt=""></td>
+    <td align="center"><a href=""><img src="" alt=""></td>
   </tr>
   <tr>
     <td align="center">팀장, Infra</td>
