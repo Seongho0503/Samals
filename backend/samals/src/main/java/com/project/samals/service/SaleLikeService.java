@@ -81,7 +81,9 @@ public class SaleLikeService {
 
         List<ResMySaleLikeDto> likeList = new ArrayList<>();
         for(SaleLike saleLike : findLikes){
-             likeList.add(new ResMySaleLikeDto(saleLike,getSaleLikeCount(saleLike.getSale().getSaleSeq())));
+            ResMySaleLikeDto dto= new ResMySaleLikeDto(saleLike,getSaleLikeCount(saleLike.getSale().getSaleSeq()));
+            if(dto.getIsSold()=='N')
+                 likeList.add(dto);
         }
         return likeList;
     }
