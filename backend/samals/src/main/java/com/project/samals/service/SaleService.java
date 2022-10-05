@@ -100,8 +100,12 @@ public class SaleService {
                 .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
         User user = userRepository.findByWalletAddress(sale.getSellerAddress())
                 .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
         return ResSaleDetailDto.convert(sale,user);
     }
+
+
+
 
     public SaleDto completeSale(ReqSaleCompleteDto reqSaleCompleteDto) {
         User user = userRepository.findByWalletAddress(reqSaleCompleteDto.getBuyerAddress())

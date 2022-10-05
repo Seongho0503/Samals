@@ -123,6 +123,31 @@ public class NftService {
         return nftList;
     }
 
+    public List<ResMyNftDto> getMyNftNotSaleList(String address) {
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        List<Nft> myNft = nftRepository.findAllByNftOwner(address);
+
+//        if(myNft.size()==0)
+//            throw new NFTNotOwnException("보유한 NFT가 없습니다");
+
+        List<ResMyNftDto> nftList = new ArrayList<>();
+
+        for (Nft nft : myNft) {
+            boolean check=false;
+            for(int i=0;i<nft.getNftSaleList().size();i++){
+                if(nft.getNftSaleList().get(i).getIsSold()=='N'){
+                    check=true;
+                    break;
+                }
+            }
+            if(!check)
+                nftList.add(ResMyNftDto.convert(nft));
+        }
+        return nftList;
+    }
+
+
     public ResNftDto getNft(int tokenId) {
         Nft nft = nftRepository.findByTokenId(tokenId)
                 .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", tokenId)));
