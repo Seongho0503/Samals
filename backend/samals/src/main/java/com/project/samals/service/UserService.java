@@ -34,7 +34,7 @@ public class UserService {
 
     @Transactional
     public UserDto signup(ReqUserSignupDto userDto){
-        if(userRepository.findByWalletAddress(userDto.getWalletAddress())!=null){
+        if(userRepository.findByWalletAddress(userDto.getWalletAddress()).orElse(null)!=null){
             throw new UserDuplicateException(String.format("%s은 이미 등록된 지갑입니다.", userDto.getWalletAddress()));
         }
         User user =userDto.toEntity();
