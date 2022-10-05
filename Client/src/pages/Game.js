@@ -14,6 +14,7 @@ import "../styles/Game.css";
 const Game = () => {
   const [loadingInProgress, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const { account } = useWeb3React();
   const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener, unload, loadingProgression } =
     useUnityContext({
       loaderUrl: "Unity/WebGLbuild_new.loader.js",
@@ -37,6 +38,11 @@ const Game = () => {
   }, []);
 
   useEffect(() => {
+    return () => {
+      window.location.reload();
+    }
+  },[])
+  useEffect(() => {
     addEventListener("Auth", handleAuth);
     return () => {
       removeEventListener("Auth", handleAuth);
@@ -49,15 +55,9 @@ const Game = () => {
     }
   }, [isAuth]);
   
-  useEffect(() => {
-    return () => {
-      window.location.reload();
-    }
-  },[])
 
-  
   function setUserName() {
-    sendMessage("LoginManager", "setUserName", "0x43f11C9559F116ae60ed23987aE5CC4B5Caa5DbE");
+    sendMessage("LoginManager", "setUserName", account);
     setIsAuth(false);
   }
   return (
