@@ -106,9 +106,9 @@ const Header = () => {
       </Link>
 
       <div id='link-containers'>
-        <Button variant='outlined' size='medium'>
-          <Link to='/game'>MADAGASCAR</Link>
-        </Button>
+        {/* <Button variant='outlined' size='medium'> */}
+        <Link to='/game'>MADAGASCAR</Link>
+        {/* </Button> */}
 
         <Link to='/explore'>MARKET</Link>
         <Link to='/trade'>EXPLORE</Link>

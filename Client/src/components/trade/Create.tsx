@@ -21,7 +21,6 @@ import {
 } from './modals/Modal.styles';
 import { CloseOutlined } from '@ant-design/icons';
 import Modal from 'react-modal';
-import { History } from "history";
 import { useNavigate } from "react-router-dom";
 import { createSale } from "../../utils/event";
 const initialValues: nft = {
@@ -40,11 +39,8 @@ export interface nft{
   getTime:string
 }
 
-interface TradeProps{
-  history: History;
-}
 
-const Trade = ({ history }: TradeProps) => {
+const Trade = () => {
   const [address] = useState(useSelector(selectAddress));
   const [price, setPrice] = useState(0);
   const [promotion, setPromotion] = useState("");
