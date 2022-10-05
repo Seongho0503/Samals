@@ -46,8 +46,7 @@ public class UserService {
     }
 
     public UserDto getUserInfo(String address){
-        User user = userRepository.findByWalletAddress(address)
-                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        User user = userRepository.findByWalletAddress(address).orElse(null);
         UserDto userDto = UserDto.convert(user);
         return userDto;
     }
