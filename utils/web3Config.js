@@ -198,6 +198,19 @@ export const aceTokenAbi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "firstSupply",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -355,26 +368,6 @@ export const animalNftAbi = [
 				"internalType": "address",
 				"name": "currencyContractAddress",
 				"type": "address"
-			},
-			{
-				"internalType": "uint32[]",
-				"name": "species",
-				"type": "uint32[]"
-			},
-			{
-				"internalType": "uint32[]",
-				"name": "class",
-				"type": "uint32[]"
-			},
-			{
-				"internalType": "string[]",
-				"name": "tokenUri",
-				"type": "string[]"
-			},
-			{
-				"internalType": "bool[]",
-				"name": "check",
-				"type": "bool[]"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -441,6 +434,12 @@ export const animalNftAbi = [
 			},
 			{
 				"indexed": true,
+				"internalType": "string",
+				"name": "tokenUri",
+				"type": "string"
+			},
+			{
+				"indexed": true,
 				"internalType": "address",
 				"name": "donator",
 				"type": "address"
@@ -466,6 +465,31 @@ export const animalNftAbi = [
 			}
 		],
 		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "species",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "tokenUri",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tmpAnimalNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "Register",
 		"type": "event"
 	},
 	{
@@ -507,19 +531,26 @@ export const animalNftAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "_getClass",
+		"inputs": [],
+		"name": "TOKEN_URI",
 		"outputs": [
 			{
-				"internalType": "uint32",
+				"internalType": "string",
 				"name": "",
-				"type": "uint32"
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "TOTAL_NUMBER",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -547,6 +578,44 @@ export const animalNftAbi = [
 	{
 		"inputs": [],
 		"name": "_getLimitedNumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "species",
+				"type": "string"
+			}
+		],
+		"name": "_getMarketAnimalNumber",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "species",
+				"type": "string"
+			}
+		],
+		"name": "_getMarketLeftAnimalNumber",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -590,25 +659,6 @@ export const animalNftAbi = [
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "_getSpecies",
-		"outputs": [
-			{
-				"internalType": "uint32",
-				"name": "",
-				"type": "uint32"
 			}
 		],
 		"stateMutability": "view",
@@ -686,8 +736,42 @@ export const animalNftAbi = [
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "species",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tmpAnimalNumber",
+				"type": "uint256"
+			},
+			{
 				"internalType": "uint256",
 				"name": "donatedAt",
+				"type": "uint256"
+			}
+		],
+		"name": "buy",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "donatedAt",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "animalId",
 				"type": "uint256"
 			}
 		],
@@ -788,6 +872,35 @@ export const animalNftAbi = [
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "species",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tokenUri",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tmpAnimalNumber",
+				"type": "uint256"
+			}
+		],
+		"name": "register",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -959,18 +1072,13 @@ export const mascortNftAbi = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "currencyContractAddress",
-				"type": "address"
-			},
-			{
 				"internalType": "string",
 				"name": "tokenUri",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "species",
+				"name": "name",
 				"type": "string"
 			},
 			{
@@ -1037,25 +1145,6 @@ export const mascortNftAbi = [
 		"inputs": [
 			{
 				"indexed": true,
-				"internalType": "uint256",
-				"name": "newItemId",
-				"type": "uint256"
-			},
-			{
-				"indexed": true,
-				"internalType": "address",
-				"name": "minter",
-				"type": "address"
-			}
-		],
-		"name": "CreateMascortNft",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
 				"internalType": "address",
 				"name": "previousOwner",
 				"type": "address"
@@ -1097,25 +1186,6 @@ export const mascortNftAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "MINT_PRICE",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "mintedAt",
-				"type": "uint256"
-			}
-		],
 		"name": "_createMascortNft",
 		"outputs": [
 			{
@@ -1142,36 +1212,25 @@ export const mascortNftAbi = [
 	},
 	{
 		"inputs": [],
-		"name": "_getSpecies",
+		"name": "_getMintersNumber",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "walletAddress",
-				"type": "address"
-			}
-		],
-		"name": "_getTokenInfoByWallet",
+		"inputs": [],
+		"name": "_getName",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "string",
 				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -1191,23 +1250,10 @@ export const mascortNftAbi = [
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "_getTotalFreeNumber",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "walletAddress",
+				"name": "wallet",
 				"type": "address"
 			}
 		],
