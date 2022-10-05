@@ -9,17 +9,12 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  selectAddress,
-  setAddress,
-  setUserBio,
-  setUserId,
-  setUserPFPAddress,
-} from "../redux/slice/UserInfoSlice";
+import { selectAddress, setAddress, setUserBio, setUserId } from "../redux/slice/UserInfoSlice";
 import { MetaMaskLogin, approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -55,47 +50,53 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    if (account !== undefined) {
-      //dispatch를 통해 redux에 저장
-      dispatch(setAddress(account));
-      setReduxAddress(account);
-      //DB에서 해당 지갑 주소의 정보 호출
-      axios({ method: "GET", url: `/api/user/${account}` })
-        .then(({ data }) => {
-          console.log("get res: ", data);
+    let isAccountData;
+    async function fetchData() {
+      if (account !== undefined) {
+        //dispatch를 통해 redux에 저장
+        dispatch(setAddress(account));
+        setReduxAddress(account);
 
-          // 반환 값이 없다면 ERC20 승인함수 실행 및 DB에 저장
-          if (data === "") {
-            // 민트 권한 허가
-            approveERC20ForMint();
-            // 첫 가입 이용료 1000ACE 입금
-            firstSupply();
-            //DB 가입 처리
-            axios({
-              method: "POST",
-              url: `/api/user/signup`,
-              data: {
-                walletAddress: account,
-              },
+        //DB에서 해당 지갑 주소의 정보 호출
+        await axios({ method: "GET", url: `/api/user/${account.toLowerCase()}` })
+          .then(({ data }) => {
+            console.log("get user data: ", data);
+            isAccountData = data;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        //기존 가입 주소가 아니라면
+        if (isAccountData === "") {
+          // 민트 권한 허가
+          await approveERC20ForMint();
+          // 첫 가입 이용료 1000ACE 입금
+          await firstSupply();
+          //DB 가입 처리
+          await axios({
+            method: "POST",
+            url: `/api/user/signup`,
+            data: {
+              walletAddress: account,
+            },
+          })
+            .then((res) => {
+              //DB 저장 결과 반환
+              console.log(res);
             })
-              .then((res) => {
-                //DB 저장 결과 반환
-                console.log(res);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-          // 반환 값이 있다면 dispatch를 통해 redux에 저장
-          else {
-            dispatch(setUserBio(data.user_bio));
-            dispatch(setUserId(data.user_nickname));
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+        //기존 가입 주소라면
+        else {
+          dispatch(setUserBio(isAccountData.user_bio));
+          dispatch(setUserId(isAccountData.user_nickname));
+        }
+      }
     }
+    fetchData();
   }, [account]);
 
   const addClickEvent = () => {};
@@ -115,7 +116,7 @@ const Header = () => {
         <Link to='/minting'>DONATION</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
         <button id='connect-wallet' onClick={handleConnect}>
-          {reduxAddress === "" ? "Connect Wallet" : `${reduxAddress}`}
+          {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`}
         </button>
       </div>
     </div>

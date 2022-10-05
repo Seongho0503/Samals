@@ -48,7 +48,7 @@ export interface nft {
 }
 
 const Trade = () => {
-  const [address] = useState(useSelector(selectAddress));
+  const [address] = useState<string>(useSelector(selectAddress));
   const [price, setPrice] = useState(0);
   const [promotion, setPromotion] = useState("");
   const navigate = useNavigate();
@@ -106,47 +106,60 @@ const Trade = () => {
     }
   }, [closeModal, isCompleted]);
 
-  const registNFT = () => {
-    if (confirmEathAnimal.nftImgUrl === "") {
+  const registNFT = async () => {
+    let createSaleV : string = "";
+    if (address === "" || address === undefined) {
+      alert("지갑 로그인을 해주세요!");
+      return;
+    }
+    else if (confirmEathAnimal.nftImgUrl === "") {
       alert("보유중인 NFT를 선택해주세요.");
       return;
     }
-    console.log(
-      "토큰 아이디, 가격, 시작 시간, 종료 시간: ",
-      confirmEathAnimal.tokenId,
-      price,
-      Date.now(),
-      Date.now() * 2
-    );
+    else if (price === 0) {
+      alert("가격은 0원 이상 설정해주세요.");
+      return;
+    }
+    //이미 등록된 NFT는 판매할 수 없습니다.
+    
+    //자신의
 
-    //토큰 아이디, 가격, 시작 시간, 종료 시간
-    createSale(confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2)
+    console.log("토큰 아이디, 가격, 시작 시간, 종료 시간: ",confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2);
+    
+            //토큰 아이디, 가격, 시작 시간, 종료 시간
+    await createSale(confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2)
       .then((res) => {
-        console.log(res);
-        axios({
-          method: "POST",
-          url: "api/sale/create",
-          data: {
-            saleContractAddress: res,
-            saleDescription: promotion,
-            salePrice: price,
-            sellerAddress: address,
-            tokenId: confirmEathAnimal.tokenId,
-          },
-        })
-          .then((res) => {
-            console.log(res);
-            alert("등록 완료");
-            navigate("/trade");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        console.log("saleContractAddress: ",res);
+        console.log("saleDescription: ",promotion);
+        console.log("salePrice: ",price);
+        console.log("sellerAddress: ",address);
+        console.log("tokenId: ",confirmEathAnimal.tokenId);
+        createSaleV = res;
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+    
+    await axios({
+          method: "POST",
+          url: "api/sale/create",
+          data: {
+            saleContractAddress: createSaleV.toLowerCase(),
+            saleDescription: promotion,
+            salePrice: price,
+            sellerAddress: address.toLowerCase(),
+            tokenId: confirmEathAnimal.tokenId
+          }
+        }).then((res) => {
+          console.log(res);
+          alert("등록 완료");
+          navigate("/trade");
+        })
+          .catch((err) => {
+            console.log(err);
+        })
+  }
+  
   return (
     <>
       <TradeContainer>

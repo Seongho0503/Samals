@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/NFTCard.css";
-import { FaEthereum } from "react-icons/fa";
+import { FaFrog } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { ColorExtractor } from "react-color-extractor";
 import Card from "./base/Card";
@@ -170,11 +170,10 @@ const NFTCard = ({
             </div>
 
             <div className='price-container'>
-              <p className='price-label'>Price</p>
-              <p className='price'>
+              <pre className='price'>
                 {" "}
-                <FaEthereum /> {price}
-              </p>
+                {price} <FaFrog />
+              </pre>
             </div>
           </div>
           <div className='buttons'>

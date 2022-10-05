@@ -1,27 +1,18 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import { useLocation, Navigate } from "react-router";
+import { useLocation } from "react-router";
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
-import { FaEthereum } from "react-icons/fa";
-import {
-  AiOutlineHeart,
-  AiFillHeart,
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-} from "react-icons/ai";
+import { FaFrog } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
-import { hotDropsData } from "../constants/MockupData";
-import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
-import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
 import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
-import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 import axios from "axios";
 import { salePurchase, balanceOf, MetaMaskLogin } from "../utils/event";
@@ -46,7 +37,6 @@ const NftDetailExplore = () => {
 
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log("state: ", state);
 
   useEffect(() => {
     setColors([]);
@@ -91,6 +81,7 @@ const NftDetailExplore = () => {
       alert("현재 보유중인 ACE 토큰이 부족합니다.");
       return;
     }
+
     salePurchase(detailData.saleContractAddress).then(() => {
       axios({
         method: "PUT",
@@ -154,8 +145,9 @@ const NftDetailExplore = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <FaEthereum size='28px' />
-                        <p id='price'>{detailData.salePrice}</p>
+                        <pre id='price'>
+                          {detailData.salePrice} <FaFrog size='28px' />
+                        </pre>
                       </div>
                     }
                     onClick={onSaleTradeNft}
