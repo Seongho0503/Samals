@@ -24,7 +24,7 @@ const MainBanner = () => {
         <a
           target='_blank'
           width='300px'
-          href='https://www.notion.so/SAMALS-c268b327cd4048f794bd359333d82196'
+          href='https://silk-selenium-1b9.notion.site/SAMALS-c268b327cd4048f794bd359333d82196'
         >
           <img width='100%' src={bg} />
         </a>

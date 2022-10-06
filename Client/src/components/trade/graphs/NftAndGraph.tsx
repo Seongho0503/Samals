@@ -18,7 +18,11 @@ const NftAndGraph: React.FC<Props> = ({ setIsModalOpen, nftImgUrl }) => {
     <NftAndGraphContainer>
       {/* 기본 이미지 출력 */}
       <NftImg
-        src={nftImgUrl !== "" ? nftImgUrl : "https://cdn-icons-png.flaticon.com/512/14/14660.png"}
+        src={
+          nftImgUrl !== ""
+            ? nftImgUrl
+            : "https://cdn.discordapp.com/attachments/1026873081358209135/1027629121917952191/Animals_4.png"
+        }
       />
 
       <Button
@@ -26,7 +30,7 @@ const NftAndGraph: React.FC<Props> = ({ setIsModalOpen, nftImgUrl }) => {
           setIsModalOpen(true);
         }}
       >
-        nft 가져오기
+        NFT 가져오기
       </Button>
 
       {/* <Graph>graph</Graph> */}

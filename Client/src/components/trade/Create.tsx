@@ -7,8 +7,14 @@ import {
   SubmitButton,
   Title,
   TradeContainer,
+  TradeGrid,
+  TradeGrid2,
+  TradeGrid3,
   Image,
   Nftgroup,
+  Text,
+  Text2,
+  Text3,
 } from "./Create.styles";
 import FormInputs from "./inputs/FormInputs";
 import { useSelector } from "react-redux";
@@ -80,6 +86,9 @@ const Trade = () => {
     }
   }, [isModalOpen]);
 
+  // useEffect(() => {
+  // }, [confirmEathAnimal])
+
   //입력값에 대한 출력 확인
   const onChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     console.log(e);
@@ -115,7 +124,6 @@ const Trade = () => {
       setIsCompleted(false);
     }
   }, [closeModal, isCompleted]);
-
   const notify = (text: string) =>
     toast(text, {
       position: "top-right",
@@ -178,7 +186,6 @@ const Trade = () => {
         .then((res) => {
           notify("판매생성 완료!");
           setLoadingText("판매승인 요청!");
-
           console.log("saleContractAddress: ", res);
           console.log("saleDescription: ", promotion);
           console.log("salePrice: ", price);
@@ -218,7 +225,6 @@ const Trade = () => {
     })
       .then((res) => {
         console.log(res);
-
         notify("등록 완료!");
         navigate("/trade");
       })
@@ -230,19 +236,36 @@ const Trade = () => {
 
   return (
     <>
-      {loading === true ? <MetaLoadingScreen text={loadingText} /> : ""}
-
       <TradeContainer>
-        {/* <Menu /> */}
         <Image src={Bg} width='100%'></Image>
-        <Form onSubmit={onSubmit}>
-          <FormBox>
-            {/* NFT 이미지 및 NFT 가져오기 버튼 */}
-            <NftAndGraph setIsModalOpen={setIsModalOpen} nftImgUrl={confirmEathAnimal.nftImgUrl} />
-            <FormInputs values={confirmEathAnimal} onChange={onChange} />
-          </FormBox>
-          <SubmitButton onClick={registNFT}>등록</SubmitButton>
-        </Form>
+        <TradeGrid>
+          <Text>판매등록</Text>
+          {/* <Menu /> */}
+          <TradeGrid2>
+            <Form onSubmit={onSubmit}>
+              <FormBox>
+                {/* NFT 이미지 및 NFT 가져오기 버튼 */}
+                <NftAndGraph
+                  setIsModalOpen={setIsModalOpen}
+                  nftImgUrl={confirmEathAnimal.nftImgUrl}
+                />
+                <FormInputs values={confirmEathAnimal} onChange={onChange} />
+              </FormBox>
+              <TradeGrid3></TradeGrid3>
+              <SubmitButton onClick={registNFT}>판매 등록</SubmitButton>
+            </Form>
+          </TradeGrid2>
+        </TradeGrid>
+        <TradeGrid3>
+          <Text2>유의사항</Text2>
+          <Text3>
+            ㆍ NFT 등록은 이탈없이 총 3번의 MetaMask Transaction이 일어나야 등록이 완료됩니다.
+          </Text3>
+          <Text3>
+            ㆍ 보유하고 있는 NFT를 기준으로 거래가 진행되며, 거래 데이터는 블록체인에 저장됩니다.
+          </Text3>
+        </TradeGrid3>
+        <TradeGrid3></TradeGrid3>
       </TradeContainer>
 
       {/* 모달 창으로 동물 선택 */}
