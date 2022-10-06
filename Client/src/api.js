@@ -131,3 +131,29 @@ export const LoadingScreen = () => {
     // 로딩 이미지
   );
 };
+
+// 오름차순
+export async function getAsceList() {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/sale/list/asc`,
+    });
+    return response;
+  } catch {
+    return "";
+  }
+}
+
+// 내림차순
+export async function getDescList() {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `/api/sale/list/desc`,
+    });
+    return response;
+  } catch {
+    return "";
+  }
+}
