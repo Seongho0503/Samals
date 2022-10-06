@@ -28,8 +28,8 @@ const Minting = () => {
       <RatingData />
       <MintingButton />
       <MintSubs></MintSubs>
-      {/* <div class='mint-div'>
-        <button
+      <div class='mint-div'>
+        {/* <button
           onClick={() => {
             const res = approveERC20ForMint();
             console.log("현재토큰수: ", res);
@@ -37,8 +37,8 @@ const Minting = () => {
         >
           <img width='400px' src={buttonImg03} alt='erc20 승인' />
         </button>
-        <br /> */}
-      {/* <button
+        <br />  */}
+        {/* <button
         onClick={() => {
           const res = getTotalMint();
           console.log("현재까지 발급된 민트 개수 조회: ", res);
@@ -55,7 +55,7 @@ const Minting = () => {
       >
         최초 발행한 뽑기 NFT 개수 조회
       </button> */}
-      {/* <br />
+        <br />
 
         <button
           onClick={() => {
@@ -67,7 +67,7 @@ const Minting = () => {
           <img width='400px' src={buttonImg01} alt='코인 충전하기' />
         </button>
         <br />
-        <button
+        {/* <button
           onClick={() => {
             balanceOf().then((res) => {
               console.log("현재토큰수: ", res);
@@ -76,9 +76,9 @@ const Minting = () => {
           }}
         >
           <img width='400px' src={buttonImg02} alt='현재 남은 토큰 수' />
-        </button>
+        </button> */}
       </div>
-      {mint} */}
+
       <AnimalData />
       <MintingModal />
     </div>
