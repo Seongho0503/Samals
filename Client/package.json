@@ -37,6 +37,7 @@
     "react-slick": "^0.28.1",
     "react-unity-webgl": "^9.2.1",
     "reactstrap": "^9.1.4",
+    "recharts": "^2.1.14",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.6",

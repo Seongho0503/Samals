@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 
-
-export const getWindowDim = () => {  
-    return {
-      width:window.innerWidth,
-      height:window.innerHeight,
-    };
+export const getWindowDim = () => {
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight,
   };
-
+};
 
 export const useMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -23,9 +21,9 @@ export const useMobile = () => {
     handleResize();
 
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize");
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => windowDim.width < 1200 ? setIsMobile(true) : setIsMobile(false), [windowDim]);
+  useEffect(() => (windowDim.width < 1200 ? setIsMobile(true) : setIsMobile(false)), [windowDim]);
   return isMobile;
 };

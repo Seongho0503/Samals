@@ -1,12 +1,16 @@
 import react, { useEffect, useRef } from "react";
-
+import { useLocation, Navigate } from "react-router";
 import "../styles/Home.css";
-import MintCardData from "../components/Minting/MintCardData";
+import MintCardData from "../components/Minting/MintWait";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { totalSupply, donate } from "../utils/event";
+import { useNavigate } from "react-router-dom";
+
 const MintCard = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
   const nftSeq = useRef(0);
   //백 솔 백
   console.log("MintCard.js");
@@ -30,6 +34,7 @@ const MintCard = () => {
         console.log("debug: ", data);
         nftSeq.current = data.ipfs_seq;
         //랜덤 IPFS 번호 뽑기
+        let plz = data.ipfs_uri;
         console.log("다음 민팅할 카드 넘버: ", nftSeq.current);
 
         //블록체인 저장
@@ -37,6 +42,7 @@ const MintCard = () => {
           .then((res) => {
             console.log("donate return value: ", res);
             console.log("tokenId: ", res.events.Donated.returnValues[0]);
+
             //블록체인 저장 성공 시 해당 정보를 DB 저장
             axios({
               method: "POST",
@@ -62,6 +68,7 @@ const MintCard = () => {
                 })
                   .then(({ data }) => {
                     console.log("DB ipfs 변경 처리 성공");
+                    navigate(`/mintresult`, { state: plz });
                   })
                   .catch((err) => {
                     console.log(err);
@@ -80,7 +87,12 @@ const MintCard = () => {
       });
   }, []);
 
-  return <div>{/* <MintCardData></MintCardData> */}</div>;
+  return (
+    <div>
+      <h1>카드 민팅 결과</h1>
+      <MintCardData></MintCardData>
+    </div>
+  );
 };
 
 export default MintCard;

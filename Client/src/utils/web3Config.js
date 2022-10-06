@@ -2145,7 +2145,7 @@ export const animalNftContractAddress = "0xD673323A815EbbdfA7dBf28850930993E2bC4
 export const mascortNftContractAddress = "0x3D31FBe1ce4800F8a9C06E2e156936e08645DF36";
 
 //NftSaleManager
-export const nftSaleManagerContractAddress = "0x653dBf2b2a7A99250529B5cfFd321f33b80CA51C";
+export const nftSaleManagerContractAddress = "0x3Dee83507c9C95e14E6ad4f7F837CE8341e64b91";
 
 /* Contract Instance*/
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, createRef } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
+// import { useLocation, Navigate } from "react-router";
 import { useLocation, Navigate } from "react-router";
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
@@ -41,28 +42,13 @@ const NftDetail = () => {
 
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log("state: ", state);
+  // console.log("state: ", state);
 
   useEffect(() => {
     setColors([]);
   }, [state]);
 
   const isARSupport = useARStatus(state.item.src);
-  // const isARSupport = false;
-  //!! aciklama karakter sayisi sinirlanmali.
-  //!! scroll sorununa cozum bulunmali.
-
-  // animal Detail의 dummy 데이터
-  // const dummyList = [
-  //   {
-  //     nameKo: "토코투칸",
-  //     gradeEn: "EW",
-  //     gradeNo: 5,
-  //     count: 354,
-  //     detail:
-  //       "중앙아메리카와 남아메리카의 열대 우림 지역에 서식하며, 오색조류와 혈연관계가 있다.왕부리새의 부리는 크지만, 무겁지 않다. 단단한 열매를 쪼아먹거나 나무 기둥에 구멍을 뚫어 둥지를 만들 때 유용하게 쓰인다. 또한 부리로 열을 발산하거나 억제하는 식으로 체온을 조절할 수 있다.",
-  //   },
-  // ];
   return (
     <div>
       <Header />
@@ -83,7 +69,7 @@ const NftDetail = () => {
                   loading='eager'
                   camera-controlsk
                   auto-rotate
-                  src={state.item.src}
+                  src={state.item.itemImgUrl}
                 >
                   {" "}
                 </model-viewer>
@@ -91,16 +77,16 @@ const NftDetail = () => {
                 <>
                   {" "}
                   <ColorExtractor getColors={getColors}>
-                    <img id='detail-image' src={state.item.src} />
+                    <img id='detail-image' src={state.item.itemImgUrl} alt='PFP' />
                   </ColorExtractor>
                 </>
               )}
 
               <div id='detail-info' style={{}}>
                 <div id='detail-info-container'>
-                  <p id='collection'> {state.item.name} </p>
-                  <p id='name'> {state.item.name} </p>
-                  <p id='description'> {state.item.description} </p>
+                  <p id='collection'> {state.item.animalClass} </p>
+                  <p id='name'> {state.item.animalTitle} </p>
+                  <p id='description'>{state.item.detail}</p>
                 </div>
 
                 <div id='detail-controls'>
@@ -111,35 +97,53 @@ const NftDetail = () => {
                     child={
                       <div id='button-child'>
                         <FaEthereum size='28px' />
-                        <p id='price'>200</p>
+                        <p id='price'>{state.item.salePrice}</p>
                       </div>
                     }
-                    onClick={() => {
+                    onClick={async () => {
                       // 가격 적힌 버튼 클릭 시
-                      axios({ url: "/api/ipfs/number/shop", method: "GET" }).then(() => {});
-                      buy();
+                      const speciesAnimal = await axios({
+                        url: `/api/ipfs/number/market/${state.item.animal}`,
+                        method: "GET",
+                      });
+
+                      console.log("speciesAnimal: ", speciesAnimal);
+                      let plz = speciesAnimal.data.ipfs_uri;
+                      console.log("date:", Date.now());
+                      const buyNft = await buy(
+                        state.item.animal,
+                        speciesAnimal.data.ipfs_seq,
+                        Date.now()
+                      );
+                      console.log("buyNft: ", buyNft);
+                      const insertResult = await axios({
+                        url: "api/nft/mint",
+                        method: "POST",
+                        data: {
+                          nftPrice: 500,
+                          nftType: "market",
+                          tokenId: buyNft.events.Donated.returnValues[0],
+                          ipfsSeq: speciesAnimal.data.ipfs_seq,
+                          walletAddress: window.ethereum.selectedAddress,
+                        },
+                      });
+                      console.log("insertResult: ", insertResult);
+                      let pollOne;
+                      if (insertResult.data !== "") {
+                        pollOne = await axios({
+                          method: "POST",
+                          url: "api/ipfs/pollOne",
+                          data: {
+                            ipfsSeq: speciesAnimal.data.ipfs_seq,
+                          },
+                        }).then(({ data }) => {
+                          console.log("DB ipfs 변경 처리 성공");
+                          navigate(`/mintresult`, { state: plz });
+                        });
+                        console.log("pollOne: ", pollOne);
+                      }
                     }}
                   ></Button>
-                  <div className='like-container'>
-                    <button className='like' onClick={like}>
-                      {!isLike ? (
-                        <AiOutlineHeart size='45' color='white' />
-                      ) : (
-                        <AiFillHeart
-                          size='45'
-                          style={{
-                            stroke: `-webkit-linear-gradient(
-                    to bottom,
-                    #38ef7d,
-                    #11998e
-                  );`,
-                          }}
-                          color='#00f5c966'
-                        />
-                      )}
-                    </button>
-                    <p className='like-count'>123</p>
-                  </div>
                 </div>
               </div>
             </div>

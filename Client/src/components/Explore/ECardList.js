@@ -7,14 +7,18 @@ const ECardList = ({ list, type = "horizontal" }) => {
   let navigate = useNavigate();
 
   return (
-    <div id='card-list' style={{ flexDirection: type == "horizontal" ? "row" : "column" }}>
-      {list.map((item, index) => {
-        console.log("ECardList: ", item);
+    <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
+      {list.map((data, index) => {
         return (
           <NFTCard
-            nftSrc={item.src}
+            saleSeq={data.saleSeq}
+            nftSrc={data.itemImgUrl}
             key={index}
-            onClick={() => navigate("/detail", { state: { item: item } })}
+            starNo={data.animalClassNo}
+            price={data.salePrice}
+            nftName={data.animalTitle}
+            animalClass={data.animalClass}
+            onClick={() => navigate("/detail", { state: { item: data } })}
           />
         );
       })}

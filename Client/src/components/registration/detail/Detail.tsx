@@ -1,28 +1,63 @@
 import { Description, DetailBox, Img, LeftBox, MetaBox, MetaBoxWrapper } from "./Detail.styles";
 import { faker } from "@faker-js/faker";
+import { useState, useEffect } from "react";
+import { getDescription } from "../../../api.js";
 
 interface DetailProps {
   birdImg: string;
+  animal: string;
+}
+interface AnimalData {
+  animalClass: "";
+  animalDescription: "";
+  animalHabitat: "";
+  animalNameEn: "";
+  animalNameKr: "";
+  animalTotal: "";
 }
 
-const Detail: React.FC<DetailProps> = ({ birdImg }) => {
+const Detail = ({ birdImg, animal }: DetailProps) => {
+  const [animals, setAnimals] = useState({
+    animalClass: "",
+    animalDescription: "",
+    animalHabitat: "",
+    animalNameEn: "",
+    animalNameKr: "",
+    animalTotal: "",
+  });
+  useEffect(() => {
+    console.log("애니" + animal);
+    getDescription(animal).then((data: any) => {
+      // console.log("뜨는건가: ", data.data);
+      setAnimals({
+        animalClass: data.data.animalClass,
+        animalDescription: data.data.animalDescription,
+        animalHabitat: data.data.animalHabitat,
+        animalNameEn: data.data.animalNameEn,
+        animalNameKr: data.data.animalNameKr,
+        animalTotal: data.data.animalTotal,
+      });
+      //console.log(animals);
+    });
+  }, []);
+
   return (
     <>
       <DetailBox>
         <LeftBox>
-          <div>토코토칸</div>
-          <div>bird#12</div>
+          <div>NFT 고유번호</div>
+          <div>bird#12 db추가물어보기</div>
         </LeftBox>
 
         <MetaBoxWrapper marginRight>
           <MetaBox marginBottom>
-            <div>서식지</div>
-            <div>바다</div>
+            <div>한국 이름</div>
+            <div>{animals.animalNameKr}</div>
           </MetaBox>
 
           <MetaBox>
-            <div>생존수</div>
-            <div>2000 마리</div>
+            <div>영어 이름</div>
+            <div>{animals.animalNameEn}</div>
           </MetaBox>
         </MetaBoxWrapper>
 
@@ -30,30 +65,18 @@ const Detail: React.FC<DetailProps> = ({ birdImg }) => {
 
         <MetaBoxWrapper marginLeft>
           <MetaBox marginBottom>
-            <div>외국이름</div>
-            <div>Tococan</div>
+            <div>생존 수</div>
+            <div>{animals.animalTotal}</div>
           </MetaBox>
 
           <MetaBox>
-            <div>음</div>
-            <div>음</div>
+            <div>서식지</div>
+            <div>{animals.animalHabitat}</div>
           </MetaBox>
         </MetaBoxWrapper>
       </DetailBox>
-
       {/* <Description>{faker.lorem.paragraphs(8)}</Description> */}
-      <Description>
-        토코투칸(영어: Toco Toucan, 학명: Ramphastos toco)은 왕부리새과(투칸과)에서 가장 잘 알려져
-        있고, 크기도 가장 큰 종이다. 이들은 중부 및 동부 남아메리카에 서식한다. 동물원에서 흔히 볼
-        수 있다. 부리는 커서 무거워 보이지만, 실제로는 유공성으로 가벼운 편이다. 부리가 몸의 1/3을
-        차지한다. 토코투칸(영어: Toco Toucan, 학명: Ramphastos toco)은 왕부리새과(투칸과)에서 가장
-        잘 알려져 있고, 크기도 가장 큰 종이다. 이들은 중부 및 동부 남아메리카에 서식한다. 동물원에서
-        흔히 볼 수 있다. 부리는 커서 무거워 보이지만, 실제로는 유공성으로 가벼운 편이다. 부리가 몸의
-        1/3을 차지한다토코투칸(영어: Toco Toucan, 학명: Ramphastos toco)은 왕부리새과(투칸과)에서
-        가장 잘 알려져 있고, 크기도 가장 큰 종이다. 이들은 중부 및 동부 남아메리카에 서식한다.
-        동물원에서 흔히 볼 수 있다. 부리는 커서 무거워 보이지만, 실제로는 유공성으로 가벼운 편이다.
-        부리가 몸의 1/3을 차지한다
-      </Description>
+      <Description>{animals.animalDescription}</Description>
     </>
   );
 };

@@ -29,7 +29,7 @@ const NFTCard = ({
   animalSpecies,
   likePush,
 }) => {
-  const [isLike, setIsLike] = useState(likePush === "Y" ? true : false);
+  const [isLike, setIsLike] = useState(likePush === "Y" ? "Y" : likePush === "N" ? "N" : "none");
   const [colors, setColors] = useState([]);
   const [stateLikeCount, setStateLikeCount] = useState(likeCount);
   const isARSupport = useARStatus(nftSrc);
@@ -46,7 +46,7 @@ const NFTCard = ({
     console.log("current Address: ", sessionAddress);
 
     //만약 isLike가 True(하트 클릭 상태)일 경우
-    if (isLike) {
+    if (isLike === "Y") {
       axios({
         url: "api/sale/like/delete",
         method: "POST",
@@ -82,7 +82,11 @@ const NFTCard = ({
         });
     }
 
-    setIsLike(!isLike);
+    if (isLike === "Y") {
+      setIsLike("N");
+    } else if (isLike === "N") {
+      setIsLike("Y");
+    }
   };
 
   const getColors = (colors) => {
@@ -107,16 +111,32 @@ const NFTCard = ({
     // console.log(stars);
     return stars;
   };
-
-  // useEffect(() => {
-  //   function staring() {
-  //     const stars = [];
-  //     for (let i = 1; i < { starNo }; i++) {
-  //       stars.push(<img className='star' src={Star} alt='star' />);
-  //     }
-  //     // return stars;
-  //   }
-  // }, []);
+  const IsHeartAvail = () => {
+    // 좋아요 없는 경우 빈 하트
+    if (isLike === "N") {
+      return <AiOutlineHeart size='30' color='white' />;
+    }
+    //좋아요 있는 경우 찬 하트
+    else if (isLike === "Y") {
+      return (
+        <AiFillHeart
+          size='30'
+          style={{
+            stroke: `-webkit-linear-gradient(
+                    to bottom,
+                    #38ef7d,
+                    #11998e
+                  )`,
+          }}
+          color='#00f5c966'
+        />
+      );
+    }
+    //둘 다 아닌 경우
+    else {
+      return "";
+    }
+  };
   return (
     <Card
       blurColor={colors[0]}
@@ -138,7 +158,7 @@ const NFTCard = ({
               {/*멸종위기 등급 별*/}
               <div className='info-container'>{staring()}</div>
               <ColorExtractor getColors={getColors}>
-                <img className='nft-image' src={nftSrc} />
+                <img className='nft-image' src={nftSrc} alt='animalPFP' />
               </ColorExtractor>
             </>
           )}
@@ -168,23 +188,7 @@ const NFTCard = ({
                   Like();
                 }}
               >
-                {!isLike ? (
-                  // 좋아요 상태 아닐 시
-                  <AiOutlineHeart size='30' color='white' />
-                ) : (
-                  // 좋아요 상태 일 시
-                  <AiFillHeart
-                    size='30'
-                    style={{
-                      stroke: `-webkit-linear-gradient(
-                    to bottom,
-                    #38ef7d,
-                    #11998e
-                  )`,
-                    }}
-                    color='#00f5c966'
-                  />
-                )}
+                <IsHeartAvail />
               </button>
               <p className='like-count'>{stateLikeCount}</p>
             </div>

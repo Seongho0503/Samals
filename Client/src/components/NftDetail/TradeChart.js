@@ -11,7 +11,7 @@ function TradeChart({ lables, data }) {
         borderWidth: 1,
         borderColor: "red",
         pointBorderWidth: 0,
-        backgroundColor: "red",
+        backgroundColor: "black",
         pointBackgroundColor: "transparent",
         data: [1, 2, 3, 4, 5],
       },
