@@ -18,6 +18,9 @@ export const NftCard = styled.div`
 
 export const AskModalBlock = styled.div`
   width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 30px;
   background: #ffffff;
   border-radius: 0.5rem;
@@ -89,6 +92,7 @@ export const Button = styled.button<ButtonProps>`
 
 export const ConfirmDialog = styled.div`
   display: flex;
+  justify-content: center;
   flex-direction: column;
   padding-bottom: 2rem;
 `;

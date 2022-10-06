@@ -7,8 +7,14 @@ import {
   SubmitButton,
   Title,
   TradeContainer,
+  TradeGrid,
+  TradeGrid2,
+  TradeGrid3,
   Image,
   Nftgroup,
+  Text,
+  Text2,
+  Text3,
 } from "./Create.styles";
 import FormInputs from "./inputs/FormInputs";
 import { useSelector } from "react-redux";
@@ -107,72 +113,96 @@ const Trade = () => {
   }, [closeModal, isCompleted]);
 
   const registNFT = async () => {
-    let createSaleV : string = "";
+    let createSaleV: string = "";
     if (address === "" || address === undefined) {
       alert("지갑 로그인을 해주세요!");
       return;
-    }
-    else if (confirmEathAnimal.nftImgUrl === "") {
+    } else if (confirmEathAnimal.nftImgUrl === "") {
       alert("보유중인 NFT를 선택해주세요.");
       return;
-    }
-    else if (price === 0) {
+    } else if (price === 0) {
       alert("가격은 0원 이상 설정해주세요.");
       return;
     }
     //이미 등록된 NFT는 판매할 수 없습니다.
-    
+
     //자신의
 
-    console.log("토큰 아이디, 가격, 시작 시간, 종료 시간: ",confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2);
-    
-            //토큰 아이디, 가격, 시작 시간, 종료 시간
+    console.log(
+      "토큰 아이디, 가격, 시작 시간, 종료 시간: ",
+      confirmEathAnimal.tokenId,
+      price,
+      Date.now(),
+      Date.now() * 2
+    );
+
+    //토큰 아이디, 가격, 시작 시간, 종료 시간
     await createSale(confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2)
       .then((res) => {
-        console.log("saleContractAddress: ",res);
-        console.log("saleDescription: ",promotion);
-        console.log("salePrice: ",price);
-        console.log("sellerAddress: ",address);
-        console.log("tokenId: ",confirmEathAnimal.tokenId);
+        console.log("saleContractAddress: ", res);
+        console.log("saleDescription: ", promotion);
+        console.log("salePrice: ", price);
+        console.log("sellerAddress: ", address);
+        console.log("tokenId: ", confirmEathAnimal.tokenId);
         createSaleV = res;
       })
       .catch((err) => {
         console.log(err);
       });
-    
+
     await axios({
-          method: "POST",
-          url: "api/sale/create",
-          data: {
-            saleContractAddress: createSaleV.toLowerCase(),
-            saleDescription: promotion,
-            salePrice: price,
-            sellerAddress: address.toLowerCase(),
-            tokenId: confirmEathAnimal.tokenId
-          }
-        }).then((res) => {
-          console.log(res);
-          alert("등록 완료");
-          navigate("/trade");
-        })
-          .catch((err) => {
-            console.log(err);
-        })
-  }
-  
+      method: "POST",
+      url: "api/sale/create",
+      data: {
+        saleContractAddress: createSaleV.toLowerCase(),
+        saleDescription: promotion,
+        salePrice: price,
+        sellerAddress: address.toLowerCase(),
+        tokenId: confirmEathAnimal.tokenId,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        alert("등록 완료");
+        navigate("/trade");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <TradeContainer>
-        {/* <Menu /> */}
         <Image src={Bg} width='100%'></Image>
-        <Form onSubmit={onSubmit}>
-          <FormBox>
-            {/* NFT 이미지 및 NFT 가져오기 버튼 */}
-            <NftAndGraph setIsModalOpen={setIsModalOpen} nftImgUrl={confirmEathAnimal.nftImgUrl} />
-            <FormInputs values={confirmEathAnimal} onChange={onChange} />
-          </FormBox>
-          <SubmitButton onClick={registNFT}>등록</SubmitButton>
-        </Form>
+        <TradeGrid>
+          <Text>판매등록</Text>
+          {/* <Menu /> */}
+          <TradeGrid2>
+            <Form onSubmit={onSubmit}>
+              <FormBox>
+                {/* NFT 이미지 및 NFT 가져오기 버튼 */}
+                <NftAndGraph
+                  setIsModalOpen={setIsModalOpen}
+                  nftImgUrl={confirmEathAnimal.nftImgUrl}
+                />
+                <FormInputs values={confirmEathAnimal} onChange={onChange} />
+              </FormBox>
+              <TradeGrid3></TradeGrid3>
+              <SubmitButton onClick={registNFT}>판매 등록</SubmitButton>
+            </Form>
+          </TradeGrid2>
+        </TradeGrid>
+        <TradeGrid3>
+          <Text2>유의사항</Text2>
+          <Text3>
+            ㆍ NFT 등록은 이탈없이 총 3번의 MetaMask Transaction이 일어나야 등록이 완료됩니다.
+          </Text3>
+          <Text3>
+            ㆍ 보유하고 있는 NFT를 기준으로 거래가 진행되며, 거래 데이터는 블록체인에 저장됩니다.
+          </Text3>
+        </TradeGrid3>
+        <TradeGrid3></TradeGrid3>
       </TradeContainer>
 
       {/* 모달 창으로 동물 선택 */}
