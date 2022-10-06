@@ -4,7 +4,7 @@ import "../styles/TradeSelect.css";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { useSelector } from "react-redux";
 
-const TradeSelect = () => {
+const TradeSelect = ({ handleChangeSignType }) => {
   const [reduxAddress] = useState(useSelector(selectAddress));
   const registNFT = () => {
     if (reduxAddress === undefined || reduxAddress === "") {
@@ -23,12 +23,12 @@ const TradeSelect = () => {
       <div className='animal-control-group' style={{ zIndex: 10 }}>
         <h1 style={{ cursor: "default" }}>PRICE</h1>
 
-        <label className='control control--radio'>
+        <label className='control control--radio' onClick={() => handleChangeSignType("desc")}>
           최저가순
           <input type='radio' name='radio' defaultChecked='checked' />
           <div className='control__indicator'></div>
         </label>
-        <label className='control control--radio'>
+        <label className='control control--radio' onClick={() => handleChangeSignType("asc")}>
           최고가순
           <input type='radio' name='radio' />
           <div className='control__indicator'></div>

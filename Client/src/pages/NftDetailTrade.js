@@ -19,8 +19,17 @@ import { salePurchase, balanceOf, MetaMaskLogin } from "../utils/event";
 import { addressTransferShort } from "../api";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { useSelector } from "react-redux";
+import ReactJsAlert from "reactjs-alert";
+import { MetaLoadingScreen } from "../api";
 
 const NftDetailExplore = () => {
+  // reactjs-alert 관련
+  const [open, setOpen] = React.useState(false);
+  const [status, setStatus] = useState(false);
+  const [type, setType] = useState("warning");
+  const [title, setTitle] = useState("구매 완료!");
+
+  const [loading, setLoading] = useState(false);
   const [reduxAddress] = useState(useSelector(selectAddress));
   const isMobile = useMobile();
   const [balance] = useState(balanceOf());
@@ -104,36 +113,55 @@ const NftDetailExplore = () => {
   const onSaleTradeNft = () => {
     //예외처리
     if (window.ethereum.selectedAddress === undefined) {
-      alert("구매하기 위해선 메타마스크 로그인이 필요합니다.");
+      setTitle("메타마스크 로그인이 필요합니다.");
+      setOpen(true);
       MetaMaskLogin();
       return;
     } else if (detailData.sellerAddress === window.ethereum.selectedAddress) {
-      alert("자신이 등록한 NFT는 판매할 수 없습니다.");
+      setTitle("자신이 등록한 NFT는 구매할 수 없습니다.");
+      setOpen(true);
       return;
     } else if (balance < detailData.salePrice) {
-      alert("현재 보유중인 ACE 토큰이 부족합니다.");
+      setTitle(`보유중인 ACE가 부족합니다.
+      보유 ACE: ${balance}`);
+      setOpen(true);
       return;
     }
-
-    salePurchase(detailData.saleContractAddress).then(() => {
-      axios({
-        method: "PUT",
-        url: "api/sale/complete",
-        data: {
-          buyerAddress: window.ethereum.selectedAddress,
-          saleSeq: detailData.saleSeq,
-        },
-      }).then((res) => {
-        console.log(res);
-        if (res !== "") {
-          alert("NFT 구매 완료, my페이지로 이동");
-          navigate("/mypage");
-        }
-      });
-    });
+    try {
+      setLoading(true);
+      salePurchase(detailData.saleContractAddress)
+        .then(() => {
+          axios({
+            method: "PUT",
+            url: "api/sale/complete",
+            data: {
+              buyerAddress: window.ethereum.selectedAddress,
+              saleSeq: detailData.saleSeq,
+            },
+          }).then((res) => {
+            console.log(res);
+            if (res !== "") {
+              setLoading(false);
+              setStatus(true);
+              setTimeout(() => {
+                navigate("/mypage");
+              }, 3000);
+            }
+          });
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } catch (e) {
+      console.log("error");
+      setLoading(false);
+    }
   };
+
   return (
     <div>
+      {loading === true ? <MetaLoadingScreen text='거래승인,계약체결,결제 3개 요청!' /> : <></>}
       <Header />
       <div id='nft-detail-card-wrapper'>
         <Card
@@ -183,8 +211,10 @@ const NftDetailExplore = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <p id='price'>{detailData.salePrice}</p>
-                        <pre> </pre>
+                        <p id='price' style={{ cursor: "pointer" }}>
+                          {detailData.salePrice}
+                        </p>
+                        &nbsp;
                         <span>
                           <FaFrog size='28px' />
                         </span>
@@ -232,6 +262,14 @@ const NftDetailExplore = () => {
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
+      <ReactJsAlert
+        status={status} // true or false
+        type={type} // success, warning, error, info
+        title={title}
+        Close={() => setStatus(false)}
+        autoCloseIn={3000}
+        button={"확인"}
+      />
     </div>
   );
 };
