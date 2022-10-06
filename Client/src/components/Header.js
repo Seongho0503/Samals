@@ -101,6 +101,7 @@ const Header = () => {
         else {
           dispatch(setUserBio(isAccountData.userBio));
           dispatch(setUserId(isAccountData.userNickname));
+          setReduxUserNickName(isAccountData.userNickname);
         }
       }
     }
