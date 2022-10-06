@@ -59,6 +59,32 @@ const Header = () => {
       });
     }
   }
+  // useEffect(() => {
+  //   if (focus === "") {
+  //   } else if (focus === "mada") {
+  //     mada.current.style.backgroundColor = "gold";
+  //   } else if (focus === "mark") {
+  //     mark.current.style.backgroundColor = "gold";
+  //   } else if (focus === "trad") {
+  //     trad.current.style.backgroundColor = "gold";
+  //   } else if (focus === "dona") {
+  //     dona.current.style.backgroundColor = "gold";
+  //   } else if (focus === "mypa") {
+  //     mypa.current.style.backgroundColor = "gold";
+  //   }
+  // });
+  if (focus === "") {
+  } else if (focus === "mada") {
+    mada.current.style.backgroundColor = "gold";
+  } else if (focus === "mark") {
+    mark.current.style.backgroundColor = "gold";
+  } else if (focus === "trad") {
+    trad.current.style.backgroundColor = "gold";
+  } else if (focus === "dona") {
+    dona.current.style.backgroundColor = "gold";
+  } else if (focus === "mypa") {
+    mypa.current.style.backgroundColor = "gold";
+  }
 
   useEffect(() => {
     let isAccountData;
@@ -120,22 +146,34 @@ const Header = () => {
     fetchData();
   }, [account]);
 
+  // const changeColor = (linkText) => {
+  //   console.log(linkText);
+  //   let a = document.getElementsByClassName("Links-List");
+  //   console.log(a);
+  //   console.log(a.length);
+  //   // for (let i = 0; i < a.length; i++) {
+  //   //   i.style.backgroundColor = "";
+  //   // }
+  //   // console.log("document.getElementById(linkText): ", document.getElementById(linkText));
+  //   let b = document.getElementById(linkText);
+  //   console.log(b);
+  //   console.log("b.style: ", b.style);
+  //   b.style.backgroundColor = "red";
+  //   // document.getElementById(linkText).style.backgroundColor = "gold";
+  // };
+
   return (
     <div id='header' style={{ height: "80px" }}>
       <div id='logo'>
         <Link
+          className='Links-List'
+          id='main'
           ref={main}
           to='/'
           style={{ width: "50px", height: "50px", backgroundColor: "" }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "";
-            mark.current.style.backgroundColor = "";
-            trad.current.style.backgroundColor = "";
-            dona.current.style.backgroundColor = "";
-            mypa.current.style.backgroundColor = "";
-            dispatch(setHeaderClickSwitch(""));
-            setFocus("");
-          }}
+          // onClick={() => {
+          //   changeColor("main");
+          // }}
         >
           <img
             width='50px'
@@ -151,88 +189,69 @@ const Header = () => {
         style={{ textAlign: "center", verticalAlign: "middle", top: "5px" }}
       >
         {/* <Button variant='outlined' size='medium'> */}
+        {/* <button>버튼</button> */}
         <Link
+          className='Links-List'
+          id='mada'
           ref={mada}
           to='/game'
           style={{ backgroundColor: focus === "game" ? "gold" : "" }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "gold";
-            mark.current.style.backgroundColor = "";
-            trad.current.style.backgroundColor = "";
-            dona.current.style.backgroundColor = "";
-            mypa.current.style.backgroundColor = "";
-            dispatch(setHeaderClickSwitch("game"));
-            setFocus("game");
-          }}
+          // onClick={() => {
+          //   changeColor("mada");
+          // }}
         >
           MADAGASCAR
         </Link>
 
         <Link
+          className='Links-List'
+          id='mark'
           ref={mark}
           to='/explore'
           style={{ backgroundColor: focus === "explore" ? "gold" : "" }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "";
-            mark.current.style.backgroundColor = "gold";
-            trad.current.style.backgroundColor = "";
-            dona.current.style.backgroundColor = "";
-            mypa.current.style.backgroundColor = "";
-            dispatch(setHeaderClickSwitch("explore"));
-            setFocus("explore");
-          }}
+          // onClick={() => {
+          //   changeColor("mark");
+          // }}
         >
           MARKET
         </Link>
         <Link
+          className='Links-List'
+          id='trad'
           ref={trad}
           to='/trade'
           style={{ backgroundColor: focus === "trade" ? "gold" : "" }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "";
-            mark.current.style.backgroundColor = "";
-            trad.current.style.backgroundColor = "gold";
-            dona.current.style.backgroundColor = "";
-            mypa.current.style.backgroundColor = "";
-            dispatch(setHeaderClickSwitch("trade"));
-            setFocus("trade");
-          }}
+          // onClick={() => {
+          //   changeColor("trad");
+          // }}
         >
           TRADE
         </Link>
         <Link
+          className='Links-List'
+          id='dona'
           ref={dona}
           to='/minting'
           style={{ backgroundColor: focus === "minting" ? "gold" : "" }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "";
-            mark.current.style.backgroundColor = "";
-            trad.current.style.backgroundColor = "";
-            dona.current.style.backgroundColor = "gold";
-            mypa.current.style.backgroundColor = "";
-            dispatch(setHeaderClickSwitch("minting"));
-            setFocus("minting");
-          }}
+          // onClick={() => {
+          //   changeColor("dona");
+          // }}
         >
           DONATION
         </Link>
 
         <Link
+          className='Links-List'
+          id='mypa'
           ref={mypa}
           to='/mypage'
           style={{
             visibility: reduxAddress !== undefined ? "visible" : "hidden",
             backgroundColor: focus === "mypage" ? "gold" : "",
           }}
-          onClick={() => {
-            mada.current.style.backgroundColor = "";
-            mark.current.style.backgroundColor = "";
-            trad.current.style.backgroundColor = "";
-            dona.current.style.backgroundColor = "";
-            mypa.current.style.backgroundColor = "gold";
-            dispatch(setHeaderClickSwitch("mypage"));
-            setFocus("mypage");
-          }}
+          // onClick={() => {
+          //   changeColor("mypa");
+          // }}
         >
           MYPAGE
         </Link>

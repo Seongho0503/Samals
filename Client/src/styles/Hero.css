@@ -158,6 +158,16 @@ a {
   border-radius: 30px;
 }
 
+
+#link-containers button:hover{
+  border: 2px solid #72d87c;
+}
+#link-containers button {
+  border: 2px solid #ffffff;
+  border-radius: 30px;
+}
+
+
 #header-text-first {
   margin-top: 90px;
   font-size: 120px;
