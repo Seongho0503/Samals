@@ -226,7 +226,7 @@ const NftDetailExplore = () => {
       <TradeHistory sale={state.item.saleSeq}></TradeHistory>
       {/* <TradeChart></TradeChart> */}
       {/* <AnimalDetail animalDetail={dummyList} /> */}
-      <AnimalBook animal={state.item.animalSpecies}></AnimalBook>
+      {/* <AnimalBook animal={state.item.animalSpecies}></AnimalBook> */}
       <AnimalInfo animal={state.item.animalSpecies} />
 
       {/* <Test /> */}

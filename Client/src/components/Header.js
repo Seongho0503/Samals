@@ -14,6 +14,7 @@ import {
 } from "../redux/slice/UserInfoSlice";
 import { approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
+
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import axios from "axios";
 import Game from "pages/Game";

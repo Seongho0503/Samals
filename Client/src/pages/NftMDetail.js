@@ -140,7 +140,7 @@ const NftDetail = () => {
       </div>
 
       {/* <AnimalDetail animalDetail={dummyList} /> */}
-      <AnimalBook></AnimalBook>
+      {/* <AnimalBook></AnimalBook> */}
       <AnimalInfo animal={state.item.animal} />
       {/* <TradeHistory></TradeHistory> */}
       {/* <Test /> */}
