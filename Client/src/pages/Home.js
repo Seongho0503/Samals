@@ -7,6 +7,7 @@ import MainToken from "../components/Main/MainToken";
 import MainRoadMap from "../components/Main/MainRoadMap";
 import MainTeam from "../components/Main/MainTeam";
 import MainLast from "../components/Main/MainLast";
+import MainBanner from "../components/Main/MainBanner";
 
 import "../styles/Home.css";
 import CardList from "../components/CardList";
@@ -19,6 +20,7 @@ const Home = () => {
       {/* <LoadingScreen /> */}
 
       <MainTitle list={hotDropsData} />
+      <MainBanner />
       <MainSub />
       <MainNFT />
       <MainVision />
