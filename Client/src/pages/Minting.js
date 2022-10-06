@@ -9,7 +9,9 @@ import Footer from "../components/Footer";
 import buttonImg01 from "../assets/mint-button01.png";
 import buttonImg02 from "../assets/mint-button02.png";
 import buttonImg03 from "../assets/mint-button03.png";
+
 import Button from "@mui/material/Button";
+
 import "../styles/Home.css";
 import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
@@ -38,6 +40,7 @@ const Minting = () => {
         >
           <img width='400px' src={buttonImg03} alt='erc20 승인' />
         </Button>
+
         <br />
         {/* <button
         onClick={() => {
@@ -67,6 +70,7 @@ const Minting = () => {
         >
           <img width='400px' src={buttonImg01} alt='코인 충전하기' />
         </Button>
+
         <br />
         {/* <button
           onClick={() => {

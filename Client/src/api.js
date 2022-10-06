@@ -1,10 +1,12 @@
 import { width } from "@mui/system";
 import axios from "axios";
 import { env } from "process";
+
 import loading2 from "./assets/loading02.gif";
 import loading3 from "./assets/loading03.gif";
 import loading4 from "./assets/loading04.gif";
 import arrow from "./assets/arrow.png";
+
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
 

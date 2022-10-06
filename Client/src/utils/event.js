@@ -115,6 +115,7 @@ export var isOwner = async () => {
 
   return res;
 };
+
 export var createSale = async (animalId, price, startedAt, endedAt) => {
   const _createSale = await nftSaleManagerContract.methods
     .createSale(animalId, price, startedAt, endedAt)

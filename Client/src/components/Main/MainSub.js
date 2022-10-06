@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/MainSub.css";
 import title from "../../assets/our-story.png";
+
 import { getTotalDonate } from "../../api";
 import CountUp from "react-countup";
 import { FaFrog } from "react-icons/fa";
@@ -26,6 +27,7 @@ const MainSub = () => {
       <img width='500px' src={title} />
       <h1 id='header-subtext-first2'>
         <CountUp separator=',' end={token} />
+
         <FaFrog size='70px' style={{ top: "10px" }} />
       </h1>
       <h5 id='header-subtext-second'>

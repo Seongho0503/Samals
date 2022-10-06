@@ -19,6 +19,7 @@ import { salePurchase, balanceOf, MetaMaskLogin } from "../utils/event";
 import { addressTransferShort } from "../api";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { useSelector } from "react-redux";
+
 import ReactJsAlert from "reactjs-alert";
 import { MetaLoadingScreen } from "../api";
 
@@ -30,6 +31,7 @@ const NftDetailExplore = () => {
   const [title, setTitle] = useState("구매 완료!");
 
   const [loading, setLoading] = useState(false);
+
   const [reduxAddress] = useState(useSelector(selectAddress));
   const isMobile = useMobile();
   const [balance] = useState(balanceOf());
@@ -262,6 +264,7 @@ const NftDetailExplore = () => {
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
+
       <ReactJsAlert
         status={status} // true or false
         type={type} // success, warning, error, info

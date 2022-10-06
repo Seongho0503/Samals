@@ -17,9 +17,11 @@ import logo from "../assets/nav_logo_clean.png";
 
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import axios from "axios";
+
 import { MetaLoadingScreen, addressTransferShort } from "../api";
 const Header = () => {
   const [loading, setLoading] = useState(false);
+
   const main = useRef(null);
   const mada = useRef(null);
   const mark = useRef(null);
@@ -79,6 +81,7 @@ const Header = () => {
         //기존 가입 주소가 아니라면
         if (isAccountData === "") {
           // 민트 권한 허가
+
           setLoading(true);
           try {
             await approveERC20ForMint();
@@ -89,6 +92,7 @@ const Header = () => {
           } catch (e) {
             setLoading(false);
           }
+
           //DB 가입 처리
           await axios({
             method: "POST",
@@ -118,8 +122,6 @@ const Header = () => {
 
   return (
     <div id='header' style={{ height: "80px" }}>
-      {loading === true ? <MetaLoadingScreen text='ERC20,토큰지급 수락!' /> : ""}
-
       <div id='logo'>
         <Link
           ref={main}
@@ -240,6 +242,7 @@ const Header = () => {
           {reduxUserNickName === "" || reduxUserNickName === undefined ? (
             <div>
               <AccountBalanceWalletIcon />
+
               <span style={{ top: "-7px", fontSize: "20px" }}>{"  "}wallet</span>
             </div>
           ) : (

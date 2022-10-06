@@ -7,6 +7,7 @@
   background-size: cover;
   /* z-index: 1; */
 }
+
 #hero3 {
   width: 100%;
   /* border: 1px solid cyan; */
@@ -18,6 +19,7 @@
   margin-bottom: 200px;
   /* z-index: 1; */
 }
+
 #hero2 {
   width: 100%;
   /* border: 1px solid cyan; */
@@ -95,7 +97,9 @@
   height: 70px;
   /* border: 0.001px solid red; */
   display: flex;
+
   z-index: 998;
+
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -121,6 +125,7 @@
 
 #connect-wallet {
   width: 140px;
+
   height: 40px;
   background-color: #ffffff;
   border: none;

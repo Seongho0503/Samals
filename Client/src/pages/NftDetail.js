@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
+
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
 import { FaFrog } from "react-icons/fa";
+
 import { useMobile } from "../hooks/isMobile";
 import { useARStatus } from "../hooks/isARStatus";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
@@ -103,6 +105,7 @@ const NftDetail = () => {
   return (
     <div>
       {loading === true ? <MetaLoadingScreen text='상점민팅 대기중!' /> : <></>}
+
       <Header />
       <div id='nft-detail-card-wrapper'>
         <Card
@@ -162,6 +165,7 @@ const NftDetail = () => {
             </div>
           }
         />
+
         <ReactJsAlert
           status={status} // true or false
           type='error' // success, warning, error, info
@@ -179,6 +183,7 @@ const NftDetail = () => {
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
+
       <ReactJsAlert
         status={status} // true or false
         type={type} // success, warning, error, info

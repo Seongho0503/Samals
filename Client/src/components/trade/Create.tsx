@@ -36,6 +36,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import Modal from "react-modal";
 import Bg from "../../assets/create.png";
 import { useNavigate } from "react-router-dom";
+
 import { createSale, animalSaleApprove, recordSale } from "../../utils/event";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -310,6 +311,7 @@ const Trade = () => {
           </Nftgroup>
         </AskModalBlock>
       </Modal>
+
       <ToastContainer
         position='top-right'
         autoClose={5000}
