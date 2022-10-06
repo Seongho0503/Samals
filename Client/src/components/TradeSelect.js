@@ -1,14 +1,22 @@
+import { useState } from "react";
 import "../styles/TradeSelect.css";
 // import styles from "../styles/TradeSelect.module.css";
+import { selectAddress } from "../redux/slice/UserInfoSlice";
+import { useSelector } from "react-redux";
 
 const TradeSelect = () => {
-  function onClick() {
-    console.log("Hi there, user!");
+  const [reduxAddress] = useState(useSelector(selectAddress));
+  const registNFT = () => {
+    if (reduxAddress === undefined || reduxAddress === "") {
+      alert("로그인을 해야 합니다!");
+      return;
+    }
+
     window.location.replace("/create");
-  }
+  };
   return (
     <div className='animal-container' style={{ zIndex: 10 }}>
-      <button className='register' id='register' onClick={onClick}>
+      <button className='register' id='register' onClick={registNFT}>
         NFT 등록
       </button>
       {/* <div className='animal-control-group'> */}

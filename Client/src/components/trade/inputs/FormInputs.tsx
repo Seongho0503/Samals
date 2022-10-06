@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import {
   selectAddress,
 } from "../../../redux/slice/UserInfoSlice";
-
+import { FaFrog } from "react-icons/fa";
 interface FormInpusProps {
   values: nft;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
@@ -33,7 +33,7 @@ const FormInputs: React.FC<FormInpusProps> = ({ values, onChange } : FormInpusPr
       <Input type='text' id='nft' name='nft' value={values.} onChange={onChange} /> */}
 
       <label htmlFor='price'>가격</label>
-      <Input type='number' id='price' name='price' onChange={onChange} />
+      <Input type='number' id='price' name='price' onChange={onChange} placeholder="1token 이상 입력해주세요."/>
 
       <label htmlFor='promotion'>홍보 메세지</label>
       <PromotionTextarea

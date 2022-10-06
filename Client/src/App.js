@@ -117,6 +117,7 @@ function App() {
         <Route path='/detailTrade' element={<NftDetailTrade />} />
         <Route path='/mintcard' element={<MintCard />} />
         <Route path='/register' element={<Register />} />
+
         <Route path='/mintresult' element={<MintResult />} />
         <Route path='/guide' element={<Guide />} />
         <Route

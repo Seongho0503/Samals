@@ -36,10 +36,16 @@ export async function getAnimalData() {
 }
 // 거래소 거래 nft 리스트
 export async function getAnimalList(myAddress) {
+  let inputUrl = "";
+  if (myAddress === "" || myAddress === undefined) {
+    inputUrl = "/api/sale/list";
+  } else {
+    inputUrl = `/api/sale/list?address=${myAddress}`;
+  }
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/sale/list?address=${myAddress}`,
+      url: inputUrl,
     });
     return response;
   } catch {
@@ -99,3 +105,8 @@ export async function getSomeList(animalSpecies) {
     return "";
   }
 }
+
+export const addressTransferShort = (address) => {
+  if (typeof address !== "string") return false;
+  return address.slice(0, 4) + "..." + address.slice(12, 16);
+};

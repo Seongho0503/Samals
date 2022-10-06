@@ -84,6 +84,7 @@ const MintCard = () => {
       })
       .catch((err) => {
         console.log("다음 민팅할 카드 넘버 실패 err: ", err);
+        console.log();
       });
   }, []);
 

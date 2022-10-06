@@ -6,7 +6,7 @@ import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
-import { FaEthereum } from "react-icons/fa";
+import { FaFrog } from "react-icons/fa";
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -95,8 +95,8 @@ const NftDetail = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <FaEthereum size='28px' />
-                        <p id='price'>{state.item.salePrice}</p>
+                        <pre id='price'>{state.item.salePrice} </pre>
+                        <FaFrog size='28px' />
                       </div>
                     }
                     onClick={async () => {

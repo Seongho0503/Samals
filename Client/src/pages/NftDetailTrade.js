@@ -1,35 +1,32 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import { useLocation, Navigate } from "react-router";
+import { useLocation } from "react-router";
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
-import { FaEthereum } from "react-icons/fa";
-import {
-  AiOutlineHeart,
-  AiFillHeart,
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-} from "react-icons/ai";
+import { FaFrog } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
-import { hotDropsData } from "../constants/MockupData";
-import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
-import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
 import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
-import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 import axios from "axios";
 import { salePurchase, balanceOf, MetaMaskLogin } from "../utils/event";
+import { addressTransferShort } from "../api";
+import { selectAddress } from "../redux/slice/UserInfoSlice";
+import { useSelector } from "react-redux";
+
 const NftDetailExplore = () => {
+  const [reduxAddress] = useState(useSelector(selectAddress));
   const isMobile = useMobile();
   const [balance] = useState(balanceOf());
   const [colors, setColors] = useState([]);
   const [isLike, setIsLike] = useState(false);
+  const [likeCnt, setLikeCnt] = useState(0);
   const [detailData, setDetailData] = useState({
     saleDescription: "",
     tokenImgUrl: "",
@@ -38,7 +35,45 @@ const NftDetailExplore = () => {
     tokenId: "",
   });
 
-  const like = () => setIsLike(!isLike);
+  const onClickLikeBtn = () => {
+    axios({}).then(() => {});
+
+    let inputUrl = "api/sale/like/";
+    let result = "";
+    if (reduxAddress === undefined) {
+      alert("좋아요를 누르려면 지갑 연결이 필요합니다.");
+      return;
+    }
+
+    //만약 isLike가 True(하트 클릭 상태)일 경우
+    if (isLike) result = "delete";
+    // isLike가 fasle일 경우
+    else result = "add";
+
+    axios({
+      url: inputUrl + result,
+      method: "POST",
+      data: { saleSeq: detailData.saleSeq, walletAddress: reduxAddress },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data === "Success") {
+          if (result === "add") {
+            console.log("like success");
+            setLikeCnt(likeCnt + 1);
+          } else {
+            console.log("like fail");
+
+            setLikeCnt(likeCnt - 1);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    console.log("change isLike");
+    setIsLike(!isLike);
+  };
 
   const getColors = (colors) => {
     setColors((c) => [...c, ...colors]);
@@ -46,15 +81,17 @@ const NftDetailExplore = () => {
 
   const navigate = useNavigate();
   const { state } = useLocation();
-  console.log("state: ", state);
 
   useEffect(() => {
     setColors([]);
-
-    axios({ url: `/api/sale/${state.item.saleSeq}`, method: "GET" })
+    let inputUrl = `/api/sale/${state.item.saleSeq}`;
+    if (reduxAddress !== undefined) inputUrl += `?address=${reduxAddress}`;
+    axios({ url: inputUrl, method: "GET" })
       .then(({ data }) => {
         setDetailData(data);
-        console.log(data);
+        setIsLike(data.likePush === "Y" ? true : false);
+        setLikeCnt(data.likeCount);
+        console.log("detailData: ", data);
         console.log("아이템", state.item);
       })
       .catch((err) => {
@@ -63,21 +100,7 @@ const NftDetailExplore = () => {
   }, []);
 
   const isARSupport = useARStatus(state.item.itemImgUrl);
-  // const isARSupport = false;
-  //!! aciklama karakter sayisi sinirlanmali.
-  //!! scroll sorununa cozum bulunmali.
 
-  // animal Detail의 dummy 데이터
-  // const dummyList = [
-  //   {
-  //     nameKo: "토코투칸",
-  //     gradeEn: "EW",
-  //     gradeNo: 5,
-  //     count: 354,
-  //     detail:
-  //       "중앙아메리카와 남아메리카의 열대 우림 지역에 서식하며, 오색조류와 혈연관계가 있다.왕부리새의 부리는 크지만, 무겁지 않다. 단단한 열매를 쪼아먹거나 나무 기둥에 구멍을 뚫어 둥지를 만들 때 유용하게 쓰인다. 또한 부리로 열을 발산하거나 억제하는 식으로 체온을 조절할 수 있다.",
-  //   },
-  // ];
   const onSaleTradeNft = () => {
     //예외처리
     if (window.ethereum.selectedAddress === undefined) {
@@ -91,6 +114,7 @@ const NftDetailExplore = () => {
       alert("현재 보유중인 ACE 토큰이 부족합니다.");
       return;
     }
+
     salePurchase(detailData.saleContractAddress).then(() => {
       axios({
         method: "PUT",
@@ -143,9 +167,14 @@ const NftDetailExplore = () => {
 
               <div id='detail-info' style={{}}>
                 <div id='detail-info-container'>
-                  <p id='collection'> {detailData.saleTitle} </p>
-                  <p id='name'> </p>
-                  <p id='description'> {detailData.saleDescription} </p>
+                  <p id='collection'>NFT 시리즈 : {detailData.saleTitle} </p>
+                  <p id='collection'>민팅 순서 : {detailData.tokenId} </p>
+                  <p id='collection'>판매자 닉네임 : {detailData.sellerNickName} </p>
+                  <p id='collection'>
+                    판매자 주소 : {addressTransferShort(detailData.sellerAddress)}{" "}
+                  </p>
+                  <p id='collection'>게시글 등록일 : {detailData.saleCreatedTime} </p>
+                  <p id='collection'>NFT 정보 : {detailData.saleDescription} </p>
                 </div>
 
                 <div id='detail-controls'>
@@ -154,14 +183,22 @@ const NftDetailExplore = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <FaEthereum size='28px' />
                         <p id='price'>{detailData.salePrice}</p>
+                        <pre> </pre>
+                        <span>
+                          <FaFrog size='28px' />
+                        </span>
                       </div>
                     }
                     onClick={onSaleTradeNft}
                   ></Button>
                   <div className='like-container'>
-                    <button className='like' onClick={like}>
+                    <button
+                      className='like'
+                      onClick={() => {
+                        onClickLikeBtn();
+                      }}
+                    >
                       {!isLike ? (
                         <AiOutlineHeart size='45' color='white' />
                       ) : (
@@ -178,7 +215,7 @@ const NftDetailExplore = () => {
                         />
                       )}
                     </button>
-                    <p className='like-count'>{state.item.likeCount}</p>
+                    <p className='like-count'>{likeCnt}</p>
                   </div>
                 </div>
               </div>

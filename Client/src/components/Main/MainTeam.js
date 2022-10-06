@@ -22,7 +22,9 @@ const MainTeam = () => {
               <div className='at-user__avatar'>
                 <img src={profile1} />
               </div>
-              <div className='at-user__name'>Kwon Sungho</div>
+              <div className='at-user__name' style={{ cursor: "help" }}>
+                Kwon Sungho
+              </div>
               <div className='at-user__title'>Front-End</div>
             </div>
           </div>
