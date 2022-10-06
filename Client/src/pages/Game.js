@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
@@ -7,15 +8,15 @@ import bg from "../assets/madagascar.png";
 import bg2 from "../assets/bg-05.png";
 import Button1 from "../components/Game/Button1";
 import Button2 from "../components/Game/Button2";
-import { useWeb3React } from "@web3-react/core";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ProgressBar } from "react-loader-spinner";
+import { selectAddress } from "redux/slice/UserInfoSlice";
 
 import "../styles/Game.css";
 const Game = () => {
   const [loadingInProgress, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  const { account } = useWeb3React();
+  const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
   const { unityProvider, sendMessage, isLoaded, addEventListener, removeEventListener, unload, loadingProgression } =
     useUnityContext({
       loaderUrl: "Unity/WebGLbuild_new.loader.js",
@@ -58,7 +59,7 @@ const Game = () => {
   
 
   function setUserName() {
-    sendMessage("LoginManager", "setUserName", account);
+    sendMessage("LoginManager", "setUserName", reduxAddress);
     setIsAuth(false);
   }
   return (
