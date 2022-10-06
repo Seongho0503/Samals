@@ -84,7 +84,7 @@
   height: 70px;
   /* border: 0.001px solid red; */
   display: flex;
-  z-index: 999;
+  z-index: 998;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
@@ -109,7 +109,7 @@
 }
 
 #connect-wallet {
-  width: 180px;
+  width: 140px;
   height: 40px;
   background-color: #ffffff;
   border: none;

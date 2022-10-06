@@ -16,8 +16,6 @@ import { LoadingScreen } from "../api";
 const Home = () => {
   return (
     <div id='home' style={{ cursor: "default" }}>
-      {/* <LoadingScreen /> */}
-
       <MainTitle list={hotDropsData} />
       <MainSub />
       <MainNFT />

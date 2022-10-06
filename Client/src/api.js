@@ -1,7 +1,10 @@
 import { width } from "@mui/system";
 import axios from "axios";
 import { env } from "process";
-import loading from "./assets/loading.gif";
+import loading2 from "./assets/loading02.gif";
+import loading3 from "./assets/loading03.gif";
+import loading4 from "./assets/loading04.gif";
+import arrow from "./assets/arrow.png";
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
 
@@ -35,6 +38,7 @@ export async function getAnimalData() {
     return "";
   }
 }
+
 // 거래소 거래 nft 리스트
 export async function getAnimalList(myAddress) {
   let inputUrl = "";
@@ -114,18 +118,159 @@ export const addressTransferShort = (address) => {
 
 export const LoadingScreen = () => {
   return (
-    <div
-      style={{
-        zIndex: "10",
-        position: "fixed",
-        width: "100%",
-        height: "100%",
-        opacity: "0.5",
-        backgroundColor: "black",
-      }}
-    >
-      hello
-      <img src={loading} alt='loadingBird' />
+    <div>
+      <div
+        style={{
+          zIndex: "10",
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+          opacity: "0.5",
+          backgroundColor: "black",
+        }}
+      ></div>
+      <img
+        src={arrow}
+        style={{
+          zIndex: "999",
+          position: "fixed",
+          width: "50px",
+          top: "5%",
+          left: "80%",
+          transform: "translate(-50%, 0)",
+        }}
+        alt='arrow'
+      />
+      <img
+        src={loading2}
+        alt='loadingBird'
+        style={{
+          zIndex: "11",
+          width: "400px",
+          top: "30%",
+          left: "50%",
+
+          position: "fixed",
+          transform: "translate(-50%, 0)",
+        }}
+      />
+    </div>
+    // 빈투명 검은 화면
+    // 로딩 이미지
+  );
+};
+
+export const MetaLoadingScreen = ({ text }) => {
+  console.log(text);
+  return (
+    <div>
+      <div
+        style={{
+          zIndex: "10",
+          position: "fixed",
+          top: "0px",
+          left: "0px",
+          width: "100%",
+          height: "100%",
+          opacity: "0.5",
+          backgroundColor: "black",
+        }}
+      ></div>
+      <p
+        style={{
+          fontFamily: "김포평화",
+          border: "3px",
+          lineHeight: "1.4",
+          padding: "30px",
+          fontSize: "40px",
+          color: "#FFFFFF",
+          marginTop: "20px",
+          zIndex: "11",
+          position: "fixed",
+          right: "15%",
+          top: "6%",
+        }}
+      >
+        MetaMask
+        <br />
+        {text}
+      </p>
+      <img
+        src={arrow}
+        style={{
+          zIndex: "999",
+          position: "fixed",
+          width: "100px",
+          right: "120px",
+          top: "25px",
+          transform: "translate(-50%, 0)",
+        }}
+        alt='arrow'
+      />
+      <img
+        src={loading4}
+        alt='loadingBird'
+        style={{
+          zIndex: "11",
+          width: "400px",
+          top: "30%",
+          left: "50%",
+          position: "fixed",
+          transform: "translate(-50%, 0)",
+        }}
+      />
+    </div>
+    // 빈투명 검은 화면
+    // 로딩 이미지
+  );
+};
+
+export const MadaLoadingScreen = ({ text }) => {
+  console.log(text);
+  return (
+    <div>
+      <div
+        style={{
+          zIndex: "10",
+          position: "fixed",
+          top: "0px",
+          left: "0px",
+          width: "100%",
+          height: "100%",
+          opacity: "0.5",
+          backgroundColor: "black",
+        }}
+      ></div>
+      <p
+        style={{
+          fontFamily: "김포평화",
+          border: "3px",
+          lineHeight: "1.4",
+          padding: "30px",
+          fontSize: "40px",
+          color: "#FFFFFF",
+          marginTop: "20px",
+          zIndex: "11",
+          position: "fixed",
+          left: "50%",
+          transform: "translate(-50%, 0)",
+          top: "60%",
+        }}
+      >
+        {text}%
+      </p>
+      <img
+        src={loading2}
+        alt='loadingBird'
+        style={{
+          zIndex: "11",
+          width: "400px",
+          top: "30%",
+          left: "50%",
+          position: "fixed",
+          transform: "translate(-50%, 0)",
+        }}
+      />
     </div>
     // 빈투명 검은 화면
     // 로딩 이미지

@@ -11,8 +11,8 @@ import Button2 from "../components/Game/Button2";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ProgressBar, Dna } from "react-loader-spinner";
 import { selectAddress } from "redux/slice/UserInfoSlice";
-
 import "../styles/Game.css";
+import { MadaLoadingScreen } from "../api";
 const Game = () => {
   const [loadingInProgress, setLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
@@ -68,23 +68,12 @@ const Game = () => {
   }
   return (
     <div>
-      <img width='100%' src={bg} />
+      <img width='100%' src={bg} alt='' />
       <div class='game-card'>
         <Button1></Button1>
         <Button2></Button2>
       </div>
-      {isLoaded === false && (
-        <div>
-          <Dna
-            height='80'
-            width='80'
-            ariaLabel='dna-loading'
-            wrapperStyle={{}}
-            wrapperClass='dna-wrapper'
-          />
-          <p>{loadingPercentage}%</p>
-        </div>
-      )}
+      {isLoaded === false && <MadaLoadingScreen text={loadingPercentage} />}
       <Unity
         unityProvider={unityProvider}
         style={{
