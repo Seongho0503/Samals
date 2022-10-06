@@ -6,7 +6,7 @@ import Toad from "../assets/card/Toad.png";
 import Shark from "../assets/card/Shark.png";
 import Elephant from "../assets/card/Elephant.png";
 import Toco from "../assets/card/Toco.png";
-import ProfileEdit from "../components/MyPage/ProfileEdit";
+// import ProfileEdit from "../components/MyPage/ProfileEdit";
 import MyProfile from "./MyPofile";
 import axios from "axios";
 
@@ -214,7 +214,7 @@ const MyPage = () => {
                     <a href='#' className='q-ad'>
                       {/* <img src="https://imagizer.imageshack.comm/img923/1849/4TnLy1.png" /> */}
                       {/* <span>프로필 수정</span> */}
-                      <ProfileEdit></ProfileEdit>
+                      {/* <ProfileEdit></ProfileEdit> */}
                     </a>
                   </div>
                 </div>

@@ -34,7 +34,7 @@ import {
   balanceOf,
 } from "../../../utils/event";
 // import ProfileEdit from "../../MyPage/ProfileEdit_two";
-import ProfileEdit from "../../MyPage/ProfileEdit";
+// import ProfileEdit from "../../MyPage/ProfileEdit";
 const UserInfo = () => {
   const [address, setAddress] = useState(useSelector(selectAddress));
   const [alltoken, setAlltoken] = useState(0);
@@ -121,7 +121,7 @@ const UserInfo = () => {
         <BirdName>
           <BirdSum>{nftCount} 마리의 멸종 위기 동물을 구하셨습니다</BirdSum>
         </BirdName>
-        <ProfileEdit />
+        {/* <ProfileEdit /> */}
         {/* <UserName>
           {userInfo.userBio == null ? (
             <span className='use-bio'>자기 소개 내용이 없습니다</span>

@@ -226,14 +226,13 @@ const BirdList = () => {
                 src={
                   isLike
                     ? clickedLike
-                      ? clickedLike.imgUri
-                      : (likeList[0] as { imgUri: string }).imgUri
+                      ? clickedLike?.imgUri
+                      : (likeList[0] as { imgUri: string })?.imgUri
                     : clickedBird
-                    ? clickedBird.nftImgUrl
+                    ? clickedBird?.nftImgUrl
                     : birds[0]?.nftImgUrl
                 }
               />
-
               <CharacterMetaBox>
                 <CharacterNumber>
                   {clickedBird?.animalSpecies}#{clickedBird?.nftMintNumber}
