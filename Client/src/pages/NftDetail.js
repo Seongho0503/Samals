@@ -18,6 +18,8 @@ import MainLast from "../components/Main/MainLast";
 import axios from "axios";
 import { buy, balanceOf } from "../utils/event";
 import ReactJsAlert from "reactjs-alert";
+import { selectAddress } from "../redux/slice/UserInfoSlice";
+import { useSelector } from "react-redux";
 
 import { MetaLoadingScreen } from "../api";
 const NftDetail = () => {
@@ -39,7 +41,11 @@ const NftDetail = () => {
   useEffect(() => {
     setColors([]);
     async function inputBalance() {
-      setCrntBlnc(await balanceOf());
+      let a;
+      await balanceOf().then((res) => {
+        a = res;
+      });
+      setCrntBlnc(a);
     }
     inputBalance();
   }, [state]);
@@ -48,9 +54,15 @@ const NftDetail = () => {
 
   const buyMarketNFT = async () => {
     // 예외처리
-    let a = await balanceOf();
-    setCrntBlnc(a);
-    if (a < 500) {
+    let address = JSON.parse(JSON.parse(sessionStorage.getItem("persist:root")).userInfo).address;
+    console.log(address);
+    if (address === undefined) {
+      setTitle("메타마스크 지갑 연결을 해주세요.");
+      setStatus(true);
+      return;
+    }
+
+    if (crntBlnc < 500) {
       setStatus(true);
       return;
     }
@@ -165,15 +177,14 @@ const NftDetail = () => {
             </div>
           }
         />
-
-        <ReactJsAlert
+        {/* <ReactJsAlert
           status={status} // true or false
           type='error' // success, warning, error, info
           title={title} // title you want to display
           Close={() => this.setState({ status: false })} // callback method for hide
           autoCloseIn={3000}
           button={"확인"}
-        />
+        /> */}
       </div>
 
       {/* <AnimalDetail animalDetail={dummyList} /> */}
