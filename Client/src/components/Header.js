@@ -14,7 +14,7 @@ import { MetaMaskLogin, approveERC20ForMint, firstSupply } from "../utils/event"
 import logo from "../assets/nav_logo_clean.png";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 const Header = () => {
   const injected = new InjectedConnector();
@@ -116,7 +116,7 @@ const Header = () => {
         <Link to='/minting'>DONATION</Link>
         {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
         <button id='connect-wallet' onClick={handleConnect}>
-          {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`}
+          {/* {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`} */}
         </button>
       </div>
     </div>

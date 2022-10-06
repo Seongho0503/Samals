@@ -198,6 +198,28 @@ a {
       white-space: normal;
       word-break: break-word;
       position: relative;
+      border-radius: 20px;
+      &:nth-child(1) {
+        background-color: rebeccapurple;
+      }
+      &:nth-child(2) {
+        background-color: #ffff00;
+      }
+      &:nth-child(3) {
+        background-color: #009000;
+      }
+      &:nth-child(4) {
+        background-color: #ff7e00;
+      }
+      &:nth-child(5) {
+        background-color: #0055ff;
+      }
+      &:nth-child(6) {
+        background-color: black;
+      }
+      &:nth-child(7) {
+        background-color: #ff3399;
+      }
 
       &:before {
         content: "";
@@ -268,7 +290,7 @@ a {
         transition-delay: 60ms;
       }
       .headline {
-        font-size: 2.667em;
+        font-size: 2.3em;
         font-weight: 900;
         transition-delay: 50ms;
       }

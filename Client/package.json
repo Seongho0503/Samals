@@ -88,8 +88,5 @@
     "stream-http": "^3.2.0",
     "url": "^0.11.0"
   },
-  "overrides": {
-    "@types/react": "^17.0.50"
-  },
   "proxy": "http://j7d103.p.ssafy.io:8080"
 }

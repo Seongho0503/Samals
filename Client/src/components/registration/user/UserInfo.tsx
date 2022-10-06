@@ -1,7 +1,6 @@
+import React, { useState, useEffect } from "react";
 import bird from "assets/profile-example.png";
 import person from "assets/person.png";
-import { useState } from "react";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import {
@@ -34,8 +33,8 @@ import {
   firstSupply,
   balanceOf,
 } from "../../../utils/event";
+// import ProfileEdit from "../../MyPage/ProfileEdit_two";
 import ProfileEdit from "../../MyPage/ProfileEdit";
-
 const UserInfo = () => {
   const [address, setAddress] = useState(useSelector(selectAddress));
   const [alltoken, setAlltoken] = useState(0);
