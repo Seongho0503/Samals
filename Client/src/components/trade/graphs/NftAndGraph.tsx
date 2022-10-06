@@ -18,11 +18,7 @@ const NftAndGraph: React.FC<Props> = ({ setIsModalOpen, nftImgUrl }) => {
     <NftAndGraphContainer>
       {/* 기본 이미지 출력 */}
       <NftImg
-        src={
-          nftImgUrl !== ""
-            ? nftImgUrl
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Ramphastos_toco.jpg/375px-Ramphastos_toco.jpg"
-        }
+        src={nftImgUrl !== "" ? nftImgUrl : "https://cdn-icons-png.flaticon.com/512/14/14660.png"}
       />
 
       <Button
