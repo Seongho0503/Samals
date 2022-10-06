@@ -30,7 +30,10 @@ import { CloseOutlined } from "@ant-design/icons";
 import Modal from "react-modal";
 import Bg from "../../assets/create.png";
 import { useNavigate } from "react-router-dom";
-import { createSale } from "../../utils/event";
+import { createSale, animalSaleApprove, recordSale } from "../../utils/event";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import { MetaLoadingScreen } from "../../api";
 const initialValues: nft = {
   tokenId: 0,
   nftMintNumber: 0,
@@ -48,6 +51,13 @@ export interface nft {
 }
 
 const Trade = () => {
+  // alert 관련
+    const [status, setStatus] = useState(false);
+  const [type, setType] = useState("success");
+  const [title, setTitle] = useState("This is a alert");
+  
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingText, setLoadingText] = useState<string>("");
   const [address] = useState<string>(useSelector(selectAddress));
   const [price, setPrice] = useState(0);
   const [promotion, setPromotion] = useState("");
@@ -66,9 +76,6 @@ const Trade = () => {
       getMyNftList();
     }
   }, [isModalOpen]);
-
-  // useEffect(() => {
-  // }, [confirmEathAnimal])
 
   //입력값에 대한 출력 확인
   const onChange = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -106,29 +113,63 @@ const Trade = () => {
     }
   }, [closeModal, isCompleted]);
 
+    const notify = (text:string) => toast(text, {
+position: "top-right",
+autoClose: 5000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+
   const registNFT = async () => {
     let createSaleV : string = "";
     if (address === "" || address === undefined) {
-      alert("지갑 로그인을 해주세요!");
+      notify("지갑 로그인이 필요합니다.");
       return;
     }
     else if (confirmEathAnimal.nftImgUrl === "") {
-      alert("보유중인 NFT를 선택해주세요.");
+      notify("판매할 NFT를 선택해주세요.");
       return;
     }
     else if (price === 0) {
-      alert("가격은 0원 이상 설정해주세요.");
+      notify("가격은 0원 이상이어야 합니다.");
       return;
     }
-    //이미 등록된 NFT는 판매할 수 없습니다.
-    
-    //자신의
 
     console.log("토큰 아이디, 가격, 시작 시간, 종료 시간: ",confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2);
-    
+    setLoadingText("판매생성 요청!");
+    setLoading(true);
             //토큰 아이디, 가격, 시작 시간, 종료 시간
-    await createSale(confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2)
-      .then((res) => {
+    try {
+  //       export var createSale = async (animalId, price, startedAt, endedAt) => {
+  //   // 1 : 글을 등록하고 글의 주소를 받아온다.
+  //   const _createSale = await nftSaleManagerContract.methods
+  //     .createSale(animalId, price, startedAt, endedAt)
+  //     .send({ from: window.ethereum.selectedAddress })
+  //     .then("1", console.log); //유저 지갑 주소를 넣어줄 것
+  //   console.log("판매 contract 주소", _createSale.events.SaleCreated.returnValues.newNftSaleAddress);
+
+  //   // 2 : 글에 대한 NFT 양도 허가를 진행한다.
+  //   const res1 = await animalNftContract.methods
+  //     .approve(_createSale.events.SaleCreated.returnValues.newNftSaleAddress, animalId)
+  //     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
+  //   console.log("1 : NFT 양도 허가", res1);
+
+  //   // 게시글 솔리디티 등록
+  //   const res2 = await nftSaleManagerContract.methods
+  //     .recordSale(animalId, _createSale.events.SaleCreated.returnValues.newNftSaleAddress)
+  //     .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
+  //   console.log("2 : 게시글 등록", res2);
+
+  //   return _createSale.events.SaleCreated.returnValues.newNftSaleAddress;
+  // };
+      
+      await createSale(confirmEathAnimal.tokenId, price, Date.now(), Date.now() * 2)
+        .then((res) => {
+        notify("판매생성 완료!");
+        setLoadingText("판매승인 요청!");
         console.log("saleContractAddress: ",res);
         console.log("saleDescription: ",promotion);
         console.log("salePrice: ",price);
@@ -139,6 +180,22 @@ const Trade = () => {
       .catch((err) => {
         console.log(err);
       });
+
+      await animalSaleApprove(createSaleV, confirmEathAnimal.tokenId)
+        .then(() => {
+        notify("판매승인 완료!");
+        setLoadingText("판매기록 요청!");
+      })
+      
+      await recordSale(confirmEathAnimal.tokenId, createSaleV).then(() => {
+        setLoading(false);
+        notify("판매기록 완료!");
+      })
+    } catch (e) {
+      setLoading(false);
+      notify("등록 중 문제 발생!");
+      navigate("/trade");
+    }
     
     await axios({
           method: "POST",
@@ -152,16 +209,18 @@ const Trade = () => {
           }
         }).then((res) => {
           console.log(res);
-          alert("등록 완료");
+          notify("등록 완료!");
           navigate("/trade");
         })
-          .catch((err) => {
-            console.log(err);
+      .catch((err) => {
+        console.log(err);
+          notify("알 수 없는 이유로 등록 실패!");
         })
   }
-  
+
   return (
     <>
+      {loading === true ? <MetaLoadingScreen text={loadingText}/> : ""}
       <TradeContainer>
         {/* <Menu /> */}
         <Image src={Bg} width='100%'></Image>
@@ -218,7 +277,19 @@ const Trade = () => {
           </Nftgroup>
         </AskModalBlock>
       </Modal>
-      {/* <AskModal nftList={nftList} isModalOpen={isModalOpen} closeModal={closeModal} /> */}
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+/>
+{/* Same as */}
+<ToastContainer />
     </>
   );
 };

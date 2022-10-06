@@ -24,10 +24,7 @@ import Create from "./components/trade/Create";
 //dapp
 
 import NftDetail from "./pages/NftDetail";
-import NftMDetail from "./pages/NftMDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
-import ScrollToTop from "./components/base/ScrollToTop";
-import Footer from "./components/base/Footer";
 import Panda from "./assets/panda.png";
 import UserPage from "./pages/UserPage";
 

@@ -17,11 +17,8 @@ const FormInputs: React.FC<FormInpusProps> = ({ values, onChange } : FormInpusPr
  
   return (
     <FormInputsWrapper>
-      <label htmlFor='seller'>내 지갑 주소</label>
-      <Input type='text' id='seller' name='seller' value={reduxAddress } disabled/>
-
-      <label htmlFor='animal'>동물명</label>
-      <Input type='text' id='animal' name='animal' value={values.animalSpecies} disabled/>
+      <label htmlFor='animal' style={{width:"100%"}}>동물명</label>
+      <Input type='text' id='animal' name='animal' value={values.animalSpecies} disabled style={{width:"100%"}}/>
 
       <label htmlFor='animal'>토큰 아이디</label>
       <Input type='text' id='animal' name='animal' value={values.tokenId} onChange={onChange} disabled/>

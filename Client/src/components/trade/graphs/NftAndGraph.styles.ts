@@ -8,8 +8,7 @@ export const NftAndGraphContainer = styled.div`
 `;
 
 export const NftImg = styled.img`
-  width: 100%;
-  aspect-ratio: 4 / 3;
+  width: 400px;
   background: #fff;
   border-radius: 1rem;
   margin-bottom: 1rem;
