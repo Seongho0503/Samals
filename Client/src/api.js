@@ -1,7 +1,7 @@
 import { width } from "@mui/system";
 import axios from "axios";
 import { env } from "process";
-import chita from "./assets/card/chita.png";
+import loading from "./assets/loading.gif";
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
 
@@ -117,7 +117,7 @@ export const LoadingScreen = () => {
     <div
       style={{
         zIndex: "10",
-        position: "fix",
+        position: "fixed",
         width: "100%",
         height: "100%",
         opacity: "0.5",
@@ -125,7 +125,7 @@ export const LoadingScreen = () => {
       }}
     >
       hello
-      <img src={chita} alt='loadingBird' />
+      <img src={loading} alt='loadingBird' />
     </div>
     // 빈투명 검은 화면
     // 로딩 이미지

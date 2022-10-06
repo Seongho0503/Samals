@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import AnimalData from "../components/Minting/AnimalData";
 import MintingButton from "../components/Minting/MintingButton";
 import MintingModal from "../components/Minting/MintingModal";
+import MintSubs from "../components/Minting/MintSubs";
 import RatingData from "../components/Minting/RatingData";
 import Footer from "../components/Footer";
 import buttonImg01 from "../assets/mint-button01.png";
@@ -24,9 +25,10 @@ const Minting = () => {
   return (
     <div id='home'>
       {/* <MintingTitle /> */}
-      <MintingButton />
       <RatingData />
-      <div class='mint-div'>
+      <MintingButton />
+      <MintSubs></MintSubs>
+      {/* <div class='mint-div'>
         <button
           onClick={() => {
             const res = approveERC20ForMint();
@@ -35,8 +37,8 @@ const Minting = () => {
         >
           <img width='400px' src={buttonImg03} alt='erc20 승인' />
         </button>
-        <br />
-        {/* <button
+        <br /> */}
+      {/* <button
         onClick={() => {
           const res = getTotalMint();
           console.log("현재까지 발급된 민트 개수 조회: ", res);
@@ -53,7 +55,7 @@ const Minting = () => {
       >
         최초 발행한 뽑기 NFT 개수 조회
       </button> */}
-        <br />
+      {/* <br />
 
         <button
           onClick={() => {
@@ -76,7 +78,7 @@ const Minting = () => {
           <img width='400px' src={buttonImg02} alt='현재 남은 토큰 수' />
         </button>
       </div>
-      {mint}
+      {mint} */}
       <AnimalData />
       <MintingModal />
     </div>

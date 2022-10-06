@@ -12,9 +12,12 @@ import "../styles/Home.css";
 import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
 
+import { LoadingScreen } from "../api";
 const Home = () => {
   return (
     <div id='home' style={{ cursor: "default" }}>
+      {/* <LoadingScreen /> */}
+
       <MainTitle list={hotDropsData} />
       <MainSub />
       <MainNFT />
