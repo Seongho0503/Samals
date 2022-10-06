@@ -35,11 +35,9 @@ const TCardList = ({ list, type = "horizontal" }) => {
 
   const [amlist, setAmlist] = useState([]);
   useEffect(() => {
-    console.log("reduxAddress: ", reduxAddress);
     if (activeAnimal == "All") {
+      console.log("리덕스", reduxAddress);
       getAnimalList(reduxAddress).then(({ data }) => {
-        //console.log("리스트: ", data);
-        //console.log(data.animalClassNo);
         setAmlist(data);
       });
     } else {
@@ -141,7 +139,6 @@ const TCardList = ({ list, type = "horizontal" }) => {
 
       <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
         {amlist.map((data, index) => {
-          console.log("TcardList: ", data, ", index: ", index);
           return (
             <NFTCard
               saleSeq={data.saleSeq}

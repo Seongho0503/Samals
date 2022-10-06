@@ -1,5 +1,7 @@
 import bird from "../../assets/card/Toco.png";
 import person from "../../assets/person.png";
+import { useState } from "react";
+import { useEffect } from "react";
 import {
   Bird,
   BirdName,
@@ -16,6 +18,7 @@ import {
 import { faker } from "@faker-js/faker";
 
 const UserInfo = () => {
+  const [nftCount, setNftCount] = useState(0);
   return (
     <UserInfoContainer>
       <Block>

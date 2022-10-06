@@ -18,13 +18,13 @@ import sign from "../../assets/sign/EW.png";
 const AnimalInfo = ({ animal }) => {
   const [animals, setAnimals] = useState({ animalNameKr: "", animalNameEn: "", animalClass: "" });
   useEffect(() => {
-    console.log("애니멀 출력: " + animal);
+    //console.log("애니멀 출력: " + animal);
     getDescription(animal).then(({ data }) => {
-      console.log("data: ", data);
+      // console.log("동물정보: ", data);
       setAnimals(data);
     });
   }, []);
-
+  //console.log("animal : ", animal);
   return (
     <div>
       <header>
@@ -59,7 +59,7 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-content timeline-card js--fadeInRight'>
                 <div className='timeline-img-header'></div>
                 <div className='date'>{animals.animalClass}</div>
-                <img className='date' src={sign}></img>
+                <img className='date' src={animals.img4}></img>
               </div>
             </Roll>
           </div>
@@ -83,11 +83,7 @@ const AnimalInfo = ({ animal }) => {
               <div className='timeline-content js--fadeInRight'>
                 <div className='date'>{animals.animalHabitat}</div>
 
-                <img
-                  className='date'
-                  src='https://www.water.or.kr/images/egovframework/life/weast/ws2_65.jpg'
-                  alt='rhinoImg'
-                />
+                <img className='date' src={animals.img2} />
               </div>
             </LightSpeed>
           </div>

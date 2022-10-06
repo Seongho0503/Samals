@@ -1,5 +1,4 @@
 import { useState, useEffect, useContext } from "react";
-
 import "../styles/MyPage.css";
 import UserProfile from "../assets/userprofile.png";
 import Tiger from "../assets/card/Tiger.png";

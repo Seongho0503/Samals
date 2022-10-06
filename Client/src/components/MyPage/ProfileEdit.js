@@ -90,11 +90,7 @@ class ProfileEdit extends React.Component {
     return (
       <div>
         {" "}
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.handleClickOpen}
-        >
+        <Button variant='contained' color='primary' onClick={this.handleClickOpen}>
           프로필 수정
         </Button>{" "}
         <Dialog open={this.state.open} onClose={this.handleClose}>
@@ -104,48 +100,41 @@ class ProfileEdit extends React.Component {
             {" "}
             <input
               className={classes.hidden}
-              accept="image/*"
-              id="raised-button-file"
-              type="file"
+              accept='image/*'
+              id='raised-button-file'
+              type='file'
               file={this.state.file}
               value={this.state.fileName}
               onChange={this.handleFileChange}
             />{" "}
-            <label htmlFor="raised-button-file">
+            <label htmlFor='raised-button-file'>
               {" "}
-              <Button
-                variant="contained"
-                color="primary"
-                component="span"
-                name="file"
-              >
+              <Button variant='contained' color='primary' component='span' name='file'>
                 {" "}
-                {this.state.fileName === ""
-                  ? "프로필 이미지 선택"
-                  : this.state.fileName}{" "}
+                {this.state.fileName === "" ? "프로필 이미지 선택" : this.state.fileName}{" "}
               </Button>{" "}
             </label>
             <br />{" "}
             <TextField
-              label="닉네임"
-              type="text"
-              name="userName"
+              label='닉네임'
+              type='text'
+              name='userName'
               value={this.state.userName}
               onChange={this.handleValueChange}
             />
             <br />{" "}
             <TextField
-              label="자기소개"
-              type="text"
-              name="birthday"
+              label='자기소개'
+              type='text'
+              name='birthday'
               value={this.state.birthday}
               onChange={this.handleValueChange}
             />
             <br />{" "}
             <TextField
-              label="성별"
-              type="text"
-              name="gender"
+              label='나의문구'
+              type='text'
+              name='gender'
               value={this.state.gender}
               onChange={this.handleValueChange}
             />
@@ -161,18 +150,10 @@ class ProfileEdit extends React.Component {
           </DialogContent>{" "}
           <DialogActions>
             {" "}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.handleFormSubmit}
-            >
+            <Button variant='contained' color='primary' onClick={this.handleFormSubmit}>
               수정
             </Button>{" "}
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={this.handleClose}
-            >
+            <Button variant='outlined' color='primary' onClick={this.handleClose}>
               닫기
             </Button>{" "}
           </DialogActions>{" "}

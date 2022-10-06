@@ -93,7 +93,7 @@
   top: 0;
   right: 0;
   left: 0;
-  background: #064f11;
+  background: #011d04;
   /* background: #100f17; */
 }
 
@@ -132,7 +132,9 @@ a {
   cursor: pointer;
   transition: border 1.5s ease;
 }
-
+.clicked {
+  color: gold;
+}
 #link-containers a:hover {
   border: 1px solid #ffffff;
 }

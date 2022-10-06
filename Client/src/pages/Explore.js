@@ -9,7 +9,7 @@ import { getDescription } from "../api";
 const Explore = () => {
   return (
     <div id='explore'>
-      <img className='market-img' src={Market}></img>
+      <img className='market-img' src={Market} alt='' />
       <div id='list-container'>
         <CardList list={exploreList} />
       </div>

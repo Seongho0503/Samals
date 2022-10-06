@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const FormInputsWrapper = styled.div`
   display: flex;
@@ -6,34 +6,31 @@ export const FormInputsWrapper = styled.div`
   width: 100%;
   padding: 1rem;
   padding-top: 0;
-
   label {
     margin-bottom: 0.5rem;
   }
 `;
 
 export const Input = styled.input`
-  background: #1e0d86;
+  background: #d9d9d9;
   outline: none;
-  border: 1px solid #1e0d86;
+  margin-left: 3rem;
   border-radius: 0.5rem;
-  width: 100%;
-  height: 2rem;
+  width: 80%;
+  height: 3rem;
   padding: 0.5rem;
-
   margin-bottom: 1rem;
-  color: #fefefe;
+  color: #000000;
 `;
 
 export const PromotionTextarea = styled.textarea`
-  background: #1e0d86;
+  background: #d9d9d9;
   outline: none;
-  border: 1px solid #1e0d86;
   border-radius: 0.5rem;
-  width: 100%;
+  width: 80%;
   height: 6rem;
   padding: 0.5rem;
-
+  margin-left: 3rem;
   margin-bottom: 1rem;
   color: #fefefe;
 `;

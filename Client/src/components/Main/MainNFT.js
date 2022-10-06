@@ -14,14 +14,14 @@ const MainNFT = () => {
 
         <h5 id='header-subtext-second'>
           <p id='header-subtext-second'>
-            Samals 프로젝트는 프로그램으로 생성된
+            세이멀즈 프로젝트는 프로그램으로 생성된
             <br />
             SSAFY D103 올청이 팀의 고유 디지털수집품입니다.
             <br />
             <br />
             동물 일러스트는 모두 팀에서 자체 제작했으며, <br />
             세상에서 유일한 일러스트 NFT입니다. <br />
-            Samals 토큰으로 지금 Samals의 nft를 소유해보세요!
+            ACE 토큰으로 지금 세이멀즈의 NFT를 소유해보세요!
           </p>
         </h5>
       </div>
@@ -38,40 +38,29 @@ const MainNFT = () => {
                         nftexample
                     }
                 /> */}
-      <div className='autonft'>
+      <div className='autonft' style={{ cursor: "focus" }}>
         <div className='wrap'>
           <div className='items-wrap'>
             <div className='items marquee'>
               <div className='item'>
-                <img width='100px' border-radius='6px' src={nftexample} />
-              </div>
-              <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/bird%20(55).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg'
-                />
-              </div>
-              <div className='item'>
-                {" "}
-                <img
-                  width='100px'
-                  border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -79,7 +68,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -87,7 +76,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -95,7 +84,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -103,7 +92,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -111,34 +100,38 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(55).png'
+                />
+              </div>
+              <div className='item'>
+                {" "}
+                <img
+                  width='100px'
+                  border-radius='6px'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(55).png'
                 />
               </div>
             </div>
             <div aria-hidden='true' className='items marquee'>
               <div className='item'>
-                {" "}
-                <img width='100px' border-radius='6px' src={nftexample} />
-              </div>
-              <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/bird%20(15).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -146,7 +139,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -154,7 +147,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -162,7 +155,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -170,7 +163,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -178,7 +171,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -186,7 +179,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(15).png'
                 />
               </div>
             </div>
@@ -195,28 +188,24 @@ const MainNFT = () => {
           <div className='items-wrap'>
             <div className='items marquee reverce'>
               <div className='item'>
-                {" "}
-                <img width='100px' border-radius='6px' src={nftexample} />
-              </div>
-              <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(15).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/bird%20(55).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -224,7 +213,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -232,7 +221,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -240,7 +229,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -248,7 +237,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -256,7 +245,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png'
                 />
               </div>
               <div className='item'>
@@ -264,34 +253,30 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(55).png'
                 />
               </div>
             </div>
             <div aria-hidden='true' className='items marquee reverce'>
               <div className='item'>
-                {" "}
-                <img width='100px' border-radius='6px' src={nftexample} />
-              </div>
-              <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/bird%20(15).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://newsimg-hams.hankookilbo.com/2022/03/31/71f341a2-0b9d-4fbd-81e4-0d706e714767.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png'
                 />
               </div>
               <div className='item'>
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/202205/02/fe9129a1-00e7-466c-bfd2-1ac9f08ebd9c.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -299,7 +284,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/05/BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -307,7 +292,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbQTeRDXuEXAjairhgF8QCJD7TiRIsPz2lpFy_KgOe0dtOK1qDcPELM6AWxzkvOudIiZ0&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -315,7 +300,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://cdn.businessplus.kr/news/photo/202203/34566_25578_5733.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -323,7 +308,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://file.mk.co.kr/meet/neds/2022/03/image_readtop_2022_249531_16480404664979152.jpg'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -331,7 +316,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n6E55NE-oUy7qImItJRgBXuNKkc2kpFEmyfq0n4blkFYJGtCAs2728wbctbtny2UaHE&usqp=CAU'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png'
                 />
               </div>
               <div className='item'>
@@ -339,7 +324,7 @@ const MainNFT = () => {
                 <img
                   width='100px'
                   border-radius='6px'
-                  src='https://www.blockmedia.co.kr/wp-content/uploads/2022/02/%EC%A0%80%EC%8A%A4%ED%8B%B4-%EB%B9%84%EB%B2%84-NFT-BAYC.png'
+                  src='https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(15).png'
                 />
               </div>
             </div>
