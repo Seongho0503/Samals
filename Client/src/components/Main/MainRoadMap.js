@@ -20,12 +20,13 @@ const MainRoadMap = () => {
             <h1 class='carousel-h1'>멸종 위기 등급에 따른 차등 확률</h1>
             <br />
             <br />
+            <h2 class='carousel-h2'>- CR(위급) / EN(위기) / VU(취약) / LC(관심) 등급 구분</h2>
+            <br />
+            <br />
             <h2 class='carousel-h2'>- 10,000개 이상의 NFT 발급 및 판매</h2>
             <br />
             <br />
-            <h2 class='carousel-h2'>- CR / EN / VU / LC 등급에 따른 민팅 확률</h2>
-            <br />
-            <br />
+
             <h2 class='carousel-h2'>- 실 개체 수와 동일한 NFT 작품 개수</h2>
             <br />
             <br />

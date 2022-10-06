@@ -9,7 +9,8 @@ const MintCardData = (props) => {
   console.log(data);
   const mintcard2 = {
     margin: "auto",
-    marginTop: 100,
+    marginTop: 90,
+    marginBottom: 20,
     width: 500,
     height: 500,
     borderRadius: 30,
