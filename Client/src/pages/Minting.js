@@ -29,7 +29,7 @@ const Minting = () => {
       <MintingButton />
       <MintSubs></MintSubs>
       <div class='mint-div'>
-        {/* <button
+        <button
           onClick={() => {
             const res = approveERC20ForMint();
             console.log("현재토큰수: ", res);
@@ -37,7 +37,7 @@ const Minting = () => {
         >
           <img width='400px' src={buttonImg03} alt='erc20 승인' />
         </button>
-        <br />  */}
+        <br />
         {/* <button
         onClick={() => {
           const res = getTotalMint();
