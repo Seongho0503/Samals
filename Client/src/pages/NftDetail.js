@@ -1,55 +1,111 @@
-import React, { useState, useEffect, createRef } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
-import { useLocation, Navigate } from "react-router";
+import { useLocation } from "react-router";
+
 import Card from "../components/base/Card";
 import "../styles/NFTDetail.css";
 import { ColorExtractor } from "react-color-extractor";
 import Button from "../components/base/Button";
 import { FaFrog } from "react-icons/fa";
-import {
-  AiOutlineHeart,
-  AiFillHeart,
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
-} from "react-icons/ai";
+
 import { useMobile } from "../hooks/isMobile";
-import { hotDropsData } from "../constants/MockupData";
-import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
-import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
-import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
 // import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
-
 import axios from "axios";
-import { buy } from "../utils/event";
+import { buy, balanceOf } from "../utils/event";
+import ReactJsAlert from "reactjs-alert";
+
+import { MetaLoadingScreen } from "../api";
 const NftDetail = () => {
+  const navigate = useNavigate();
+  const [status, setStatus] = useState(false);
+  const [type, setType] = useState("warning");
+  const [title, setTitle] = useState("ACE 부족이 부족합니다.");
+  const [crntBlnc, setCrntBlnc] = useState(0);
   const isMobile = useMobile();
-
+  const [loading, setLoading] = useState(false);
   const [colors, setColors] = useState([]);
-
-  const [isLike, setIsLike] = useState(false);
-
-  const like = () => setIsLike(!isLike);
 
   const getColors = (colors) => {
     setColors((c) => [...c, ...colors]);
   };
 
-  const navigate = useNavigate();
   const { state } = useLocation();
-  // console.log("state: ", state);
 
   useEffect(() => {
     setColors([]);
+    async function inputBalance() {
+      setCrntBlnc(await balanceOf());
+    }
+    inputBalance();
   }, [state]);
 
   const isARSupport = useARStatus(state.item.src);
+
+  const buyMarketNFT = async () => {
+    // 예외처리
+    let a = await balanceOf();
+    setCrntBlnc(a);
+    if (a < 500) {
+      setStatus(true);
+      return;
+    }
+
+    // 가격 적힌 버튼 클릭 시
+    const speciesAnimal = await axios({
+      url: `/api/ipfs/number/market/${state.item.animal}`,
+      method: "GET",
+    });
+
+    console.log("speciesAnimal: ", speciesAnimal);
+    console.log("date:", Date.now());
+    setLoading(true);
+    let buyNft;
+    try {
+      await buy(state.item.animal, speciesAnimal.data.ipfs_seq, Date.now()).then((res) => {
+        buyNft = res;
+        setLoading(false);
+      });
+    } catch (e) {
+      console.log("buy 솔리디티 error");
+      setLoading(false);
+    }
+
+    console.log("buyNft: ", buyNft);
+    const insertResult = await axios({
+      url: "api/nft/mint",
+      method: "POST",
+      data: {
+        nftPrice: 500,
+        nftType: "market",
+        tokenId: buyNft.events.Donated.returnValues[0],
+        ipfsSeq: speciesAnimal.data.ipfs_seq,
+        walletAddress: window.ethereum.selectedAddress,
+      },
+    });
+    console.log("insertResult: ", insertResult);
+    let pollOne;
+    if (insertResult.data !== "") {
+      pollOne = await axios({
+        method: "POST",
+        url: "api/ipfs/pollOne",
+        data: {
+          ipfsSeq: speciesAnimal.data.ipfs_seq,
+        },
+      });
+      console.log("pollOne: ", pollOne);
+      navigate("/mintresult", { state: pollOne.data.ipfs_uri });
+    }
+  };
+
   return (
     <div>
+      {loading === true ? <MetaLoadingScreen text='상점민팅 대기중!' /> : <></>}
+
       <Header />
       <div id='nft-detail-card-wrapper'>
         <Card
@@ -95,54 +151,28 @@ const NftDetail = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <pre id='price'>{state.item.salePrice} </pre>
+                        <span id='price' style={{ fontSize: "20px" }}>
+                          {/* 띄워쓰기 */}
+                          {state.item.salePrice}&nbsp;
+                        </span>
                         <FaFrog size='28px' />
                       </div>
                     }
-                    onClick={async () => {
-                      // 가격 적힌 버튼 클릭 시
-                      const speciesAnimal = await axios({
-                        url: `/api/ipfs/number/market/${state.item.animal}`,
-                        method: "GET",
-                      });
-
-                      console.log("speciesAnimal: ", speciesAnimal);
-                      console.log("date:", Date.now());
-                      const buyNft = await buy(
-                        state.item.animal,
-                        speciesAnimal.data.ipfs_seq,
-                        Date.now()
-                      );
-                      console.log("buyNft: ", buyNft);
-                      const insertResult = await axios({
-                        url: "api/nft/mint",
-                        method: "POST",
-                        data: {
-                          nftPrice: 500,
-                          nftType: "market",
-                          tokenId: buyNft.events.Donated.returnValues[0],
-                          ipfsSeq: speciesAnimal.data.ipfs_seq,
-                          walletAddress: window.ethereum.selectedAddress,
-                        },
-                      });
-                      console.log("insertResult: ", insertResult);
-                      let pollOne;
-                      if (insertResult.data !== "") {
-                        pollOne = await axios({
-                          method: "POST",
-                          url: "api/ipfs/pollOne",
-                          data: {
-                            ipfsSeq: speciesAnimal.data.ipfs_seq,
-                          },
-                        });
-                        console.log("pollOne: ", pollOne);
-                      }
-                    }}
+                    onClick={buyMarketNFT}
                   ></Button>
                 </div>
               </div>
             </div>
           }
+        />
+
+        <ReactJsAlert
+          status={status} // true or false
+          type='error' // success, warning, error, info
+          title={title} // title you want to display
+          Close={() => this.setState({ status: false })} // callback method for hide
+          autoCloseIn={3000}
+          button={"확인"}
         />
       </div>
 
@@ -153,6 +183,15 @@ const NftDetail = () => {
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
+
+      <ReactJsAlert
+        status={status} // true or false
+        type={type} // success, warning, error, info
+        title={title}
+        Close={() => setStatus(false)}
+        autoCloseIn={3000}
+        button={"확인"}
+      />
     </div>
   );
 };

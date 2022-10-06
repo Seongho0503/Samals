@@ -36,8 +36,9 @@ const style = {
 };
 
 const MintingButton = () => {
-  const [open, setOpen] = React.useState(false);
   const [mint, setMint] = useState();
+  const [open, setOpen] = React.useState(false);
+
   const [status, setStatus] = useState(false);
   const [type, setType] = useState("success");
   const [title, setTitle] = useState("This is a alert");
@@ -82,6 +83,8 @@ const MintingButton = () => {
         type={type} // success, warning, error, info
         title={title}
         Close={() => setStatus(false)}
+        autoCloseIn={3000}
+        button={"확인"}
       />
 
       <Modal
