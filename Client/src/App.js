@@ -18,6 +18,7 @@ import MintCard from "./pages/MintCard";
 import Header from "./components/Header";
 import MyPage from "./pages/MyPage";
 import MintResult from "./pages/MintResult";
+import Guide from "./pages/Guide";
 import Create from "./components/trade/Create";
 
 //dapp
@@ -117,6 +118,7 @@ function App() {
         <Route path='/mintcard' element={<MintCard />} />
         <Route path='/register' element={<Register />} />
         <Route path='/mintresult' element={<MintResult />} />
+        <Route path='/guide' element={<Guide />} />
         <Route
           path='/mypage'
           element={

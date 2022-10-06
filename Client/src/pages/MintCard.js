@@ -89,7 +89,6 @@ const MintCard = () => {
 
   return (
     <div>
-      <h1>카드 민팅 결과</h1>
       <MintCardData></MintCardData>
     </div>
   );
