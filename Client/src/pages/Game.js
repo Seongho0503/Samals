@@ -11,6 +11,7 @@ import Button2 from "../components/Game/Button2";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { ProgressBar } from "react-loader-spinner";
 import { selectAddress } from "redux/slice/UserInfoSlice";
+import { useNavigate } from "react-router-dom";
 
 import "../styles/Game.css";
 const Game = () => {
@@ -25,6 +26,7 @@ const Game = () => {
       codeUrl: "Unity/WebGLbuild_new.wasm",
     });
   const loadingPercentage = Math.round(loadingProgression * 100);
+  const navigate = useNavigate();
     
   useEffect(() => {
     if (document.querySelector(`script[src="web3/index.js"]`)) return;
@@ -41,7 +43,7 @@ const Game = () => {
 
   useEffect(() => {
     return () => {
-      window.location.reload();
+      navigate(0);
     }
   },[])
   useEffect(() => {
