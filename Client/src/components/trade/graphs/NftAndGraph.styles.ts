@@ -4,26 +4,30 @@ export const NftAndGraphContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 40%;
+  justify-content: center;
+  margin-left: 4rem;
+  width: 45%;
 `;
 
 export const NftImg = styled.img`
-  width: 400px;
+  width: 100%;
+  aspect-ratio: 4 / 4;
   background: #fff;
   border-radius: 1rem;
   margin-bottom: 1rem;
 `;
 
 export const Button = styled.button`
-  width: 140px;
-  height: 3rem;
-  border-radius: 0.5rem;
-  margin-bottom: 2rem;
-  background: #d9d9d9;
-
-  font-size: 1rem;
+  width: 90%;
+  height: 60px;
+  border-radius: 0.8rem;
+  margin-top: 1rem;
+  background: #2d68c8;
+  font-family: "김포평화B";
+  color: #ffffff;
+  font-size: 2rem;
   &:hover {
-    background: #a8a8a8;
+    background: #00358b;
   }
 `;
 

@@ -175,7 +175,7 @@ const NftDetail = () => {
       {/* <AnimalDetail animalDetail={dummyList} /> */}
       {/* <AnimalBook></AnimalBook> */}
       <AnimalInfo animal={state.item.animal} />
-      <TradeHistory></TradeHistory>
+      {/* <TradeHistory></TradeHistory> */}
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
