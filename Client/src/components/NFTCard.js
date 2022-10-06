@@ -122,65 +122,69 @@ const NFTCard = ({
     }
   };
   return (
-    <button onClick={onClick}>
-      <Card
-        blurColor={colors[0]}
-        child={
-          <>
-            {isARSupport ? (
-              <model-viewer
-                ar-scale='auto'
-                ar
-                ar-modes='webxr scene-viewer quick-look'
-                id='reveal'
-                loading='eager'
-                camera-controls
-                auto-rotate
-                src={nftSrc}
-              ></model-viewer>
-            ) : (
-              <>
-                {/*멸종위기 등급 별*/}
-                <div className='info-container'>{staring()}</div>
-                <ColorExtractor getColors={getColors}>
-                  <img className='nft-image' src={nftSrc} alt='animalPFP' />
-                </ColorExtractor>
-              </>
-            )}
+    <Card
+      blurColor={colors[0]}
+      child={
+        <>
+          {isARSupport ? (
+            <model-viewer
+              ar-scale='auto'
+              ar
+              ar-modes='webxr scene-viewer quick-look'
+              id='reveal'
+              loading='eager'
+              camera-controls
+              auto-rotate
+              src={nftSrc}
+            ></model-viewer>
+          ) : (
+            <>
+              {/*멸종위기 등급 별*/}
+              <div className='info-container'>{staring()}</div>
+              <ColorExtractor getColors={getColors}>
+                <img
+                  className='nft-image'
+                  src={nftSrc}
+                  alt='animalPFP'
+                  style={{ cursor: "pointer" }}
+                  onClick={onClick}
+                />
+              </ColorExtractor>
+            </>
+          )}
 
-            <div className='wrapper'>
-              <div className='info-container'>
-                <p className='owner'> 멸종위기등급 : {animalClass}</p>
-                <p className='name'>{nftName}</p>
-              </div>
+          <div className='wrapper'>
+            <div className='info-container'>
+              <p className='owner'> 멸종위기등급 : {animalClass}</p>
+              <p className='name'>{nftName}</p>
+            </div>
 
-              <div className='price-container'>
-                <pre className='price'>
-                  {" "}
-                  {price} <FaFrog />
-                </pre>
-              </div>
+            <div className='price-container'>
+              <pre className='price'>
+                {" "}
+                {price} <FaFrog />
+              </pre>
             </div>
-            <div className='buttons'>
-              {/* Buy now 버튼 */}
-              <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
-              <div className='like-container'>
-                {/* 하트 버튼 클릭 */}
-                <button
-                  className='like'
-                  onClick={() => {
-                    Like();
-                  }}
-                >
-                  <IsHeartAvail />
-                </button>
-                <p className='like-count'>{likeCnt}</p>
-              </div>
+          </div>
+          <div className='buttons'>
+            {/* Buy now 버튼 */}
+            <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
+            <div className='like-container'>
+              {/* 하트 버튼 클릭 */}
+              <button
+                className='like'
+                onClick={() => {
+                  Like();
+                }}
+              >
+                <IsHeartAvail />
+              </button>
+              <p className='like-count'>{likeCnt}</p>
             </div>
-          </>
-        }
-      ></Card>
-    </button>
+          </div>
+        </>
+      }
+    ></Card>
   );
 };
 

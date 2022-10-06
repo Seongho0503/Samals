@@ -1,6 +1,7 @@
+import { width } from "@mui/system";
 import axios from "axios";
 import { env } from "process";
-
+import chita from "./assets/card/chita.png";
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
 
@@ -109,4 +110,24 @@ export async function getSomeList(animalSpecies) {
 export const addressTransferShort = (address) => {
   if (typeof address !== "string") return false;
   return address.slice(0, 4) + "..." + address.slice(12, 16);
+};
+
+export const LoadingScreen = () => {
+  return (
+    <div
+      style={{
+        zIndex: "10",
+        position: "fix",
+        width: "100%",
+        height: "100%",
+        opacity: "0.5",
+        backgroundColor: "black",
+      }}
+    >
+      hello
+      <img src={chita} alt='loadingBird' />
+    </div>
+    // 빈투명 검은 화면
+    // 로딩 이미지
+  );
 };
