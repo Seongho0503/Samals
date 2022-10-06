@@ -15,7 +15,7 @@ const Trade = () => {
   return (
     <div id='explore'>
       <Header />
-      <img id='hero-background' src={bg} />
+      <img id='hero-background' src={bg} alt='' />
       <CardMotion></CardMotion>
       {/* <AnimalSearch></AnimalSearch> */}
       {/* <TradeSelect></TradeSelect> */}

@@ -2121,24 +2121,9 @@ export const nftSaleAbi = [
 export const web3 = new Web3(window.ethereum);
 
 /* Contract Address */
-
-//AceToken
-//original
-// export const aceTokenContractAddress = "0x61d624d4Fc28203dA7E43799A4d7FeC08D6a3Bd0";
-
-//export const aceTokenContractAddress = "0xd1DCd064b7151F145129edadf7186757A5858b7C";
-
-//after
 export const aceTokenContractAddress = "0xB9b1aB65D4bc2f9Bf00dbbe5Cc12063e5CfcAC92";
 
 //AnimalNft
-//original
-// export const animalNftContractAddress = "0xACA26B2E1Db92478c43552f50B3Bc7931e480717";
-
-// before export const animalNftContractAddress = "0xbD48Baf9BFFC4Faed3199341cb747e33566f8F93";
-// export const animalNftContractAddress = "0xD621101cf09b543Da7241e110141590F8fe748b1";
-
-//last one
 export const animalNftContractAddress = "0xD673323A815EbbdfA7dBf28850930993E2bC46Fd";
 
 //MascortNft

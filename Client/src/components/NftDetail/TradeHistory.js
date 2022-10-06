@@ -36,19 +36,31 @@ const TradeHistory = (props) => {
 
   const [selldatas, setSelldatas] = useState({});
   const [saleData, setSaleData] = useState([]);
+
   // [] ||  [] || "판매날짜가 없습니다"
   //const [saleDate, setSaleDate] = useState(saleDate === null ? "출석날짜가 없습니" : saleDate);
 
   useEffect(() => {
     console.log("얼마", props.sale);
-    console.log("얼마2", props);
     SaleDetail(props.sale).then((res) => {
+<<<<<<< HEAD
       // await SaleHistory(res).then((response) => {
       // console.log(`res`, response);
       console.log(`가격1`, sellPrices.price1);
       console.log(`가격2`, sellPrices.price2);
       console.log(`가격3`, sellPrices.price3);
       //console.log("날짜체크", saleDate);
+=======
+      // console.log(res);
+      if (res === undefined) {
+        console.log("res === undefined, 거래 데이터 없음");
+        return;
+      }
+
+      SaleHistory(res.data.tokenId).then((res) => {
+        console.log("날짜체크", saleDate);
+      });
+>>>>>>> c0a622afc8aa15a0db6c7e5a796f5ae62ce54390
     });
     // console.log("아", sellDates.date1);
   }, []);
@@ -78,7 +90,6 @@ const TradeHistory = (props) => {
   const SaleDetail = async (saleSeq) => {
     try {
       await axios.get(`/api/sale/${saleSeq}`).then((res) => {
-        console.log("detailsss", res.data.tokenId);
         setTokenid(res.data.tokenId);
         // console.log(saleDetail);
         return SaleHistory(res.data.tokenId);
@@ -103,6 +114,7 @@ const TradeHistory = (props) => {
   const SaleHistory = async (tokenid) => {
     try {
       console.log("토큰2", tokenid);
+<<<<<<< HEAD
       await axios.get(`/api/nft/${tokenid}` + `/sale`).then((res) => {
         console.log("거래기간1", res.data[1].saleCompletedTime);
         const dataLength = res.data.length;
@@ -140,6 +152,35 @@ const TradeHistory = (props) => {
         //   price5: res.data[4].salePrice || [],
         // });
         setTest(res.data[0]);
+=======
+      await axios.get(`/api/nft/${tokenid}/sale`).then((res) => {
+        if (res.data[0].saleCompletedTime === undefined) {
+          console.log("거래 완료된 기록이 없습니다.");
+          return;
+        }
+        console.log("거래기간", res.data[0].saleCompletedTime);
+        setSellDates({
+          date1: res.data[0].saleCompletedTime,
+          date2: res.data[1].saleCompletedTime,
+          date3: res.data[2].saleCompletedTime,
+          date4: res.data[3].saleCompletedTime,
+          date5: res.data[4].saleCompletedTime,
+        });
+        setSellByer({
+          buy1: res.data[0].buyerNickname,
+          buy2: res.data[1].buyerNickname,
+          buy3: res.data[2].buyerNickname,
+          buy4: res.data[3].buyerNickname,
+          buy5: res.data[4].buyerNickname,
+        });
+        setSellPrices({
+          price1: res.data[0].salePrice,
+          price2: res.data[1].salePrice,
+          price3: res.data[2].salePrice,
+          price4: res.data[3].salePrice,
+          price5: res.data[4].salePrice,
+        });
+>>>>>>> c0a622afc8aa15a0db6c7e5a796f5ae62ce54390
         //console.log("하", res.data[3].saleCompletedTime);
         //console.log("허", res.data[4].saleCompletedTime);
         // console.log(saleDetail);
@@ -147,7 +188,7 @@ const TradeHistory = (props) => {
         //console.log("데이터", sellDates);
       });
     } catch (e) {
-      console.log("error:", e);
+      // console.log("error:", e);
     }
   };
   return (

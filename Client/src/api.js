@@ -1,6 +1,7 @@
+import { width } from "@mui/system";
 import axios from "axios";
 import { env } from "process";
-
+import chita from "./assets/card/chita.png";
 const BASE_URL = "http://j7d103.p.ssafy.io:8080/api";
 //const BASE_URL = "http://j7d103.p.ssafy.io:8080/api/ipfs/list";
 
@@ -36,10 +37,16 @@ export async function getAnimalData() {
 }
 // 거래소 거래 nft 리스트
 export async function getAnimalList(myAddress) {
+  let inputUrl = "";
+  if (myAddress === "" || myAddress === undefined) {
+    inputUrl = "/api/sale/list";
+  } else {
+    inputUrl = `/api/sale/list?address=${myAddress}`;
+  }
   try {
     const response = await axios({
       method: "GET",
-      url: `/api/sale/list?address=${myAddress}`,
+      url: inputUrl,
     });
     return response;
   } catch {
@@ -99,3 +106,28 @@ export async function getSomeList(animalSpecies) {
     return "";
   }
 }
+
+export const addressTransferShort = (address) => {
+  if (typeof address !== "string") return false;
+  return address.slice(0, 4) + "..." + address.slice(12, 16);
+};
+
+export const LoadingScreen = () => {
+  return (
+    <div
+      style={{
+        zIndex: "10",
+        position: "fix",
+        width: "100%",
+        height: "100%",
+        opacity: "0.5",
+        backgroundColor: "black",
+      }}
+    >
+      hello
+      <img src={chita} alt='loadingBird' />
+    </div>
+    // 빈투명 검은 화면
+    // 로딩 이미지
+  );
+};

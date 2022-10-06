@@ -14,7 +14,7 @@ import { hotDropsData } from "../constants/MockupData";
 
 const Home = () => {
   return (
-    <div id='home'>
+    <div id='home' style={{ cursor: "default" }}>
       <MainTitle list={hotDropsData} />
       <MainSub />
       <MainNFT />

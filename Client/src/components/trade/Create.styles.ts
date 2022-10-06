@@ -1,11 +1,16 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const TradeContainer = styled.div`
-  background: #000824;
-  color: #fefefe;
-
+  background: #e7e7e7;
+  color: #000000;
   height: 100vh;
 `;
+
+export const Nftgroup = styled.div`
+  display: flex;
+`;
+
+export const Image = styled.img``;
 
 export const Form = styled.form`
   padding: 1rem;
@@ -33,15 +38,13 @@ export const SubmitButton = styled.button`
   border-radius: 0.5rem;
   margin-bottom: 2rem;
 
-  background: #1e0d86;
-  border: 1px solid #1e0d86;
-  font-size: 1rem;
+  background: #d9d9d9;
+  font-size: 1.5rem;
 
   display: block;
   margin: 0 auto;
 
   &:hover {
-    background: #1e0d86;
-    border: 1px solid #1e0d86;
+    background: #a8a8a8;
   }
 `;

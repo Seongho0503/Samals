@@ -22,8 +22,8 @@ const MintCardData = (props) => {
 
   return (
     <div>
-      <img width='500px' src={data} style={mintcard2} />
-      <screen></screen>
+      <img width='500px' src={data} style={mintcard2} alt='' />
+      <screen />
     </div>
   );
 };

@@ -18,7 +18,7 @@ const MainToken = () => {
           <br />
           <br />
           ACE 토큰은 ERC-20 표준을 지원하며
-          <br /> Samals 플랫폼 내 기부 및 거래에 사용됩니다.
+          <br /> 세이멀즈 플랫폼 내 기부 및 거래에 사용됩니다.
           <br />
           <br />
           ACE 토큰을 통해 Animal NFT인 AMT 토큰을 분배 받을 수 있습니다. <br />

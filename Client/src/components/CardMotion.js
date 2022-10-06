@@ -73,7 +73,14 @@ const CardMotion = () => {
       await sleep(1600);
       goToPage(0);
       unhoverSlide(slideSeq[2]);
+<<<<<<< HEAD
       // dribbble.classList.remove("hover");
+=======
+      try {
+        dribbble.classList.remove("hover");
+      } catch (e) {}
+
+>>>>>>> c0a622afc8aa15a0db6c7e5a796f5ae62ce54390
       currentlyDemoing = false;
     }
 

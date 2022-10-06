@@ -14,14 +14,14 @@ const MainNFT = () => {
 
         <h5 id='header-subtext-second'>
           <p id='header-subtext-second'>
-            Samals 프로젝트는 프로그램으로 생성된
+            세이멀즈 프로젝트는 프로그램으로 생성된
             <br />
             SSAFY D103 올청이 팀의 고유 디지털수집품입니다.
             <br />
             <br />
             동물 일러스트는 모두 팀에서 자체 제작했으며, <br />
             세상에서 유일한 일러스트 NFT입니다. <br />
-            Samals 토큰으로 지금 Samals의 nft를 소유해보세요!
+            ACE 토큰으로 지금 세이멀즈의 NFT를 소유해보세요!
           </p>
         </h5>
       </div>
@@ -38,7 +38,7 @@ const MainNFT = () => {
                         nftexample
                     }
                 /> */}
-      <div className='autonft'>
+      <div className='autonft' style={{ cursor: "focus" }}>
         <div className='wrap'>
           <div className='items-wrap'>
             <div className='items marquee'>

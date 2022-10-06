@@ -30,7 +30,17 @@
   mix-blend-mode: screen;
   opacity: 0.3;
 }
-
+#mainsub .flex{
+    display: flex;
+      justify-content: space-between;
+      margin: 100px auto;
+      width: 50%;
+}
+#mainsub .count-num {
+    text-align: center;
+      font-size: 35px;
+      font-weight: 700;
+}
 #header-subtext-first {
   margin-top: 90px;
   font-size: 100px;

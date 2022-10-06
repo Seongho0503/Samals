@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/Hero.css";
 import { useNavigate } from "react-router-dom";
 import bg from "../../assets/bg-01.png";
-import font from "../../assets/font-03.png";
+import font from "../../assets/font-04.png";
 import title from "../../assets/our-vision.png";
 import Header from "../Header";
 

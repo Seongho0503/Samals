@@ -144,7 +144,7 @@ export var createSale = async (animalId, price, startedAt, endedAt) => {
 export var salePurchase = async (nftSaleAddress) => {
   // 1 : ERC20 토큰 거래에 대한 양도 허가를 진행한다.
   await approveERC20ForSale(nftSaleAddress);
-
+  // 2.
   const nftSaleContract = createNftSaleContract(nftSaleAddress);
   // 게시글 솔리디티 등록
   const res = await nftSaleContract.methods
