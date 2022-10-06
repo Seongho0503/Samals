@@ -14,15 +14,10 @@ import {
 } from "../redux/slice/UserInfoSlice";
 import { approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
-<<<<<<< HEAD
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-=======
+
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import axios from "axios";
 import Game from "pages/Game";
->>>>>>> 81603c53b2764ad2e3db382ebb53cbc76e3d4b59
 
 const Header = () => {
   const main = useRef(null);
@@ -233,9 +228,6 @@ const Header = () => {
       </div>
       <div>
         <button id='connect-wallet' onClick={handleConnect}>
-<<<<<<< HEAD
-          {/* {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`} */}
-=======
           {reduxUserNickName === "" || reduxUserNickName === undefined ? (
             <div>
               <AccountBalanceWalletIcon />
@@ -244,7 +236,6 @@ const Header = () => {
           ) : (
             `${reduxUserNickName}`
           )}
->>>>>>> 81603c53b2764ad2e3db382ebb53cbc76e3d4b59
         </button>
       </div>
     </div>
