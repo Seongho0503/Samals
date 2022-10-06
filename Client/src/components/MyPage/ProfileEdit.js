@@ -162,4 +162,5 @@ class ProfileEdit extends React.Component {
     );
   }
 }
-export default withStyles(styles)(ProfileEdit);
+// export default withStyles(styles)(ProfileEdit);
+export default ProfileEdit;
