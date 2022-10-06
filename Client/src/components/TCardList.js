@@ -22,7 +22,7 @@ import { getAnimalList, getNftInfo, getSomeList } from "../api.js";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import empty from "../assets/empty.png";
-
+import TradeSelect from "./TradeSelect";
 // declare var $: $;
 
 const TCardList = ({ list, type = "horizontal" }) => {
@@ -91,6 +91,7 @@ const TCardList = ({ list, type = "horizontal" }) => {
 
   return (
     <div>
+      {/* <TradeSelect></TradeSelect> */}
       <div className='toggles'>
         {/* <button id="showall">Show All</button> */}
         {/* <button animalActive={activeAnimal === "tiger" ? true : false} onClick={setActiveAnimal}> */}
@@ -142,18 +143,20 @@ const TCardList = ({ list, type = "horizontal" }) => {
       <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
         {amlist.map((data, index) => {
           return (
-            <NFTCard
-              saleSeq={data.saleSeq}
-              nftSrc={data.itemImgUrl}
-              key={index}
-              starNo={data.animalClassNo}
-              price={data.salePrice}
-              likeCount={data.likeCount}
-              nftName={data.animalTitle}
-              animalClass={data.animalClass}
-              likePush={data.likePush}
-              onClick={() => navigate("/detailTrade", { state: { item: data } })}
-            />
+            <div>
+              <NFTCard
+                saleSeq={data.saleSeq}
+                nftSrc={data.itemImgUrl}
+                key={index}
+                starNo={data.animalClassNo}
+                price={data.salePrice}
+                likeCount={data.likeCount}
+                nftName={data.animalTitle}
+                animalClass={data.animalClass}
+                likePush={data.likePush}
+                onClick={() => navigate("/detailTrade", { state: { item: data } })}
+              />
+            </div>
           );
         })}
       </div>

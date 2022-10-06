@@ -18,7 +18,7 @@ const Trade = () => {
       <img id='hero-background' src={bg} />
       <CardMotion></CardMotion>
       {/* <AnimalSearch></AnimalSearch> */}
-      <TradeSelect></TradeSelect>
+      {/* <TradeSelect></TradeSelect> */}
 
       {/* <AnimalFiller></AnimalFiller> */}
       <div id='list-container' style={{ zIndex: 1 }}>

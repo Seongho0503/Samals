@@ -34,7 +34,7 @@ import {
   firstSupply,
   balanceOf,
 } from "../../../utils/event";
-import ProfileEdit from "../../../components/MyPage/ProfileEdit";
+import ProfileEdit from "../../MyPage/ProfileEdit";
 
 const UserInfo = () => {
   const [address, setAddress] = useState(useSelector(selectAddress));
@@ -122,6 +122,7 @@ const UserInfo = () => {
         <BirdName>
           <BirdSum>{nftCount} 마리의 멸종 위기 동물을 구하셨습니다</BirdSum>
         </BirdName>
+        {/* <ProfileEdit /> */}
         {/* <UserName>
           {userInfo.userBio == null ? (
             <span className='use-bio'>자기 소개 내용이 없습니다</span>

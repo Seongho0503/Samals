@@ -11,34 +11,7 @@ const TradeSelect = () => {
       <button className='register' id='register' onClick={onClick}>
         NFT 등록
       </button>
-      {/* <div className='animal-control-group'> */}
-      {/* <h1>Price</h1> */}
-      {/* <label className="control control--checkbox">
-          First checkbox
-          <input type="checkbox" checked="checked" />
-          <div className="control__indicator"></div>
-        </label> */}
-      {/* <label className='control control--checkbox'>
-          최저가순
-          <input type='checkbox' />
-          <div className='control__indicator'></div>
-        </label>
-        <label className='control control--checkbox'>
-          최고가순
-          <input type='checkbox' />
-          <div className='control__indicator'></div>
-        </label> */}
-      {/* <label className="control control--checkbox">
-          Disabled
-          <input type="checkbox" disabled="disabled" />
-          <div className="control__indicator"></div>
-        </label>
-        <label className="control control--checkbox">
-          Disabled & checked
-          <input type="checkbox" disabled="disabled" checked="checked" />
-          <div className="control__indicator"></div>
-        </label> */}
-      {/* </div> */}
+
       <div className='animal-control-group' style={{ zIndex: 10 }}>
         <h1 style={{ cursor: "default" }}>PRICE</h1>
 
@@ -52,7 +25,56 @@ const TradeSelect = () => {
           <input type='radio' name='radio' />
           <div className='control__indicator'></div>
         </label>
-        {/* <label className="control control--radio">
+      </div>
+    </div>
+  );
+};
+
+export default TradeSelect;
+
+{
+  /* <div className='animal-control-group'> */
+}
+{
+  /* <h1>Price</h1> */
+}
+{
+  /* <label className="control control--checkbox">
+          First checkbox
+          <input type="checkbox" checked="checked" />
+          <div className="control__indicator"></div>
+        </label> */
+}
+{
+  /* <label className='control control--checkbox'>
+          최저가순
+          <input type='checkbox' />
+          <div className='control__indicator'></div>
+        </label>
+        <label className='control control--checkbox'>
+          최고가순
+          <input type='checkbox' />
+          <div className='control__indicator'></div>
+        </label> */
+}
+{
+  /* <label className="control control--checkbox">
+          Disabled
+          <input type="checkbox" disabled="disabled" />
+          <div className="control__indicator"></div>
+        </label>
+        <label className="control control--checkbox">
+          Disabled & checked
+          <input type="checkbox" disabled="disabled" checked="checked" />
+          <div className="control__indicator"></div>
+        </label> */
+}
+{
+  /* </div> */
+}
+
+{
+  /* <label className="control control--radio">
           Disabled
           <input type="radio" name="radio2" disabled="disabled" />
           <div className="control__indicator"></div>
@@ -66,8 +88,10 @@ const TradeSelect = () => {
             checked="checked"
           />
           <div className="control__indicator"></div>
-        </label> */}
-        {/* </div>
+        </label> */
+}
+{
+  /* </div>
       <div className='animal-control-group'>
         <h1>아이템</h1>
         <div className='select'>
@@ -77,8 +101,10 @@ const TradeSelect = () => {
             <option>밀집모자</option>
           </select>
           <div className='select__arrow'></div>
-        </div> */}
-        {/* <div className="select">
+        </div> */
+}
+{
+  /* <div className="select">
           <select>
             <option>Second select</option>
             <option>Option</option>
@@ -92,11 +118,5 @@ const TradeSelect = () => {
             <option>Option</option>
             <option>Option</option>
           </select>
-          <div className="select__arrow"></div> */}
-      </div>
-      {/* </div> */}
-    </div>
-  );
-};
-
-export default TradeSelect;
+          <div className="select__arrow"></div> */
+}

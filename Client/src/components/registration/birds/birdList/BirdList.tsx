@@ -116,7 +116,10 @@ const BirdList = () => {
   const closeDetail = useCallback(() => setIsDetail(false), []);
   const storeProfile = useCallback((tokenid: any) => setTokenId(tokenId), []);
 
-  const openLike = useCallback(() => setIsLike(true), []);
+  const openLike = useCallback(() => {
+    setIsDonation(false);
+    setIsLike(true);
+  }, []);
   const closeLike = useCallback(() => setIsLike(false), []);
 
   const onClick = useCallback(() => {
@@ -218,7 +221,7 @@ const BirdList = () => {
             // </div>
             <CharacterBox>
               <Button onClick={openDetail}>상세보기</Button>
-              <Button onClick={storeProfile}>프로필 설정</Button>
+              {/* <Button onClick={storeProfile}>프로필 설정</Button> */}
               <Character
                 src={
                   isLike

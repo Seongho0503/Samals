@@ -29,8 +29,12 @@ import {
 import FavorChart from "./FavorChart";
 
 const ContainerWrapper = styled.div`
+  display: flex;
   & > .recharts-responsive-container {
     margin: 0 auto;
+  }
+  & > .recharts-wrapper {
+    font-family: "GangwonEdu_OTFBoldA";
   }
 `;
 

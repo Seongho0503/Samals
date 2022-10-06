@@ -4,7 +4,8 @@ export const BirdListContainer = styled.div`
   flex: 1;
   background: linear-gradient(to bottom, #e6fcf5 5%, #96f2d7 20%);
   top: 77px;
-  height: calc(100vh - 200px);
+  // height: calc(100vh - 200px);
+  height: calc(100vh - 70px);
 `;
 
 export const Top = styled.div`

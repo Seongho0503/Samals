@@ -61,10 +61,7 @@ const CardMotion = () => {
       hoverSlide(slideSeq[0]);
       await sleep(1200);
       goToPage(pageSeq[1]);
-      try {
-        dribbble.classList.add("hover");
-      } catch (e) {}
-
+      // dribbble.classList.add("hover");
       unhoverSlide(slideSeq[0]);
       await sleep(500);
       hoverSlide(slideSeq[1]);
@@ -76,7 +73,7 @@ const CardMotion = () => {
       await sleep(1600);
       goToPage(0);
       unhoverSlide(slideSeq[2]);
-      dribbble.classList.remove("hover");
+      // dribbble.classList.remove("hover");
       currentlyDemoing = false;
     }
 
@@ -246,14 +243,11 @@ const CardMotion = () => {
           <div id='next-catch'></div>
           <div id='prev-catch'></div>
         </div>
-        {/* <div id="footer">
-          <a
-            href="https://dribbble.com/shots/3888265-Motion-Study"
-            target="_blank"
-          >
-            <div id="dribbble"></div>
-          </a>
-        </div> */}
+        <div id='footer'>
+          {/* <a href='https://dribbble.com/shots/3888265-Motion-Study' target='_blank'>
+            <div id='dribbble'></div>
+          </a> */}
+        </div>
       </div>
     </div>
   );
