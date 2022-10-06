@@ -9,7 +9,7 @@ import MainLast from "../components/Main/MainLast";
 import AnimalSearch from "../components/AnimalSearch";
 import CardMotion from "../components/CardMotion";
 import TradeSelect from "../components/TradeSelect";
-import bg from "../assets/explore.png";
+import bg from "../assets/trade.png";
 
 const Trade = () => {
   return (
