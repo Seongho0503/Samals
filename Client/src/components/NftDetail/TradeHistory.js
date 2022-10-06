@@ -32,13 +32,19 @@ const TradeHistory = (props) => {
     price5: sellDates.date5 == null || "최근 거래 내역이 없습니다.",
   });
   const [saleData, setSaleData] = useState([]);
+
   // [] ||  [] || "판매날짜가 없습니다"
   //const [saleDate, setSaleDate] = useState(saleDate === null ? "출석날짜가 없습니" : saleDate);
 
   useEffect(() => {
     console.log("얼마", props.sale);
-    console.log("얼마2", props);
     SaleDetail(props.sale).then((res) => {
+      // console.log(res);
+      if (res === undefined) {
+        console.log("res === undefined, 거래 데이터 없음");
+        return;
+      }
+
       SaleHistory(res.data.tokenId).then((res) => {
         console.log("날짜체크", saleDate);
       });
@@ -62,7 +68,6 @@ const TradeHistory = (props) => {
   const SaleDetail = async (saleSeq) => {
     try {
       await axios.get(`/api/sale/${saleSeq}`).then((res) => {
-        console.log("detailsss", res.data.tokenId);
         setTokenid(res.data.tokenId);
         // console.log(saleDetail);
         return SaleHistory(res.data.tokenId);
@@ -87,7 +92,11 @@ const TradeHistory = (props) => {
   const SaleHistory = async (tokenid) => {
     try {
       console.log("토큰2", tokenid);
-      await axios.get(`/api/nft/${tokenid}` + `/sale`).then((res) => {
+      await axios.get(`/api/nft/${tokenid}/sale`).then((res) => {
+        if (res.data[0].saleCompletedTime === undefined) {
+          console.log("거래 완료된 기록이 없습니다.");
+          return;
+        }
         console.log("거래기간", res.data[0].saleCompletedTime);
         setSellDates({
           date1: res.data[0].saleCompletedTime,
@@ -116,7 +125,7 @@ const TradeHistory = (props) => {
         console.log("거래데이터", res.data);
       });
     } catch (e) {
-      console.log("error:", e);
+      // console.log("error:", e);
     }
   };
   return (

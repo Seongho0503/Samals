@@ -105,3 +105,8 @@ export async function getSomeList(animalSpecies) {
     return "";
   }
 }
+
+export const addressTransferShort = (address) => {
+  if (typeof address !== "string") return false;
+  return address.slice(0, 4) + "..." + address.slice(12, 16);
+};

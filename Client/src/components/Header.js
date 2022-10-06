@@ -29,10 +29,10 @@ const Header = () => {
     if (active) {
       deactivate();
       //초기화
-      dispatch(setAddress(""));
-      dispatch(setUserBio(""));
-      dispatch(setUserId(""));
-      setReduxAddress("");
+      dispatch(setAddress(undefined));
+      dispatch(setUserBio(undefined));
+      dispatch(setUserId(undefined));
+      setReduxAddress(undefined);
       return;
     }
     // 활성화 시

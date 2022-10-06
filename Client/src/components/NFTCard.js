@@ -31,12 +31,13 @@ const NFTCard = ({
 }) => {
   const [isLike, setIsLike] = useState(likePush === "Y" ? "Y" : likePush === "N" ? "N" : "none");
   const [colors, setColors] = useState([]);
-  const [stateLikeCount, setStateLikeCount] = useState(likeCount);
+  const [likeCnt, setLikeCnt] = useState(likeCount);
   const isARSupport = useARStatus(nftSrc);
 
   const Like = () => {
     let sessionAddress = JSON.parse(sessionStorage.getItem("persist:root"));
-
+    let inputUrl = "api/sale/like/";
+    let result = "";
     if (sessionAddress === undefined || JSON.parse(sessionAddress.userInfo).address === "") {
       alert("지갑을 연결해주세요. 모달 창 및 문구 변경 필요");
       return;
@@ -46,47 +47,30 @@ const NFTCard = ({
     console.log("current Address: ", sessionAddress);
 
     //만약 isLike가 True(하트 클릭 상태)일 경우
-    if (isLike === "Y") {
-      axios({
-        url: "api/sale/like/delete",
-        method: "POST",
-        data: { saleSeq: saleSeq, walletAddress: sessionAddress },
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.data === "Success") {
-            alert("좋아요 취소 성공");
-            setStateLikeCount(stateLikeCount - 1);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    if (isLike === "Y") result = "delete";
     // isLike가 fasle일 경우
-    else {
-      axios({
-        url: "api/sale/like/add",
-        method: "POST",
-        data: { saleSeq: saleSeq, walletAddress: sessionAddress },
-      })
-        .then((res) => {
-          console.log(res);
-          if (res.data === "Success") {
-            alert("좋아요 성공");
-            setStateLikeCount(stateLikeCount + 1);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    else result = "add";
 
-    if (isLike === "Y") {
-      setIsLike("N");
-    } else if (isLike === "N") {
-      setIsLike("Y");
-    }
+    axios({
+      url: inputUrl + result,
+      method: "POST",
+      data: { saleSeq: saleSeq, walletAddress: sessionAddress },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data === "Success") {
+          if (result === "add") {
+            setLikeCnt(likeCnt + 1);
+            setIsLike("Y");
+          } else {
+            setLikeCnt(likeCnt - 1);
+            setIsLike("N");
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const getColors = (colors) => {
@@ -138,63 +122,65 @@ const NFTCard = ({
     }
   };
   return (
-    <Card
-      blurColor={colors[0]}
-      child={
-        <>
-          {isARSupport ? (
-            <model-viewer
-              ar-scale='auto'
-              ar
-              ar-modes='webxr scene-viewer quick-look'
-              id='reveal'
-              loading='eager'
-              camera-controls
-              auto-rotate
-              src={nftSrc}
-            ></model-viewer>
-          ) : (
-            <>
-              {/*멸종위기 등급 별*/}
-              <div className='info-container'>{staring()}</div>
-              <ColorExtractor getColors={getColors}>
-                <img className='nft-image' src={nftSrc} alt='animalPFP' />
-              </ColorExtractor>
-            </>
-          )}
+    <button onClick={onClick}>
+      <Card
+        blurColor={colors[0]}
+        child={
+          <>
+            {isARSupport ? (
+              <model-viewer
+                ar-scale='auto'
+                ar
+                ar-modes='webxr scene-viewer quick-look'
+                id='reveal'
+                loading='eager'
+                camera-controls
+                auto-rotate
+                src={nftSrc}
+              ></model-viewer>
+            ) : (
+              <>
+                {/*멸종위기 등급 별*/}
+                <div className='info-container'>{staring()}</div>
+                <ColorExtractor getColors={getColors}>
+                  <img className='nft-image' src={nftSrc} alt='animalPFP' />
+                </ColorExtractor>
+              </>
+            )}
 
-          <div className='wrapper'>
-            <div className='info-container'>
-              <p className='owner'> 멸종위기등급 : {animalClass}</p>
-              <p className='name'>{nftName}</p>
-            </div>
+            <div className='wrapper'>
+              <div className='info-container'>
+                <p className='owner'> 멸종위기등급 : {animalClass}</p>
+                <p className='name'>{nftName}</p>
+              </div>
 
-            <div className='price-container'>
-              <pre className='price'>
-                {" "}
-                {price} <FaFrog />
-              </pre>
+              <div className='price-container'>
+                <pre className='price'>
+                  {" "}
+                  {price} <FaFrog />
+                </pre>
+              </div>
             </div>
-          </div>
-          <div className='buttons'>
-            {/* Buy now 버튼 */}
-            <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
-            <div className='like-container'>
-              {/* 하트 버튼 클릭 */}
-              <button
-                className='like'
-                onClick={() => {
-                  Like();
-                }}
-              >
-                <IsHeartAvail />
-              </button>
-              <p className='like-count'>{stateLikeCount}</p>
+            <div className='buttons'>
+              {/* Buy now 버튼 */}
+              <Button color={Colors.buttons.primary} textContent='Buy Now' onClick={onClick} />
+              <div className='like-container'>
+                {/* 하트 버튼 클릭 */}
+                <button
+                  className='like'
+                  onClick={() => {
+                    Like();
+                  }}
+                >
+                  <IsHeartAvail />
+                </button>
+                <p className='like-count'>{likeCnt}</p>
+              </div>
             </div>
-          </div>
-        </>
-      }
-    ></Card>
+          </>
+        }
+      ></Card>
+    </button>
   );
 };
 
