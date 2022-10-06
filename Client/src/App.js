@@ -112,7 +112,8 @@ function App() {
         <Route path='/create' element={<Create />} />
         <Route path='/explore' element={<Explore />} />
         <Route path='/detail' element={<NftDetail />} />
-        <Route path='/minting' element={<Minting />} /> <Route path='/game' element={<Game />} />
+        <Route path='/minting' element={<Minting />} />
+        <Route path='/game' element={<Game />} />
         <Route path='/trade' element={<Trade />} />
         <Route path='/detailTrade' element={<NftDetailTrade />} />
         <Route path='/mintcard' element={<MintCard />} />

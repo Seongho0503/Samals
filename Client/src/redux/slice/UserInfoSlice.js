@@ -3,10 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const UserInfoSlice = createSlice({
   name: "UserInfoSlice",
   initialState: {
-    address: "",
-    userId: "",
-    userBio: "",
-    userPFPAddress: "",
+    address: undefined,
+    userId: undefined,
+    userBio: undefined,
+    userPFPAddress: undefined,
+    headerClickSwitch: "",
   },
   reducers: {
     setAddress: (state, action) => {
@@ -21,14 +22,19 @@ export const UserInfoSlice = createSlice({
     setUserPFPAddress: (state, action) => {
       state.userPFPAddress = action.payload;
     },
+    setHeaderClickSwitch: (state, action) => {
+      state.headerClickSwitch = action.payload;
+    },
   },
 });
 
-export const { setAddress, setUserId, setUserBio, setUserPFPAddress } = UserInfoSlice.actions;
+export const { setAddress, setUserId, setUserBio, setUserPFPAddress, setHeaderClickSwitch } =
+  UserInfoSlice.actions;
 
 export const selectAddress = (state) => state.userInfo.address;
 export const selectUserId = (state) => state.userInfo.userId;
 export const selectUserBio = (state) => state.userInfo.userBio;
 export const selectUserPFPAddress = (state) => state.userInfo.userPFPAddress;
+export const selectHeaderClickSwitch = (state) => state.userInfo.headerClickSwitch;
 
 export default UserInfoSlice.reducer;

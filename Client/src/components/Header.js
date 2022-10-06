@@ -1,39 +1,50 @@
-import { useState, useEffect, useContext } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { useEthers, useEtherBalance } from "@usedapp/core";
-import { DAppProvider } from "@usedapp/core";
-import Explore from ".././pages/Explore";
-import Minting from ".././pages/Minting";
-import Web3 from "web3";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAddress, setAddress, setUserBio, setUserId } from "../redux/slice/UserInfoSlice";
-import { MetaMaskLogin, approveERC20ForMint, firstSupply } from "../utils/event";
+import {
+  selectAddress,
+  selectUserId,
+  setAddress,
+  setUserBio,
+  setUserId,
+  selectHeaderClickSwitch,
+  setHeaderClickSwitch,
+} from "../redux/slice/UserInfoSlice";
+import { approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import axios from "axios";
+import Game from "pages/Game";
 
 const Header = () => {
+  const main = useRef(null);
+  const mada = useRef(null);
+  const mark = useRef(null);
+  const trad = useRef(null);
+  const dona = useRef(null);
+  const mypa = useRef(null);
   const injected = new InjectedConnector();
   //redux의 값을 호출 후 state로 관리
   const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
-  const { chainedId, account, active, activate, deactivate } = useWeb3React();
+  const [reduxUserNickName, setReduxUserNickName] = useState(useSelector(selectUserId));
+  const [focus, setFocus] = useState(useSelector(selectHeaderClickSwitch));
+
+  const { account, active, activate, deactivate } = useWeb3React();
   const dispatch = useDispatch();
 
   //연결 확인
   async function handleConnect() {
     // 비활성화 전환
     if (active) {
-      deactivate();
-      //초기화
-      dispatch(setAddress(undefined));
-      dispatch(setUserBio(undefined));
-      dispatch(setUserId(undefined));
-      setReduxAddress(undefined);
-      return;
+      // deactivate();
+      // //초기화
+      // dispatch(setAddress(undefined));
+      // dispatch(setUserBio(undefined));
+      // dispatch(setUserId(undefined));
+      // setReduxAddress(undefined);
+      // return;
     }
     // 활성화 시
     else {
@@ -45,9 +56,6 @@ const Header = () => {
       });
     }
   }
-  useEffect(() => {
-    return () => {};
-  }, []);
 
   useEffect(() => {
     let isAccountData;
@@ -91,32 +99,141 @@ const Header = () => {
         }
         //기존 가입 주소라면
         else {
-          dispatch(setUserBio(isAccountData.user_bio));
-          dispatch(setUserId(isAccountData.user_nickname));
+          dispatch(setUserBio(isAccountData.userBio));
+          dispatch(setUserId(isAccountData.userNickname));
         }
       }
     }
     fetchData();
   }, [account]);
 
-  const addClickEvent = () => {};
   return (
-    <div id='header'>
-      <Link to='/' id='logo' width='1px'>
-        <img width='50px' src={logo} />
-      </Link>
+    <div id='header' style={{ height: "80px" }}>
+      <div id='logo'>
+        <Link
+          ref={main}
+          to='/'
+          style={{ width: "50px", height: "50px", backgroundColor: "" }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "";
+            mark.current.style.backgroundColor = "";
+            trad.current.style.backgroundColor = "";
+            dona.current.style.backgroundColor = "";
+            mypa.current.style.backgroundColor = "";
+            dispatch(setHeaderClickSwitch(""));
+            setFocus("");
+          }}
+        >
+          <img
+            width='50px'
+            src={logo}
+            alt='logo'
+            style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+          />
+        </Link>
+      </div>
 
-      <div id='link-containers'>
+      <div
+        id='link-containers'
+        style={{ textAlign: "center", verticalAlign: "middle", top: "5px" }}
+      >
         {/* <Button variant='outlined' size='medium'> */}
-        <Link to='/game'>MADAGASCAR</Link>
-        {/* </Button> */}
+        <Link
+          ref={mada}
+          to='/game'
+          style={{ backgroundColor: focus === "game" ? "gold" : "" }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "gold";
+            mark.current.style.backgroundColor = "";
+            trad.current.style.backgroundColor = "";
+            dona.current.style.backgroundColor = "";
+            mypa.current.style.backgroundColor = "";
+            dispatch(setHeaderClickSwitch("game"));
+            setFocus("game");
+          }}
+        >
+          MADAGASCAR
+        </Link>
 
-        <Link to='/explore'>MARKET</Link>
-        <Link to='/trade'>TRADE</Link>
-        <Link to='/minting'>DONATION</Link>
-        {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
+        <Link
+          ref={mark}
+          to='/explore'
+          style={{ backgroundColor: focus === "explore" ? "gold" : "" }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "";
+            mark.current.style.backgroundColor = "gold";
+            trad.current.style.backgroundColor = "";
+            dona.current.style.backgroundColor = "";
+            mypa.current.style.backgroundColor = "";
+            dispatch(setHeaderClickSwitch("explore"));
+            setFocus("explore");
+          }}
+        >
+          MARKET
+        </Link>
+        <Link
+          ref={trad}
+          to='/trade'
+          style={{ backgroundColor: focus === "trade" ? "gold" : "" }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "";
+            mark.current.style.backgroundColor = "";
+            trad.current.style.backgroundColor = "gold";
+            dona.current.style.backgroundColor = "";
+            mypa.current.style.backgroundColor = "";
+            dispatch(setHeaderClickSwitch("trade"));
+            setFocus("trade");
+          }}
+        >
+          TRADE
+        </Link>
+        <Link
+          ref={dona}
+          to='/minting'
+          style={{ backgroundColor: focus === "minting" ? "gold" : "" }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "";
+            mark.current.style.backgroundColor = "";
+            trad.current.style.backgroundColor = "";
+            dona.current.style.backgroundColor = "gold";
+            mypa.current.style.backgroundColor = "";
+            dispatch(setHeaderClickSwitch("minting"));
+            setFocus("minting");
+          }}
+        >
+          DONATION
+        </Link>
+
+        <Link
+          ref={mypa}
+          to='/mypage'
+          style={{
+            visibility: reduxAddress !== undefined ? "visible" : "hidden",
+            backgroundColor: focus === "mypage" ? "gold" : "",
+          }}
+          onClick={() => {
+            mada.current.style.backgroundColor = "";
+            mark.current.style.backgroundColor = "";
+            trad.current.style.backgroundColor = "";
+            dona.current.style.backgroundColor = "";
+            mypa.current.style.backgroundColor = "gold";
+            dispatch(setHeaderClickSwitch("mypage"));
+            setFocus("mypage");
+          }}
+        >
+          MYPAGE
+        </Link>
+      </div>
+      <div>
         <button id='connect-wallet' onClick={handleConnect}>
-          {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`}
+          {reduxUserNickName === "" || reduxUserNickName === undefined ? (
+            <div>
+              <AccountBalanceWalletIcon />
+              <span style={{ top: "-5px", fontSize: "20px" }}>{"  "}wallet</span>
+            </div>
+          ) : (
+            `${reduxUserNickName}`
+          )}
         </button>
       </div>
     </div>
