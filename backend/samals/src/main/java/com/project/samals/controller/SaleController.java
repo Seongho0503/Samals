@@ -55,8 +55,8 @@ public class SaleController {
 
     @ApiOperation(value = "거래 상세 조회")
     @GetMapping("/{saleSeq}")
-    public ResponseEntity<ResSaleDetailDto> getSale(@PathVariable long saleSeq){
-        return new ResponseEntity<>(saleService.getSale(saleSeq),HttpStatus.OK);
+    public ResponseEntity<ResSaleDetailDto> getSale(@PathVariable long saleSeq,String address){
+        return new ResponseEntity<>(saleService.getSale(saleSeq,address),HttpStatus.OK);
     }
 
     @ApiOperation(value = "거래 완료")

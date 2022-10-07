@@ -30,7 +30,7 @@ public class AnimalService {
         return animalDto;
     }
     public AnimalDto modifyAnimal(AnimalDto animalDto){
-        Animal animal = animalRepository.findByAnimalSpecies(animalDto.getAnimal_species());
+        Animal animal = animalRepository.findByAnimalSpecies(animalDto.getAnimal_species()).orElseThrow();
         animal.setAnimalSpecies(animalDto.getAnimal_species());
         animal.setAnimalClass(animalDto.getAnimal_class());
         animal.setAnimalDescription(animalDto.getAnimal_description());
@@ -41,7 +41,7 @@ public class AnimalService {
     //동물의 현재 개수 증가
     public Boolean incAnimal(String animalSpecies){
 //        AnimalDto animalDto = new AnimalDto().convert(animalRepository.findByAnimalSpecies(animalSpecies));
-        Animal animal = animalRepository.findByAnimalSpecies(animalSpecies);
+        Animal animal = animalRepository.findByAnimalSpecies(animalSpecies).orElseThrow();
         //총 개수보다 현재 개수가 적으면
         if(animal.getAnimalTotal() > animal.getAnimalCurrent()){
             animal.setAnimalCurrent(animal.getAnimalCurrent() + 1);

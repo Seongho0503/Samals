@@ -26,10 +26,21 @@ public class IpfsController {
     private  final IpfsService ipfsService;
     private static final Logger log = LoggerFactory.getLogger(IpfsController.class);
 
+    @ApiOperation(value = "메인 페이지 NFT 이미지 리스트")
+    @GetMapping("/img-list")
+    public ResponseEntity<List<String>> getNftImgList(){
+        return new ResponseEntity<>(ipfsService.getNftImgList(),HttpStatus.OK);
+    }
     @ApiOperation(value = "기부 랜덤 번호 뽑기 - donate or market")
     @GetMapping("/number/{ipfsType}")
     public ResponseEntity<IpfsDto> getRandom(@PathVariable String ipfsType){
         return new ResponseEntity<>(ipfsService.getRandom(ipfsType),HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "상점 각 동물 랜덤 번호 뽑기 - donate or market")
+    @GetMapping("/number/market/{animalSpecies}")
+    public ResponseEntity<IpfsDto> getRandomAnimal(@PathVariable String animalSpecies){
+        return new ResponseEntity<>(ipfsService.getRandomAnimal(animalSpecies),HttpStatus.OK);
     }
 
     @ApiOperation(value="ipfs 데이터 추가")

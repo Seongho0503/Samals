@@ -43,7 +43,7 @@ public class AnimalController {
     @ApiOperation(value="특정 동물 조회")
     @GetMapping("species/{animalSpecies}")
     public ResponseEntity<Animal> findAnimalByAnimalSpecies(@PathVariable String animalSpecies){
-        return new ResponseEntity<>(animalRepository.findByAnimalSpecies(animalSpecies), HttpStatus.OK);
+        return new ResponseEntity<>(animalRepository.findByAnimalSpecies(animalSpecies).orElseThrow(), HttpStatus.OK);
     }
 
     @ApiOperation(value="특정 동물 수정")

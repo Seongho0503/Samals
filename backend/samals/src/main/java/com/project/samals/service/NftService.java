@@ -9,6 +9,8 @@ import com.project.samals.dto.SaleDto;
 import com.project.samals.dto.request.ReqNftDto;
 import com.project.samals.dto.response.ResMyNftDto;
 import com.project.samals.dto.response.ResNftDto;
+import com.project.samals.dto.response.ResSaleHistoryDto;
+import com.project.samals.exception.*;
 import com.project.samals.repository.IpfsRepository;
 import com.project.samals.repository.NftRepository;
 import com.project.samals.repository.UserRepository;
@@ -17,8 +19,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -30,13 +32,21 @@ public class NftService {
     private final IpfsRepository ipfsRepository;
 
     public NftDto mintNft(ReqNftDto nftDto) {
-        User user = userRepository.findByWalletAddress(nftDto.getWalletAddress());
-        if(user==null)
-            return null;
+        User user = userRepository.findByWalletAddress(nftDto.getWalletAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
 
-        Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq());
-        if(ipfs==null)
-            return null;
+//        ipfsRepository.findByIpfsTokenId(nftDto.getTokenId()-1)
+//                .orElseThrow(() -> new IpfsNotFoundException(
+//                        String.format("%d Token의 민팅 차례가 아닙니다. Token 순서를 확인하세요.", nftDto.getTokenId())));
+
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(nftDto.getIpfsSeq())
+                .orElseThrow(() -> new IpfsNotFoundException("해당 IPFS 데이터를 찾을 수 없습니다."));
+
+        if(ipfs.getIpfsIsUsed()=='Y')
+            throw new IpfsAlreadyUseException("이미 사용중인 IPFS 데이터입니다");
+
+        if(ipfsRepository.findByIpfsTokenId(nftDto.getTokenId())!=null)
+            throw new IpfsAlreadyUseException(String.format("Token %d 은 이미 사용중입니다.", nftDto.getTokenId()));
 
         ipfs.getAnimal().setAnimalCurrent(ipfs.getAnimal().getAnimalCurrent()+1);
         ipfs.setIpfsIsUsed('Y');
@@ -51,25 +61,32 @@ public class NftService {
     }
 
     public NftDto getMintHistory(int tokenId) {
-        Nft nftInfo = nftRepository.findByTokenId(tokenId);
-        return NftDto.convert(nftInfo);
+        Nft mintHistory = nftRepository.findByTokenId(tokenId)
+                .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", tokenId)));
+        return NftDto.convert(mintHistory);
     }
 
-    public List<SaleDto> getNftHistory(int tokenId) {
-        Nft nft = nftRepository.findByTokenId(tokenId);
-        if(nft ==null)
-            return null;
-        List<SaleDto> nftHistory = new ArrayList<>();
+    public List<ResSaleHistoryDto> getNftHistory(int tokenId) {
+        Nft nft = nftRepository.findByTokenId(tokenId)
+                .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", tokenId)));
+        List<ResSaleHistoryDto> nftHistory = new ArrayList<>();
         for (Sale sale : nft.getNftSaleList()) {
-            nftHistory.add(SaleDto.convert(sale));
+            ResSaleHistoryDto dto = ResSaleHistoryDto.convert(sale);
+            dto.setSellerNickname(userRepository.findByWalletAddress(sale.getSellerAddress())
+                    .orElseThrow(() -> new UserNotFoundException("판매자 지갑의 사용자 정보를 찾을 수 없습니다.")).getUserNickname());
+            if(sale.getBuyerAddress()!=null) {
+                dto.setBuyerNickname(userRepository.findByWalletAddress(sale.getBuyerAddress())
+                        .orElseThrow(() -> new UserNotFoundException("구매자 지갑의 사용자 정보를 찾을 수 없습니다.")).getUserNickname());
+            }
+            if(dto.getIsSold()=='Y')
+                nftHistory.add(dto);
         }
         return nftHistory;
     }
 
     public List<NftDto> getMyMintHistory(String address) {
-        User user = userRepository.findByWalletAddress(address);
-        if(user == null)
-            return null;
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<NftDto> mintHistory = new ArrayList<>();
         for (Nft nft : user.getMintList()) {
             mintHistory.add(NftDto.convert(nft));
@@ -78,10 +95,13 @@ public class NftService {
     }
 
     public List<NftDto> getMyDonateHistory(String address) {
-        User user = userRepository.findByWalletAddress(address);
-        if(user == null)
-            return null;
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> donates = nftRepository.findByNftTypeAndUser("donate",user);
+
+//        if(donates.size()==0)
+//            throw new DonateNotFoundException("기부 기록을 찾을 수 없습니다.");
+
         List<NftDto> donateHistory = new ArrayList<>();
         for (Nft nft : donates) {
             donateHistory.add(NftDto.convert(nft));
@@ -90,9 +110,13 @@ public class NftService {
     }
 
     public List<ResMyNftDto> getMyNftList(String address) {
-        if(userRepository.findByWalletAddress(address)==null)
-            return null;
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> myNft = nftRepository.findAllByNftOwner(address);
+
+//        if(myNft.size()==0)
+//            throw new NFTNotOwnException("보유한 NFT가 없습니다");
+
         List<ResMyNftDto> nftList = new ArrayList<>();
         for (Nft nft : myNft) {
             nftList.add(ResMyNftDto.convert(nft));
@@ -100,8 +124,34 @@ public class NftService {
         return nftList;
     }
 
+    public List<ResMyNftDto> getMyNftNotSaleList(String address) {
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        List<Nft> myNft = nftRepository.findAllByNftOwner(address);
+
+//        if(myNft.size()==0)
+//            throw new NFTNotOwnException("보유한 NFT가 없습니다");
+
+        List<ResMyNftDto> nftList = new ArrayList<>();
+
+        for (Nft nft : myNft) {
+            boolean check=false;
+            for(int i=0;i<nft.getNftSaleList().size();i++){
+                if(nft.getNftSaleList().get(i).getIsSold()=='N'){
+                    check=true;
+                    break;
+                }
+            }
+            if(!check)
+                nftList.add(ResMyNftDto.convert(nft));
+        }
+        return nftList;
+    }
+
+
     public ResNftDto getNft(int tokenId) {
-        Nft nft = nftRepository.findByTokenId(tokenId);
+        Nft nft = nftRepository.findByTokenId(tokenId)
+                .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", tokenId)));
         return ResNftDto.convert(nft);
     }
 
@@ -113,11 +163,21 @@ public class NftService {
 
     public int getMyTotalDonate(String address){
         int donatePrice=500;
-        User user = userRepository.findByWalletAddress(address);
-        if(user ==null)
-            return -1;
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<Nft> donateCounts= nftRepository.findByNftTypeAndUser("donate",user);
         return donateCounts.size()*donatePrice;
+    }
+
+    public int getDonateAvg(){
+        int price=500;
+        List<String> temp = new ArrayList<>();
+        List<Nft> donateList= nftRepository.findAllByNftType("donate");
+        for(Nft nft : donateList){
+            temp.add(nft.getUser().getWalletAddress());
+        }
+        List<String> minters = temp.stream().distinct().collect(Collectors.toList());
+        return donateList.size()*price/minters.size();
     }
 }
 
