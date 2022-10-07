@@ -11,7 +11,6 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
 import { useARStatus } from "../hooks/isARStatus";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
-import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
 import MainLast from "../components/Main/MainLast";
 import axios from "axios";
@@ -25,7 +24,6 @@ import { MetaLoadingScreen } from "../api";
 
 const NftDetailExplore = () => {
   // reactjs-alert 관련
-  const [open, setOpen] = React.useState(false);
   const [status, setStatus] = useState(false);
   const [type, setType] = useState("warning");
   const [title, setTitle] = useState("구매 완료!");
@@ -116,17 +114,17 @@ const NftDetailExplore = () => {
     //예외처리
     if (window.ethereum.selectedAddress === undefined) {
       setTitle("메타마스크 로그인이 필요합니다.");
-      setOpen(true);
+      setStatus(true);
       MetaMaskLogin();
       return;
     } else if (detailData.sellerAddress === window.ethereum.selectedAddress) {
       setTitle("자신이 등록한 NFT는 구매할 수 없습니다.");
-      setOpen(true);
+      setStatus(true);
       return;
     } else if (balance < detailData.salePrice) {
       setTitle(`보유중인 ACE가 부족합니다.
       보유 ACE: ${balance}`);
-      setOpen(true);
+      setStatus(true);
       return;
     }
     try {
@@ -254,6 +252,14 @@ const NftDetailExplore = () => {
             </div>
           }
         />
+        <ReactJsAlert
+          status={status} // true or false
+          type={type} // success, warning, error, info
+          title={title}
+          Close={() => setStatus(false)}
+          autoCloseIn={3000}
+          button={"확인"}
+        />
       </div>
       <TradeHistory sale={state.item.saleSeq}></TradeHistory>
       {/* <TradeChart></TradeChart> */}
@@ -264,15 +270,6 @@ const NftDetailExplore = () => {
       {/* <Test /> */}
       {/* <TradeChart></TradeChart> */}
       <MainLast />
-
-      <ReactJsAlert
-        status={status} // true or false
-        type={type} // success, warning, error, info
-        title={title}
-        Close={() => setStatus(false)}
-        autoCloseIn={3000}
-        button={"확인"}
-      />
     </div>
   );
 };
