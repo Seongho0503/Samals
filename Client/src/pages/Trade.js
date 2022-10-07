@@ -9,7 +9,7 @@ import MainLast from "../components/Main/MainLast";
 import AnimalSearch from "../components/AnimalSearch";
 import CardMotion from "../components/CardMotion";
 import TradeSelect from "../components/TradeSelect";
-import bg from "../assets/explore.png";
+import bg from "../assets/trade.png";
 
 const Trade = () => {
   return (
@@ -18,7 +18,7 @@ const Trade = () => {
       <img id='hero-background' src={bg} alt='' />
       <CardMotion></CardMotion>
       {/* <AnimalSearch></AnimalSearch> */}
-      <TradeSelect></TradeSelect>
+      {/* <TradeSelect></TradeSelect> */}
 
       {/* <AnimalFiller></AnimalFiller> */}
       <div id='list-container' style={{ zIndex: 1 }}>

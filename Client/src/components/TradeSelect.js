@@ -4,7 +4,7 @@ import "../styles/TradeSelect.css";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { useSelector } from "react-redux";
 
-const TradeSelect = () => {
+const TradeSelect = ({ handleChangeSignType }) => {
   const [reduxAddress] = useState(useSelector(selectAddress));
   const registNFT = () => {
     if (reduxAddress === undefined || reduxAddress === "") {
@@ -19,14 +19,42 @@ const TradeSelect = () => {
       <button className='register' id='register' onClick={registNFT}>
         NFT 등록
       </button>
-      {/* <div className='animal-control-group'> */}
-      {/* <h1>Price</h1> */}
-      {/* <label className="control control--checkbox">
+
+      <div className='animal-control-group' style={{ zIndex: 10 }}>
+        <h1 style={{ cursor: "default" }}>PRICE</h1>
+
+        <label className='control control--radio' onClick={() => handleChangeSignType("desc")}>
+          최저가순
+          <input type='radio' name='radio' defaultChecked='checked' />
+          <div className='control__indicator'></div>
+        </label>
+        <label className='control control--radio' onClick={() => handleChangeSignType("asc")}>
+          최고가순
+          <input type='radio' name='radio' />
+          <div className='control__indicator'></div>
+        </label>
+      </div>
+    </div>
+  );
+};
+
+export default TradeSelect;
+
+{
+  /* <div className='animal-control-group'> */
+}
+{
+  /* <h1>Price</h1> */
+}
+{
+  /* <label className="control control--checkbox">
           First checkbox
           <input type="checkbox" checked="checked" />
           <div className="control__indicator"></div>
-        </label> */}
-      {/* <label className='control control--checkbox'>
+        </label> */
+}
+{
+  /* <label className='control control--checkbox'>
           최저가순
           <input type='checkbox' />
           <div className='control__indicator'></div>
@@ -35,8 +63,10 @@ const TradeSelect = () => {
           최고가순
           <input type='checkbox' />
           <div className='control__indicator'></div>
-        </label> */}
-      {/* <label className="control control--checkbox">
+        </label> */
+}
+{
+  /* <label className="control control--checkbox">
           Disabled
           <input type="checkbox" disabled="disabled" />
           <div className="control__indicator"></div>
@@ -45,22 +75,14 @@ const TradeSelect = () => {
           Disabled & checked
           <input type="checkbox" disabled="disabled" checked="checked" />
           <div className="control__indicator"></div>
-        </label> */}
-      {/* </div> */}
-      <div className='animal-control-group' style={{ zIndex: 10 }}>
-        <h1 style={{ cursor: "default" }}>PRICE</h1>
+        </label> */
+}
+{
+  /* </div> */
+}
 
-        <label className='control control--radio'>
-          최저가순
-          <input type='radio' name='radio' defaultChecked='checked' />
-          <div className='control__indicator'></div>
-        </label>
-        <label className='control control--radio'>
-          최고가순
-          <input type='radio' name='radio' />
-          <div className='control__indicator'></div>
-        </label>
-        {/* <label className="control control--radio">
+{
+  /* <label className="control control--radio">
           Disabled
           <input type="radio" name="radio2" disabled="disabled" />
           <div className="control__indicator"></div>
@@ -74,8 +96,10 @@ const TradeSelect = () => {
             checked="checked"
           />
           <div className="control__indicator"></div>
-        </label> */}
-        {/* </div>
+        </label> */
+}
+{
+  /* </div>
       <div className='animal-control-group'>
         <h1>아이템</h1>
         <div className='select'>
@@ -85,8 +109,10 @@ const TradeSelect = () => {
             <option>밀집모자</option>
           </select>
           <div className='select__arrow'></div>
-        </div> */}
-        {/* <div className="select">
+        </div> */
+}
+{
+  /* <div className="select">
           <select>
             <option>Second select</option>
             <option>Option</option>
@@ -100,11 +126,5 @@ const TradeSelect = () => {
             <option>Option</option>
             <option>Option</option>
           </select>
-          <div className="select__arrow"></div> */}
-      </div>
-      {/* </div> */}
-    </div>
-  );
-};
-
-export default TradeSelect;
+          <div className="select__arrow"></div> */
+}

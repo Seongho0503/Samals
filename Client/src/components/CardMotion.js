@@ -6,6 +6,9 @@ import Shark from "../assets/card/Shark.png";
 import Elephant from "../assets/card/Elephant.png";
 import Toco from "../assets/card/Toco.png";
 import Slider from "./Slider";
+import Penguin from "../assets/card/penguin.png";
+import coco from "../assets/card/coco.png";
+import chita from "../assets/card/chita.png";
 
 const CardMotion = () => {
   useEffect(() => {
@@ -61,10 +64,7 @@ const CardMotion = () => {
       hoverSlide(slideSeq[0]);
       await sleep(1200);
       goToPage(pageSeq[1]);
-      try {
-        dribbble.classList.add("hover");
-      } catch (e) {}
-
+      // dribbble.classList.add("hover");
       unhoverSlide(slideSeq[0]);
       await sleep(500);
       hoverSlide(slideSeq[1]);
@@ -76,9 +76,7 @@ const CardMotion = () => {
       await sleep(1600);
       goToPage(0);
       unhoverSlide(slideSeq[2]);
-      try {
-        dribbble.classList.remove("hover");
-      } catch (e) {}
+      // dribbble.classList.remove("hover");
 
       currentlyDemoing = false;
     }
@@ -127,11 +125,12 @@ const CardMotion = () => {
             >
               <div className='number'>01</div>
               <div className='body'>
-                <div className='location'>두꺼비, EN</div>
-                <div className='headline'>날뛰는 두꺼비</div>
-                <a href='https://unsplash.com/photos/EYmhcdGuYmI' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>두꺼비, EN</div> */}
+                <div className='headline'>와이오밍 두꺼비</div>
+
+                <div className='link'>남은 개체수 : 멸종</div>
+                {/* <a href='https://unsplash.com/photos/EYmhcdGuYmI' target='_blank'>
+                </a> */}
               </div>
             </div>
             <div
@@ -145,11 +144,9 @@ const CardMotion = () => {
             >
               <div className='number'>02</div>
               <div className='body'>
-                <div className='location'>백상아리, EN</div>
-                <div className='headline'>화가난 백상아리</div>
-                <a href='https://unsplash.com/photos/ANJHXftvvJ8' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                <div className='headline'>백상아리</div>
+
+                <div className='link'>남은 개체수 : 3500</div>
               </div>
             </div>
             <div
@@ -164,11 +161,10 @@ const CardMotion = () => {
             >
               <div className='number'>03</div>
               <div className='body'>
-                <div className='location'>아프리카 코끼리, EN </div>
-                <div className='headline'>배고픈 코끼리</div>
-                <a href='https://unsplash.com/photos/73aocAAt7rs' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>아프리카 코끼리, EN </div> */}
+                <div className='headline'>아프리카 숲 코끼리</div>
+
+                <div className='link'>남은 개체수 : 220</div>
               </div>
             </div>
             <div
@@ -182,11 +178,10 @@ const CardMotion = () => {
             >
               <div className='number'>04</div>
               <div className='body'>
-                <div className='location'>토코토칸, EN</div>
-                <div className='headline'>졸린 토코토칸</div>
-                <a href='https://unsplash.com/photos/aPDCEoW7B78' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>토코토칸, EN</div> */}
+                <div className='headline'>토코투칸</div>
+
+                <div className='link'>남은 개체수 : 불명</div>
               </div>
             </div>
             <div
@@ -200,17 +195,16 @@ const CardMotion = () => {
             >
               <div className='number'>05</div>
               <div className='body'>
-                <div className='location'>호랑이, EN</div>
-                <div className='headline'>용맹한 호랑이</div>
-                <a href='https://unsplash.com/photos/Akz00I_GGjU' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>호랑이, EN</div> */}
+                <div className='headline'>호랑이</div>
+
+                <div className='link'>남은 개체수 : 4500</div>
               </div>
             </div>
             <div
               className='slide'
               style={{
-                backgroundImage: "url(" + Toad + ")",
+                backgroundImage: "url(" + coco + ")",
                 // background:
                 //   "url(https://alca.tv/static/u/31979576-5060-4513-aae2-b379b87e7fe6_opt.png)",
               }}
@@ -219,17 +213,16 @@ const CardMotion = () => {
             >
               <div className='number'>06</div>
               <div className='body'>
-                <div className='location'>두꺼비, EN</div>
-                <div className='headline'>날뛰는 두꺼비</div>
-                <a href='https://unsplash.com/photos/pTn26knnKVw' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>두꺼비, EN</div> */}
+                <div className='headline'>큰뿔코뿔소</div>
+
+                <div className='link'>남은 개체수 : 3700</div>
               </div>
             </div>
             <div
               className='slide'
               style={{
-                backgroundImage: "url(" + Shark + ")",
+                backgroundImage: "url(" + chita + ")",
                 // background:
                 //   "url(https://alca.tv/static/u/429b83b8-1ad4-4450-b0de-0a0c1073cf1e_opt.jpg)",
               }}
@@ -238,25 +231,21 @@ const CardMotion = () => {
             >
               <div className='number'>07</div>
               <div className='body'>
-                <div className='location'>백상아리, EN</div>
-                <div className='headline'>화가난 백상아리</div>
-                <a href='https://unsplash.com/photos/v63B_MUiFw8' target='_blank'>
-                  <div className='link'>3000 달러</div>
-                </a>
+                {/* <div className='location'>백상아리, EN</div> */}
+                <div className='headline'>아무르 표범</div>
+
+                <div className='link'>남은 개체수 : 84</div>
               </div>
             </div>
           </div>
           <div id='next-catch'></div>
           <div id='prev-catch'></div>
         </div>
-        {/* <div id="footer">
-          <a
-            href="https://dribbble.com/shots/3888265-Motion-Study"
-            target="_blank"
-          >
-            <div id="dribbble"></div>
-          </a>
-        </div> */}
+        <div id='footer'>
+          {/* <a href='https://dribbble.com/shots/3888265-Motion-Study' target='_blank'>
+            <div id='dribbble'></div>
+          </a> */}
+        </div>
       </div>
     </div>
   );

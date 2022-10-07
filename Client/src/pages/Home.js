@@ -8,14 +8,19 @@ import MainRoadMap from "../components/Main/MainRoadMap";
 import MainTeam from "../components/Main/MainTeam";
 import MainLast from "../components/Main/MainLast";
 
+import MainBanner from "../components/Main/MainBanner";
+
 import "../styles/Home.css";
 import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
 
+import { LoadingScreen } from "../api";
 const Home = () => {
   return (
     <div id='home' style={{ cursor: "default" }}>
       <MainTitle list={hotDropsData} />
+      <MainBanner />
+
       <MainSub />
       <MainNFT />
       <MainVision />

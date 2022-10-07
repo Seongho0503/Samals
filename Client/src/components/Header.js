@@ -1,39 +1,53 @@
-import { useState, useEffect, useContext } from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import { useEthers, useEtherBalance } from "@usedapp/core";
-import { DAppProvider } from "@usedapp/core";
-import Explore from ".././pages/Explore";
-import Minting from ".././pages/Minting";
-import Web3 from "web3";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { useWeb3React } from "@web3-react/core";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAddress, setAddress, setUserBio, setUserId } from "../redux/slice/UserInfoSlice";
-import { MetaMaskLogin, approveERC20ForMint, firstSupply } from "../utils/event";
+import {
+  selectAddress,
+  selectUserId,
+  setAddress,
+  setUserBio,
+  setUserId,
+  selectHeaderClickSwitch,
+  setHeaderClickSwitch,
+} from "../redux/slice/UserInfoSlice";
+import { approveERC20ForMint, firstSupply } from "../utils/event";
 import logo from "../assets/nav_logo_clean.png";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import axios from "axios";
+
+import { MetaLoadingScreen, addressTransferShort } from "../api";
 const Header = () => {
+  const [loading, setLoading] = useState(false);
+
+  const main = useRef(null);
+  const mada = useRef(null);
+  const mark = useRef(null);
+  const trad = useRef(null);
+  const dona = useRef(null);
+  const mypa = useRef(null);
   const injected = new InjectedConnector();
   //redux의 값을 호출 후 state로 관리
   const [reduxAddress, setReduxAddress] = useState(useSelector(selectAddress));
-  const { chainedId, account, active, activate, deactivate } = useWeb3React();
+  const [reduxUserNickName, setReduxUserNickName] = useState(useSelector(selectUserId));
+  const [focus, setFocus] = useState(useSelector(selectHeaderClickSwitch));
+
+  const { account, active, activate, deactivate } = useWeb3React();
   const dispatch = useDispatch();
 
   //연결 확인
   async function handleConnect() {
     // 비활성화 전환
     if (active) {
-      deactivate();
-      //초기화
-      dispatch(setAddress(undefined));
-      dispatch(setUserBio(undefined));
-      dispatch(setUserId(undefined));
-      setReduxAddress(undefined);
-      return;
+      // deactivate();
+      // //초기화
+      // dispatch(setAddress(undefined));
+      // dispatch(setUserBio(undefined));
+      // dispatch(setUserId(undefined));
+      // setReduxAddress(undefined);
+      // return;
     }
     // 활성화 시
     else {
@@ -45,9 +59,32 @@ const Header = () => {
       });
     }
   }
-  useEffect(() => {
-    return () => {};
-  }, []);
+  // useEffect(() => {
+  //   if (focus === "") {
+  //   } else if (focus === "mada") {
+  //     mada.current.style.backgroundColor = "gold";
+  //   } else if (focus === "mark") {
+  //     mark.current.style.backgroundColor = "gold";
+  //   } else if (focus === "trad") {
+  //     trad.current.style.backgroundColor = "gold";
+  //   } else if (focus === "dona") {
+  //     dona.current.style.backgroundColor = "gold";
+  //   } else if (focus === "mypa") {
+  //     mypa.current.style.backgroundColor = "gold";
+  //   }
+  // });
+  if (focus === "") {
+  } else if (focus === "mada") {
+    mada.current.style.backgroundColor = "gold";
+  } else if (focus === "mark") {
+    mark.current.style.backgroundColor = "gold";
+  } else if (focus === "trad") {
+    trad.current.style.backgroundColor = "gold";
+  } else if (focus === "dona") {
+    dona.current.style.backgroundColor = "gold";
+  } else if (focus === "mypa") {
+    mypa.current.style.backgroundColor = "gold";
+  }
 
   useEffect(() => {
     let isAccountData;
@@ -70,9 +107,18 @@ const Header = () => {
         //기존 가입 주소가 아니라면
         if (isAccountData === "") {
           // 민트 권한 허가
-          await approveERC20ForMint();
-          // 첫 가입 이용료 1000ACE 입금
-          await firstSupply();
+
+          setLoading(true);
+          try {
+            await approveERC20ForMint();
+            // 첫 가입 이용료 1000ACE 입금
+            await firstSupply().then(() => {
+              setLoading(false);
+            });
+          } catch (e) {
+            setLoading(false);
+          }
+
           //DB 가입 처리
           await axios({
             method: "POST",
@@ -91,32 +137,135 @@ const Header = () => {
         }
         //기존 가입 주소라면
         else {
-          dispatch(setUserBio(isAccountData.user_bio));
-          dispatch(setUserId(isAccountData.user_nickname));
+          dispatch(setUserBio(isAccountData.userBio));
+          dispatch(setUserId(isAccountData.userNickname));
+          setReduxUserNickName(isAccountData.userNickname);
         }
       }
     }
     fetchData();
   }, [account]);
 
-  const addClickEvent = () => {};
+  // const changeColor = (linkText) => {
+  //   console.log(linkText);
+  //   let a = document.getElementsByClassName("Links-List");
+  //   console.log(a);
+  //   console.log(a.length);
+  //   // for (let i = 0; i < a.length; i++) {
+  //   //   i.style.backgroundColor = "";
+  //   // }
+  //   // console.log("document.getElementById(linkText): ", document.getElementById(linkText));
+  //   let b = document.getElementById(linkText);
+  //   console.log(b);
+  //   console.log("b.style: ", b.style);
+  //   b.style.backgroundColor = "red";
+  //   // document.getElementById(linkText).style.backgroundColor = "gold";
+  // };
+
   return (
-    <div id='header'>
-      <Link to='/' id='logo' width='1px'>
-        <img width='50px' src={logo} />
-      </Link>
+    <div id='header' style={{ height: "80px" }}>
+      <div id='logo'>
+        <Link
+          className='Links-List'
+          id='main'
+          ref={main}
+          to='/'
+          style={{ width: "50px", height: "50px", backgroundColor: "" }}
+          // onClick={() => {
+          //   changeColor("main");
+          // }}
+        >
+          <img
+            width='50px'
+            src={logo}
+            alt='logo'
+            style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
+          />
+        </Link>
+      </div>
 
-      <div id='link-containers'>
+      <div
+        id='link-containers'
+        style={{ textAlign: "center", verticalAlign: "middle", top: "5px" }}
+      >
         {/* <Button variant='outlined' size='medium'> */}
-        <Link to='/game'>MADAGASCAR</Link>
-        {/* </Button> */}
+        {/* <button>버튼</button> */}
+        <Link
+          className='Links-List'
+          id='mada'
+          ref={mada}
+          to='/game'
 
-        <Link to='/explore'>MARKET</Link>
-        <Link to='/trade'>TRADE</Link>
-        <Link to='/minting'>DONATION</Link>
-        {!reduxAddress ? "" : <Link to='/mypage'>MYPAGE</Link>}
+          // onClick={() => {
+          //   changeColor("mada");
+          // }}
+        >
+          MADAGASCAR
+        </Link>
+
+        <Link
+          className='Links-List'
+          id='mark'
+          ref={mark}
+          to='/explore'
+
+          // onClick={() => {
+          //   changeColor("mark");
+          // }}
+        >
+          MARKET
+        </Link>
+        <Link
+          className='Links-List'
+          id='trad'
+          ref={trad}
+          to='/trade'
+
+          // onClick={() => {
+          //   changeColor("trad");
+          // }}
+        >
+          TRADE
+        </Link>
+        <Link
+          className='Links-List'
+          id='dona'
+          ref={dona}
+          to='/minting'
+
+          // onClick={() => {
+          //   changeColor("dona");
+          // }}
+        >
+          DONATION
+        </Link>
+
+        <Link
+          className='Links-List'
+          id='mypa'
+          ref={mypa}
+          to='/mypage'
+          style={{
+            visibility: reduxAddress !== undefined ? "visible" : "hidden",
+          }}
+          // onClick={() => {
+          //   changeColor("mypa");
+          // }}
+        >
+          MYPAGE
+        </Link>
+      </div>
+      <div>
         <button id='connect-wallet' onClick={handleConnect}>
-          {reduxAddress === "" ? <AccountBalanceWalletIcon /> : `${reduxAddress}`}
+          {reduxUserNickName === "" || reduxUserNickName === undefined ? (
+            <div>
+              <AccountBalanceWalletIcon />
+
+              <span style={{ top: "-7px", fontSize: "20px" }}>{"  "}wallet</span>
+            </div>
+          ) : (
+            `${reduxUserNickName}`
+          )}
         </button>
       </div>
     </div>

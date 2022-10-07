@@ -10,17 +10,10 @@ import { FaEthereum } from "react-icons/fa";
 import {
   AiOutlineHeart,
   AiFillHeart,
-  AiOutlineArrowLeft,
-  AiOutlineArrowRight,
 } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
-import { hotDropsData } from "../constants/MockupData";
-import NFTCard from "../components/NFTCard";
 import { useARStatus } from "../hooks/isARStatus";
-import AnimalDetail from "../components/AnimalDetail";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
-import AnimalBook from "../components/NftDetail/AnimalBook";
-import TradeHistory from "../components/NftDetail/TradeHistory";
 // import TradeChart from "../components/NftDetail/TradeChart";
 import MainLast from "../components/Main/MainLast";
 
@@ -140,7 +133,7 @@ const NftDetail = () => {
       </div>
 
       {/* <AnimalDetail animalDetail={dummyList} /> */}
-      <AnimalBook></AnimalBook>
+      {/* <AnimalBook></AnimalBook> */}
       <AnimalInfo animal={state.item.animal} />
       {/* <TradeHistory></TradeHistory> */}
       {/* <Test /> */}

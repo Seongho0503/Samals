@@ -111,10 +111,11 @@ const FavorChart = () => {
   return (
     <RadarChart
       outerRadius={90}
-      width={730}
+      width={450}
+      //   width={100}
       height={250}
       data={data}
-      font-family='GangwonEdu_OTFBoldA'
+      //   font-family='GangwonEdu_OTFBoldA'
     >
       <PolarGrid />
       <PolarAngleAxis dataKey='subject' />

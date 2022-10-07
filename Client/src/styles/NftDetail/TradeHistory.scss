@@ -18,23 +18,26 @@ body {
   justify-content: center;
   align-items: center;
 }
-// .history {
-//   margin: auto;
-// }
+.history {
+  // margin: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 #table-container {
   border-radius: 15px;
   //border: 10px solid rgba(255, 255, 255, 0.03);
-  display: flex;
-  margin-top: 12%;
-  overflow: auto;
+  // display: flex;
+  // margin-top: 12%;
+  // overflow: auto;
   justify-content: center;
   align-items: center;
-  width: 53%;
+  // width: 53%;
 
   table {
     border-collapse: collapse;
     height: auto;
-    width: 66%;
+    // width: 66%;
     color: rgba(255, 255, 255, 0.3);
     background: linear-gradient(45deg, rgba(255, 255, 255, 0.1) 0%, rgba(245, 255, 246, 0.1) 100%);
 

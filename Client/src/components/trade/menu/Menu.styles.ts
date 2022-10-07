@@ -1,9 +1,9 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const MenuContainer = styled.div`
   display: flex;
   padding: 1rem;
-
+  background: red;
   width: 60%;
   margin: 0 auto;
 `;

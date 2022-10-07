@@ -169,6 +169,7 @@ p#description {
   model-viewer#arDetail {
     width: 100%;
     height: 350px !important;
+    cursor : pointer;
   }
   #detail-content {
     width: 100%;

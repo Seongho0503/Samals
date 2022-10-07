@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import NFTCard from "./NFTCard";
 import "../styles/CardList.css";
 import { useNavigate } from "react-router-dom";
@@ -18,11 +18,11 @@ import toucan from "../assets/fillter/toucan.png";
 import iguana2 from "../assets/fillter/iguan-col.png";
 import shark3 from "../assets/fillter/shark3.png";
 import toad2 from "../assets/fillter/toad2.png";
-import { getAnimalList, getNftInfo, getSomeList } from "../api.js";
+import { getAnimalList, getNftInfo, getSomeList, getAsceList, getDescList } from "../api.js";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import empty from "../assets/empty.png";
-
+import TradeSelect from "./TradeSelect";
 // declare var $: $;
 
 const TCardList = ({ list, type = "horizontal" }) => {
@@ -34,23 +34,51 @@ const TCardList = ({ list, type = "horizontal" }) => {
   let navigate = useNavigate();
 
   const [amlist, setAmlist] = useState([]);
+  const [signType, setSignType] = useState("desc");
+
   useEffect(() => {
-    if (activeAnimal == "All") {
-      console.log("리덕스", reduxAddress);
-      getAnimalList(reduxAddress).then(({ data }) => {
-        setAmlist(data);
+    if (signType == "desc") {
+      getAsceList().then((res) => {
+        //console.log("오름차순: ", res.data);
+        let result = res.data;
+        if (activeAnimal != "All") {
+          result = res.data.filter((animal) => animal.animalSpecies == activeAnimal);
+        }
+        setAmlist(result);
       });
     } else {
-      getSomeList(activeAnimal).then((res) => {
-        //console.log("해당리스트: ", res.data);
-        setAmlist(res.data);
+      getDescList().then((res) => {
+        //console.log("내림차순 ", res.data);
+        let result = res.data;
+        if (activeAnimal != "All") {
+          result = res.data.filter((animal) => animal.animalSpecies == activeAnimal);
+        }
+        setAmlist(result);
       });
     }
     // console.log("애니멀리스트" + amlist);
     // console.log("애니멀사진" + amlist[0].itemImgUrl);
     // console.log("이미지" + data[0]);
     // console.log("이미지" + data[0].itemImgUrl);
-  }, [activeAnimal]);
+  }, [signType, activeAnimal]);
+
+  // useEffect(() => {
+  //   if (activeAnimal == "All") {
+  //     console.log("리덕스", reduxAddress);
+  //     getAnimalList(reduxAddress).then(({ data }) => {
+  //       //console.log("리스트: ", data);
+  //       //console.log(data.animalClassNo);
+  //       setAmlist(data);
+  //     });
+  //   } else {
+  //     getSomeList(activeAnimal).then((res) => {
+  //       //console.log("해당리스트: ", res.data);
+  //       console.log(amlist);
+  //       debugger;
+  //       setAmlist(res.data);
+  //     });
+  //   }
+  // }, [activeAnimal]);
 
   // const [price, setPrice] = useState([]);
   // useEffect(() => {
@@ -88,74 +116,79 @@ const TCardList = ({ list, type = "horizontal" }) => {
   // }, [activeAnimal]);
 
   return (
-    <div>
-      <div className='toggles'>
-        {/* <button id="showall">Show All</button> */}
-        {/* <button animalActive={activeAnimal === "tiger" ? true : false} onClick={setActiveAnimal}> */}
-        <button onClick={() => setActiveAnimal("All")}>
-          <img className='animal-fillter' src={all} />
-          <h2 className='animal-name'> {"All"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("tiger")}>
-          <img className='animal-fillter' src={tiger4} />{" "}
-          <h2 className='animal-name'> {"Tiger"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("elephant")}>
-          <img className='animal-fillter' src={elephant5} />
-          <h2 className='animal-name'> {"Elephant"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("frog")}>
-          <img className='animal-fillter' src={toad2} />
-          <h2 className='animal-name'> {"Toad"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("shark")}>
-          {/* {"ddd "} */}
-          <img className='animal-fillter' src={shark3} />{" "}
-          <h2 className='animal-name'> {"Shark"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("bird")}>
-          <img className='animal-fillter' src={toucan} />{" "}
-          <h2 className='animal-name'> {"Toucan"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("rhino")}>
-          <img className='animal-fillter' src={rhino} />{" "}
-          <h2 className='animal-name'> {"Rhino"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("iguana")}>
-          <img className='animal-fillter' src={iguana2} />
-          <h2 className='animal-name'> {"Iguana"} </h2>
-        </button>
+    <Fragment>
+      <TradeSelect handleChangeSignType={setSignType}></TradeSelect>
+      <div>
+        <div className='toggles'>
+          {/* <button id="showall">Show All</button> */}
+          {/* <button animalActive={activeAnimal === "tiger" ? true : false} onClick={setActiveAnimal}> */}
+          <button onClick={() => setActiveAnimal("All")}>
+            <img className='animal-fillter' src={all} />
+            <h2 className='animal-name'> {"All"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("tiger")}>
+            <img className='animal-fillter' src={tiger4} />{" "}
+            <h2 className='animal-name'> {"Tiger"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("elephant")}>
+            <img className='animal-fillter' src={elephant5} />
+            <h2 className='animal-name'> {"Elephant"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("frog")}>
+            <img className='animal-fillter' src={toad2} />
+            <h2 className='animal-name'> {"Toad"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("shark")}>
+            {/* {"ddd "} */}
+            <img className='animal-fillter' src={shark3} />{" "}
+            <h2 className='animal-name'> {"Shark"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("bird")}>
+            <img className='animal-fillter' src={toucan} />{" "}
+            <h2 className='animal-name'> {"Toucan"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("rhino")}>
+            <img className='animal-fillter' src={rhino} />{" "}
+            <h2 className='animal-name'> {"Rhino"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("iguana")}>
+            <img className='animal-fillter' src={iguana2} />
+            <h2 className='animal-name'> {"Iguana"} </h2>
+          </button>
 
-        <button onClick={() => setActiveAnimal("penguin")}>
-          {/* {"ddd "} */}
-          <img className='animal-fillter' src={penguin1} />{" "}
-          <h2 className='animal-name'> {"Penguin"} </h2>
-        </button>
-        <button onClick={() => setActiveAnimal("leopard")}>
-          <img className='animal-fillter' src={leopard2} />{" "}
-          <h2 className='animal-name'> {"Leopard"} </h2>
-        </button>
-      </div>
+          <button onClick={() => setActiveAnimal("penguin")}>
+            {/* {"ddd "} */}
+            <img className='animal-fillter' src={penguin1} />{" "}
+            <h2 className='animal-name'> {"Penguin"} </h2>
+          </button>
+          <button onClick={() => setActiveAnimal("leopard")}>
+            <img className='animal-fillter' src={leopard2} />{" "}
+            <h2 className='animal-name'> {"Leopard"} </h2>
+          </button>
+        </div>
 
-      <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
-        {amlist.map((data, index) => {
-          return (
-            <NFTCard
-              saleSeq={data.saleSeq}
-              nftSrc={data.itemImgUrl}
-              key={index}
-              starNo={data.animalClassNo}
-              price={data.salePrice}
-              likeCount={data.likeCount}
-              nftName={data.animalTitle}
-              animalClass={data.animalClass}
-              likePush={data.likePush}
-              onClick={() => navigate("/detailTrade", { state: { item: data } })}
-            />
-          );
-        })}
+        <div id='card-list' style={{ flexDirection: type === "horizontal" ? "row" : "column" }}>
+          {amlist.map((data, index) => {
+            return (
+              <div key={index}>
+                <NFTCard
+                  saleSeq={data.saleSeq}
+                  nftSrc={data.itemImgUrl}
+                  key={index}
+                  starNo={data.animalClassNo}
+                  price={data.salePrice}
+                  likeCount={data.likeCount}
+                  nftName={data.animalTitle}
+                  animalClass={data.animalClass}
+                  likePush={data.likePush}
+                  onClick={() => navigate("/detailTrade", { state: { item: data } })}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

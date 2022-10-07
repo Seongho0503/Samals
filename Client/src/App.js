@@ -24,10 +24,12 @@ import Create from "./components/trade/Create";
 //dapp
 
 import NftDetail from "./pages/NftDetail";
+
 import NftMDetail from "./pages/NftMDetail";
 import NftDetailTrade from "./pages/NftDetailTrade";
 import ScrollToTop from "./components/base/ScrollToTop";
 import Footer from "./components/base/Footer";
+
 import Panda from "./assets/panda.png";
 import UserPage from "./pages/UserPage";
 
@@ -112,7 +114,8 @@ function App() {
         <Route path='/create' element={<Create />} />
         <Route path='/explore' element={<Explore />} />
         <Route path='/detail' element={<NftDetail />} />
-        <Route path='/minting' element={<Minting />} /> <Route path='/game' element={<Game />} />
+        <Route path='/minting' element={<Minting />} />
+        <Route path='/game' element={<Game />} />
         <Route path='/trade' element={<Trade />} />
         <Route path='/detailTrade' element={<NftDetailTrade />} />
         <Route path='/mintcard' element={<MintCard />} />
