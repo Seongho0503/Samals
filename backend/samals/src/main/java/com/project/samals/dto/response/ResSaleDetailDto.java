@@ -33,6 +33,10 @@ public class ResSaleDetailDto {
     private int tokenId;
     private String tokenImgUrl;
 
+    // 사용자 좋아요 정보
+    private int likeCount;
+    private char likePush;
+
 
     public static ResSaleDetailDto convert(Sale sale, User user) {
         if(sale == null) return null;

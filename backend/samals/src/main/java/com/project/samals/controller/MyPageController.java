@@ -53,6 +53,12 @@ public class MyPageController {
         return new ResponseEntity<>(nftService.getMyNftList(address),HttpStatus.OK);
     }
 
+    @ApiOperation(value = "내 NFT 리스트 조회 (거래 중이지 않은)")
+    @GetMapping("/{address}/nft/notOnSale")
+    public ResponseEntity<List<ResMyNftDto>> getMyNftNotOnSaleList(@PathVariable String address){
+        return new ResponseEntity<>(nftService.getMyNftNotSaleList(address),HttpStatus.OK);
+    }
+
     @ApiOperation(value = "내 좋아요 리스트 조회")
     @GetMapping("/{address}/like")
     public ResponseEntity<List<ResMySaleLikeDto>> getMyLikeList(@PathVariable String address) {
@@ -64,5 +70,6 @@ public class MyPageController {
     public ResponseEntity<Integer> getMyTotalDonate(@PathVariable String address) {
         return new ResponseEntity<>(nftService.getMyTotalDonate(address), HttpStatus.OK);
     }
+
 
 }

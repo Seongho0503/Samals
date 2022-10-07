@@ -1,6 +1,7 @@
 package com.project.samals.service;
 
 import com.project.samals.domain.Ipfs;
+import com.project.samals.domain.Nft;
 import com.project.samals.domain.ProfileImg;
 import com.project.samals.domain.User;
 import com.project.samals.dto.UserDto;
@@ -8,10 +9,10 @@ import com.project.samals.dto.request.ReqProfileDto;
 import com.project.samals.dto.request.ReqUserSignupDto;
 import com.project.samals.dto.request.ReqUserUpdateDto;
 import com.project.samals.dto.response.ResProfileCountDto;
-import com.project.samals.repository.IpfsRepository;
-import com.project.samals.repository.ProfileImgRepository;
-import com.project.samals.repository.UserRepository;
+import com.project.samals.exception.*;
+import com.project.samals.repository.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -22,16 +23,20 @@ import java.util.List;
 @Service
 @Transactional
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
     private final IpfsRepository ipfsRepository;
+    private final SaleRepository saleRepository;
+    private final NftRepository nftRepository;
     private final ProfileImgRepository profileImgRepository;
 
-    public UserDto signup(ReqUserSignupDto userDto) {
-        if(userRepository.findByWalletAddress(userDto.getWalletAddress())!=null)
-            return null;
-
+    @Transactional
+    public UserDto signup(ReqUserSignupDto userDto){
+        if(userRepository.findByWalletAddress(userDto.getWalletAddress()).orElse(null)!=null){
+            throw new UserDuplicateException(String.format("%s은 이미 등록된 지갑입니다.", userDto.getWalletAddress()));
+        }
         User user =userDto.toEntity();
         userRepository.save(user);
         if(user.getUserNickname()==null)
@@ -41,23 +46,24 @@ public class UserService {
     }
 
     public UserDto getUserInfo(String address){
-        User user = userRepository.findByWalletAddress(address);
+        User user = userRepository.findByWalletAddress(address).orElse(null);
         UserDto userDto = UserDto.convert(user);
         return userDto;
     }
 
     public String withdrawal(String address){
-        User user = userRepository.findByWalletAddress(address);
-        if(user == null)
-            return "no user";
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("삭제할 사용자를 찾을 수 없습니다"));
         userRepository.delete(user);
-        return "delete Success";
+        return "Success";
     }
 
     public UserDto updateUser(ReqUserUpdateDto userDto) {
-        if(setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId())).equals("fail"))
-            return null;
-        User user = userRepository.findByWalletAddress(userDto.getWalletAddress());
+        setProfile(new ReqProfileDto(userDto.getWalletAddress(), userDto.getTokenId()));
+
+        User user = userRepository.findByWalletAddress(userDto.getWalletAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
         user.setUserBio(userDto.getUserBio());
         user.setUserNickname(userDto.getUserNickname());
         user.setUpdatedTime(new Date());
@@ -65,14 +71,19 @@ public class UserService {
     }
 
     public String setProfile(ReqProfileDto profileDto) {
-        User user = userRepository.findByWalletAddress(profileDto.getAddress());
+        User user = userRepository.findByWalletAddress(profileDto.getAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         Ipfs ipfs = ipfsRepository.findByIpfsTokenId(profileDto.getTokenId());
+        if(ipfs ==null)
+            throw new IpfsNotFoundException("해당 토큰의 IPFS 데이터를 찾을 수 없습니다.");
+        Nft nft = nftRepository.findByTokenId(profileDto.getTokenId())
+                .orElseThrow(() -> new NFTNotFoundException("등록되지 않은 Token입니다."));
 
-        if(user==null||ipfs==null)
-            return "fail";
+        if(saleRepository.findByNftAndSellerAddress(nft,user.getWalletAddress())!=null)
+            throw new OnSaleException(String.format("토큰 %d은 판매중인 NFT입니다.", nft.getTokenId()));
 
         if(profileImgRepository.findByIpfs(ipfs)!=null)
-            return "fail";
+            throw new ProfileImgAlreadyUseException("다른 사용자가 사용하고 있는 이미지입니다.");
 
         ProfileImg profile = profileImgRepository.findByUser(user);
         if(profile ==null){
@@ -86,9 +97,8 @@ public class UserService {
     }
 
     public String deleteProfile(String address) {
-        User user = userRepository.findByWalletAddress(address);
-        if(user ==null)
-            return "Fail - no user";
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         profileImgRepository.deleteByUser(user);
         return "Success";
     }

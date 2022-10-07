@@ -9,10 +9,8 @@ import com.project.samals.dto.request.ReqSaleCompleteDto;
 import com.project.samals.dto.request.ReqSaleDto;
 import com.project.samals.dto.response.ResSaleDetailDto;
 import com.project.samals.dto.response.ResSaleListDto;
-import com.project.samals.repository.NftRepository;
-import com.project.samals.repository.SaleLikeRepository;
-import com.project.samals.repository.SaleRepository;
-import com.project.samals.repository.UserRepository;
+import com.project.samals.exception.*;
+import com.project.samals.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,19 +26,28 @@ import java.util.stream.Collectors;
 public class SaleService {
     private final SaleRepository saleRepository;
     private final SaleLikeRepository saleLikeRepository;
+    private final ProfileImgRepository profileImgRepository;
     private final UserRepository userRepository;
     private final NftRepository nftRepository;
     private final SaleLikeService saleLikeService;
 
     @Transactional
     public SaleDto createSale(ReqSaleDto saleDto) {
-        Nft nft = nftRepository.findByTokenId(saleDto.getTokenId());
-        if(userRepository.findByWalletAddress(saleDto.getSellerAddress())==null)
-            return null;
+        Nft nft = nftRepository.findByTokenId(saleDto.getTokenId())
+                .orElseThrow(() -> new NFTNotFoundException(String.format("토큰 %d, NFT 정보를 찾을 수 없습니다", saleDto.getTokenId())));
+
+        userRepository.findByWalletAddress(saleDto.getSellerAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
+        if(profileImgRepository.findByIpfs(nft.getIpfs())!=null)
+            throw new ProfileImgAlreadyUseException("프로필 이미지로 사용중입니다.");
+
         if(saleRepository.findByNftAndIsSold(nft,'N')!=null)
-            return null;
-        if(!saleDto.getSellerAddress().equals(nft.getNftOwner()))
-            return null;
+            throw new SaleDuplicateException("이미 거래 중인 NFT 입니다");
+
+        System.out.println(saleDto.getSellerAddress()+"..."+nft.getNftOwner());
+//        if(!saleDto.getSellerAddress().equals(nft.getNftOwner()))
+//            throw new SellerValidException("판매 주소와 NFT 소유 주소가 일치하지 않습니다");
 
         Sale sale =saleDto.toEntity(nft);
         saleRepository.save(sale);
@@ -50,7 +57,13 @@ public class SaleService {
     }
 
     public List<ResSaleListDto> getSaleList(String animalSpecies,String address){
-        User user = userRepository.findByWalletAddress(address);
+        User user;
+        if(address!=null) {
+            user = userRepository.findByWalletAddress(address)
+                    .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        }else{
+            user=null;
+        }
         List<ResSaleListDto> saleList = new ArrayList<>();
 
         for(Sale sale : saleRepository.findAllByIsSold('N')){
@@ -82,28 +95,54 @@ public class SaleService {
     }
 
 
-    public ResSaleDetailDto getSale(long saleSeq) {
-        Sale sale=saleRepository.findBySaleSeq(saleSeq);
-        User user = userRepository.findByWalletAddress(sale.getSellerAddress());
-        return ResSaleDetailDto.convert(sale,user);
+    public ResSaleDetailDto getSale(long saleSeq,String address) {
+        Sale sale=saleRepository.findBySaleSeq(saleSeq)
+                .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
+        User seller = userRepository.findByWalletAddress(sale.getSellerAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 판매자를를 찾을 수 없습니다"));
+
+        User user;
+        if(address!=null) {
+            user = userRepository.findByWalletAddress(address)
+                    .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+        }else{
+            user=null;
+        }
+
+        ResSaleDetailDto detailDto = ResSaleDetailDto.convert(sale,seller);
+
+        SaleLike saleLike = saleLikeRepository.findBySaleAndUser(sale,user);
+        if(saleLike!= null)
+            detailDto.setLikePush('Y');
+        else
+            detailDto.setLikePush('N');
+
+        detailDto.setLikeCount(saleLikeService.getSaleLikeCount(sale.getSaleSeq()));
+
+        return detailDto;
     }
 
+
+
+
     public SaleDto completeSale(ReqSaleCompleteDto reqSaleCompleteDto) {
-        User user = userRepository.findByWalletAddress(reqSaleCompleteDto.getBuyerAddress());
-        if(user==null)
-            return null;
-        Sale sale = saleRepository.findBySaleSeq(reqSaleCompleteDto.getSaleSeq());
-        if(sale.getSellerAddress().equals(reqSaleCompleteDto.getBuyerAddress()))
-            return null;
+        User user = userRepository.findByWalletAddress(reqSaleCompleteDto.getBuyerAddress())
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
+        Sale sale = saleRepository.findBySaleSeq(reqSaleCompleteDto.getSaleSeq())
+                .orElseThrow(() -> new SaleNotFoundException("거래를 찾을 수 없습니다"));
+
+//        if(sale.getSellerAddress().equals(reqSaleCompleteDto.getBuyerAddress()))
+//            throw new BuyerValidException("판매자는 본인 NFT를 구매할 수 없습니다.");
 
         Sale saved = reqSaleCompleteDto.complete(sale);
         return SaleDto.convert(saleRepository.save(saved));
     }
 
     public List<SaleDto> getMySaleList(String address){
-        User user = userRepository.findByWalletAddress(address);
-        if(user==null)
-            return null;
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
+
         List<SaleDto> saleList = new ArrayList<>();
         for(Sale sale : saleRepository.findAllBySellerAddress(address)){
             saleList.add(SaleDto.convert(sale));
@@ -119,7 +158,8 @@ public class SaleService {
     }
 
     public List<ResSaleListDto> search(String search, String address){
-        User user = userRepository.findByWalletAddress(address);
+        User user = userRepository.findByWalletAddress(address)
+                .orElseThrow(() -> new UserNotFoundException("해당 지갑의 사용자를 찾을 수 없습니다"));
         List<ResSaleListDto> saleList = new ArrayList<>();
         for(Sale sale : saleRepository.findAllByIsSoldAndSaleTitleContainingIgnoreCase('N',search)){
             ResSaleListDto saleListDto = ResSaleListDto.convert(sale);

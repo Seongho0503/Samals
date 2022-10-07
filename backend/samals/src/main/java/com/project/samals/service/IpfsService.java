@@ -3,6 +3,8 @@ package com.project.samals.service;
 import com.project.samals.domain.Animal;
 import com.project.samals.domain.Ipfs;
 import com.project.samals.dto.IpfsDto;
+import com.project.samals.exception.AnimalNotFoundException;
+import com.project.samals.exception.IpfsNotFoundException;
 import com.project.samals.repository.AnimalRepository;
 import com.project.samals.repository.IpfsRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Transactional
@@ -25,6 +24,30 @@ public class IpfsService {
     private final AnimalRepository animalRepository;
     private static final Logger log = LoggerFactory.getLogger(IpfsService.class);
 
+    public List<String> getNftImgList(){
+        List<String> imgList=new ArrayList<>();
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/bird%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(55).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(55).png");
+
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/bird%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/tiger%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/leopard%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/iguana%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/elephant%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/frog%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/rhino%20(15).png");
+        imgList.add("https://j7d103.p.ssafy.io/image/downloadFile/penguin%20(15).png");
+
+        return imgList;
+    }
     public IpfsDto getRandom(String ipfsType){
         if(!ipfsType.equals("donate")&&!ipfsType.equals("market"))
             return null;
@@ -36,13 +59,21 @@ public class IpfsService {
             return new IpfsDto().convert(ipfsList.get(num));
     }
 
+    public IpfsDto getRandomAnimal(String animalSpecies){
+        Animal animal = new Animal();
+        animal.setAnimalSpecies(animalSpecies);
+        List<Ipfs> ipfsList = ipfsRepository.findAllByIpfsIsUsedAndIpfsTypeAndAnimal('N',"market", animal);
+        int num = (int)(Math.random()*(ipfsList.size()));
+            return new IpfsDto().convert(ipfsList.get(num));
+    }
+
     public String add(String animalSpecies){
         for(int i=1;i<101;i++){
             Ipfs ipfs = Ipfs.builder()
                     .ipfsUri("https://j7d103.p.ssafy.io/image/downloadFile/"+animalSpecies+"%20("+i+").png")
                     .ipfsType("donate")
                     .ipfsIsUsed('N')
-                    .animal(animalRepository.findByAnimalSpecies(animalSpecies))
+                    .animal(animalRepository.findByAnimalSpecies(animalSpecies).orElseThrow())
                     .build();
             ipfsRepository.save(ipfs);
         }
@@ -65,7 +96,8 @@ public class IpfsService {
             return result;
         }
         //동물 검색
-        Animal animal = animalRepository.findByAnimalSpecies((String)request.get("animal_species"));
+        Animal animal = animalRepository.findByAnimalSpecies((String)request.get("animal_species"))
+                .orElseThrow(null);
 
         //해당 동물이 없으면 리턴
         if(animal == null){
@@ -111,7 +143,8 @@ public class IpfsService {
     }
 
     public IpfsDto pollOneIpfs(int ipfsSeq){
-        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq);
+        Ipfs ipfs = ipfsRepository.findByIpfsSeq(ipfsSeq)
+                .orElseThrow(() -> new IpfsNotFoundException("해당 IPFS 데이터를 찾을 수 없습니다."));
         ipfs.setIpfsIsUsed('Y');
         IpfsDto ipfsDto = new IpfsDto().convert(ipfs);
         log.info("ipfsDto -> {}", ipfsDto);
