@@ -32,7 +32,7 @@ const NftDetailExplore = () => {
 
   const [reduxAddress] = useState(useSelector(selectAddress));
   const isMobile = useMobile();
-  const [balance] = useState(balanceOf());
+  const [balance, setBalance] = useState(0);
   const [colors, setColors] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [likeCnt, setLikeCnt] = useState(0);
@@ -92,6 +92,9 @@ const NftDetailExplore = () => {
   const { state } = useLocation();
 
   useEffect(() => {
+    balanceOf().then((res) => {
+      setBalance(res);
+    });
     setColors([]);
     let inputUrl = `/api/sale/${state.item.saleSeq}`;
     if (reduxAddress !== undefined) inputUrl += `?address=${reduxAddress}`;
