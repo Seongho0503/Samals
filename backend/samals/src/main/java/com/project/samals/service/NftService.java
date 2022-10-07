@@ -78,7 +78,8 @@ public class NftService {
                 dto.setBuyerNickname(userRepository.findByWalletAddress(sale.getBuyerAddress())
                         .orElseThrow(() -> new UserNotFoundException("구매자 지갑의 사용자 정보를 찾을 수 없습니다.")).getUserNickname());
             }
-            nftHistory.add(dto);
+            if(dto.getIsSold()=='Y')
+                nftHistory.add(dto);
         }
         return nftHistory;
     }
