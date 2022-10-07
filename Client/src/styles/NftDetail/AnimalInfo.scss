@@ -1,0 +1,367 @@
+$primary: #ffffff00;
+$dark-primary: #303f9f;
+$light-primary: #c5cae9;
+$text: #ffffff;
+$primary-text: #212121;
+$secondary-text: black;
+$accent: #ff4081;
+
+section {
+  padding: 50px 0;
+}
+
+html,
+body {
+  // overflow-x: hidden;
+}
+
+// body {
+//   font-family: "Roboto";
+//   font-size: 17px;
+//   font-weight: 400;
+//   background-color: #eee;
+// }
+
+h1 {
+  font-size: 200%;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 400;
+  font-family: "GangwonEdu_OTFBoldA";
+}
+
+header {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); //$primary;
+  animation: gradient 15s ease infinite;
+  // text-align: center;
+  color: $text;
+  // padding: 3px;
+  height: 229px;
+  // margin-top: -300px;
+  background-size: 400% 400%;
+  margin-top: 500px;
+
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  // save animals
+  p {
+    font-family: "Allura";
+    // color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 0;
+    font-size: 60px;
+    margin-top: px;
+    font-family: "GangwonEdu_OTFBoldA";
+  }
+}
+
+.timeline {
+  position: relative;
+
+  &::before {
+    content: "";
+    background: $light-primary;
+    width: 18px;
+    height: 75%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.timeline-item-right {
+  width: 100%;
+  margin-bottom: 70px;
+  margin-right: 80px;
+
+  &:nth-child(even) {
+    .timeline-content {
+      float: right;
+      padding: 40px 30px 10px 30px;
+      border-radius: 20px;
+
+      .date {
+        right: auto;
+        left: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        top: 30px;
+        left: -15px;
+        border-width: 10px 15px 10px 0;
+        border-color: transparent #f5f5f5 transparent transparent;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.timeline-item {
+  width: 100%;
+  margin-bottom: 50px;
+  margin-left: 0px;
+
+  p.content {
+    color: black;
+    font-size: 50px;
+    padding: 50px;
+    font-family: "GangwonEdu_OTFBoldA";
+    margin-top: 40px;
+  }
+
+  &:nth-child(even) {
+    .timeline-content {
+      float: right;
+      padding: 40px 30px 10px 30px;
+
+      .date {
+        right: auto;
+        left: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        top: 30px;
+        left: -15px;
+        border-width: 10px 15px 10px 0;
+        border-color: transparent #f5f5f5 transparent transparent;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.timeline-items {
+  width: 100%;
+  margin-bottom: 50px;
+
+  p.content {
+    color: black;
+    font-size: 30px;
+    padding: 54px;
+  }
+
+  &:nth-child(even) {
+    .timeline-content {
+      float: right;
+      padding: 40px 30px 10px 30px;
+
+      .date {
+        right: auto;
+        left: 0;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        top: 30px;
+        left: -15px;
+        border-width: 10px 15px 10px 0;
+        border-color: transparent #f5f5f5 transparent transparent;
+      }
+    }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.timeline-content {
+  position: relative;
+  width: 43%;
+  padding: 10px 30px;
+  border-radius: 4px;
+  background: #f5f5f5;
+  box-shadow: 0 20px 25px -15px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    width: 0;
+    height: 0;
+    top: 30px;
+    right: -15px;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #f5f5f5;
+  }
+}
+
+.timeline-content js--fadeInLeft {
+  position: relative;
+  right: 30px;
+  padding: 40px;
+}
+
+.timeline-img {
+  width: 30px;
+  height: 30px;
+  background: $primary;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  margin-top: 25px;
+  margin-left: -15px;
+  background-color: green;
+}
+
+a {
+  background: $primary;
+  color: $text;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  display: inline-block;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px -1px rgba(0, 0, 0, 0.6);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: darken($primary, 10%);
+    color: $text;
+    text-decoration: none;
+  }
+}
+
+.timeline-card {
+  padding: 0 !important;
+
+  p {
+    padding: 78px;
+    color: black;
+    font-size: 30px;
+    font-family: "GangwonEdu_OTFBoldA";
+    line-height: 1.5;
+    word-spacing: 5px;
+  }
+
+  a {
+    margin-left: 20px;
+  }
+}
+
+.timeline-item {
+  .timeline-img-header {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4)),
+      url("https://picsum.photos/1000/800/?random") center center no-repeat;
+    background-size: cover;
+  }
+}
+
+.timeline-img-header {
+  height: 200px;
+  position: relative;
+  margin-bottom: 20px;
+
+  h2 {
+    color: $text;
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+  }
+}
+
+blockquote {
+  margin-top: 30px;
+  color: $secondary-text;
+  border-left-color: $primary;
+  padding: 40px;
+  font-size: 40px;
+  font-family: "GangwonEdu_OTFBoldA";
+  margin-top: 40px;
+}
+
+.date {
+  background: $accent;
+  display: inline-block;
+  color: $text;
+  padding: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 30px;
+  width: 100%;
+  font-size: 30px;
+  border-radius: 20px;
+  font-family: "GangwonEdu_OTFBoldA";
+}
+
+@media screen and (max-width: 768px) {
+  .timeline {
+    &::before {
+      left: 50px;
+    }
+
+    .timeline-img {
+      left: 50px;
+    }
+
+    .timeline-content {
+      max-width: 100%;
+      width: auto;
+      margin-left: 70px;
+    }
+
+    .timeline-item {
+      &:nth-child(even) {
+        .timeline-content {
+          float: none;
+        }
+      }
+
+      &:nth-child(odd) {
+        .timeline-content {
+          &::after {
+            content: "";
+            position: absolute;
+            border-style: solid;
+            width: 0;
+            height: 0;
+            top: 30px;
+            left: -15px;
+            border-width: 10px 15px 10px 0;
+            border-color: transparent #f5f5f5 transparent transparent;
+          }
+        }
+      }
+    }
+  }
+}

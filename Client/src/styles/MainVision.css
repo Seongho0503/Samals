@@ -1,0 +1,55 @@
+*,
+::before,
+::after {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card2 {
+  max-width: 310px;
+  width: 100%;
+  height: 460px;
+
+  float: left;
+  perspective: 500px;
+}
+
+.content2 {
+  width: 100%;
+  height: 100%;
+
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.card2:hover .content2 {
+  transform: rotateY(180deg);
+  transition: transform 0.5s;
+}
+
+.front,
+.back {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background: url("../assets/vision-01.png");
+  line-height: 300px;
+  color: #03446a;
+  text-align: center;
+  font-size: 60px;
+  border-radius: 30px;
+  backface-visibility: hidden;
+}
+
+.back {
+  border-radius: 30px;
+  background: url("../assets/vision-02.jpg ");
+  color: white;
+  transform: rotateY(180deg);
+}
