@@ -195,7 +195,7 @@ const Header = () => {
           id='mada'
           ref={mada}
           to='/game'
-          style={{ backgroundColor: focus === "game" ? "gold" : "" }}
+
           // onClick={() => {
           //   changeColor("mada");
           // }}
@@ -208,7 +208,7 @@ const Header = () => {
           id='mark'
           ref={mark}
           to='/explore'
-          style={{ backgroundColor: focus === "explore" ? "gold" : "" }}
+
           // onClick={() => {
           //   changeColor("mark");
           // }}
@@ -220,7 +220,7 @@ const Header = () => {
           id='trad'
           ref={trad}
           to='/trade'
-          style={{ backgroundColor: focus === "trade" ? "gold" : "" }}
+
           // onClick={() => {
           //   changeColor("trad");
           // }}
@@ -232,7 +232,7 @@ const Header = () => {
           id='dona'
           ref={dona}
           to='/minting'
-          style={{ backgroundColor: focus === "minting" ? "gold" : "" }}
+
           // onClick={() => {
           //   changeColor("dona");
           // }}
@@ -247,7 +247,6 @@ const Header = () => {
           to='/mypage'
           style={{
             visibility: reduxAddress !== undefined ? "visible" : "hidden",
-            backgroundColor: focus === "mypage" ? "gold" : "",
           }}
           // onClick={() => {
           //   changeColor("mypa");
