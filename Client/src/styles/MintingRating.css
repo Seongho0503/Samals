@@ -1,5 +1,5 @@
 #rating-data {
-  margin-bottom: 100px;
+  margin-top: 20px;
 }
 #rating-text {
   font-size: 100px;
@@ -7,4 +7,8 @@
     "Open Sans", "Helvetica Neue", sans-serif;
   color: #008318;
   font-family: "Black Han Sans", sans-serif;
+}
+#mint-rating-data {
+  margin-top: 40px;
+  margin-bottom: 40px;
 }

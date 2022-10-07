@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import buttonImg from "../../assets/animal-button.png";
+import Collaboration from "../../assets/collaboration.png";
 import modalBack from "../../assets/modal-back.jpg";
+import buttonImg02 from "../../assets/mint-button02.png";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import ReactJsAlert from "reactjs-alert";
 import "../../styles/MintingAnimation.css";
-
+import {
+  approveERC20ForMint,
+  getTotalMint,
+  getLimitedNumber,
+  firstSupply,
+  balanceOf,
+} from "../../utils/event";
 import Typography from "@mui/material/Typography";
 
 const style = {
@@ -27,8 +36,12 @@ const style = {
 };
 
 const MintingButton = () => {
+  const [mint, setMint] = useState();
   const [open, setOpen] = React.useState(false);
 
+  const [status, setStatus] = useState(false);
+  const [type, setType] = useState("success");
+  const [title, setTitle] = useState("This is a alert");
   //"기부하고, NFT받기" 버튼 클릭 시
   const handleOpen = () => {
     let sessionAddress = JSON.parse(sessionStorage.getItem("persist:root"));
@@ -52,6 +65,28 @@ const MintingButton = () => {
       >
         <img width='400px' src={buttonImg} alt='기부하고, NFT받기' />
       </Button>
+      <Button
+        onClick={() => {
+          balanceOf().then((res) => {
+            console.log("현재토큰수: ", res);
+            setMint(res);
+            setStatus(true);
+            setType("success");
+            setTitle(`${res} ACE 토큰이 남아있습니다!`);
+          });
+        }}
+      >
+        <img width='400px' src={buttonImg02} alt='현재 남은 토큰 수' />
+      </Button>
+      <ReactJsAlert
+        status={status} // true or false
+        type={type} // success, warning, error, info
+        title={title}
+        Close={() => setStatus(false)}
+        autoCloseIn={3000}
+        button={"확인"}
+      />
+
       <Modal
         open={open}
         onClose={handleClose}

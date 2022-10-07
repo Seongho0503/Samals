@@ -3,11 +3,15 @@ import { useState, useEffect, useContext } from "react";
 import AnimalData from "../components/Minting/AnimalData";
 import MintingButton from "../components/Minting/MintingButton";
 import MintingModal from "../components/Minting/MintingModal";
+import MintSubs from "../components/Minting/MintSubs";
 import RatingData from "../components/Minting/RatingData";
 import Footer from "../components/Footer";
 import buttonImg01 from "../assets/mint-button01.png";
 import buttonImg02 from "../assets/mint-button02.png";
 import buttonImg03 from "../assets/mint-button03.png";
+
+import Button from "@mui/material/Button";
+
 import "../styles/Home.css";
 import CardList from "../components/CardList";
 import { hotDropsData } from "../constants/MockupData";
@@ -24,17 +28,19 @@ const Minting = () => {
   return (
     <div id='home'>
       {/* <MintingTitle /> */}
-      <MintingButton />
       <RatingData />
+      <MintingButton />
+      <MintSubs></MintSubs>
       <div class='mint-div'>
-        <button
+        <Button
           onClick={() => {
             const res = approveERC20ForMint();
             console.log("현재토큰수: ", res);
           }}
         >
           <img width='400px' src={buttonImg03} alt='erc20 승인' />
-        </button>
+        </Button>
+
         <br />
         {/* <button
         onClick={() => {
@@ -55,7 +61,7 @@ const Minting = () => {
       </button> */}
         <br />
 
-        <button
+        <Button
           onClick={() => {
             firstSupply().then((res) => {
               console.log("첫지급: ", res);
@@ -63,9 +69,10 @@ const Minting = () => {
           }}
         >
           <img width='400px' src={buttonImg01} alt='코인 충전하기' />
-        </button>
+        </Button>
+
         <br />
-        <button
+        {/* <button
           onClick={() => {
             balanceOf().then((res) => {
               console.log("현재토큰수: ", res);
@@ -74,9 +81,9 @@ const Minting = () => {
           }}
         >
           <img width='400px' src={buttonImg02} alt='현재 남은 토큰 수' />
-        </button>
+        </button> */}
       </div>
-      {mint}
+
       <AnimalData />
       <MintingModal />
     </div>

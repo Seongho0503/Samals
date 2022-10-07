@@ -11,7 +11,6 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { useMobile } from "../hooks/isMobile";
 import { useARStatus } from "../hooks/isARStatus";
 import AnimalInfo from "../components/NftDetail/AnimalInfo";
-import AnimalBook from "../components/NftDetail/AnimalBook";
 import TradeHistory from "../components/NftDetail/TradeHistory";
 import MainLast from "../components/Main/MainLast";
 import axios from "axios";
@@ -20,10 +19,20 @@ import { addressTransferShort } from "../api";
 import { selectAddress } from "../redux/slice/UserInfoSlice";
 import { useSelector } from "react-redux";
 
+import ReactJsAlert from "reactjs-alert";
+import { MetaLoadingScreen } from "../api";
+
 const NftDetailExplore = () => {
+  // reactjs-alert 관련
+  const [status, setStatus] = useState(false);
+  const [type, setType] = useState("warning");
+  const [title, setTitle] = useState("구매 완료!");
+
+  const [loading, setLoading] = useState(false);
+
   const [reduxAddress] = useState(useSelector(selectAddress));
   const isMobile = useMobile();
-  const [balance] = useState(balanceOf());
+  const [balance, setBalance] = useState(0);
   const [colors, setColors] = useState([]);
   const [isLike, setIsLike] = useState(false);
   const [likeCnt, setLikeCnt] = useState(0);
@@ -83,6 +92,9 @@ const NftDetailExplore = () => {
   const { state } = useLocation();
 
   useEffect(() => {
+    balanceOf().then((res) => {
+      setBalance(res);
+    });
     setColors([]);
     let inputUrl = `/api/sale/${state.item.saleSeq}`;
     if (reduxAddress !== undefined) inputUrl += `?address=${reduxAddress}`;
@@ -104,36 +116,55 @@ const NftDetailExplore = () => {
   const onSaleTradeNft = () => {
     //예외처리
     if (window.ethereum.selectedAddress === undefined) {
-      alert("구매하기 위해선 메타마스크 로그인이 필요합니다.");
+      setTitle("메타마스크 로그인이 필요합니다.");
+      setStatus(true);
       MetaMaskLogin();
       return;
     } else if (detailData.sellerAddress === window.ethereum.selectedAddress) {
-      alert("자신이 등록한 NFT는 판매할 수 없습니다.");
+      setTitle("자신이 등록한 NFT는 구매할 수 없습니다.");
+      setStatus(true);
       return;
     } else if (balance < detailData.salePrice) {
-      alert("현재 보유중인 ACE 토큰이 부족합니다.");
+      setTitle(`보유중인 ACE가 부족합니다.
+      보유 ACE: ${balance}`);
+      setStatus(true);
       return;
     }
-
-    salePurchase(detailData.saleContractAddress).then(() => {
-      axios({
-        method: "PUT",
-        url: "api/sale/complete",
-        data: {
-          buyerAddress: window.ethereum.selectedAddress,
-          saleSeq: detailData.saleSeq,
-        },
-      }).then((res) => {
-        console.log(res);
-        if (res !== "") {
-          alert("NFT 구매 완료, my페이지로 이동");
-          navigate("/mypage");
-        }
-      });
-    });
+    try {
+      setLoading(true);
+      salePurchase(detailData.saleContractAddress)
+        .then(() => {
+          axios({
+            method: "PUT",
+            url: "api/sale/complete",
+            data: {
+              buyerAddress: window.ethereum.selectedAddress,
+              saleSeq: detailData.saleSeq,
+            },
+          }).then((res) => {
+            console.log(res);
+            if (res !== "") {
+              setLoading(false);
+              setStatus(true);
+              setTimeout(() => {
+                navigate("/mypage");
+              }, 3000);
+            }
+          });
+        })
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
+    } catch (e) {
+      console.log("error");
+      setLoading(false);
+    }
   };
+
   return (
     <div>
+      {loading === true ? <MetaLoadingScreen text='거래승인,계약체결,결제 3개 요청!' /> : <></>}
       <Header />
       <div id='nft-detail-card-wrapper'>
         <Card
@@ -183,8 +214,10 @@ const NftDetailExplore = () => {
                     height='50px'
                     child={
                       <div id='button-child'>
-                        <p id='price'>{detailData.salePrice}</p>
-                        <pre> </pre>
+                        <p id='price' style={{ cursor: "pointer" }}>
+                          {detailData.salePrice}
+                        </p>
+                        &nbsp;
                         <span>
                           <FaFrog size='28px' />
                         </span>
@@ -222,11 +255,19 @@ const NftDetailExplore = () => {
             </div>
           }
         />
+        <ReactJsAlert
+          status={status} // true or false
+          type={type} // success, warning, error, info
+          title={title}
+          Close={() => setStatus(false)}
+          autoCloseIn={3000}
+          button={"확인"}
+        />
       </div>
       <TradeHistory sale={state.item.saleSeq}></TradeHistory>
       {/* <TradeChart></TradeChart> */}
       {/* <AnimalDetail animalDetail={dummyList} /> */}
-      <AnimalBook animal={state.item.animalSpecies}></AnimalBook>
+      {/* <AnimalBook animal={state.item.animalSpecies}></AnimalBook> */}
       <AnimalInfo animal={state.item.animalSpecies} />
 
       {/* <Test /> */}

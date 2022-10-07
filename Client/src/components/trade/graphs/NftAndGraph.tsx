@@ -21,7 +21,7 @@ const NftAndGraph: React.FC<Props> = ({ setIsModalOpen, nftImgUrl }) => {
         src={
           nftImgUrl !== ""
             ? nftImgUrl
-            : "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Ramphastos_toco.jpg/375px-Ramphastos_toco.jpg"
+            : "https://cdn.discordapp.com/attachments/1026873081358209135/1027629121917952191/Animals_4.png"
         }
       />
 
@@ -30,7 +30,7 @@ const NftAndGraph: React.FC<Props> = ({ setIsModalOpen, nftImgUrl }) => {
           setIsModalOpen(true);
         }}
       >
-        nft 가져오기
+        NFT 가져오기
       </Button>
 
       {/* <Graph>graph</Graph> */}

@@ -36,6 +36,15 @@ body {
 }
 
 @font-face {
+  font-family: "수성";
+  src: url("../src/assets/font/수성돋움.ttf");
+}
+@font-face {
+  font-family: "김포평화B";
+  src: url("../src/assets/font/김포평화고딕B.ttf");
+}
+
+@font-face {
   font-family: "GangwonEdu_OTFBoldA";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
     format("woff");

@@ -116,8 +116,32 @@ export var isOwner = async () => {
   return res;
 };
 
-// 판매글 등록 및 권한 허가 : 유효성 검사할 수 있으면 해줄 것(모두 int)
 export var createSale = async (animalId, price, startedAt, endedAt) => {
+  const _createSale = await nftSaleManagerContract.methods
+    .createSale(animalId, price, startedAt, endedAt)
+    .send({ from: window.ethereum.selectedAddress })
+    .then("1", console.log); //유저 지갑 주소를 넣어줄 것
+  console.log("판매 contract 주소", _createSale.events.SaleCreated.returnValues.newNftSaleAddress);
+  return _createSale.events.SaleCreated.returnValues.newNftSaleAddress;
+};
+
+export var animalSaleApprove = async (newNftSaleAddress, animalId) => {
+  const res1 = await animalNftContract.methods
+    .approve(newNftSaleAddress, animalId)
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
+  console.log("1 : NFT 양도 허가", res1);
+  return res1;
+};
+export var recordSale = async (animalId, newNftSaleAddress) => {
+  const res2 = await nftSaleManagerContract.methods
+    .recordSale(animalId, newNftSaleAddress)
+    .send({ from: window.ethereum.selectedAddress }); //유저 지갑 주소를 넣어줄 것
+  console.log("2 : 게시글 등록", res2);
+  return res2;
+};
+
+// 판매글 등록 및 권한 허가 : 유효성 검사할 수 있으면 해줄 것(모두 int)
+export var createSaleAll = async (animalId, price, startedAt, endedAt) => {
   // 1 : 글을 등록하고 글의 주소를 받아온다.
   const _createSale = await nftSaleManagerContract.methods
     .createSale(animalId, price, startedAt, endedAt)
