@@ -1,8 +1,9 @@
-#  SAMALS - 멸종 위기 동물 보호를 위한 NFT 거래 플랫폼
-> **Save the Animals, SAMALS**
+#  SAMALS - 멸종 위기 동물 보호를 위한 NFT 거래 및 기부 플랫폼
+> ## `Save the Animals, SAMALS` 
+![image](https://user-images.githubusercontent.com/86208370/221049983-29ee5d6b-9ff2-415b-a47a-f242e4d014cd.png)
 
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+<br>
 
 ## 🐮 **Introduce**
 
@@ -12,9 +13,10 @@
 
 <br>
 
-### 🎥 소개 영상
+## 🦁 **서비스 소개**
 
-- [UCC 바로가기]()
+
+<img src="https://user-images.githubusercontent.com/86208370/221055232-1180c2af-17e4-4631-884a-c7e87f498969.gif" width="800" height="400" />
 
 <br>
   
