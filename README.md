@@ -129,6 +129,7 @@ smart-contractor로 메타마스크에 로그인 후 유저가 소유한 NFT를 
 
 > ### Game 화면
 ![image](https://user-images.githubusercontent.com/86208370/221377654-626ac197-efd9-4d57-aa8b-5882e2b04412.png)
+<img src="https://user-images.githubusercontent.com/86208370/221381469-6b933ba7-4f23-4bc6-afdf-461308a7c5cb.gif" width="700" height="400" />
 
 > 보유한 NFT를 자신의 마다가스카 섬에서 자유롭게 동물을 기르면서 유저끼리 섬을 방문할 수 있는 커뮤니케이션 공간입니다. <br>
 SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하면서 섬을 탐험하고 동물을 관찰할 수 있습니다.
