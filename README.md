@@ -7,7 +7,7 @@
 
 ## 🕘 **프로젝트 진행 기간**
 
-> **2022.09.29(월) ~ 2022.10.07(금) [7주]**
+> **2022.09.29(월) ~ 2022.10.07(금) [6주]**
 
 <br>
 
@@ -23,6 +23,10 @@
 <br>
 
 ## 🏴 개발 환경
+
+<br>
+
+![image](https://user-images.githubusercontent.com/86208370/221379842-9ecfb5b1-baca-4305-9f09-ba8a1fa3d6c2.png)
 
 - FrontEnd
 
@@ -67,6 +71,8 @@
 ## 🐮 **서비스 목적**
 ![image](https://user-images.githubusercontent.com/86208370/221379609-8bc8a566-799c-4e26-8eb8-983b9818b7f1.png)
 ![image](https://user-images.githubusercontent.com/86208370/221379617-609833f0-9a56-4c89-bb40-126d4c9ecbe8.png)
+![image](https://user-images.githubusercontent.com/86208370/221379672-2cbeb9ac-5578-4872-80ba-d42a01e4034d.png)
+
 
 > 우리 주변에 있는 코리리와 코뿔소가 멸종위기동물이라는 사실 알고 계신가요? 저희 SAMALS는 멸종위기동물의 심각성을 알리기 위해
 멸종 위기 등급을 NFT와 Unity 게임으로 유저에게 게이밍피케이션(게임+교육)으로 시작된 프로젝트입니다.
@@ -207,58 +213,50 @@ SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하�
 
 <br>
 
-### 🧾 프로젝트 산출물
+## 🧾 프로젝트 산출물
 
-- **[SAMALS 프로젝트 PPT](https://www.canva.com/design/DAFbndmKmKs/e0vfivLV6oLARNz0SxfbEQ/view?utm_content=DAFbndmKmKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)**
+- **[누르시면 SAMALS 프로젝트 PPT를 확인하실 수 있습니다.](https://www.canva.com/design/DAFbndmKmKs/e0vfivLV6oLARNz0SxfbEQ/view?utm_content=DAFbndmKmKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)** 
+- **[SAMALS 이용 가이드로 노션 페이지입니다. 현재 EC2 비용상 서버가 내려간 점 양해부탁드립니다](https://silk-selenium-1b9.notion.site/SAMALS-c268b327cd4048f794bd359333d82196)** 
+<br>
 
-- [ERD]()
-- [API]()
-- [와이어프레임]()
+![image](https://user-images.githubusercontent.com/86208370/221380667-849c7e7a-4825-47e3-bf60-869bea259e2f.png)
+![image](https://user-images.githubusercontent.com/86208370/221379766-fcc72763-839a-4292-bb7c-1d43848a3b4a.png)
+![Contract 구조2](https://user-images.githubusercontent.com/86208370/221380555-2c27eb43-7f47-4efb-842f-598baec03d8c.jpg)
 
+
+<br>
 <br>   
      
-## 🏴 **협업 환경**
+## 🧏‍♂️ **협업 환경**
 
 <br>
 
 ![image](https://user-images.githubusercontent.com/97875998/186790445-ba6f2fe5-2aea-43fb-b7e6-bbbb1ce1b611.png)
+![image](https://user-images.githubusercontent.com/86208370/221380278-c0b443fd-1904-4454-b014-deeed419a138.png)
 ![image](https://user-images.githubusercontent.com/86208370/221377661-cc45dad8-f41b-476d-a653-b58e76349e0e.png)
+
+```
+✅ 프로젝트는 6주간의 애자일(Agile) 방식으로 개발하였고 1주 단위로 스프린트(Sprint)를 진행하며  <br>
+매일 오전 9시와 오후 17시 30분에 스크럼(Scrum) 회의를 통해 프로젝트 관리를 진행하였습니다. 
+(각 컨벤션 규칙 정리 : @Convention)
+JIRA : 에픽, 스토리, 태스크, 이슈 일정 관리 
+GIT(LAB)과 Plastic SCM : 협업
+Mattermost, Webex, Discord : 소통
+Swagger : API 문서화
+Notion : 문서화
+```
+
+<br>
+   
 <br>
 
-## 🏴 아키텍처
+ ## 🎆 주요 기능
+![image](https://user-images.githubusercontent.com/86208370/221379686-82eddd64-61df-4f9a-be7e-0b8c0d543d39.png)
+![image](https://user-images.githubusercontent.com/86208370/221379708-47dcbca8-3289-4fa8-a38c-627ffb62a6e7.png)
+![image](https://user-images.githubusercontent.com/86208370/221379721-3818a24e-5961-4e1b-a54f-cfb87a21ede8.png)
+![image](https://user-images.githubusercontent.com/86208370/221379737-e5d73ab3-7a3c-4a26-9b1f-ebd8049d29c5.png)
+![image](https://user-images.githubusercontent.com/86208370/221379746-76f4efc6-c28e-4deb-a0e2-9e82267b84c7.png)
 
 
-![image]()
-     
-<br>   
-
-
- ## 🏴 주요 기능
-
-- **1111**
-
- 
-
-
-- **222**
-
-
-
-- **333**
-
-
-
-
-- **444**
-
-
-
-</br></br>
-
- ## 🏴 서비스 
-
-</br>
-
-> **111** - 111111111
 
 
