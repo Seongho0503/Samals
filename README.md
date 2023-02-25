@@ -1,5 +1,6 @@
-#  SAMALS - 멸종 위기 동물 보호를 위한 NFT 거래 및 기부 플랫폼
-> ## `Save the Animals, SAMALS` 
+#  SAMALS
+## 멸종 위기 동물 보호를 위한 NFT 거래 및 기부 플랫폼
+> ### `Save the Animals, SAMALS` 
 ![image](https://user-images.githubusercontent.com/86208370/221049983-29ee5d6b-9ff2-415b-a47a-f242e4d014cd.png)
 
 
@@ -15,8 +16,65 @@
 
 ## 🦁 **서비스 소개**
 
+> ### HOME 화면 
+<img src="https://user-images.githubusercontent.com/86208370/221377102-12907e27-a628-4d33-b576-74dc0f5ed061.gif" width="700" height="400" />
 
-<img src="https://user-images.githubusercontent.com/86208370/221055232-1180c2af-17e4-4631-884a-c7e87f498969.gif" width="800" height="400" />
+>SAMALS를 NFT 프로젝트를 시작한 계기와 SAMALS의 목표 및 팀 소개로 이루어져 있습니다. <br>
+인터랙티브한 웹페이지 만들기위해 여러가지 동적 요소를 넣었습니다. 
+<br>
+<br>
+
+
+> ### Market 화면
+<img src="https://user-images.githubusercontent.com/86208370/221377232-b12a8721-c31c-4e37-a333-0c531e59ddfa.gif" width="700" height="400" />
+
+>상점(중앙 서버)에서 판매하는 멸종위기동물의 등급이 낮은 NFT를 구매할 수 있습니다. 
+<br>
+<br>
+
+> ### Trade 화면
+<img src="https://user-images.githubusercontent.com/86208370/221377430-94340442-29f0-4aa9-a13d-022481c82e80.gif" width="700" height="400" />
+
+![image](https://user-images.githubusercontent.com/86208370/221377716-4e512690-7a3a-420f-b57b-83f5786a3ac2.png) 
+
+> 기부를 하면 희귀한 NFT를 얻을 수 있는데 그것을 유저끼리 판매하는 공간입니다. <br>
+smart-contractor로 메타마스크에 로그인 후 유저가 소유한 NFT를 판매할 수 있습니다. <br>
+해당 NFT 최신 거래 내역과 가격 변동 그래프를 확인할 수 있습니다.
+<br>
+<br>
+
+> ### Donation 화면
+<img src="https://user-images.githubusercontent.com/86208370/221377590-9652e45d-fb31-4256-8bae-027cb98e9684.gif" width="700" height="400" />
+
+> 멸종위기동물에게 기부할 수 있는 페이지입니다. <br>
+기부를 하면 랜덤으로 희귀한 NFT를 획득할 수 있습니다.
+<br>
+<br>
+
+
+
+> ### Mypage 화면
+![image](https://user-images.githubusercontent.com/86208370/221377649-f6c8c202-d0d3-49c3-a105-4ffd234c40d3.png)
+
+> 보유한 NFT와 trade에서 찜을 누른 nft를 확인할 수 있습니다. <br>
+또한 프로필 선호도와 자신의 기부한 금액과 평균 기부 금액을 그래프로 확인할 수 있습니다.
+<br>
+<br>
+
+
+> ### Game 화면
+![image](https://user-images.githubusercontent.com/86208370/221377654-626ac197-efd9-4d57-aa8b-5882e2b04412.png)
+
+> 보유한 NFT를 자신의 마다가스카 섬에서 자유롭게 동물을 기르면서 유저끼리 섬을 방문할 수 있는 커뮤니케이션 공간입니다. <br>
+SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하면서 섬을 탐험하고 동물을 관찰할 수 있습니다.
+<br>
+<br>
+
+
+
+
+
+![image](https://user-images.githubusercontent.com/86208370/221377661-cc45dad8-f41b-476d-a653-b58e76349e0e.png)
 
 <br>
   
