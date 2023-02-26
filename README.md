@@ -170,7 +170,7 @@ SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하�
 - web3 유저 거래 구현
 <br>
 
-🐶 `부팀장 권성호`
+🐶 `부팀장 권성호` ⬅ ME 😊
 
 - Front-end
 - Market UI/UX 
@@ -218,7 +218,7 @@ SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하�
 ## 🧾 프로젝트 산출물
 
 - **[누르시면 SAMALS 프로젝트 PPT를 확인하실 수 있습니다.](https://www.canva.com/design/DAFbndmKmKs/e0vfivLV6oLARNz0SxfbEQ/view?utm_content=DAFbndmKmKs&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)** 
-- **[SAMALS 이용 가이드로 노션 페이지입니다. 현재 EC2 비용상 서버가 내려간 점 양해부탁드립니다](https://silk-selenium-1b9.notion.site/SAMALS-c268b327cd4048f794bd359333d82196)** 
+- **[SAMALS 이용 가이드로 노션 페이지로 이동합니다. 현재 EC2 비용상 프로젝트 서버가 내려간 점 양해부탁드립니다](https://silk-selenium-1b9.notion.site/SAMALS-c268b327cd4048f794bd359333d82196)** 
 <br>
 
 ![image](https://user-images.githubusercontent.com/86208370/221380667-849c7e7a-4825-47e3-bf60-869bea259e2f.png)
@@ -238,7 +238,7 @@ SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하�
 ![image](https://user-images.githubusercontent.com/86208370/221377661-cc45dad8-f41b-476d-a653-b58e76349e0e.png)
 
 ```
-✅ 프로젝트는 6주간의 애자일(Agile) 방식으로 개발하였고 1주 단위로 스프린트(Sprint)를 진행하며  <br>
+✅ 프로젝트는 6주간의 애자일(Agile) 방식으로 개발하였고 1주 단위로 스프린트(Sprint)를 진행하며 
 매일 오전 9시와 오후 17시 30분에 스크럼(Scrum) 회의를 통해 프로젝트 관리를 진행하였습니다. 
 (각 컨벤션 규칙 정리 : @Convention)
 JIRA : 에픽, 스토리, 태스크, 이슈 일정 관리 
