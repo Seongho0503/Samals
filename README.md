@@ -75,7 +75,7 @@
 
 
 > 우리 주변에 있는 코리리와 코뿔소가 멸종위기동물이라는 사실 알고 계신가요? 저희 SAMALS는 멸종위기동물의 심각성을 알리기 위해
-멸종 위기 등급을 NFT와 Unity 게임으로 유저에게 게이밍피케이션(게임+교육)으로 시작된 프로젝트입니다.
+멸종 위기 등급을 NFT와 Unity 게임으로 유저에게 게이밍피케이션(게임+교육)으로 시작된 프로젝트입니다. 
 
 <br>
 
@@ -99,6 +99,7 @@
 
 > ### Trade 화면
 <img src="https://user-images.githubusercontent.com/86208370/221377430-94340442-29f0-4aa9-a13d-022481c82e80.gif" width="700" height="400" />
+<img src="https://user-images.githubusercontent.com/86208370/221388056-322042de-ed1b-43ed-b398-bc8b0a0482a9.png" width="700" height="400" />
 
 ![image](https://user-images.githubusercontent.com/86208370/221377716-4e512690-7a3a-420f-b57b-83f5786a3ac2.png) 
 
