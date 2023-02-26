@@ -65,6 +65,9 @@
 - IDE
    - IntelliJ
    - MySQL Workbench 8.0
+   - Jira
+   - Git / Gitlab
+   
 
 <br>
 
@@ -242,7 +245,7 @@ SAMALS의 마스코트인 토코투칸(큰 부리새)를 방향키로 조종하�
 매일 오전 9시와 오후 17시 30분에 스크럼(Scrum) 회의를 통해 프로젝트 관리를 진행하였습니다. 
 (각 컨벤션 규칙 정리 : @Convention)
 JIRA : 에픽, 스토리, 태스크, 이슈 일정 관리 
-GIT(LAB)과 Plastic SCM : 협업
+GIT(LAB)과 : 협업 및 형상 관리
 Mattermost, Webex, Discord : 소통
 Swagger : API 문서화
 Notion : 문서화
